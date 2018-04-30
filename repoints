@@ -1,0 +1,307 @@
+###learnset_table
+learnset_table 0806E3B4
+learnset_table 080693A0
+learnset_table 08069414
+learnset_table 0806E1F8
+learnset_table 0806E250
+learnset_table 081A00AC
+learnset_table 081A0278
+###learnset_table
+### bs commands
+bs_commands 0803CD94
+bs_commands 0803DE38
+bs_commands 080458D8
+bs_commands 0803E084
+### ability names repoint
+ability_names_table 080001C0
+ability_names_table 0814F0D4
+ability_names_table 0814F854
+ability_names_table 081C3028
+### ability descriptions repoint
+ability_desc_table 080001C4
+ability_desc_table 081C3078
+### move animations repoint
+move_animations_table 080A3A44
+### move names repoint
+move_names_table 08000148
+move_names_table 08059B14
+move_names_table 08079B54
+move_names_table 0809B18C
+move_names_table 080D85F8
+move_names_table 080D8F34
+move_names_table 080D9A90
+move_names_table 080D9E50
+move_names_table 080D9F38
+move_names_table 080DD4CC
+move_names_table 080E0C1C
+move_names_table 080F1900
+move_names_table 080F2F8C
+move_names_table 080F3260
+move_names_table 080F3330
+move_names_table 080F378C
+move_names_table 080F4278
+move_names_table 080F457C
+move_names_table 080F4758
+move_names_table 080F47E0
+move_names_table 080F480C
+move_names_table 080F4830
+move_names_table 080F4870
+move_names_table 080FE014
+move_names_table 0811EB9C
+move_names_table 08139908
+move_names_table 0813ACB4
+move_names_table 0813ACE4
+move_names_table 0814E554
+move_names_table 0814EF94
+move_names_table 0814F730
+move_names_table 08160B54
+move_names_table 08160DFC
+move_names_table 08161048
+move_names_table 0816136C
+move_names_table 0816481C
+move_names_table 081930B4
+move_names_table 081A0618
+move_names_table 081A10D8
+move_names_table 081A10F0
+move_names_table 081AB3F8
+move_names_table 081B6AB0
+move_names_table 081B6CB0
+move_names_table 081B6E60
+move_names_table 081B6F4C
+move_names_table 081B71C4
+move_names_table 081B7280
+move_names_table 081B7354
+move_names_table 081B73D4
+move_names_table 081B78FC
+move_names_table 081B798C
+move_names_table 081B7EE8
+move_names_table 081B976C
+move_names_table 081C3BEC
+move_names_table 081C3FCC
+move_names_table 081C4050
+### move descriptions repoint
+move_desc_table 081C3EFC
+move_desc_table 081D2AC8
+### move data repoint
+move_table 080001cc
+move_table 08033ce8
+move_table 0803a3f0
+move_table 0803a738
+move_table 0803d2a0
+move_table 08045784
+move_table 0804591c
+move_table 08045b20
+move_table 080461d0
+move_table 0804626c
+move_table 0804632c
+move_table 0804648c
+move_table 08046a98
+move_table 08046ce8
+move_table 08046f58
+move_table 08046fe0
+move_table 08047020
+move_table 080472ec
+move_table 08047520
+move_table 080475a4
+move_table 080475d4
+move_table 08047684
+move_table 080477b8
+move_table 08047820
+move_table 080478b4
+move_table 08047a48
+move_table 08047cf8
+move_table 08047f90
+move_table 08049a08
+move_table 08049a40
+move_table 0804c658
+move_table 0804c828
+move_table 0804cad0
+move_table 0804e9f0
+move_table 0804edfc
+move_table 0805028c
+move_table 080514c0
+move_table 08051564
+move_table 08051894
+move_table 08051974
+move_table 080521bc
+move_table 08052434
+move_table 0805257c
+move_table 08052f08
+move_table 08052f78
+move_table 08053004
+move_table 08053a88
+move_table 08053bd8
+move_table 08054894
+move_table 08055478
+move_table 08055ee0
+move_table 08057aa0
+move_table 08057be0
+move_table 08057cb8
+move_table 08059c1c
+move_table 0805d454
+move_table 0805d4cc
+move_table 080620b0
+move_table 08062100
+move_table 08062ef4
+move_table 08062f40
+move_table 08063154
+move_table 08063404
+move_table 08063e80
+move_table 080691dc
+move_table 08069260
+move_table 080694cc
+move_table 08069578
+move_table 080695d0
+move_table 080695f4
+move_table 08069a8c
+move_table 08069bec
+move_table 08069d48
+move_table 0806b9a0
+move_table 080deac8
+move_table 08131cc8
+move_table 08131d38
+move_table 08131e6c
+move_table 08131f40
+move_table 08132090
+move_table 081323f8
+move_table 08132a38
+move_table 08132a84
+move_table 08132ce8
+move_table 08132dd0
+move_table 08133088
+move_table 081330ec
+move_table 08133180
+move_table 081331d4
+move_table 0813361c
+move_table 08133648
+move_table 08133674
+move_table 0817e324
+move_table 0817f1a4
+move_table 0817f264
+move_table 0818fff8
+move_table 08193fb4
+move_table 081ae384
+move_table 081ae3d0
+move_table 081ae454
+move_table 081bdb60
+move_table 081c3c94
+move_table 081c3cd4
+move_table 081c4058
+move_table 081c4464
+move_table 081c453c
+move_table 081d2a2c
+### move pp reference repoint
+move_table 08038850 4
+move_table 080389f8 4
+move_table 08069188 4
+move_table 08069230 4
+move_table 0806b82c 4
+### image type icons position
+type_icon_img_pos 0861CFCC
+### image type chart pallet
+img_type_chart_pallet 081C439C
+### aux type names table repoint
+aux_type_name_table_1 082F032C
+aux_type_name_table_2 080C21C8                     
+aux_type_name_table_2 0856EFD8
+aux_type_name_table_2 0856EFE0
+### new type names
+type_names 080166F4
+type_names 08016730
+type_names 08059C24
+type_names 0814F740
+type_names 081D2A30
+### after pokemon faints bs
+BS_ATK_FAINTED 08049C04
+BS_DEF_FAINTED 08049C8C
+##### battle animation backgrounds
+battle_anim_bg_table 080A5038
+battle_anim_bg_table 080A5084
+##### battle animation particles
+battle_particle_table 080A3DD0
+battle_particle_table 080A40BC
+shiny_particle_image 08172FB8
+shiny_particle_pallet 08172FBC
+battle_particle_table 080A3D74 -80000
+battle_particle_pallets 080A3D78 -80000
+### move battlescript table
+battlescripts_table 0804E9EC
+battlescripts_table 08050288
+### New Animation Table
+NewPlayAnimationTable 0805DA3C
+### Pursuit mega evolution
+pursuit_megaevo_bs 082DAB3F
+### Contest data table
+contestdatatable 080D85F0
+contestdatatable 080D9B1C
+contestdatatable 080DB318
+contestdatatable 080DB3F0
+contestdatatable 080DB45C
+contestdatatable 080DB4D8
+contestdatatable 080DD10C
+contestdatatable 080DD2D0
+contestdatatable 080DD4D0
+contestdatatable 080DDA18
+contestdatatable 080E59AC
+contestdatatable 080E5BC8
+contestdatatable 080E5E58
+contestdatatable 080E5EB0
+contestdatatable 080E6204
+contestdatatable 080E629C
+contestdatatable 080E67B0
+contestdatatable 080E697C
+contestdatatable 08156F3C
+contestdatatable 08157010
+contestdatatable 0815710C
+contestdatatable 081571E0
+contestdatatable 0815729C
+contestdatatable 08157408
+contestdatatable 08157B30
+contestdatatable 08158104
+contestdatatable 081583B4
+contestdatatable 08161414
+contestdatatable 081C247C
+contestdatatable 081C3E98
+contestdatatable 081C3F2C
+contestdatatable 081C44D0
+contestdatatable 081C4564
+contestdatatable 081D2BC4
+### Contest combos
+contestcombotable 080E546C 
+contestcombotable 080E5BCC
+### Trainer AI
+tai_command_table 08130FF0
+TAI_SCRIPT_0 082DBEF8
+TAI_SCRIPT_1 082DBEFC
+TAI_SCRIPT_2 082DBF00
+TAI_SCRIPT_3 082DBF04
+TAI_SCRIPT_7 082DBF14
+TAI_SCRIPT_1D 082DBF6C
+### learnsets for PGEscript.py
+learnset_table 0806930C
+### exp give
+BS_POKE_FAINTS_EXP_SLIDEIN 08041754
+### trainer throw images
+trainerthrow_imgs 0805DFD4
+trainerthrow_imgs 0818D098
+### trainer throw pals
+trainerthrow_pals 0805CBDC
+trainerthrow_pals 0805DFDC
+trainerthrow_pals 0814DCA0
+trainerthrow_pals 0816AA60
+trainerthrow_pals 0818CBF8
+trainerthrow_pals 081BE1F8
+### trainer throw positions
+trainerhrow_positions 0805B634
+trainerhrow_positions 0805B768
+trainerhrow_positions 0805B9DC
+trainerhrow_positions 080A98CC
+trainerhrow_positions 080A9958
+trainerhrow_positions 0814D0C8
+trainerhrow_positions 081598C4
+trainerhrow_positions 08169F78
+trainerhrow_positions 0816A044
+trainerhrow_positions 0818BEB8
+trainerhrow_positions 081BD3A4
+## hook into bs that asks you if you want to switch poke
+BS_ASK_FOR_SWITCHING 082DA82E

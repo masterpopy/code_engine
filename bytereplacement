@@ -1,0 +1,87 @@
+##dex
+091257F18 b0 04
+## trainer name
+0806F0CC AF 05
+0806F0D0 FC 19 00 09
+## move icon routine adjustment
+081C0F4E 40 B4 00 26 0D 49 08 47
+081C12EE 40 B4 01 26 0D 49 08 47
+081C1754 40 B4 02 26 11 49 08 47
+## move delimiters
+080D8F0C C0 46 C0 46 C0 46
+080DE83A C0 46 C0 46 C0 46
+0814E504 C0 46 C0 46 C0 46
+0814EF4A C0 46 C0 46 C0 46
+0814EF62 C0 46 C0 46 C0 46
+## auxilliary table type delimiter
+0856EFDE 13
+0856EFE6 13
+## pokemon type delimiter
+0861CFC1 30
+## pokemom type palette tweaks
+## 08D97BC1 FF 66
+08D97BC1 51 73
+08D97BC8 3D 66
+## nop cmd6
+0831BD28 41 06 05 08
+## smellingsalts text now allows all conditions
+085CA024 FD 00 AB FF
+## intimidate uses bank attacker
+085CB0F6 18
+085CB0F1 0F
+## battlestring for stat change now uses scripting active and not target/attacker banks because of a certain problem
+085CA05F 13
+085CA046 13
+## magnitude calc not changing the target bank
+08053E56 00 00
+08053E8A 00 00
+## spite always taking 4pp
+080532EA 04 20 00 00 06 1C
+## make speed button faster
+080008AC 00 B5 05 4A 13 88 01 20 83 43 13 80 02 DF 13 88 03 42 FB D0 00 BD 00 00 DC 22 00 03
+## Trick usable for wild/trainer Pokemon
+08054EDA 02
+## air lock cacophony index fix
+08042700 4C
+08042752 4C
+08033B84 4C
+## item effect delimiter
+080D7508 C0 46 C0 46 C0 46 C0 46
+## adjust focus turn script
+082DB212 3F
+## Illusion, the function is called at the end instead of in the middle
+0805B204 00 00 00 00
+## Change Nauture power decoder
+085CAAF7 36
+## Change Soundproof'd decoder
+085CB172 36
+##### Wild Double Battles
+## When starting a wild battle don't clear battle flags(it's done automatically after the end of a battle)
+080B06D4 00 00
+## battlescript switch out after fainting your poke also applies to double
+082DA7E3 09
+## print bank target name instead of the first opponent pokemon
+085CBFFC 35
+085CBFA6 35
+085CC02A 35
+## dont clear unused text battle pointer that will be used as ptr to text when opponent wins
+080B1344 00 00
+0854FED8 07
+0854FF20 07
+0854FF68 07
+0854FFB0 07
+0854FFF8 07
+08550040 07
+08550088 07
+## ai switching on partner player
+08063B8E 00 80 C0 00
+## magic coat text change
+085CAD78 AB FF
+## hook into bs that asks you if you want to switch poke
+082DA82D 28
+#爸 -> 被
+085CBFA6 78
+#道具显示
+09f0003a 00
+09f0003e 00
+#807084e 281c

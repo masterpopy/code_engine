@@ -1,0 +1,16 @@
+### split icon routine
+Routine_Icon_Moves 081C0F88
+Routine_Icon_Moves 081C1328
+Routine_Icon_Moves 081C17A0
+###start attack
+bs_start_attack 0831BC0C
+###pre attacks
+bc_preattacks 0803D43C
+bc_preattacks 0803D578
+###battle buffer commands for player
+bbp05_send_out_poke_new 0831C528
+bbp06_return_poke_to_pokeball_new 0831C52C
+bbo_06_return_poke_to_ball_new 0831C6E0
+bbp15_open_bag_new 0831C568
+bbp16_open_poke_menu_new 0831C56C
+bbp2F_trainer_ball_throw_new 0831C5D0
