@@ -306,11 +306,13 @@ void damagecalc2(void)
     case MOVE_SUPER_FANG:
         damage = battle_participants[bank_target].current_hp / 2;
         break;
+	case MOVE_Z_TAPU:
+		damage = battle_participants[bank_target].current_hp * 3 / 4;
     case MOVE_FINAL_GAMBIT:
         damage = battle_participants[bank_attacker].current_hp;
         break;
     case MOVE_PSYWAVE:
-        damage = battle_participants[bank_attacker].level * 10 * (__umodsi3(rng(),16) + 5) / 100;
+        damage = battle_participants[bank_attacker].level * 10 * (__umodsi3(rng(),11) + 5) / 100;
         break;
     case MOVE_ENDEAVOR:
         {
@@ -656,6 +658,8 @@ u8 moveargweather_check(u8 arg)
             return 1;
         if (arg & 0x20 && battle_weather.int_bw & weather_air_current)
             return 1;
+		if (arg & 0x40 && new_battlestruct->field_affecting.grassy_terrain)
+			return 1;
     }
     return 0;
 }
@@ -2429,7 +2433,7 @@ void canuseskydrop(void)
 {
     if (bank_target == (bank_attacker ^ 2) || new_battlestruct->field_affecting.gravity)
         battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
-    else if (get_poke_weight(bank_target) > 2000)
+    else if (get_poke_weight(bank_target) >= 2000)
         battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction + 4);
     else
         battlescripts_curr_instruction += 8;

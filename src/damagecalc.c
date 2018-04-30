@@ -179,9 +179,9 @@ u16 get_speed(u8 bank)
             break;
         case ABILITY_QUICK_FEET:
             if (battle_participants[bank].status.flags.poison || battle_participants[bank].status.flags.toxic_poison || battle_participants[bank].status.flags.burn)
-                speed *= 2;
+                speed = speed * 3 / 2;
             else if (battle_participants[bank].status.flags.paralysis)
-                speed *= 4;
+                speed = speed * 3;
             break;
         }
     }
@@ -196,7 +196,7 @@ u16 get_speed(u8 bank)
         speed /= 4;
     //paralysis
     if (battle_participants[bank].status.flags.paralysis)
-        speed /= 4;
+        speed /= 2;
     speed = apply_statboost(speed, battle_participants[bank].spd_buff);
 
     return speed;
@@ -425,6 +425,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank)
                 base_power = 200;
             break;
         case MOVE_STORED_POWER:
+        case MOVE_POWER_TRIP:
             base_power = base_power + 20 * count_stat_increases(atk_bank, 1);
             break;
         case MOVE_ELECTRO_BALL:
