@@ -105,6 +105,7 @@ void bs_execute(void* bs)
     callback_push(execute_bs_command);
 }
 
+
 void bs_state_depending_execute(void)
 {
     if (battle_state_mode >= 0xB) //stop execution
