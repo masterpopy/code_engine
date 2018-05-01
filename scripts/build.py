@@ -16,7 +16,8 @@ for candidatePath in Paths:
         break
 if PATH == "":
 	print('DevKit does not exist in your Path variable.\nChecking default location.')
-	PATH = 'E:\\GAME\\GBA\\devkitARM\\bin'
+	#PATH = 'E:\\GAME\\GBA\\devkitARM\\bin'
+	PATH ='D:\\ZXZ\\ZXZ\\entr\\Pokemon\\RSEFL\\Hack\\devkitARM\\bin'
 	if os.path.isdir(PATH) == False:
 		print("...\nDevkit not found.")
 		sys.exit(1)

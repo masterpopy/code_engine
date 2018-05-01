@@ -658,9 +658,9 @@ u8 moveargweather_check(u8 arg)
             return 1;
         if (arg & 0x20 && battle_weather.int_bw & weather_air_current)
             return 1;
-		if (arg & 0x40 && new_battlestruct->field_affecting.grassy_terrain)
-			return 1;
     }
+	if (arg & 0x40 && new_battlestruct->field_affecting.grassy_terrain)
+        return 1;
     return 0;
 }
 
@@ -669,7 +669,9 @@ void weatherhpheal(void)
     u8 bank = get_battle_bank(read_byte(battlescripts_curr_instruction));
     battlescripts_curr_instruction++;
 	//if(current_move==MOVE_RECOVER)
-    if (moveargweather_check(move_table[current_move].arg1) || find_move_in_table(current_move, &megalauncher_moves_table[0]))
+	if (find_move_in_table(current_move, &megalauncher_moves_table[0]))
+		damage_loc = (battle_participants[bank].max_hp * 3 / 4) *-1;
+    if (moveargweather_check(move_table[current_move].arg1))
         damage_loc = (battle_participants[bank].max_hp * 2 / 3) *-1;
     else if (moveargweather_check(move_table[current_move].arg2))
         damage_loc = percent_lose(battle_participants[bank].max_hp, 75) *-1;

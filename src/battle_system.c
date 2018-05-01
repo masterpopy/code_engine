@@ -78,14 +78,14 @@ u8 get_bank_identity(u8 bank)
 
 void bs_push(void* to_return, void* now)
 {
-    struct battle_stack* stack = battle_resources->battlescript_stack;
+	struct battle_stack* stack = battle_resources->battlescript_stack;
     stack->stack_data[stack->stack_height++] = to_return;
-    to_return = now;
+    battlescripts_curr_instruction = now;
 }
 
 void bs_push_current(void* now)
 {
-    bs_push(battlescripts_curr_instruction, now);
+	bs_push(battlescripts_curr_instruction, now);
 }
 
 void execute_bs_command(void);
@@ -93,21 +93,12 @@ void execute_bs_command(void);
 
 void callback_push(void* curr_callback)
 {
-//    struct battle_stack* stack = battle_resources->callback_stack;
-//    stack->stack_data[stack->stack_height++] = battle_executed_routine;
-//    battle_executed_routine = curr_callback;
-	bs_push(battle_executed_routine, curr_callback);
-}
-
-
-/*
-void callback_push(void* curr_callback)
-{
-    struct battle_stack* stack = battle_resources->callback_stack;
+	struct battle_stack* stack = battle_resources->callback_stack;
     stack->stack_data[stack->stack_height++] = battle_executed_routine;
     battle_executed_routine = curr_callback;
 }
-*/
+
+
 void bs_execute(void* bs)
 {
     bs_push_current(bs);
