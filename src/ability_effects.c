@@ -53,7 +53,8 @@ bool has_ability_effect(u8 bank, u8 mold_breaker)
         u8 attacker_ability = battle_participants[bank_attacker].ability_id;
         if (!new_battlestruct->bank_affecting[bank_attacker].gastro_acided && (
 				attacker_ability==ABILITY_MOLD_BREAKER || attacker_ability==ABILITY_TERAVOLT || attacker_ability==ABILITY_TURBOBLAZE
-				|| current_move == MOVE_PHOTON_GEYSER || current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_SUNSTEEL_STRIKE))
+				|| current_move == MOVE_PHOTON_GEYSER || current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_SUNSTEEL_STRIKE
+				|| current_move == MOVE_Z_SOLGALEO || current_move == MOVE_Z_LUNALA || current_move == MOVE_Z_NECROZMA))
             return false;
     }
     return true;

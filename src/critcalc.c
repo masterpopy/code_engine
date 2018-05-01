@@ -23,7 +23,7 @@ void atk04_critcalc(void)
             crit_loc = 2;
         else
         {
-            if (battle_participants[bank_attacker].status2.focus_energy)
+            if (battle_participants[bank_attacker].status2.focus_energy || current_move == MOVE_Z_ASH_PIKACHU)
                 crit_chance += 2;
             if (move_table[current_move].move_flags.flags.raised_crit_ratio)
                 crit_chance++;
@@ -47,7 +47,7 @@ void atk04_critcalc(void)
                 crit_loc = 2;
             else
             {
-                static const u16 crit_table[] = {4096, 8192, 32768};
+                static const u16 crit_table[] = {2730, 8192, 32768};
                 if (rng() < crit_table[crit_chance])
                     crit_loc = 2;
             }

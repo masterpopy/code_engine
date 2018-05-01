@@ -1478,7 +1478,7 @@ u8 check_if_cannot_attack(void)
 				{
 					bs_push_current((void*)0x82DB300); //snapped out of confusion
 				}
-				else if (percent_chance(50)) //manages to hit the target
+				else if (percent_chance(67)) //manages to hit the target
 				{
 					bs_push_current((void*)0x82DB2BD);
 					battle_communication_struct.multistring_chooser = 0;
