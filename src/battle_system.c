@@ -80,7 +80,7 @@ void bs_push(void* to_return, void* now)
 {
     struct battle_stack* stack = battle_resources->battlescript_stack;
     stack->stack_data[stack->stack_height++] = to_return;
-    to_return = now;
+    battlescripts_curr_instruction = now;
 }
 
 void bs_push_current(void* now)
@@ -90,29 +90,19 @@ void bs_push_current(void* now)
 
 void execute_bs_command(void);
 
-
-void callback_push(void* curr_callback)
-{
-//    struct battle_stack* stack = battle_resources->callback_stack;
-//    stack->stack_data[stack->stack_height++] = battle_executed_routine;
-//    battle_executed_routine = curr_callback;
-	bs_push(battle_executed_routine, curr_callback);
-}
-
-
-/*
 void callback_push(void* curr_callback)
 {
     struct battle_stack* stack = battle_resources->callback_stack;
     stack->stack_data[stack->stack_height++] = battle_executed_routine;
     battle_executed_routine = curr_callback;
 }
-*/
+
 void bs_execute(void* bs)
 {
     bs_push_current(bs);
     callback_push(execute_bs_command);
 }
+
 
 void bs_state_depending_execute(void)
 {
