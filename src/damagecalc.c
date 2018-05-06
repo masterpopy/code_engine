@@ -1280,7 +1280,7 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     //at least one check
     damage = ATLEAST_ONE(damage);
     //final modifiers
-    u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
+    //u8 move_split = move_table[move].split;
     //check reflect/light screen
     u8 def_side = get_bank_side(def_bank);
     if ((side_affecting_halfword[def_side].reflect_on && move_split == MOVE_PHYSICAL) ||(side_affecting_halfword[def_side].light_screen_on && move_split == MOVE_SPECIAL))
