@@ -16,6 +16,7 @@ u8 is_bank_present(u8 bank);
 void move_to_buff1(u16 move);
 u8 get_bank_side(u8 bank);
 void bs_push_current(void* now);
+bool photon_geyser_special(u16 move); //JeremyZ
 
 struct natural_gift{
     u8 move_power;
@@ -286,6 +287,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank)
         case MOVE_MAGNITUDE:
         case MOVE_PRESENT:
         case MOVE_TRIPLE_KICK:
+		case MOVE_POLLEN_PUFF: //JeremyZ
             if (dynamic_base_power)
             {
                 base_power = dynamic_base_power;
@@ -425,7 +427,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank)
                 base_power = 200;
             break;
         case MOVE_STORED_POWER:
-        case MOVE_POWER_TRIP:
+        case MOVE_POWER_TRIP: //JeremyZ
             base_power = base_power + 20 * count_stat_increases(atk_bank, 1);
             break;
         case MOVE_ELECTRO_BALL:
@@ -501,6 +503,10 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank)
 			if (battle_participants[bank_attacker].species == POKE_ASH_GRENJA)
 				base_power = 30;
 			break;
+		case MOVE_STOMPING_TANTRUM: //Stomping Tantrum, JeremyZ
+			if (new_battlestruct->bank_affecting[bank_attacker].lastmove_fail)
+				base_power *= 2;
+			break;
     }
 	if(move>=MOVE_Z_NORMAL_PHYS && move<=MOVE_Z_FAIRY_SPEC)
 		base_power=z_moves_power[last_used_move];
@@ -527,7 +533,7 @@ bool does_move_make_contact(u16 move, u8 atk_bank)
 u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 base_power)
 {
     u16 modifier = 0x1000;
-    u8 move_split = move_table[move].split;
+    u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
     u16 quality_atk_modifier = percent_to_modifier(get_item_quality(battle_participants[atk_bank].held_item));
     if (has_ability_effect(atk_bank, 0))
     {
@@ -915,7 +921,7 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
 
 u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank)
 {
-    u8 move_split = move_table[move].split;
+    u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
     u8 stat_bank;
     if (move == MOVE_FOUL_PLAY)
     {
@@ -1101,7 +1107,7 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank)
 u16 get_def_stat(u16 move, u8 atk_bank, u8 def_bank)
 {
     u8 chosen_def; //0 = def, 1 = sp.def
-    u8 move_split = move_table[move].split;
+    u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
     if (move_split == MOVE_PHYSICAL || move == MOVE_PSYSTRIKE || move == MOVE_PSYSHOCK || move == MOVE_SECRET_SWORD)
         chosen_def = 0;
     else
@@ -1218,6 +1224,7 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
 {
     damage_loc = 0;
     if (chained_effectiveness == 0) {return;} // avoid wastage of time in case of non effective moves
+    u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
     u16 base_power = apply_base_power_modifiers(move, move_type, atk_bank, def_bank, get_base_power(move, atk_bank, def_bank));
     u16 atk_stat = get_attack_stat(move, move_type, atk_bank, def_bank);
     u16 def_stat = get_def_stat(move, atk_bank, def_bank);
@@ -1266,15 +1273,14 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     damage=(damage*chained_effectiveness)>>6;
 
     //burn
-    if (battle_participants[atk_bank].status.flags.burn && move_table[move].split == MOVE_PHYSICAL && move != MOVE_FACADE && !(check_ability(atk_bank, ABILITY_GUTS)))
+    if (battle_participants[atk_bank].status.flags.burn && move_split == MOVE_PHYSICAL && move != MOVE_FACADE && !(check_ability(atk_bank, ABILITY_GUTS))) //JeremyZ
     {
         damage /= 2;
     }
     //at least one check
     damage = ATLEAST_ONE(damage);
     //final modifiers
-    u8 move_split = move_table[move].split;
-
+    u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
     //check reflect/light screen
     u8 def_side = get_bank_side(def_bank);
     if ((side_affecting_halfword[def_side].reflect_on && move_split == MOVE_PHYSICAL) ||(side_affecting_halfword[def_side].light_screen_on && move_split == MOVE_SPECIAL))

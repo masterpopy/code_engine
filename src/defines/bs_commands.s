@@ -67,6 +67,13 @@
 .word \jumpifuserhasnoHP_address
 .endm
 
+@JeremyZ
+.macro jumpifuserheadblown jumpifuserheadblown_address
+.byte 0x83
+.hword 170
+.word \jumpifuserheadblown_address
+.endm
+
 @@@@@@@@@@@@@@@@@ Macro
 
 @@ Delay
@@ -1339,4 +1346,14 @@ jumpifbyte 0x4 0x202427C 0x29 \jumpiftypenotaffected_address
 .macro seteffect1 seteffecteffect
 callasm_cmd 145
 .hword \seteffecteffect
+.endm
+
+@JeremyZ
+.macro pollenpuffdamagecalculation
+.byte 0xF9
+.endm
+
+@JeremyZ
+.macro blowifabilitynotdamp
+.byte 0xFA
 .endm

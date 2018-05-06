@@ -444,6 +444,19 @@ bool check_focus(u8 bank)
         status3[bank].focus_punch_charge = 0;
         bs_execute((void *)0x82DB1FF);
     }
+	//JeremyZ
+	else if(new_battlestruct->bank_affecting[bank].beak_blast_charge == 1)
+	{
+		is_bank_focusing = true;
+		new_battlestruct->bank_affecting[bank].beak_blast_charge = 2;
+		bs_execute((void *)0x82DB1FF); //Needs Revision
+	}
+	else if(new_battlestruct->bank_affecting[bank].shell_trap_charge == 1)
+	{
+		is_bank_focusing = true;
+		new_battlestruct->bank_affecting[bank].shell_trap_charge = 2;
+		bs_execute((void *)0x82DB1FF); //Needs Revision
+	}//
     return is_bank_focusing;
 }
 
@@ -694,6 +707,9 @@ void set_focus_charge(void)
     }
 }
 
+void set_beak_charge(void); //Beak Blast, JeremyZ
+void set_shell_charge(void); //Shell Trap, JeremyZ
+
 void bc_preattacks(void)
 {
     u8 play_script=0;
@@ -729,6 +745,8 @@ void bc_preattacks(void)
     if(!play_script)
     {
         set_focus_charge();
+		set_beak_charge(); //JeremyZ
+		set_shell_charge(); //JeremyZ
         clear_atk_up_if_hit_flag_unless_enraged();
         current_move_turn=0;
         battle_state_mode=battle_state_mode_first_assigned;

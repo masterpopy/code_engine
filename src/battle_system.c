@@ -799,7 +799,7 @@ bool battle_turn_move_effects(void)
                     if (attacker_struct->status.flags.burn && current_hp && not_magicguard(active_bank))
                     {
                         effect = 1;
-                        damage_loc = get_1_8_of_max_hp(active_bank);
+                        damage_loc = get_1_16_of_max_hp(active_bank); //JeremyZ
                         call_bc_move_exec((void*)0x082DB25F);
                     }
                     break;
@@ -1125,7 +1125,7 @@ bool battle_turn_move_effects(void)
 							case 0x3EE:
 							case 0x3EF:
 							case 0x3F0:
-                                if((battle_participants[bank].current_hp >= (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_SHIELDS_DOWN))
+                                if((battle_participants[bank].current_hp > (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_SHIELDS_DOWN)) //JeremyZ
                                 {
                                     effect = 1;
                                     new_species = POKE_MINIOR_METEOR;
@@ -1135,7 +1135,7 @@ bool battle_turn_move_effects(void)
                                 }
                                 break;
                             case POKE_MINIOR_METEOR:
-                                if(battle_participants[bank].current_hp && (battle_participants[bank].current_hp < (battle_participants[bank].max_hp / 2)))
+                                if(battle_participants[bank].current_hp && (battle_participants[bank].current_hp <= (battle_participants[bank].max_hp / 2))) //JeremyZ
                                 {
                                     effect = 1;									
                                     new_species = POKE_MINIOR_CORE;
@@ -1149,7 +1149,7 @@ bool battle_turn_move_effects(void)
                                 break;
                             case POKE_ZYGARDE_10:
                             case POKE_ZYGARDE_50:
-                                if(battle_participants[bank].current_hp && ((battle_participants[bank].current_hp < (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_POWER_CONSTRUCT)))
+                                if(battle_participants[bank].current_hp && ((battle_participants[bank].current_hp <= (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_POWER_CONSTRUCT))) //JeremyZ
                                 {
                                     effect = 1;
                                     new_species = POKE_ZYGARDE_50;
@@ -1187,10 +1187,21 @@ bool battle_turn_move_effects(void)
 							}
                         }
                     break;
+				case 31: //throat chop, JeremyZ
+					if (disable_structs[active_bank].throatchop_timer)
+                    {
+						disable_structs[active_bank].throatchop_timer--;
+						if (disable_structs[active_bank].throatchop_timer == 0)
+						{
+							effect = 1;
+							call_bc_move_exec(BS_TAUNTEND_END2); //Needs Revision
+						}
+                    }
+                    break;
             }
             if (effect != 5) //check for uproar
                  *tracker += 1;
-            #define TRACKER_MAX 31
+            #define TRACKER_MAX 32
             if (*tracker >= TRACKER_MAX)
             {
                 *tracker = 0;
@@ -1949,6 +1960,8 @@ u8 check_move_limitations(u8 bank, u8 not_usable_moves, struct move_limitation l
             not_usable_moves |= BIT_GET(i);
         else if (new_battlestruct->bank_affecting[bank].embargo && embargo_forbidden_move(move_to_check))
             not_usable_moves |= BIT_GET(i);
+		else if (disable_structs[bank].throatchop_timer && find_move_in_table(move_to_check, sound_moves)) //JeremyZ
+			not_usable_moves |= BIT_GET(i);
     }
     return not_usable_moves;
 }
@@ -2012,6 +2025,11 @@ bool message_cant_choose_move(void)
         cant = 1;
         *loc_to_store_bs = BS_CANTSELECT_HEALBLOCK;
     }
+	else if (disable_structs[bank].throatchop_timer && find_move_in_table(checking_move, sound_moves)) //JeremyZ
+	{
+		cant = 1;
+		*loc_to_store_bs = BS_CANTSELECT_HEALBLOCK; //Needs Revision
+	}		
     return cant;
 }
 

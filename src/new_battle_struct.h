@@ -54,6 +54,10 @@ struct bank_affecting{
     u8 caught : 1;
     u8 always_crit : 2;
     u8 itemheal : 1;
+	u8 beak_blast_charge : 2; //JeremyZ
+	u8 shell_trap_charge : 2; //JeremyZ
+	u8 lastmove_fail : 1; //JeremyZ
+	u8 head_blown : 1; //JeremyZ
 };
 
 struct side_affecting{

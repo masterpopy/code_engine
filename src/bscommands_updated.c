@@ -58,6 +58,9 @@ void bs_push(void* to_return, void* now);
 void bs_push_current(void* now);
 void reset_multiple_turn_effects(u8 bank);
 bool not_impostered(u8 bank);
+bool does_move_make_contact(u16 move, u8 atk_bank); //JeremyZ
+bool photon_geyser_special(u16 move); //JeremyZ
+void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
 
 void set_unburden(u8 bank)
 {
@@ -776,13 +779,14 @@ void clear_twoturn(u8 bank)
 void atk49_move_end_turn(void)
 {
 #define INC_END_EVENTS battle_scripting.cmd49_state_tracker++;
-#define case_max 37
+#define case_max 39
 	u8 effect = 0;
 	u16 last_move;
 	if (last_used_move == 0xFFFF)
 		last_move = 0;
 	else
 		last_move = last_used_move;
+	new_battlestruct->bank_affecting[bank_attacker].lastmove_fail = move_outcome.missed || move_outcome.failed || move_outcome.not_affected; //JeremyZ
 	u8 arg1 = read_byte(battlescripts_curr_instruction + 1);
 	u8 arg2 = read_byte(battlescripts_curr_instruction + 2);
 	u8 current_move_type = get_attacking_move_type();
@@ -1284,6 +1288,22 @@ void atk49_move_end_turn(void)
 			}
 			break;
 		}
+		case 36: //get burnt by Beak Blast, JeremyZ
+		{
+			if (new_battlestruct->bank_affecting[bank_target].beak_blast_charge == 2 && does_move_make_contact(current_move, bank_attacker) && MOVE_WORKED 
+			&& (special_statuses[bank_target].moveturn_losthp) && battle_participants[bank_attacker].current_hp && !cant_become_burned(bank_attacker, 0))
+				moveeffect_set_status(bank_attacker, STATUS_BURN, 2);
+			INC_END_EVENTS
+				break;
+		}
+		case 37: //set Shell Trap, JeremyZ
+		{
+			if (new_battlestruct->bank_affecting[bank_target].shell_trap_charge == 2 && (move_table[current_move].split & photon_geyser_special(current_move)) == MOVE_PHYSICAL 
+			&& (bank_attacker ^ bank_target) != 2 && MOVE_WORKED && (special_statuses[bank_target].moveturn_losthp))
+				new_battlestruct->bank_affecting[bank_target].shell_trap_charge = 3;
+			INC_END_EVENTS
+				break;
+		}
 		default:
 			battle_scripting.cmd49_state_tracker = case_max;
 		}
@@ -1346,6 +1366,7 @@ u8 check_if_cannot_attack(void)
 		case 0: //flag clear
 			attacker_struct->status2.destinny_bond = 0;
 			status3[bank_attacker].grudge = 0;
+			new_battlestruct->bank_affecting[active_bank].head_blown = 0; //JeremyZ
 			break;
 		case 1: //check if asleep
 			if (attacker_struct->status.flags.sleep)
@@ -1584,6 +1605,13 @@ u8 check_if_cannot_attack(void)
 				effect = 1;
 				damage_loc = get_1_4_of_max_hp(bank_attacker);
 				battlescripts_curr_instruction = BS_POWDER;
+			}
+			break;
+		case 20: //Shell Trap, JeremyZ
+			if (new_battlestruct->bank_affecting[bank_attacker].shell_trap_charge != 3 && current_move == MOVE_SHELL_TRAP)
+			{
+				effect = 3; //effect = 1或2都不可以，暂时不知道为什么
+				battlescripts_curr_instruction = BS_HARSHSUN_PREVENTS; //Needs Revision
 			}
 			break;
 		}
@@ -2550,8 +2578,8 @@ void atkCC_nature_power(void)
 		current_move = MOVE_PSYCHIC;
 	else
 	{
-		static const u16 naturepower_table[] = { MOVE_SEED_BOMB /*GRASS*/, MOVE_RAZOR_LEAF /*LONG GRASS*/, MOVE_EARTHQUAKE /*SAND*/, MOVE_HYDRO_PUMP /*UNDERWATER*/, MOVE_SURF /*WATER*/, MOVE_BUBBLE_BEAM /*POND*/, MOVE_ROCK_SLIDE /*ROCK*/, MOVE_POWER_GEM /*CAVE*/, MOVE_TRI_ATTACK, MOVE_TRI_ATTACK };
-		current_move = naturepower_table[battle_env_bg];
+		static const u16 naturepower_table[] = { MOVE_ENERGY_BALL /*GRASS*/, MOVE_ENERGY_BALL /*LONG GRASS*/, MOVE_EARTH_POWER /*SAND*/, MOVE_HYDRO_PUMP /*UNDERWATER*/, MOVE_HYDRO_PUMP /*WATER*/, MOVE_HYDRO_PUMP /*POND*/, MOVE_POWER_GEM /*ROCK*/, MOVE_POWER_GEM /*CAVE*/, MOVE_TRI_ATTACK, MOVE_TRI_ATTACK };
+		current_move = naturepower_table[battle_env_bg]; //JeremyZ
 	}
 	bank_target = get_target_of_move(current_move, 0, 0);
 	set_attacking_move_type();
@@ -2645,9 +2673,9 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokem
 			}
 			set_attributes(poke, ATTR_SPECIES, &base_species);
 			calculate_stats_pokekmon(poke);
-			u16 total_hp = get_attributes(poke, ATTR_TOTAL_HP, 0);
+			/*u16 total_hp = get_attributes(poke, ATTR_TOTAL_HP, 0);
 			if (current_hp > total_hp)
-				set_attributes(poke, ATTR_CURRENT_HP, &total_hp);
+				set_attributes(poke, ATTR_CURRENT_HP, &total_hp);*/
 		}
 		else
 		{
@@ -3690,6 +3718,8 @@ void atkF0_copy_caught_poke(void);
 void atkF1_setpoke_as_caught(void);
 void atkF2_display_dex_info(void);
 void atkF3_nickname_caught_poke(void);
+void atkF9_pollen_puff(void); //JeremyZ
+void atkFA_blowifnotdamp(void); //JeremyZ
 
 const command bs_commands[] = {
 	atk00_move_canceller,	//	0
@@ -3941,6 +3971,8 @@ const command bs_commands[] = {
 	(void*)0x8056ED1,	//	 0xF6
 	(void*)0x8056EDD,	//	 0xF7
 	(void*)0x8056EF9,	//	 0xF8
+	atkF9_pollen_puff,	//	 0xF9, JeremyZ
+	atkFA_blowifnotdamp,	//	 0xFA, JeremyZ
 };
 
 void execute_bs_command(void)

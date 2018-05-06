@@ -211,6 +211,12 @@ battlescripts_table:
 .word LOSETYPE_EFFECT		@185 Burn Up; arg1 is type the user has to be and the type the user loses
 .word CONFUSE_STATCHANGE	@186 Swagger, Flatter; arg1 is stat value
 .word INSTRUCT_EFFECT	@187 Oh Guruuuu!!!
+.word SPOTLIGHT	@188 Spotlight, JeremyZ
+.word THROAT_CHOP	@189 Throat Chop, JeremyZ
+.word POLLEN_PUFF	@190 Pollen Puff, JeremyZ
+.word SPEED_SWAP	@191 Speed Swap, JeremyZ
+.word MIND_BLOWN	@192 Mind Blown, JeremyZ
+.word PLASMA_FISTS	@193 Plasma Fists, JeremyZ
 
 SUNNYDAY_BS:
 	attackcanceler
@@ -2432,3 +2438,95 @@ INSTRUCT_EFFECT:
 	attackstring
 	ppreduce
 	callasm_cmd 165
+
+SPOTLIGHT: @JeremyZ
+	attackcanceler
+	callasm_cmd 62 @jump if not double battle
+	.word MOVE_FAILED
+	attackanimation
+	callasm_cmd 167 @set_spotlight
+	printstring 0x1E8 @Needs Message
+	waitmessage 0x40
+	goto_cmd ENDTURN
+
+THROAT_CHOP: @JeremyZ
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	jumpiftypenotaffected MOVE_FAILED
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	damageadjustment
+	attackanimation
+	waitanimation
+	effectiveness_sound
+	hitanim bank_target
+	waitstate
+	graphicalhpupdate bank_target
+	datahpupdate bank_target
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	callasm_cmd 168 @set Throat Chop
+	.word MOVE_FAILED
+	printstring 0x1E8 @Needs Revision
+	waitmessage 0x40
+	goto_cmd ENDTURN
+	
+POLLEN_PUFF: @JeremyZ
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	jumpiftypenotaffected MOVE_FAILED
+	attackstring
+	ppreduce
+	pollenpuffdamagecalculation
+
+SPEED_SWAP: @JeremyZ
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	callasm_cmd 169 @Speed Swap
+	printstring 0x1E8 @Needs Revision
+	waitmessage 0x40
+	goto_cmd ENDTURN
+
+MIND_BLOWN: @JeremyZ
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifuserheadblown EXPLODE_DAMAGE @Needs Revision
+	blowifabilitynotdamp
+	datahpupdate bank_attacker
+	waitstate
+
+PLASMA_FISTS: @JeremyZ
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	jumpiftypenotaffected MOVE_FAILED
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	damageadjustment
+	attackanimation
+	waitanimation
+	effectiveness_sound
+	hitanim bank_target
+	waitstate
+	graphicalhpupdate bank_target
+	datahpupdate bank_target
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	callasm_cmd 65 @sets Ion Deluge
+	.word MOVE_FAILED
+	printstring 0x1E8
+	waitmessage 0x40
+	goto_cmd ENDTURN
+	
