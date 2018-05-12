@@ -32,6 +32,8 @@ bool is_bank_present(u8 bank)
     return 1;
 }
 
+bool is_immune_to_powder(u8 bank); //JeremyZ
+
 u8 get_target_of_move(u16 move, u8 target_given, u8 adjust)
 {
     u8 target_case;
@@ -49,7 +51,8 @@ u8 get_target_of_move(u16 move, u8 target_given, u8 adjust)
         {
             case 4:
             case 0: //chosen target
-                if (side_timers[target_side].followme_timer && battle_participants[side_timers[target_side].followme_target].current_hp)
+                if (side_timers[target_side].followme_timer && battle_participants[side_timers[target_side].followme_target].current_hp 
+					&& !(is_immune_to_powder(bank_attacker) && new_battlestruct->bank_affecting[side_timers[target_side].followme_target].rage_powder)) //Rage Powder, JeremyZ
                     result_target = side_timers[target_side].followme_target;
                 else
                 {

@@ -3,6 +3,19 @@
 
 #include "types.h"
 
+//JeremyZ
+#define NIGHT_FIRST_HOUR    18
+#define NIGHT_LAST_HOUR     5
+
+struct real_time_clock_hex{
+    u16 field0;
+    u8 hour;
+    u8 minute;
+    u8 second;
+};
+
+extern struct real_time_clock_hex rtc_hex;
+
 struct bank_affecting{
     u8 embargo : 3;
     u8 electrify : 1;
@@ -54,6 +67,7 @@ struct bank_affecting{
     u8 caught : 1;
     u8 always_crit : 2;
     u8 itemheal : 1;
+	u8 rage_powder : 1; //JeremyZ
 	u8 beak_blast_charge : 2; //JeremyZ
 	u8 shell_trap_charge : 2; //JeremyZ
 	u8 lastmove_fail : 1; //JeremyZ

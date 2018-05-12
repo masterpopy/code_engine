@@ -7,6 +7,37 @@ bool is_bank_present(u8 bank);
 u8 has_ability_effect(u8 bank, u8 mold_breaker);
 bool check_ability(u8 bank, u8 ability);
 void atk0C_datahpupdate(void);
+u8 is_of_type(u8 bank, u8 type);
+u8 get_item_effect(u8 bank, u8 check_negating_effects);
+void update_rtc(void);
+struct real_time_clock_hex rtc_hex;
+
+//JeremyZ
+bool time_check(u8 from, u8 to)
+{
+    update_rtc();
+    u8 hour = rtc_hex.hour;
+    if (to >= from)
+    {
+        if (hour >= from && hour <= to)
+            return 1;
+        return 0;
+    }
+    else
+    {
+        if (hour >= from || hour <= to)
+            return 1;
+		return 0;
+    }   
+}
+
+//Rage Powder
+bool is_immune_to_powder(u8 bank)
+{
+	if (is_of_type(bank, TYPE_GRASS) || check_ability(bank, ABILITY_OVERCOAT) || get_item_effect(bank_attacker, 1) == ITEM_EFFECT_SAFETYGOOGLES)
+		return 1;
+	return 0;
+}
 
 //Photon Geyser & Z_Necrozma
 bool photon_geyser_special(u16 move)
@@ -65,23 +96,11 @@ void atkFA_blowifnotdamp(void)
 			return;
 		}
 	}
-	//set head_blown flag
-	new_battlestruct->bank_affecting[active_bank].head_blown = 1;	
 	damage_loc = (battle_participants[bank_attacker].max_hp + 1) / 2;
-	if (check_ability(bank_attacker, ABILITY_MAGIC_GUARD))
+	if (check_ability(bank_attacker, ABILITY_MAGIC_GUARD) || new_battlestruct->bank_affecting[active_bank].head_blown)
 		damage_loc = 0;
-	//graphical hp update
-	active_bank = bank_attacker;
-	prepare_health_bar_update_buffer(0, damage_loc);
-	mark_buffer_bank_for_execution(active_bank);
-	for (u8 i = 0; i < 4; i++)
-	{
-		if (is_bank_present(i) && i != bank_attacker)
-		{
-			bank_target = i;
-			break;
-		}
-	}
+	//set head_blown flag
+	new_battlestruct->bank_affecting[active_bank].head_blown = 1;
 	battlescripts_curr_instruction++; //Needs Revision
 }
 
@@ -96,13 +115,13 @@ void set_spotlight(void)
 //Throat Chop
 void set_throatchop(void)
 {
-	void* failjump = (void*)read_word(battlescripts_curr_instruction + 1);
+	void* failjump = (void*)read_word(battlescripts_curr_instruction /*+ 1*/);
 	if (disable_structs[bank_target].throatchop_timer)
 		battlescripts_curr_instruction = failjump;
 	else
 	{
 		disable_structs[bank_target].throatchop_timer = 2;
-		battlescripts_curr_instruction += 5;
+		battlescripts_curr_instruction += 4;//5;
 	}
 }
 

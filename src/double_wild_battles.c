@@ -8,6 +8,7 @@ bool is_poke_valid(const struct pokemon* poke);
 void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokemon* poke);
 u8 get_bank_side(u8 bank);
 void setflag(u16 flag);
+bool time_check(u8 from, u8 to); //JeremyZ
 
 #pragma pack(push,1)
 struct double_grass_tile{
@@ -102,7 +103,7 @@ bool is_poke_caught(u16 species)
 
 bool is_poke_ultrabeast(u16 species)
 {
-	if (species>0x34D && species <0x355)
+	if ((species > 0x34D && species < 0x355) || (species > 0x42E && species < 0x433)) //JeremyZ
 		return 1;
     return 0;
 }
@@ -139,8 +140,8 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
     case BALL_NEST:
         {
             u8 level = catching->level;
-            if (level <= 30)
-                multiplier = 40 - level;
+            if (level < 30) //JeremyZ
+                multiplier = 41 - level;
         }
         break;
     case BALL_REPEAT:
@@ -148,7 +149,7 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
             multiplier = 35;
         break;
     case BALL_TIMER:
-        multiplier = battle_trace.battle_turn_counter + 10;
+        multiplier = battle_trace.battle_turn_counter * 3 + 10; //JeremyZ
         if (multiplier > 40)
             multiplier = 40;
         break;
@@ -186,7 +187,7 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         break;
     case BALL_QUICK:
         if (battle_trace.battle_turn_counter == 0)
-            multiplier = 40;
+            multiplier = 50; //JeremyZ
         break;
     case BALL_HEAVY:
         {
@@ -197,6 +198,8 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
             else if (weight < 3072) {changed_rate += 20;}
             else if (weight < 4096) {changed_rate += 30;}
             else {changed_rate += 40;}
+			if (changed_rate < 1) //JeremyZ
+				changed_rate = 1;
             if (changed_rate >= 0 && changed_rate <= 255) {catchrate = changed_rate;}
         }
         break;
@@ -205,8 +208,8 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
             multiplier = 30;
         break;
     case BALL_DUSK:
-        if (curr_mapheader.type == MAP_CAVE)
-            multiplier = 35;
+        if (curr_mapheader.type == MAP_CAVE || time_check(NIGHT_FIRST_HOUR, NIGHT_LAST_HOUR)) //JeremyZ
+            multiplier = 30;
         break;
     case BALL_MOON:
         {

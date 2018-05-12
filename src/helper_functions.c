@@ -1062,6 +1062,8 @@ void roomsetter(void)
     }
 }
 
+bool is_immune_to_powder(u8 bank); //JeremyZ
+
 void countercalc(void)
 {
     u32 physical_damage = protect_structs[bank_attacker].physical_damage;
@@ -1070,7 +1072,8 @@ void countercalc(void)
     u8 special_target = protect_structs[bank_attacker].mirrorcoat_target;
     u8 attackers_side = get_bank_side(bank_attacker);
     u8 followme = 0;
-    if (side_timers[attackers_side].followme_timer && battle_participants[side_timers[attackers_side].followme_target].current_hp)
+    if (side_timers[attackers_side].followme_timer && battle_participants[side_timers[attackers_side].followme_target].current_hp
+		&& !(is_immune_to_powder(bank_attacker) && new_battlestruct->bank_affecting[side_timers[attackers_side ^ 1].followme_target].rage_powder)) //Rage Powder, JeremyZ
         followme = 1;
     u32 damage = 0;
     u8 fail = 0;
@@ -3019,7 +3022,7 @@ void revert_mega(void) //bank
 void instruct_canceler(void)
 {
     u16 last_target_move = calling_move_used[bank_target];
-    if(last_target_move == 0xFFFF || last_target_move!=current_move_used[bank_target] || battle_participants[bank_target].current_hp==0
+    if(last_target_move == 0x0 || last_target_move == 0xFFFF || last_target_move!=current_move_used[bank_target] || battle_participants[bank_target].current_hp==0
        || move_table[last_target_move].script_id ==39 || find_move_in_table(last_target_move,instruct_banlist) || find_move_in_table(last_target_move,moves_calling_another_move)
         || find_move_in_table(last_target_move,moves_with_charging_turn))
     {

@@ -1120,7 +1120,7 @@ void atk49_move_end_turn(void)
 			if (!(hitmarker&HITMARKER_IMMOBILE_DUE_TO_STATUS) && move_table[current_move].target == move_target_foes_and_ally &&
 				battle_flags.double_battle && !protect_structs[bank_attacker].flag0_onlystruggle)
 			{
-				if (move_table[current_move].script_id == 23 && move_outcome.explosion_stop) //stop explosion if damp on
+				if ((move_table[current_move].script_id == 23 || move_table[current_move].script_id == 192) && move_outcome.explosion_stop) //stop explosion if damp on, JeremyZ
 				{
 					move_outcome.explosion_stop = 0;
 					INC_END_EVENTS
@@ -1294,7 +1294,7 @@ void atk49_move_end_turn(void)
 			&& (special_statuses[bank_target].moveturn_losthp) && battle_participants[bank_attacker].current_hp && !cant_become_burned(bank_attacker, 0))
 				moveeffect_set_status(bank_attacker, STATUS_BURN, 2);
 			INC_END_EVENTS
-				break;
+			break;
 		}
 		case 37: //set Shell Trap, JeremyZ
 		{
@@ -1302,7 +1302,16 @@ void atk49_move_end_turn(void)
 			&& (bank_attacker ^ bank_target) != 2 && MOVE_WORKED && (special_statuses[bank_target].moveturn_losthp))
 				new_battlestruct->bank_affecting[bank_target].shell_trap_charge = 3;
 			INC_END_EVENTS
-				break;
+			break;
+		}
+		case 38: //set Rage Powder, JeremyZ
+		{
+			if (current_move == MOVE_RAGE_POWDER)
+				new_battlestruct->bank_affecting[bank_attacker].rage_powder = 1;
+			else
+				new_battlestruct->bank_affecting[bank_attacker].rage_powder = 0;
+			INC_END_EVENTS
+			break;
 		}
 		default:
 			battle_scripting.cmd49_state_tracker = case_max;

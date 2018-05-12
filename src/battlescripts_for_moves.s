@@ -2497,12 +2497,15 @@ SPEED_SWAP: @JeremyZ
 
 MIND_BLOWN: @JeremyZ
 	attackcanceler
+	blowifabilitynotdamp
 	attackstring
 	ppreduce
-	jumpifuserheadblown EXPLODE_DAMAGE @Needs Revision
-	blowifabilitynotdamp
+	graphicalhpupdate bank_attacker
 	datahpupdate bank_attacker
-	waitstate
+	accuracycheck MOVE_MISSED 0x0
+	critcalc
+	damagecalc
+	goto_cmd SUCCESS_MOVE_ATTACK
 
 PLASMA_FISTS: @JeremyZ
 	attackcanceler
@@ -2524,6 +2527,7 @@ PLASMA_FISTS: @JeremyZ
 	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
+	faintpokemon bank_target 0x0 0x0 @faint target
 	callasm_cmd 65 @sets Ion Deluge
 	.word MOVE_FAILED
 	printstring 0x1E8

@@ -38,8 +38,7 @@ u8 item_force_switching(u8 bank, void* BS_ptr);
 
 bool not_impostered(u8 bank)
 {
-	u8 opposing_bank = bank ^ 1;
-    return is_bank_present(opposing_bank) && !battle_participants[opposing_bank].status2.transformed && !battle_participants[bank].status2.transformed;
+    return !battle_participants[bank].status2.transformed;
 }
 
 bool has_ability_effect(u8 bank, u8 mold_breaker)
@@ -1251,7 +1250,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             case ABILITY_IMPOSTER:
                 {
                     u8 opposing_bank = bank ^ 1;
-                    if (not_impostered(bank))
+                    if (is_bank_present(opposing_bank) && !battle_participants[opposing_bank].status2.transformed && !battle_participants[bank].status2.transformed)
                     {
                         effect = 1;
                         bs_execute(BS_IMPOSTER);
