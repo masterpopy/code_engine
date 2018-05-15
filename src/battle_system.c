@@ -33,7 +33,9 @@ bool has_ability_effect(u8 bank, u8 mold_breaker);
 bool weather_abilities_effect(void);
 void clear_twoturn(u8 bank);
 u8  get_trainer_opponent_A_class();
-bool not_impostered(u8 bank); 
+bool not_impostered(u8 bank);
+struct pokemon* get_bank_poke_ptr(u8 bank); //JeremyZ
+
 u8 get_battle_bank(u8 to_get)
 {
     switch (to_get)
@@ -2170,13 +2172,14 @@ bool ai_switch_wonderguard(void)
     return 0;
 }
 
-bool ai_ability_switch(void)
+bool ai_ability_switch(void) //JeremyZ
 {
-    if (check_ability(active_bank, ABILITY_NATURAL_CURE))
+	struct pokemon* poke = get_bank_poke_ptr(active_bank);
+    if (check_ability(active_bank, ABILITY_NATURAL_CURE) && get_attributes(poke, ATTR_STATUS_AILMENT, 0))
     {
-		return 0;
+		return 1;
     }
-    else if (check_ability(active_bank, ABILITY_REGENERATOR))
+    else if (check_ability(active_bank, ABILITY_REGENERATOR) && battle_participants[active_bank].current_hp <= battle_participants[active_bank].max_hp / 2)
     {
 		return 1;
     }

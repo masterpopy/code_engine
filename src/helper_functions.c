@@ -51,7 +51,7 @@ bool not_impostered(u8 bank);
 bool is_poke_valid(struct pokemon* poke)
 {
     u16 species = get_attributes(poke, ATTR_SPECIES, 0);
-    if (species != 0 && species != 412)
+    if (species != 0 && species != 412 && !get_attributes(poke, ATTR_IS_EGG, 0)) //JeremyZ
         return 1;
     return 0;
 }
@@ -629,7 +629,7 @@ void half_hp_damage(void)
 
 void jumpifonlyonepokemon(void)
 {
-    if (count_party_pokemon(bank_attacker) <= 1)
+    if (count_party_pokemon(bank_attacker) <= 1 + battle_flags.double_battle) //JeremyZ
         battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
     else
         battlescripts_curr_instruction += 4;

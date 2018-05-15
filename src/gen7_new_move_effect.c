@@ -10,9 +10,7 @@ void atk0C_datahpupdate(void);
 u8 is_of_type(u8 bank, u8 type);
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 void update_rtc(void);
-struct real_time_clock_hex rtc_hex;
 
-//JeremyZ
 bool time_check(u8 from, u8 to)
 {
     update_rtc();
@@ -28,7 +26,7 @@ bool time_check(u8 from, u8 to)
         if (hour >= from || hour <= to)
             return 1;
 		return 0;
-    }   
+    }
 }
 
 //Rage Powder

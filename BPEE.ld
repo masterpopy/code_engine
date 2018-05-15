@@ -637,3 +637,4 @@ poke_name_table = 0x08000144;
 battle_strings_table = 0x085CC270;
 
 update_rtc = 0x0802F588|1; /*JeremyZ*/
+rtc_hex = 0x03005CF8; /*JeremyZ*/

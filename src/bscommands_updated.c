@@ -1292,7 +1292,10 @@ void atk49_move_end_turn(void)
 		{
 			if (new_battlestruct->bank_affecting[bank_target].beak_blast_charge == 2 && does_move_make_contact(current_move, bank_attacker) && MOVE_WORKED 
 			&& (special_statuses[bank_target].moveturn_losthp) && battle_participants[bank_attacker].current_hp && !cant_become_burned(bank_attacker, 0))
+			{
 				moveeffect_set_status(bank_attacker, STATUS_BURN, 2);
+				effect = 1;
+			}
 			INC_END_EVENTS
 			break;
 		}
@@ -1300,7 +1303,10 @@ void atk49_move_end_turn(void)
 		{
 			if (new_battlestruct->bank_affecting[bank_target].shell_trap_charge == 2 && (move_table[current_move].split & photon_geyser_special(current_move)) == MOVE_PHYSICAL 
 			&& (bank_attacker ^ bank_target) != 2 && MOVE_WORKED && (special_statuses[bank_target].moveturn_losthp))
+			{
 				new_battlestruct->bank_affecting[bank_target].shell_trap_charge = 3;
+				effect = 1;
+			}
 			INC_END_EVENTS
 			break;
 		}

@@ -231,6 +231,7 @@ void __attribute__((long_call)) change_order_in_battle(u8 bank);
 void __attribute__((long_call)) sub_81B8E80(u8 bank, u8 pokeID, u8 sth);
 void __attribute__((long_call)) sub_80571DC(u8 bank, u8 pokeID);
 void __attribute__((long_call)) buffer_pokemon_species(u8* dst, u16 species);
+void __attribute__((long_call)) update_rtc(void); //JeremyZ
 
 u32 __attribute__((long_call)) __udivsi3(u32 numerator, u32 denumerator);
 
