@@ -73,7 +73,7 @@ void atkF9_pollen_puff(void)
 //Mind Blown
 void jumpifuserheadblown(void)
 {
-    if (! new_battlestruct->bank_affecting[bank_attacker].head_blown) //Not Jump
+    if (!new_battlestruct->bank_affecting[bank_attacker].head_blown) //Not Jump
         battlescripts_curr_instruction += 4;
     else //Jump
         battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);

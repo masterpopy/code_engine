@@ -2670,7 +2670,7 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokem
 	{
 		u16 current_hp = get_attributes(poke, ATTR_CURRENT_HP, 0);
 		u16 species = get_attributes(poke, ATTR_SPECIES, 0);
-		if (species == POKE_ZYGARDE_100 && (current_hp || battle_outcome))
+		if (species == POKE_ZYGARDE_100 && (!current_hp || battle_outcome)) //JeremyZ
 		{
 			u16 base_species = POKE_ZYGARDE_10;
 			if ((side && (new_battlestruct->party_bit.is_base_z50_ai & bits_table[teamID])) ||
@@ -2684,13 +2684,15 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokem
 				{
 					new_battlestruct->party_bit.is_base_z50_user = 0;
 				}
-				//base_species = POKE_ZYGARDE_50;
+				base_species = POKE_ZYGARDE_50; //JeremyZ
 			}
 			set_attributes(poke, ATTR_SPECIES, &base_species);
 			calculate_stats_pokekmon(poke);
-			/*u16 total_hp = get_attributes(poke, ATTR_TOTAL_HP, 0);
+			u16 total_hp = get_attributes(poke, ATTR_TOTAL_HP, 0);
 			if (current_hp > total_hp)
-				set_attributes(poke, ATTR_CURRENT_HP, &total_hp);*/
+				set_attributes(poke, ATTR_CURRENT_HP, &total_hp);
+			else //JeremyZ
+				set_attributes(poke, ATTR_CURRENT_HP, &current_hp);
 		}
 		else
 		{

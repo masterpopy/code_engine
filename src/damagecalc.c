@@ -1323,8 +1323,7 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
         else
             final_modifier = chain_modifier(final_modifier, 0x1000 + new_battlestruct->bank_affecting[atk_bank].same_move_used * 0x333);
     }
-    else if ((get_item_effect(atk_bank, 1) == ITEM_EFFECT_EXPERTBELT && move_outcome.super_effective) || 
-		atk_ability == ABILITY_NEUROFORCE)
+    else if ((get_item_effect(atk_bank, 1) == ITEM_EFFECT_EXPERTBELT || atk_ability == ABILITY_NEUROFORCE) && move_outcome.super_effective) //JeremyZ
     {
         final_modifier = chain_modifier(final_modifier, 0x1333);
     }
@@ -1355,6 +1354,12 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     {
         final_modifier = chain_modifier(final_modifier, 0x2000);
     }
+	
+	//JeremyZ
+	if(new_battlestruct->various.ate_bonus)
+	{
+		final_modifier = chain_modifier(final_modifier, 0x1333);
+	}
 
     damage = apply_modifier(final_modifier, damage);
     damage_loc = ATLEAST_ONE(damage);

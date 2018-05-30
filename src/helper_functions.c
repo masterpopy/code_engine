@@ -669,7 +669,7 @@ void weatherhpheal(void)
     u8 bank = get_battle_bank(read_byte(battlescripts_curr_instruction));
     battlescripts_curr_instruction++;
 	//if(current_move==MOVE_RECOVER)
-	if (find_move_in_table(current_move, &megalauncher_moves_table[0]))
+	if (check_ability(bank_attacker, ABILITY_MEGA_LAUNCHER) && find_move_in_table(current_move, &megalauncher_moves_table[0]))
 		damage_loc = (battle_participants[bank].max_hp * 3 / 4) *-1;
     if (moveargweather_check(move_table[current_move].arg1))
         damage_loc = (battle_participants[bank].max_hp * 2 / 3) *-1;
@@ -995,7 +995,7 @@ void ability_change(void)
         case 3: //target's ability becomes the one in arg2
             {
                 u8 newability = move_table[current_move].arg2;
-                if (*ability_def == newability || findability_in_table(newability, forbidenabilitiestable4))
+                if (*ability_def == newability || findability_in_table(*ability_def, forbidenabilitiestable4))
                     fail = 1;
                 else
                 {

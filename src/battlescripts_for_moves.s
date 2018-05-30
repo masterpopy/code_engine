@@ -2077,7 +2077,6 @@ CRASH_ATTACK:
 	attackcanceler
 	accuracycheck CRASHED 0x0
 	attackstring
-	ppreduce
 	critcalc
 	damagecalc
 	jumpiftypenotaffected CRASHED
@@ -2497,15 +2496,16 @@ SPEED_SWAP: @JeremyZ
 
 MIND_BLOWN: @JeremyZ
 	attackcanceler
-	blowifabilitynotdamp
 	attackstring
 	ppreduce
+	blowifabilitynotdamp
 	graphicalhpupdate bank_attacker
 	datahpupdate bank_attacker
 	accuracycheck MOVE_MISSED 0x0
 	critcalc
 	damagecalc
-	goto_cmd SUCCESS_MOVE_ATTACK
+	damageadjustment
+	goto_cmd ATTACK_ANIM
 
 PLASMA_FISTS: @JeremyZ
 	attackcanceler

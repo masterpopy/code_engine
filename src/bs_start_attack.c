@@ -465,6 +465,7 @@ bool check_focus(u8 bank)
 
 u16 check_z_move(u16 move, u8 bank)
 {
+	const struct evolution_sub* evo = GET_EVO_TABLE(battle_participants[bank].species);
 	const struct move_info* info = &move_table[move];
 	if(get_item_effect(bank, 0) != 153)
 		return 0;
@@ -472,9 +473,12 @@ u16 check_z_move(u16 move, u8 bank)
 	u32 param = item_info->extra_param;
 	u8 type = info->type;
 	if(param > TYPE_FAIRY){
-		if(param >> 16 == battle_participants[bank].species && (param << 16) >> 16 == move)
-			return  item_info->mystery_value;
-		return 0;
+		for (u8 i = 0; i < NUM_OF_EVOS; i++) //JeremyZ
+		{
+			if(!evo[i].method && evo[i].paramter == battle_participants[bank].held_item && (param << 16) >> 16 == move)
+				return  item_info->mystery_value;
+			return 0;
+		}
 	}
 	else if(param == type)
 	{

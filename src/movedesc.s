@@ -765,6 +765,7 @@ move_desc_table:
 .word ZINGZAP_description
 .word NATUREFURY_description
 .word MULTIATTACK_description
+.word NOTHING_description
 .word MIND_BLOWN_description
 .word PLASMA_FISTS_description
 .word PHOTON_GEYSER_description

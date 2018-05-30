@@ -145,8 +145,11 @@ u8 get_attacking_move_type(void)
     u8 move_type=battle_stuff_ptr->dynamic_move_type&0x3F;
     if(!move_type)
     {
-        if(check_ability(bank_attacker,ABILITY_NORMALIZE))
+        if(check_ability(bank_attacker,ABILITY_NORMALIZE) && move_type != TYPE_NORMAL) //JeremyZ
+		{
             move_type = TYPE_NORMAL;
+			new_battlestruct->various.ate_bonus=1;
+		}
         else
             move_type = move_table[current_move].type;
     }
@@ -1154,19 +1157,37 @@ bool battle_turn_move_effects(void)
                                 if(battle_participants[bank].current_hp && ((battle_participants[bank].current_hp <= (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_POWER_CONSTRUCT))) //JeremyZ
                                 {
                                     effect = 1;
-                                    new_species = POKE_ZYGARDE_50;
-                                    if(species==POKE_ZYGARDE_50)
-                                    {
-                                        if(get_bank_side(bank))
-                                        {
-                                            new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[bank]];
-                                        }
-                                        else
-                                        {
-                                            new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[bank]];
-                                        }
-										new_species = POKE_ZYGARDE_100;
-                                    }
+                                    // new_species = POKE_ZYGARDE_50;
+                                    // if(species==POKE_ZYGARDE_50)
+                                    // {
+                                        // if(get_bank_side(bank))
+                                        // {
+                                            // new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[bank]];
+                                        // }
+                                        // else
+                                        // {
+                                            // new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[bank]];
+                                        // }
+										// new_species = POKE_ZYGARDE_100;
+                                    // }
+									
+									//JeremyZ
+									if(get_bank_side(bank))
+									{
+										if(species == POKE_ZYGARDE_50)
+											new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[bank]];
+										else
+											new_battlestruct->party_bit.is_base_z50_ai &= ~bits_table[battle_team_id_by_side[bank]];
+									}
+									else
+									{
+										if(species == POKE_ZYGARDE_50)
+											new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[bank]];
+										else
+											new_battlestruct->party_bit.is_base_z50_user &= ~bits_table[battle_team_id_by_side[bank]];
+									}
+									new_species = POKE_ZYGARDE_100;
+									
                                     //battle_scripting.active_bank=bank;
                                     string_chooser = 0x24A;
                                     script = (BS_ZYGARDE_FORM_CHANGE);
@@ -2044,19 +2065,19 @@ s8 can_switch(u8 bank) //1 - can; 0 - can't; -1 can't due to abilities
     if (battle_participants[bank].status2.trapped_in_wrap || battle_participants[bank].status2.cant_escape || status3[bank].rooted || new_battlestruct->field_affecting.fairy_lock)
         return 0;
     u8 ability_bank = ability_battle_effects(12, bank, ABILITY_SHADOW_TAG, 0, 0);
-    if (ability_bank /*&& !check_ability(bank, ABILITY_SHADOW_TAG) */&& !is_of_type(bank, TYPE_GHOST))
+    if (ability_bank && !check_ability(bank, ABILITY_SHADOW_TAG) && !is_of_type(bank, TYPE_GHOST)) //JeremyZ
     {
         another_active_bank = ability_bank - 1;
         return -1;
     }
     ability_bank = ability_battle_effects(12, bank, ABILITY_MAGNET_PULL, 1, 0);
-    if (ability_bank && is_of_type(bank, TYPE_STEEL))
+    if (ability_bank && is_of_type(bank, TYPE_STEEL) && !is_of_type(bank, TYPE_GHOST)) //JeremyZ
     {
         another_active_bank = ability_bank - 1;
         return -1;
     }
     ability_bank = ability_battle_effects(12, bank, ABILITY_ARENA_TRAP, 1, 0);
-    if (ability_bank && GROUNDED(bank))
+    if (ability_bank && GROUNDED(bank) && !is_of_type(bank, TYPE_GHOST)) //JeremyZ
     {
         another_active_bank = ability_bank - 1;
         return - 1;
@@ -2188,7 +2209,7 @@ bool ai_ability_switch(void) //JeremyZ
 
 bool tai_should_switch(void)
 {
-    if (!can_switch(active_bank))
+    if (can_switch(active_bank) <= 0) //JeremyZ
         return 0;
     u8 available_to_switch = 0;
     for (u8 i = 0; i < 6; i++)

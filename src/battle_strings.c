@@ -327,6 +327,8 @@ const u8* get_move_name(u16 move)
 		return z_move_names_table[move - MOVE_Z_DECIDUEYE + 37];
 	else if (move == MOVE_Z_ASH_PIKACHU)
 		return z_move_names_table[46];
+	else if (move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_NECROZMA) //JeremyZ
+		return z_move_names_table[move - MOVE_Z_KOMMO_O + 47];
 	return move_names_table[move];
 }
 
