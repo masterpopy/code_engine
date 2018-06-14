@@ -144,7 +144,7 @@ u8 can_set_mega_trigger(u8 bank)
     bool res=0;
     int mega_mode=0;
     if(bank==0 && !(mega->user_trigger) &&
-       ((battle_flags.multibattle && !(mega->evo_happened_pbs&0x1)) || !(mega->evo_happened_pbs&0x5)))
+       ((battle_flags.multibattle && !(mega->evo_happened_pbs&0x5/*1*/)) || !(mega->evo_happened_pbs&0x1/*5*/))) //JeremyZ
     {
         res=true;
     }

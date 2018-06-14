@@ -1192,7 +1192,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                 if (!(battle_weather.flags.harsh_sun))
                 {
                     effect = true;
-                    battle_weather.int_bw = weather_harsh_sun | weather_permament_sun;
+                    battle_weather.int_bw = weather_harsh_sun; //| weather_permament_sun;
                     bs_execute(BS_DESOLATELAND);
                     battle_scripting.active_bank = bank;
                 }
@@ -1201,7 +1201,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                 if (!(battle_weather.flags.heavy_rain))
                 {
                     effect = true;
-                    battle_weather.int_bw = weather_heavy_rain | weather_permament_rain;
+                    battle_weather.int_bw = weather_heavy_rain; //| weather_permament_rain;
                     bs_execute(BS_PRIMORDIALSEA);
                     battle_scripting.active_bank = bank;
                 }

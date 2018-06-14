@@ -378,7 +378,6 @@ struct disable_struct{
     u8 recharge_counter;
     u8 field1A;
     u8 field1B;
-	u8 throatchop_timer; //JeremyZ
 };
 
 extern struct disable_struct disable_structs[4];

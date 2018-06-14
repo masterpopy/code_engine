@@ -22,7 +22,8 @@ void* get_move_battlescript_ptr(u16 move);
 u8 affected_by_substitute(u8 bank);
 u16 type_effectiveness_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u8 effects_handling_and_recording);
 void set_attacking_move_type();
-void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
+//void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
+void revert_mega_to_normalform_new(u8 opponent_side);
 bool is_bank_present(u8 bank);
 u8 calculate_effect_chance(u8 bank, u16 move);
 struct pokemon* get_bank_poke_ptr(u8 bank);
@@ -224,7 +225,7 @@ void atk96_weather_damage(void)
 	s32 damage = 0;
 	u8 ability = battle_participants[bank_attacker].ability_id;
 	u8 ability_effect = has_ability_effect(bank_attacker, 0);
-	if (weather_abilities_effect() && !(get_item_effect(bank_attacker, 1) == ITEM_EFFECT_SAFETYGOOGLES) && !(ability_effect && ability == ABILITY_MAGIC_GUARD) && is_bank_present(bank_attacker))
+	if (weather_abilities_effect() && !(get_item_effect(bank_attacker, 1) == ITEM_EFFECT_SAFETYGOOGLES) && !(ability_effect && (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_OVERCOAT)) && is_bank_present(bank_attacker))
 	{
 		if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
 		{
@@ -1601,13 +1602,13 @@ u8 check_if_cannot_attack(void)
 				battle_communication_struct.multistring_chooser = 1;
 			}
 			break;
-		case 18: //weather prevents move usage
-			if (battle_weather.flags.heavy_rain && get_attacking_move_type() == TYPE_FIRE)
+		case 18: //weather prevents move usage, JeremyZ
+			if (weather_abilities_effect() && battle_weather.flags.heavy_rain && get_attacking_move_type() == TYPE_FIRE)
 			{
 				effect = 3;
 				battlescripts_curr_instruction = BS_HEAVYRAIN_PREVENTS;
 			}
-			else if (battle_weather.flags.harsh_sun && get_attacking_move_type() == TYPE_WATER)
+			else if (weather_abilities_effect() && battle_weather.flags.harsh_sun && get_attacking_move_type() == TYPE_WATER)
 			{
 				effect = 3;
 				battlescripts_curr_instruction = BS_HARSHSUN_PREVENTS;
@@ -2190,7 +2191,7 @@ void atk0C_datahpupdate(void)
 	else
 	{
 		u8 split = move_table[current_move].split;
-		if (affected_by_substitute(bank))
+		if (affected_by_substitute(bank) && damage_loc > 0) //JeremyZ
 		{
 			u8* substitute_hp = &disable_structs[bank].substitute_hp;
 			if (damage_loc > *substitute_hp)
@@ -2665,12 +2666,12 @@ struct revert_form_struct
 
 void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokemon* poke)
 {
-	if (mega_revert) { revert_mega_to_normalform(teamID, side); }
+	if (mega_revert) { revert_mega_to_normalform_new(side); } //JeremyZ
 	else
 	{
 		u16 current_hp = get_attributes(poke, ATTR_CURRENT_HP, 0);
 		u16 species = get_attributes(poke, ATTR_SPECIES, 0);
-		if (species == POKE_ZYGARDE_100 && (!current_hp || battle_outcome)) //JeremyZ
+		if (species == POKE_ZYGARDE_100 && battle_outcome) //JeremyZ
 		{
 			u16 base_species = POKE_ZYGARDE_10;
 			if ((side && (new_battlestruct->party_bit.is_base_z50_ai & bits_table[teamID])) ||

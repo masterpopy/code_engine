@@ -114,11 +114,11 @@ void set_spotlight(void)
 void set_throatchop(void)
 {
 	void* failjump = (void*)read_word(battlescripts_curr_instruction /*+ 1*/);
-	if (disable_structs[bank_target].throatchop_timer)
+	if (new_battlestruct->bank_affecting[bank_target].throatchop_timer)
 		battlescripts_curr_instruction = failjump;
 	else
 	{
-		disable_structs[bank_target].throatchop_timer = 2;
+		new_battlestruct->bank_affecting[bank_target].throatchop_timer = 2;
 		battlescripts_curr_instruction += 4;//5;
 	}
 }
@@ -159,4 +159,39 @@ void set_shell_charge(void)
 		else
 			new_battlestruct->bank_affecting[i].shell_trap_charge = 0;
     }
+}
+
+//Mega Related
+void revert_mega_to_normalform_new(u8 opponent_side)
+{
+    struct pokemon* poke_address;
+    if (opponent_side)
+        poke_address = &party_opponent[0];
+    else
+        poke_address = &party_player[0];
+	for (u8 i = 0; i < 6; i++)
+	{
+		u16 mega_current_species = get_attributes(poke_address + i, ATTR_SPECIES, 0);
+		u16 current_hp = get_attributes(poke_address + i, ATTR_CURRENT_HP, 0);
+		if (current_hp && !battle_outcome)
+			continue;
+		u16 species_to_revert = 0;
+		const struct evolution_sub* evos = GET_EVO_TABLE(mega_current_species);
+		if(mega_current_species==0x42E)
+			species_to_revert=((u16*)sav1->balls_pocket)[i];
+		for (u8 i = 0; i < NUM_OF_EVOS; i++)
+		{
+			if (evos[i].method == 0xFF)
+			{
+				species_to_revert = evos[i].poke;
+				break;
+			}
+		}
+		if (species_to_revert)
+		{
+			set_attributes(poke_address + i, ATTR_SPECIES, &species_to_revert);
+			calculate_stats_pokekmon(poke_address + i);
+		}
+	}
+    return;
 }

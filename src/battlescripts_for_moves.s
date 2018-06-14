@@ -472,9 +472,8 @@ HAPPYHOUR:
 	goto_cmd ENDTURN
 
 USELESS_MOVES:
-	jumpifmove MOVE_SPLASH 0x082D94F5
+	jumpifnotmove MOVE_HOLD_HANDS 0x82D94F5
 	jumpifmove MOVE_HOLD_HANDS HOLDHANDS
-	@Otherwise, the move is Celebrate
 	attackcanceler
 	attackstring
 	ppreduce

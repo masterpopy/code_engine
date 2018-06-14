@@ -45,7 +45,8 @@ void prep_string(u16 strID, u8 bank);
 u8 get_bank_side(u8 bank);
 void bs_push(void* to_return, void* now);
 void bs_push_current(void* now);
-void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
+//void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
+void revert_mega_to_normalform_new(u8 opponent_side);
 bool not_impostered(u8 bank);
 
 bool is_poke_valid(struct pokemon* poke)
@@ -3016,7 +3017,7 @@ void jump_if_forcesetflag_set(void)
 void revert_mega(void) //bank
 {
     u8 bank = get_battle_bank(read_byte(battlescripts_curr_instruction++));
-    revert_mega_to_normalform(bank, get_bank_side(bank));
+    revert_mega_to_normalform_new(get_bank_side(bank)); //JeremyZ
 }
 
 void instruct_canceler(void)

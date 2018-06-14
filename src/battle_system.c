@@ -448,7 +448,7 @@ static bool check_leafguard_shieldsdown(u8 ability, u8 bank)
 bool is_class_FOUR(u8 bank)
 {
 	enum trainer_class class = get_trainer_opponent_A_class();
-	if(get_bank_side(bank) == 1 && (class==CLASS_ELITE_FOUR || class == CLASS_CHAMPION))
+	if(get_bank_side(bank) == 1 && /*(class==CLASS_ELITE_FOUR ||*/ class == CLASS_CHAMPION/*)*/) //Only Champion enjoys status and hazards immunity, JeremyZ
 		return 1;
 	return 0;
 }
@@ -1211,10 +1211,10 @@ bool battle_turn_move_effects(void)
                         }
                     break;
 				case 31: //throat chop, JeremyZ
-					if (disable_structs[active_bank].throatchop_timer)
+					if (new_battlestruct->bank_affecting[active_bank].throatchop_timer)
                     {
-						disable_structs[active_bank].throatchop_timer--;
-						if (disable_structs[active_bank].throatchop_timer == 0)
+						new_battlestruct->bank_affecting[active_bank].throatchop_timer--;
+						if (new_battlestruct->bank_affecting[active_bank].throatchop_timer == 0)
 						{
 							effect = 1;
 							call_bc_move_exec(BS_TAUNTEND_END2); //Needs Revision
@@ -1983,7 +1983,7 @@ u8 check_move_limitations(u8 bank, u8 not_usable_moves, struct move_limitation l
             not_usable_moves |= BIT_GET(i);
         else if (new_battlestruct->bank_affecting[bank].embargo && embargo_forbidden_move(move_to_check))
             not_usable_moves |= BIT_GET(i);
-		else if (disable_structs[bank].throatchop_timer && find_move_in_table(move_to_check, sound_moves)) //JeremyZ
+		else if (new_battlestruct->bank_affecting[bank].throatchop_timer && find_move_in_table(move_to_check, sound_moves)) //JeremyZ
 			not_usable_moves |= BIT_GET(i);
     }
     return not_usable_moves;
@@ -2048,7 +2048,7 @@ bool message_cant_choose_move(void)
         cant = 1;
         *loc_to_store_bs = BS_CANTSELECT_HEALBLOCK;
     }
-	else if (disable_structs[bank].throatchop_timer && find_move_in_table(checking_move, sound_moves)) //JeremyZ
+	else if (new_battlestruct->bank_affecting[bank].throatchop_timer && find_move_in_table(checking_move, sound_moves)) //JeremyZ
 	{
 		cant = 1;
 		*loc_to_store_bs = BS_CANTSELECT_HEALBLOCK; //Needs Revision
@@ -2195,6 +2195,7 @@ bool ai_switch_wonderguard(void)
 
 bool ai_ability_switch(void) //JeremyZ
 {
+	return 0; //Anti-Bug
 	struct pokemon* poke = get_bank_poke_ptr(active_bank);
     if (check_ability(active_bank, ABILITY_NATURAL_CURE) && get_attributes(poke, ATTR_STATUS_AILMENT, 0))
     {
