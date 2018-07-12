@@ -2467,6 +2467,7 @@ THROAT_CHOP: @JeremyZ
 	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
+	faintpokemon bank_target 0x0 0x0 @faint target
 	callasm_cmd 168 @set Throat Chop
 	.word MOVE_FAILED
 	printstring 0x1E8 @Needs Revision

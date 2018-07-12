@@ -8,6 +8,7 @@ u8 get_item_effect(u8 bank, u8 check_negating_effects);
 u8 has_ability_effect(u8 bank, u8 mold_breaker, u8 gastro);
 bool check_ability(u8 bank, u8 ability);
 void bs_push_current(void* now);
+bool not_impostered(u8 bank); //JeremyZ
 
 bool affected_by_substitute(u8 substitute_bank)
 {
@@ -29,7 +30,7 @@ void atk07_final_dmg_calc(void)
     battlescripts_curr_instruction++;
 
     if(battle_participants[bank_target].species == POKE_MIMIKKYU && check_ability(bank_target,ABILITY_DISGUISE)
-       && has_ability_effect(bank_target, 1, 1) && MOVE_WORKED && !affected_by_substitute(bank_target))
+       && has_ability_effect(bank_target, 1, 1) && MOVE_WORKED && !affected_by_substitute(bank_target) && not_impostered(bank_target)) //JeremyZ
     {
         new_battlestruct->various.bust_mimikyu = 1;
         damage_loc = 0;

@@ -476,7 +476,8 @@ u16 check_z_move(u16 move, u8 bank)
 		for (u8 i = 0; i < NUM_OF_EVOS; i++) //JeremyZ
 		{
 			if(!evo[i].method && evo[i].paramter == battle_participants[bank].held_item && (param << 16) >> 16 == move)
-				return  item_info->mystery_value;
+				return param >> 16;
+				//return  item_info->mystery_value;
 			return 0;
 		}
 	}

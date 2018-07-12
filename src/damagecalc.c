@@ -1076,7 +1076,7 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank)
         break;
     case ITEM_EFFECT_LIGHTBALL:
 		
-        if (battle_participants[atk_bank].species == POKE_PIKACHU ||(battle_participants[atk_bank].species >= 0X3DD && battle_participants[atk_bank].species <= 0X3e2) ||(battle_participants[atk_bank].species >= 0x37B && battle_participants[atk_bank].species <= 0x380))
+        if (battle_participants[atk_bank].species == POKE_PIKACHU ||(battle_participants[atk_bank].species >= 0X3DD && battle_participants[atk_bank].species <= 0X3e2) ||(battle_participants[atk_bank].species >= 0x37B && battle_participants[atk_bank].species <= 0x380) || battle_participants[atk_bank].species == 0x434)
         {
             modifier = chain_modifier(modifier, 0x2000);
         }
