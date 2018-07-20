@@ -1273,7 +1273,8 @@ BS_GEM_MSG:
 	
 .global BS_START_Z
 BS_START_Z:
-	printstring 0x18D
+	@printstring 0x18D
+	callasm_cmd 122
 	waitmessage 0x40
 	playanimation bank_attacker 0x25 0x0
 	callasm_cmd 106

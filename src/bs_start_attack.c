@@ -472,6 +472,7 @@ u16 check_z_move(u16 move, u8 bank)
 	const struct item_struct* item_info = &(*item_table)[battle_participants[bank].held_item];
 	u32 param = item_info->extra_param;
 	u8 type = info->type;
+	new_battlestruct->various.var2 = 0x18D;
 	if(param > TYPE_FAIRY){
 		for (u8 i = 0; i < NUM_OF_EVOS; i++) //JeremyZ
 		{
@@ -489,6 +490,7 @@ u16 check_z_move(u16 move, u8 bank)
 			type -= 0x6;
 		else if(type > TYPE_EGG)
 			type --;
+		new_battlestruct->various.var2 = 0x24D + type;
 		return  MOVE_Z_NORMAL_PHYS + (type << 1) + info->split;
 	}
 	return 0;
