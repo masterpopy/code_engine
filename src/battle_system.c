@@ -257,7 +257,7 @@ u16 get_airborne_state(u8 bank, u8 mode, u8 check_levitate)
         return 1;
     if (check_levitate && battle_participants[bank].ability_id == ABILITY_LEVITATE && has_ability_effect(bank,mode))
         return 4;
-    if ((mode==0 && is_of_type(bank,TYPE_FLYING)) || get_item_effect(bank, true) == ITEM_EFFECT_AIRBALLOON ||
+    if ((/*mode==0 &&*/ is_of_type(bank,TYPE_FLYING)) || get_item_effect(bank, true) == ITEM_EFFECT_AIRBALLOON ||
         new_battlestruct->bank_affecting[bank].magnet_rise || new_battlestruct->bank_affecting[bank].telekinesis)
         return 3;
     return 2;
@@ -474,7 +474,7 @@ u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted)
         return 4;
     if (side_affecting_halfword[get_bank_side(def_bank)].safeguard_on && !self_inflicted)
         return 5;
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(def_bank, 1, 1) <= 2 && !self_inflicted)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(def_bank, 1, 1) <= 2 /*&& !self_inflicted*/)
         return 8;
     return 0;
 }
@@ -508,9 +508,9 @@ u8 cant_fall_asleep(u8 bank, u8 self_inflicted)
                 return 6;
         }
     }
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 && !self_inflicted)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 /*&& !self_inflicted*/)
         return 8;
-    if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(bank, 1, 1) <= 2 && !self_inflicted)
+    if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(bank, 1, 1) <= 2 /*&& !self_inflicted*/)
         return 9;
     return 0;
 }
@@ -535,7 +535,7 @@ u8 cant_become_paralyzed(u8 bank, u8 self_inflicted)
         return 4;
     if (side_affecting_halfword[get_bank_side(bank)].safeguard_on && !self_inflicted)
         return 5;
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 && !self_inflicted)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 /*&& !self_inflicted*/)
         return 8;
     return 0;
 }
@@ -560,7 +560,7 @@ u8 cant_become_burned(u8 bank, u8 self_inflicted)
         return 4;
     if (side_affecting_halfword[get_bank_side(bank)].safeguard_on && !self_inflicted)
         return 5;
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 && !self_inflicted)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 /*&& !self_inflicted*/)
         return 8;
     return 0;
 }
@@ -588,7 +588,7 @@ u8 cant_become_freezed(u8 bank, u8 self_inflicted)
         return 5;
     if (weather_abilities_effect() && battle_weather.int_bw & (weather_harsh_sun || weather_permament_sun || weather_sun))
         return 7;
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 && !self_inflicted)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2 /*&& !self_inflicted*/)
         return 8;
     return 0;
 }
@@ -1217,7 +1217,7 @@ bool battle_turn_move_effects(void)
 						if (new_battlestruct->bank_affecting[active_bank].throatchop_timer == 0)
 						{
 							effect = 1;
-							call_bc_move_exec(BS_TAUNTEND_END2); //Needs Revision
+							call_bc_move_exec(BS_THROATCHOPEND_END2); //Needs Revision
 						}
                     }
                     break;

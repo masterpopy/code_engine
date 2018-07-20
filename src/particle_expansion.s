@@ -440,6 +440,12 @@ shiny_particle_image:
 .word HAPPY_HOUR_GOLD_particle
 .byte 0x00, 0xA, 0x61, 0x28
 
+.word THOUSAND_WAVES_WIND_particle
+.byte 0x80, 0x00, 0x62, 0x28
+
+.word DIAMOND_STORM_WIND_particle
+.byte 0x80, 0x00, 0x63, 0x28
+
 .align 2
 
 @Battle Animations Particles Table
@@ -827,4 +833,7 @@ particle_entry OMEGA_REVERSION_SYMBOL_palette OMEGAEVO_SYMBOL_particle 0x0
 .byte 0x60, 0x28, 0x00, 0x00
 .word HAPPY_HOUR_GOLD_palette
 .byte 0x61, 0x28, 0x00, 0x00
-
+.word THOUSAND_WAVES_WIND_palette
+.byte 0x62, 0x28, 0x00, 0x00
+.word DIAMOND_STORM_bg_palette
+.byte 0x63, 0x28, 0x00, 0x00

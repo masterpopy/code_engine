@@ -208,6 +208,8 @@ extern u8 BS_TORMENTEND[];
 extern u8 BS_DISABLEEND[];
 extern u8 BS_ENCOREEND[];
 extern u8 BS_TERRAINEND[];
+extern u8 BS_THROATCHOPEND[];
+extern u8 BS_THROATCHOPEND_END2[];
 
 extern u8 BS_AQUARING[];
 extern u8 BS_BINDEFFECT[];

@@ -1543,6 +1543,17 @@ BS_TERRAINEND:
 	printfromtable terrainend_strings
 	waitmessage 0x40
 	end2
+
+.global BS_THROATCHOPEND
+BS_THROATCHOPEND:
+	printstring 0x260
+	waitmessage 0x40
+	return_cmd
+
+.global BS_THROATCHOPEND_END2
+BS_THROATCHOPEND_END2:
+	call BS_THROATCHOPEND
+	end2
 	
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Some move effects

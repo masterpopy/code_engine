@@ -907,14 +907,18 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
     {
         modifier = chain_modifier(modifier, 0x1800);
     }
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(def_bank, 1, 1) >= 2 && move_type == TYPE_DRAGON)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(def_bank, 0, 1) <= 2 && move_type == TYPE_DRAGON)
     {
         modifier = chain_modifier(modifier, 0x800);
     }
-    if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(atk_bank, 0, 1) >= 2 && move_type == TYPE_ELECTRIC)
+    if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(atk_bank, 0, 1) <= 2 && move_type == TYPE_ELECTRIC)
     {
         modifier = chain_modifier(modifier, 0x1800);
     }
+	if (new_battlestruct->field_affecting.psychic_terrain && get_airborne_state(atk_bank, 0, 1) <= 2 && move_type == TYPE_PSYCHIC)
+	{
+		modifier = chain_modifier(modifier, 0x1800);
+	}
 
     return apply_modifier(modifier, base_power);
 }

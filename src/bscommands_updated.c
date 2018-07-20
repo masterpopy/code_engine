@@ -2862,6 +2862,7 @@ u8 cant_become_confused(u8 bank)
 	//1 == already confused
 	//4 == ability doesn't allow it
 	//5 == safeguard protection
+	//8 == misty terrain protection
 	if (battle_participants[bank].status2.confusion)
 		return 1;
 	if (is_class_FOUR(bank))
@@ -2870,6 +2871,8 @@ u8 cant_become_confused(u8 bank)
 		return 4;
 	if (side_affecting_halfword[get_bank_side(bank)].safeguard_on && !(hitmarker & HITMAKRER_IGNORE_SAFEGUARD))
 		return 5;
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2)
+        return 8;
 	return 0;
 }
 

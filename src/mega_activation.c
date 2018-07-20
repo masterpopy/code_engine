@@ -108,8 +108,8 @@ u16 get_mega_species(u8 bank, u8 chosen_method)
             case 0xFC: //fervent wish mega
                 {
 					//JeremyZ, cannot mega if holding z-crystal
-					// if (item_effect == 153)
-						// break;
+					//if (item_effect == 153)
+						//break;
                     u16 fervent_move = evo[i].paramter;
                     if (fervent_move)
                     {
@@ -143,12 +143,12 @@ u8 can_set_mega_trigger(u8 bank)
     struct mega_related* mega=&new_battlestruct->mega_related;
     bool res=0;
     int mega_mode=0;
-    if(bank==0 && !(mega->user_trigger) && !(mega->ally_trigger) &&
-       ((battle_flags.multibattle && !(mega->evo_happened_pbs&0x5/*1*/)) || !(mega->evo_happened_pbs&0x1/*5*/))) //JeremyZ
+    if(bank==0 && mega->user_trigger < 2 && mega->ally_trigger < 2 &&
+       ((battle_flags.multibattle && !(mega->evo_happened_pbs&0x5)) || !(mega->evo_happened_pbs&0x1))) //JeremyZ
     {
         res=true;
     }
-    else if(bank==2 && !(mega->user_trigger) && !(mega->ally_trigger) && !(mega->evo_happened_pbs&0x5))
+    else if(bank==2 && mega->user_trigger < 2 && mega->ally_trigger < 2 && !(mega->evo_happened_pbs&0x5))
     {
         res=true;
     }	

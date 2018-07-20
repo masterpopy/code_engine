@@ -2470,7 +2470,7 @@ THROAT_CHOP: @JeremyZ
 	faintpokemon bank_target 0x0 0x0 @faint target
 	callasm_cmd 168 @set Throat Chop
 	.word MOVE_FAILED
-	printstring 0x1E8 @Needs Revision
+	printstring 0x25F
 	waitmessage 0x40
 	goto_cmd ENDTURN
 	
