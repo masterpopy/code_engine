@@ -738,5 +738,6 @@
 #define MOVE_Z_SOLGALEO 0x2D6
 #define MOVE_Z_LUNALA 0x2D7
 #define MOVE_Z_NECROZMA 0x2D8
+#define MOVE_Z_ASH_GRENINJA 0x2D9
 
 #endif /* MOVE_IDS_H */

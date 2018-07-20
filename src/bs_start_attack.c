@@ -385,7 +385,7 @@ u8 check_mega_evo(u8 bank)
             }
         }
     }
-    if(mega_species && bank_mega_mode)
+    if((mega_species && bank_mega_mode > 1) || (mega_species == 0x42E && bank_mega_mode == 1)) //JeremyZ
     {
         struct pokemon* poke_address = get_bank_poke_ptr(bank);
         if (banks_side == 1)
@@ -472,7 +472,7 @@ u16 check_z_move(u16 move, u8 bank)
 	const struct item_struct* item_info = &(*item_table)[battle_participants[bank].held_item];
 	u32 param = item_info->extra_param;
 	u8 type = info->type;
-	new_battlestruct->various.var2 = 0x18D;
+	//new_battlestruct->various.var2 = 0x18D;
 	if(param > TYPE_FAIRY){
 		for (u8 i = 0; i < NUM_OF_EVOS; i++) //JeremyZ
 		{
@@ -490,7 +490,7 @@ u16 check_z_move(u16 move, u8 bank)
 			type -= 0x6;
 		else if(type > TYPE_EGG)
 			type --;
-		new_battlestruct->various.var2 = 0x24D + type;
+		//new_battlestruct->various.var2 = 0x24D + type;
 		return  MOVE_Z_NORMAL_PHYS + (type << 1) + info->split;
 	}
 	return 0;

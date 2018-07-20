@@ -819,7 +819,7 @@ void atk49_move_end_turn(void)
 				bs_push_current(BS_CHANGE_ATK_STAT);
 				effect = 1;
 			}
-			else if (new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage && !attacker_struct->status.int_status)
+			else if (new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage && !attacker_struct->status.int_status && !cant_poison(bank_target, bank_attacker, 0)) //JeremyZ
 			{
 				new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage = 0;
 				attacker_struct->status.flags.poison = 1;
