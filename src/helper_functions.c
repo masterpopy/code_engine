@@ -518,10 +518,11 @@ void apply_zmove_changes()
 			battle_participants[bank_attacker].status2.focus_energy = 1;
 			break;
 		case 1:
+			u8 *atk_stat = &battle_participants[bank_attacker].atk_buff;
 			for (u8 i = 0; i < 7; i++)
 			{
-				u8 *atk_stat = &battle_participants[bank_attacker].atk_buff + i;
-				if(*atk_stat<6)
+				atk_stat += i;
+				if(*atk_stat < 6)
 					*atk_stat=6;
 			}
 			break;
