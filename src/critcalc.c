@@ -23,8 +23,10 @@ void atk04_critcalc(void)
             crit_loc = 2;
         else
         {
-            if (battle_participants[bank_attacker].status2.focus_energy || current_move == MOVE_Z_ASH_PIKACHU)
+            if (battle_participants[bank_attacker].status2.focus_energy)
                 crit_chance += 2;
+			if (current_move == MOVE_Z_ASH_PIKACHU)
+				crit_chance += 2;
             if (move_table[current_move].move_flags.flags.raised_crit_ratio)
                 crit_chance++;
             if (check_ability(bank_attacker, ABILITY_SUPER_LUCK))

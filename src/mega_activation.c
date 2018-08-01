@@ -56,16 +56,19 @@ u8 have_z_move(u8 bank)
 	return 0;
 }
 
+u16 get_mega_species(u8 bank, u8 chosen_method);
 bool can_set_z_trigger(u8 bank)
 {
 	if(!(checkitem(622, 1) && have_z_move(bank)))
 		return false;
-	struct mega_related* mega=&new_battlestruct->mega_related;
-	if(bank==0 && !(mega->user_trigger) && !(mega->z_happened_pbs & 0x1))
+	struct mega_related* mega = &new_battlestruct->mega_related;
+	if(bank == 0 && mega->user_trigger != 1 && 
+		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x1)) || !(mega->z_happened_pbs & 0x5)))
     {
         return true;
     }
-    else if(bank==2 && !(mega->ally_trigger) && !(mega->z_happened_pbs & 0x5))
+    else if(bank == 2 && mega->user_trigger != 1 && mega->ally_trigger != 1 && 
+		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x4)) || !(mega->z_happened_pbs & 0x5)))
     {
         return true;
     }
@@ -108,8 +111,8 @@ u16 get_mega_species(u8 bank, u8 chosen_method)
             case 0xFC: //fervent wish mega
                 {
 					//JeremyZ, cannot mega if holding z-crystal
-					//if (item_effect == 153)
-						//break;
+					if (item_effect == 153)
+						break;
                     u16 fervent_move = evo[i].paramter;
                     if (fervent_move)
                     {
@@ -138,17 +141,18 @@ u16 get_mega_species(u8 bank, u8 chosen_method)
     return target_species;
 }
 
-u8 can_set_mega_trigger(u8 bank)
+u8 can_set_mega_trigger(u8 bank) //JeremyZ
 {
     struct mega_related* mega=&new_battlestruct->mega_related;
     bool res=0;
     int mega_mode=0;
-    if(bank==0 && mega->user_trigger < 2 && mega->ally_trigger < 2 &&
-       ((battle_flags.multibattle && !(mega->evo_happened_pbs&0x5)) || !(mega->evo_happened_pbs&0x1))) //JeremyZ
+    if(bank == 0 && mega->user_trigger < 3 && 
+		((battle_flags.multibattle && !(mega->evo_happened_pbs & 0x1)) || !(mega->evo_happened_pbs & 0x5)))
     {
         res=true;
     }
-    else if(bank==2 && mega->user_trigger < 2 && mega->ally_trigger < 2 && !(mega->evo_happened_pbs&0x5))
+    else if(bank == 2 && mega->user_trigger < 3 && mega->ally_trigger < 3 && 
+		((battle_flags.multibattle && !(mega->evo_happened_pbs & 0x4)) || !(mega->evo_happened_pbs & 0x5)))
     {
         res=true;
     }	
@@ -161,13 +165,16 @@ u8 can_set_mega_trigger(u8 bank)
         }
         else if (get_mega_species(bank,0xFC))
         {
-			//fc
-            mega_mode=2;
+			//fervent wish mega
+            mega_mode=3; //2;
         }
     }
-	//z==1
-	if(mega_mode==0 && (can_set_z_trigger(bank) || get_mega_species(bank,0xFA)))
-		mega_mode=1;
+	//Ultra Burst
+	if (mega_mode == 0 && get_mega_species(bank, 0xFA))
+		mega_mode = 2;
+	//Z-Move
+	if (mega_mode == 0 && can_set_z_trigger(bank))
+		mega_mode = 1;
     return mega_mode;
 }
 

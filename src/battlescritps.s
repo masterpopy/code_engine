@@ -543,6 +543,15 @@ BS_CANTUSE_PRIORITY:
 	printstring 0x238
 	waitmessage 0x30
 	goto_cmd ENDTURN
+
+.global BS_CANTUSE_PRIORITY_TERRAIN
+BS_CANTUSE_PRIORITY_TERRAIN:
+	attackstring
+	ppreduce
+	pause_cmd 0x10
+	printstring 0x238
+	waitmessage 0x30
+	goto_cmd ENDTURN	
 	
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ BS got a status condition
@@ -1274,13 +1283,14 @@ BS_GEM_MSG:
 .global BS_START_Z
 BS_START_Z:
 	printstring 0x18D
-	@callasm_cmd 122
+	callasm_cmd 171
 	waitmessage 0x40
 	playanimation bank_attacker 0x25 0x0
 	callasm_cmd 106
 	waitstate
 	callasm_cmd 166
 	.word BS_CHANGE_ATK_STAT_SELFINFLICTED
+	return_cmd
 	orword 0x2024280 0x100
 	graphicalhpupdate 0x1
 	datahpupdate 0x1

@@ -23,7 +23,7 @@ jumpifhalfword 0x1 0x020241EA \jumpifnotmove_move \jumpifnotmove_address
 .align 2
 .global battlescripts_table
 battlescripts_table:
-.word ATTACKING_MOVE	@ 0	Just attacks target(Tackle)
+.word ATTACKING_MOVE	@0 Just attacks target(Tackle)
 .word FIXED_DAMAGE		@1 Sonicboom, Dragon Rage, etc.
 .word ONE_STAT_USER		@2 Swords Dance, Double Team, etc. ;arg1 = statchanger value
 .word ONE_STAT_TARGET	@3 stuff like tail whip, growl and such ;arg1 = statchanger value
@@ -217,6 +217,7 @@ battlescripts_table:
 .word SPEED_SWAP	@191 Speed Swap, JeremyZ
 .word MIND_BLOWN	@192 Mind Blown, JeremyZ
 .word PLASMA_FISTS	@193 Plasma Fists, JeremyZ
+.word ATTACK_TERRAINCHANGE @194 Z_MEW, Z_LYCANROC, JeremyZ
 
 SUNNYDAY_BS:
 	attackcanceler
@@ -1728,6 +1729,7 @@ GASTROACID:
 CORE_ENFORCER:
 	attackcanceler
 	accuracycheck MOVE_MISSED 0x0
+	jumpiftypenotaffected MOVE_FAILED
 	attackstring
 	ppreduce
 	callasm_cmd 29 @do all stat changes that are possible
@@ -2186,7 +2188,7 @@ CANT_BECOME_ASLEEP_BS:
 	
 .align 1
 PUT_TARGET_TO_SLEEP_MSGS:
-.hword 0x75, 0x76, 0x77, 0x230
+.hword 0x75, 0x76, 0x77, 0x230, 0x1FB, 0x1FD
 
 ATTACK_CONFUSION_CHANCE:
 	seteffect1 MOVEEFFECT_CONFUSE
@@ -2532,5 +2534,33 @@ PLASMA_FISTS: @JeremyZ
 	.word MOVE_FAILED
 	printstring 0x1E8
 	waitmessage 0x40
+	goto_cmd ENDTURN
+
+ATTACK_TERRAINCHANGE:
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	jumpiftypenotaffected MOVE_FAILED	
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	damageadjustment
+	attackanimation
+	waitanimation
+	effectiveness_sound
+	hitanim bank_target
+	waitstate
+	graphicalhpupdate bank_target
+	datahpupdate bank_target
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	faintpokemon bank_target 0x0 0x0 @faint target
+	callasm_cmd 86 @Terrain Change
+	.word MOVE_FAILED
+	printfromtable terrainstrings
+	waitmessage 0x40
+	callasm_cmd 141 @check battle pokemon for terrain seeds
 	goto_cmd ENDTURN
 	

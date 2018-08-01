@@ -330,12 +330,12 @@ u8 check_mega_evo(u8 bank)
         mega_species = get_mega_species(bank,0xFC);
         if(mega_species)
         {
-            ai_mega_mode = 2;
+            ai_mega_mode = 3; //2;
         }
 		else
 		{
 			mega_species=get_mega_species(bank,0xFA);
-			ai_mega_mode=1;
+			ai_mega_mode = 2; //1;
 		}
     }
     u8 banks_side = get_bank_side(bank);
@@ -347,7 +347,7 @@ u8 check_mega_evo(u8 bank)
         if(bank==0)
         {
             bank_mega_mode=new_battlestruct->mega_related.user_trigger;
-            if(bank_mega_mode>1)
+            if(bank_mega_mode == 3) //bank_mega_mode > 1
             {
                 if(!battle_flags.multibattle)
                 {
@@ -363,7 +363,7 @@ u8 check_mega_evo(u8 bank)
         else if(bank==2)
         {
             bank_mega_mode=new_battlestruct->mega_related.ally_trigger;
-            if(bank_mega_mode>1)
+            if(bank_mega_mode == 3) //bank_mega_mode > 1
             {
                 if(!battle_flags.multibattle)
                 {
@@ -385,17 +385,17 @@ u8 check_mega_evo(u8 bank)
             }
         }
     }
-    if((mega_species && bank_mega_mode > 1) || (mega_species == 0x42E && bank_mega_mode == 1)) //JeremyZ
+    if(mega_species && bank_mega_mode > 1) //JeremyZ
     {
         struct pokemon* poke_address = get_bank_poke_ptr(bank);
         if (banks_side == 1)
         {
-			if(bank_mega_mode>1)
+			if(bank_mega_mode == 3) //bank_mega_mode > 1
 				new_battlestruct->mega_related.ai_party_mega_check|=BIT_GET(battle_team_id_by_side[bank]);
         }
         else
         {
-			if(bank_mega_mode>1)
+			if(bank_mega_mode == 3) //bank_mega_mode > 1
 				new_battlestruct->mega_related.party_mega_check|=BIT_GET(battle_team_id_by_side[bank]);
         }
         
@@ -408,11 +408,11 @@ u8 check_mega_evo(u8 bank)
         battle_text_buff1[3] = mega_species >> 8;
         battle_text_buff1[4] = 0xFF;
 
-        if(bank_mega_mode==2)
+        if (bank_mega_mode==3 && mega_species == 0x3b0) //bank_mega_mode == 2
         {
 			bs_execute(BS_FERVENT_EVO);
         }
-		else if(bank_mega_mode==1)
+		else if (bank_mega_mode == 2) //bank_mega_mode == 1
 		{
 			((u16*)sav1->balls_pocket)[banks_side]=attacker_struct->species;
 			bs_execute(BS_LIGHT_UP);
@@ -472,25 +472,31 @@ u16 check_z_move(u16 move, u8 bank)
 	const struct item_struct* item_info = &(*item_table)[battle_participants[bank].held_item];
 	u32 param = item_info->extra_param;
 	u8 type = info->type;
-	//new_battlestruct->various.var2 = 0x18D;
+	new_battlestruct->various.var2 = 0x18D;
 	if(param > TYPE_FAIRY){
 		for (u8 i = 0; i < NUM_OF_EVOS; i++) //JeremyZ
 		{
 			if(!evo[i].method && evo[i].paramter == battle_participants[bank].held_item && (param << 16) >> 16 == move)
+			{
+				u8 z_type = move_table[param >> 16].type;
+				if(z_type == TYPE_FAIRY)
+					z_type -= 0x6;
+				else if(z_type > TYPE_EGG)
+					z_type --;				
+				new_battlestruct->various.var2 = 0x24D + z_type;
 				return param >> 16;
-				//return  item_info->mystery_value;
-			return 0;
+			}
 		}
 	}
 	else if(param == type)
 	{
-		if(info->split==2)
-			return move;
 		if(type == TYPE_FAIRY)
 			type -= 0x6;
 		else if(type > TYPE_EGG)
 			type --;
-		//new_battlestruct->various.var2 = 0x24D + type;
+		new_battlestruct->various.var2 = 0x24D + type;
+		if(info->split == 2)
+			return move + 0x1000; //用+0x1000来代表变化Z招式		
 		return  MOVE_Z_NORMAL_PHYS + (type << 1) + info->split;
 	}
 	return 0;
@@ -499,15 +505,18 @@ u16 check_z_move(u16 move, u8 bank)
 u16 get_z_moves(u16 move, u8 bank)
 {
 	u8 bank_z_mode = 0;
-	if(bank == 0)			
-		bank_z_mode=new_battlestruct->mega_related.user_trigger;
-	else if(bank == 2)
-		bank_z_mode=new_battlestruct->mega_related.ally_trigger;
-	else if(!(new_battlestruct->mega_related.z_happened_pbs & (BIT_GET(bank) | BIT_GET(bank ^ 2))))
+	struct mega_related* mega = &new_battlestruct->mega_related;
+	if(bank == 0 && 
+		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x1)) || !(mega->z_happened_pbs & 0x5)))			
+		bank_z_mode = new_battlestruct->mega_related.user_trigger;
+	else if(bank == 2 && 
+		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x4)) || !(mega->z_happened_pbs & 0x5)))
+		bank_z_mode = new_battlestruct->mega_related.ally_trigger;
+	else if((bank == 1 || bank == 3) && !(new_battlestruct->mega_related.z_happened_pbs & (BIT_GET(bank) | BIT_GET(bank ^ 2))))
 		bank_z_mode = 1;
 	if (battle_flags.link && !new_battlestruct->mega_related.link_indicator[bank])
 		bank_z_mode = 0;
-	if(bank_z_mode==0)
+	if(bank_z_mode != 1) //bank_z_mode == 0
 		return 0;
 	return check_z_move(move, bank);
 }
@@ -670,21 +679,21 @@ void bs_start_attack(void)
                 change = 1;
             }           
         }//玛夏多
-		else if(*species == 0x357 && current_move == MOVE_SPECTRAL_THIEF)
+		else if(*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW))
 		{
 			*species = 0x422;
             change = 1;
-		}//索尔佳雷欧
-		else if(*species == 0x34c && current_move == MOVE_SUNSTEEL_STRIKE)
+		}//索尔迦雷欧
+		else if(*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO))
 		{
 			*species = 0x42a;
             change = 1;
-		}//月神
-		else if(*species == 0x34D && current_move == MOVE_MOONGEIST_BEAM)
+		}//露奈雅拉
+		else if(*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA))
 		{
 			*species = 0x42b;
             change = 1;
-		}//X
+		}//哲尔尼亚斯
 		else if(*species == 0x301 && current_move == MOVE_GEOMANCY)
 		{
 			*species = 0x421;

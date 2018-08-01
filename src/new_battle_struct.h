@@ -167,7 +167,7 @@ struct various{
 
 struct mega_related
 {
-    u32 user_trigger: 2; // 0x0 for not set, //0x3 for stone, //0x2 for wish£¬//1 for z
+    u32 user_trigger: 2; // 0x0 for not set, 0x1 for z, 0x2 for ultra burst, 0x3 for mega (stone & wish)
     u32 ally_trigger: 2;
     u32 evo_happened_pbs: 4;
     u32 party_mega_check: 6;

@@ -309,6 +309,7 @@ void damagecalc2(void)
         break;
 	case MOVE_Z_TAPU:
 		damage = battle_participants[bank_target].current_hp * 3 / 4;
+		break;
     case MOVE_FINAL_GAMBIT:
         damage = battle_participants[bank_attacker].current_hp;
         break;
@@ -503,7 +504,7 @@ struct config z_move_config[20];
 void apply_zmove_changes()
 {
 	u8 config=z_moves_power[current_move];
-	if(config<=13){
+	if (config <= 13){
 		if(config==13)
 			new_battlestruct->various.var2=6;
 		else
@@ -511,7 +512,10 @@ void apply_zmove_changes()
 		if(do_multiple_stats(z_move_config[config].arg1, z_move_config[config].arg2))
 			return;
 	}
-	//else if(config==14){}
+	else if (config == 14) //易中要害
+	{
+		battle_participants[bank_attacker].status2.focus_energy = 1;
+	}
 	else if(config==15)
 	{
 		for (u8 i = 0; i < 7; i++)
@@ -523,11 +527,35 @@ void apply_zmove_changes()
 	}
 	else if(config==16)
 	{
+		HEAL_USER:
 		damage_loc = (battle_participants[bank_attacker].max_hp) * -1;
-		battlescripts_curr_instruction+=4;
+		battlescripts_curr_instruction += 5; //+=4;
 		return;
 	}
-	battlescripts_curr_instruction = get_move_battlescript_ptr(current_move) + 1;
+	else if (config == 17) //回复替换出场的宝可梦
+	{
+		new_battlestruct->side_affecting[get_bank_side(bank_attacker)].lunardance = 1;
+	}
+	else if (config == 18) //万众瞩目
+	{
+		if (battle_flags.double_battle)
+		{
+			side_timers[get_bank_side(bank_attacker)].followme_timer = 1;
+			side_timers[get_bank_side(bank_attacker)].followme_target = bank_attacker;
+		}
+	}
+	else if (config == 19) //Z诅咒
+	{
+		if (is_of_type(bank_attacker, TYPE_GHOST))
+			goto HEAL_USER;
+		else
+		{
+			new_battlestruct->various.var2 = 0;
+			if(do_multiple_stats(0x1, 0x10))
+				return;
+		}
+	}
+	//battlescripts_curr_instruction = get_move_battlescript_ptr(current_move) + 1;
 }
 
 void do_multiple_stats_custom(void) //ptr to do a stat change, u8 stats to change, s8 by how much
@@ -1073,7 +1101,7 @@ void countercalc(void)
     u8 special_target = protect_structs[bank_attacker].mirrorcoat_target;
     u8 attackers_side = get_bank_side(bank_attacker);
     u8 followme = 0;
-    if (side_timers[attackers_side].followme_timer && battle_participants[side_timers[attackers_side].followme_target].current_hp
+    if (side_timers[attackers_side ^ 1].followme_timer && battle_participants[side_timers[attackers_side ^ 1].followme_target].current_hp
 		&& !(is_immune_to_powder(bank_attacker) && new_battlestruct->bank_affecting[side_timers[attackers_side ^ 1].followme_target].rage_powder)) //Rage Powder, JeremyZ
         followme = 1;
     u32 damage = 0;
@@ -1096,7 +1124,7 @@ void countercalc(void)
         if (physical_damage)
         {
             if (followme)
-                bank_target = side_timers[attackers_side].followme_target;
+                bank_target = side_timers[attackers_side ^ 1].followme_target;
             else if (battle_participants[physical_bank].current_hp && get_bank_side(physical_bank) != attackers_side)
                 bank_target = physical_bank;
             else
@@ -1119,7 +1147,7 @@ void countercalc(void)
         if (special_damage)
         {
             if (followme)
-                bank_target = side_timers[attackers_side].followme_target;
+                bank_target = side_timers[attackers_side ^ 1].followme_target;
             else if (battle_participants[special_target].current_hp && get_bank_side(special_target) != attackers_side)
                 bank_target = special_target;
             else
@@ -1731,6 +1759,7 @@ void stockpile_record(void)
     case 0:
         *stockpile_def = attacker_stats->def_buff;
         *stockpile_spdef = attacker_stats->sp_def_buff;
+		disable_structs[bank_attacker].stockpile_counter++; //JeremyZ
         break;
     case 1:
         attacker_stockpile->stockpile_def_changes += (attacker_stats->def_buff - *stockpile_def);
@@ -1826,6 +1855,7 @@ u8 terrains_get_turns(u8 bank)
     return 5;
 }
 
+void call_bc_move_exec(void* bs_ptr);
 void set_terrain(void)
 {
     u8 fail = 0;
@@ -1864,6 +1894,7 @@ void set_terrain(void)
         }
         break;
     case MOVE_PSYCHIC_TERRAIN:
+	case MOVE_Z_MEW:
         if (field->psychic_terrain)
             fail = 1;
         else
@@ -1875,7 +1906,7 @@ void set_terrain(void)
         break;
 	case MOVE_Z_LYCANROC:
 		reset_terrains(field);
-		//battle_communication_struct.multistring_chooser = ; Battle Scripts Needed
+		battle_communication_struct.multistring_chooser = 4;
 		break;
     }
     if (fail)
@@ -2598,7 +2629,7 @@ void belch_canceler(void)
 
 void print_from_nbsvar2(void)
 {
-    prep_string(new_battlestruct->various.var2,battle_scripting.active_bank);
+    prep_string(new_battlestruct->various.var2, battle_scripting.active_bank);
     battle_communication_struct.is_message_displayed=1;
 }
 
@@ -3054,6 +3085,7 @@ void set_spotlight(void); //Spotlight, JeremyZ
 void set_throatchop(void); //Throat Chop, JeremyZ
 void speed_swap(void); //Speed Swap, JeremyZ
 void jumpifuserheadblown(void); //Mind Blown, JeremyZ
+void print_start_z(void); //Start Z, JeremyZ
 
 const command callasm_table[] = {&ability_switchin_effect /*0*/, &jump_if_forcesetflag_set /*1*/, &change_attacker_item /*2*/, &callasm_nop /*3*/, &callasm_nop /*4*/,
 &changestatvar1_atk /*5*/, &changestatvar2_atk /*6*/, &frisk_target_item /*7*/, &callasm_nop /*8*/, &set_type_msg_buffer /*9*/, &callasm_nop /*10*/, &bad_dreams_damage_calc /*11*/,
@@ -3087,7 +3119,7 @@ const command callasm_table[] = {&ability_switchin_effect /*0*/, &jump_if_forces
 &triattackrand /*151*/, &statustoeffect2 /*152*/, &multiplestats_prepare_custom /*153*/, &do_multiple_stats_custom /*154*/, &jumpifnotarg1type /*155*/,
 &set_stats_to_play /*156*/, &receiver_effect /*157*/, &bugbite_get_berry_effect /*158*/, &prepare_switchbank_data /*159*/, &ash_greninja_check /*160*/,
 &zygarde_message_based_on_side/*161*/, &hp_stat_form_change /*162*/, &revert_mega /*163*/, &instruct_canceler /*164*/, &set_instruct /*165*/,
-&apply_zmove_changes/*166*/, &set_spotlight/*167*/, &set_throatchop/*168*/, &speed_swap/*169*/, &jumpifuserheadblown/*170*/}; //JeremyZ
+&apply_zmove_changes/*166*/, &set_spotlight/*167*/, &set_throatchop/*168*/, &speed_swap/*169*/, &jumpifuserheadblown/*170*/, &print_start_z/*171*/}; //JeremyZ
 
 void atk83_callasm(void)
 {

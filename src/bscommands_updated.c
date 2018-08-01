@@ -819,7 +819,7 @@ void atk49_move_end_turn(void)
 				bs_push_current(BS_CHANGE_ATK_STAT);
 				effect = 1;
 			}
-			else if (new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage && !attacker_struct->status.int_status && !cant_poison(bank_target, bank_attacker, 0)) //JeremyZ
+			else if (new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage && !cant_poison(bank_target, bank_attacker, 0)) //JeremyZ
 			{
 				new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage = 0;
 				attacker_struct->status.flags.poison = 1;
@@ -1630,6 +1630,13 @@ u8 check_if_cannot_attack(void)
 				battlescripts_curr_instruction = BS_HARSHSUN_PREVENTS; //Needs Revision
 			}
 			break;
+		case 21: //Psychic Terrain, JeremyZ
+			if (new_battlestruct->field_affecting.psychic_terrain && get_airborne_state(bank_target, 0, 1) <= 2 && get_priority(current_move, bank_attacker) >= 1 && get_bank_side(bank_target) != get_bank_side(bank_attacker))
+			{
+				effect = 1;
+				battlescripts_curr_instruction = BS_CANTUSE_PRIORITY_TERRAIN;
+			}
+			break;			
 		}
 		if (effect == 2)
 		{
@@ -1643,7 +1650,7 @@ u8 check_if_cannot_attack(void)
 			reset_multiple_turn_effects(bank_attacker);
 		}
 		*state_tracker += 1;
-		if (*state_tracker >= 21 && effect == 0)
+		if (*state_tracker >= 22 && effect == 0)
 			break;
 	}
 	return effect;
@@ -1728,6 +1735,7 @@ bool is_there_no_target(u16 move)
 	return 0;
 }
 u16 get_z_moves(u16 move, u8 bank);
+bool is_z_move(u16 move);
 void atk00_move_canceller(void)
 {
 	if (battle_outcome)
@@ -1831,7 +1839,8 @@ void atk00_move_canceller(void)
 		}
 	}
 	battlescripts_curr_instruction++;
-	if (get_z_moves(current_move, bank_attacker))
+	//if (get_z_moves(current_move, bank_attacker))
+	if (is_z_move(current_move) || (current_move > 0x1000 && (current_move = current_move - 0x1000))) //Z攻击招式或Z变化招式
 	{
 		if (bank_attacker == 0)
 		{	/*	if(bank_attacker==0)
@@ -1871,7 +1880,8 @@ void atk00_move_canceller(void)
 		{
 			new_battlestruct->mega_related.z_happened_pbs |= BIT_GET(bank_attacker);
 		}
-		battlescripts_curr_instruction = BS_START_Z;
+		//battlescripts_curr_instruction = BS_START_Z;
+		bs_push_current(BS_START_Z);
 	}
 }
 
@@ -2871,7 +2881,7 @@ u8 cant_become_confused(u8 bank)
 		return 4;
 	if (side_affecting_halfword[get_bank_side(bank)].safeguard_on && !(hitmarker & HITMAKRER_IGNORE_SAFEGUARD))
 		return 5;
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 1, 1) <= 2)
+    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 0, 1) <= 2)
         return 8;
 	return 0;
 }
@@ -3630,6 +3640,16 @@ void atk84_jumpifcannotsleep(void)
 			battle_communication_struct.multistring_chooser = 3;
 			battlescripts_curr_instruction = jump_loc;
 		}
+		else if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank_target, 0, 1) <= 2)
+		{
+			battle_communication_struct.multistring_chooser = 4;
+			battlescripts_curr_instruction = jump_loc;
+		}
+		else if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(bank_target, 0, 1) <= 2)
+		{
+			battle_communication_struct.multistring_chooser = 5;
+			battlescripts_curr_instruction = jump_loc;
+		}		
 		else
 			battlescripts_curr_instruction += 5;
 	}

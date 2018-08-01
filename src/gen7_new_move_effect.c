@@ -10,6 +10,7 @@ void atk0C_datahpupdate(void);
 u8 is_of_type(u8 bank, u8 type);
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 void update_rtc(void);
+void prep_string(u16 strID, u8 bank);
 
 bool time_check(u8 from, u8 to)
 {
@@ -194,4 +195,23 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 		}
 	}
     return;
+}
+
+//Start Z
+void print_start_z(void)
+{
+    prep_string(new_battlestruct->various.var2, bank_attacker);
+    battle_communication_struct.is_message_displayed=1;
+}
+
+//Is Z Move
+bool is_z_move(u16 move)
+{
+	if ((move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) || 
+		(move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW) || 
+		move == MOVE_Z_ASH_PIKACHU || 
+		(move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA))
+		return true;
+	else
+		return false;
 }
