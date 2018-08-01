@@ -512,50 +512,45 @@ void apply_zmove_changes()
 		if(do_multiple_stats(z_move_config[config].arg1, z_move_config[config].arg2))
 			return;
 	}
-	else if (config == 14) //易中要害
-	{
-		battle_participants[bank_attacker].status2.focus_energy = 1;
+	u32 to_add = 4;
+	switch (config - 14){
+		case 0:
+			battle_participants[bank_attacker].status2.focus_energy = 1;
+			break;
+		case 1:
+			for (u8 i = 0; i < 7; i++)
+			{
+				u8 *atk_stat = &battle_participants[bank_attacker].atk_buff + i;
+				if(*atk_stat<6)
+					*atk_stat=6;
+			}
+			break;
+		case 2:
+			HEAL_USER:
+			to_add = 5;
+			damage_loc = (battle_participants[bank_attacker].max_hp) * -1;
+			break;
+		case 3:
+			new_battlestruct->side_affecting[get_bank_side(bank_attacker)].lunardance = 1;
+			break;
+		case 4:
+			if (battle_flags.double_battle)
+			{
+				side_timers[get_bank_side(bank_attacker)].followme_timer = 1;
+				side_timers[get_bank_side(bank_attacker)].followme_target = bank_attacker;
+			}
+			break;
+		case 5:
+			if (is_of_type(bank_attacker, TYPE_GHOST))
+				goto HEAL_USER;
+			else
+			{
+				new_battlestruct->various.var2 = 0;
+				if(do_multiple_stats(0x1, 0x10))
+					return;
+			}
 	}
-	else if(config==15)
-	{
-		for (u8 i = 0; i < 7; i++)
-		{
-			u8 *atk_stat = &battle_participants[bank_attacker].atk_buff + i;
-			if(*atk_stat<6)
-				*atk_stat=6;
-		}
-	}
-	else if(config==16)
-	{
-		HEAL_USER:
-		damage_loc = (battle_participants[bank_attacker].max_hp) * -1;
-		battlescripts_curr_instruction += 5; //+=4;
-		return;
-	}
-	else if (config == 17) //回复替换出场的宝可梦
-	{
-		new_battlestruct->side_affecting[get_bank_side(bank_attacker)].lunardance = 1;
-	}
-	else if (config == 18) //万众瞩目
-	{
-		if (battle_flags.double_battle)
-		{
-			side_timers[get_bank_side(bank_attacker)].followme_timer = 1;
-			side_timers[get_bank_side(bank_attacker)].followme_target = bank_attacker;
-		}
-	}
-	else if (config == 19) //Z诅咒
-	{
-		if (is_of_type(bank_attacker, TYPE_GHOST))
-			goto HEAL_USER;
-		else
-		{
-			new_battlestruct->various.var2 = 0;
-			if(do_multiple_stats(0x1, 0x10))
-				return;
-		}
-	}
-	//battlescripts_curr_instruction = get_move_battlescript_ptr(current_move) + 1;
+	battlescripts_curr_instruction += to_add;
 }
 
 void do_multiple_stats_custom(void) //ptr to do a stat change, u8 stats to change, s8 by how much
