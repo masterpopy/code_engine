@@ -503,9 +503,9 @@ u8 z_moves_power[800];
 struct config z_move_config[20];
 void apply_zmove_changes()
 {
-	u8 config=z_moves_power[current_move];
+	u8 config = z_moves_power[current_move];
 	if (config <= 13){
-		if(config==13)
+		if(config == 13)
 			new_battlestruct->various.var2=6;
 		else
 			new_battlestruct->various.var2=0;
@@ -518,10 +518,10 @@ void apply_zmove_changes()
 			battle_participants[bank_attacker].status2.focus_energy = 1;
 			break;
 		case 1:
-			u8 *atk_stat = &battle_participants[bank_attacker].atk_buff;
+			
 			for (u8 i = 0; i < 7; i++)
 			{
-				atk_stat += i;
+				u8 *atk_stat = &battle_participants[bank_attacker].atk_buff + i;
 				if(*atk_stat < 6)
 					*atk_stat=6;
 			}
