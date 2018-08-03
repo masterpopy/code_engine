@@ -1735,7 +1735,6 @@ bool is_there_no_target(u16 move)
 	return 0;
 }
 u16 get_z_moves(u16 move, u8 bank);
-bool is_z_move(u16 move);
 void atk00_move_canceller(void)
 {
 	if (battle_outcome)
@@ -1839,8 +1838,7 @@ void atk00_move_canceller(void)
 		}
 	}
 	battlescripts_curr_instruction++;
-	//if (get_z_moves(current_move, bank_attacker))
-	if (is_z_move(current_move) || (current_move > 0x1000 && (current_move = current_move - 0x1000))) //Z攻击招式或Z变化招式
+	if (get_z_moves(current_move, bank_attacker))
 	{
 		if (bank_attacker == 0)
 		{	/*	if(bank_attacker==0)

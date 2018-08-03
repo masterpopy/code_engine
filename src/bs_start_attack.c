@@ -463,6 +463,7 @@ bool check_focus(u8 bank)
     return is_bank_focusing;
 }
 
+bool is_z_move(u16 move);
 u16 check_z_move(u16 move, u8 bank)
 {
 	const struct evolution_sub* evo = GET_EVO_TABLE(battle_participants[bank].species);
@@ -472,51 +473,53 @@ u16 check_z_move(u16 move, u8 bank)
 	const struct item_struct* item_info = &(*item_table)[battle_participants[bank].held_item];
 	u32 param = item_info->extra_param;
 	u8 type = info->type;
-	new_battlestruct->various.var2 = 0x18D;
-	if(param > TYPE_FAIRY){
-		for (u8 i = 0; i < NUM_OF_EVOS; i++) //JeremyZ
+	u16 z_move = 0;
+	
+	//决定Z招式文本
+	u8 z_type = type;
+	if (z_type == TYPE_FAIRY)
+		z_type -= 0x6;
+	else if (z_type > TYPE_EGG)
+		z_type --;				
+	new_battlestruct->various.var2 = 0x24D + z_type; //default: 0x18D
+	
+	if (is_z_move(move))
+		z_move = move;
+	else if (param > TYPE_FAIRY){
+		for (u8 i = 0; i < NUM_OF_EVOS; i++)
 		{
 			if(!evo[i].method && evo[i].paramter == battle_participants[bank].held_item && (param << 16) >> 16 == move)
 			{
-				u8 z_type = move_table[param >> 16].type;
-				if(z_type == TYPE_FAIRY)
-					z_type -= 0x6;
-				else if(z_type > TYPE_EGG)
-					z_type --;				
-				new_battlestruct->various.var2 = 0x24D + z_type;
-				return param >> 16;
+				z_move = param >> 16;
 			}
 		}
 	}
-	else if(param == type)
+	else if (param == type ||
+		(param == TYPE_NORMAL && last_used_move != 0xFFFF && find_move_in_table(last_used_move, moves_calling_another_move) && last_used_move != MOVE_MIRROR_MOVE) ||
+		(param == TYPE_FLYING && last_used_move == MOVE_MIRROR_MOVE))
 	{
-		if(type == TYPE_FAIRY)
-			type -= 0x6;
-		else if(type > TYPE_EGG)
-			type --;
-		new_battlestruct->various.var2 = 0x24D + type;
-		if(info->split == 2)
-			return move + 0x1000; //用+0x1000来代表变化Z招式		
-		return  MOVE_Z_NORMAL_PHYS + (type << 1) + info->split;
+		if (info->split == 2)
+			z_move = move;
+		else 
+			z_move = MOVE_Z_NORMAL_PHYS + (z_type << 1) + info->split;
 	}
-	return 0;
+	if (!z_move)
+		return 0;
+	return z_move;
 }
 
 u16 get_z_moves(u16 move, u8 bank)
 {
 	u8 bank_z_mode = 0;
-	struct mega_related* mega = &new_battlestruct->mega_related;
-	if(bank == 0 && 
-		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x1)) || !(mega->z_happened_pbs & 0x5)))			
+	if (bank == 0)
 		bank_z_mode = new_battlestruct->mega_related.user_trigger;
-	else if(bank == 2 && 
-		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x4)) || !(mega->z_happened_pbs & 0x5)))
+	else if (bank == 2)
 		bank_z_mode = new_battlestruct->mega_related.ally_trigger;
-	else if((bank == 1 || bank == 3) && !(new_battlestruct->mega_related.z_happened_pbs & (BIT_GET(bank) | BIT_GET(bank ^ 2))))
+	else if (!(new_battlestruct->mega_related.z_happened_pbs & (BIT_GET(bank) | BIT_GET(bank ^ 2))))
 		bank_z_mode = 1;
 	if (battle_flags.link && !new_battlestruct->mega_related.link_indicator[bank])
 		bank_z_mode = 0;
-	if(bank_z_mode != 1) //bank_z_mode == 0
+	if (bank_z_mode != 1) //bank_z_mode == 0
 		return 0;
 	return check_z_move(move, bank);
 }

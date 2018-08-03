@@ -6,6 +6,8 @@ typedef unsigned short u16;
 typedef unsigned long u32;
 
 typedef u32 bool;
+#define true 1
+#define false 0
 
 typedef signed char s8;
 typedef signed short s16;

@@ -207,11 +207,8 @@ void print_start_z(void)
 //Is Z Move
 bool is_z_move(u16 move)
 {
-	if ((move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) || 
+	return ((move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) || 
 		(move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW) || 
 		move == MOVE_Z_ASH_PIKACHU || 
-		(move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA))
-		return true;
-	else
-		return false;
+		(move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA));
 }
