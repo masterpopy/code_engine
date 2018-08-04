@@ -1071,8 +1071,8 @@ bool battle_turn_move_effects(void)
                     break;
                 case 30: //forms changes based on HP
                     {
-                        u8 bank = active_bank;
-						if(!not_impostered(bank))
+                        u8 activeBank = active_bank;
+						if(!not_impostered(activeBank))
 							break;
 						u16 species =  battle_participants[active_bank].species;
 						u16 new_species = 0;
@@ -1081,41 +1081,41 @@ bool battle_turn_move_effects(void)
                             switch(species)
                             {
                             case POKE_DARMANITAN:
-                                if(battle_participants[bank].current_hp && (battle_participants[bank].current_hp < (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_ZEN_MODE))
+                                if(battle_participants[activeBank].current_hp && (battle_participants[activeBank].current_hp < (battle_participants[activeBank].max_hp / 2)) && check_ability(activeBank,ABILITY_ZEN_MODE))
                                 {
                                     effect = 1;
                                     new_species = POKE_ZEN_MODE;
                                     string_chooser = 0x21C;
-                                    //battle_scripting.active_bank = bank;
+                                    //battle_scripting.active_bank = activeBank;
                                     script = (BS_FORMCHANGE_WITH_TYPE_CHANGE);
                                 }
                                 break;
                             case POKE_ZEN_MODE:
-                                if((battle_participants[bank].current_hp >= (battle_participants[bank].max_hp / 2)) || !check_ability(bank,ABILITY_ZEN_MODE))
+                                if((battle_participants[activeBank].current_hp >= (battle_participants[activeBank].max_hp / 2)) || !check_ability(activeBank,ABILITY_ZEN_MODE))
                                 {
                                     effect = 1;
                                     new_species = POKE_DARMANITAN;
-                                    //battle_scripting.active_bank = bank;
+                                    //battle_scripting.active_bank = activeBank;
                                     string_chooser = 0x21D;
                                     script = (BS_FORMCHANGE_WITH_TYPE_CHANGE);
                                 }
                                 break;
                             case POKE_WISHIWASHI:
-                                if((battle_participants[bank].current_hp >= (battle_participants[bank].max_hp / 4)) && check_ability(bank,ABILITY_SCHOOLING) && battle_participants[bank].level >=SCHOOLING_LEVEL)
+                                if((battle_participants[activeBank].current_hp >= (battle_participants[activeBank].max_hp / 4)) && check_ability(activeBank,ABILITY_SCHOOLING) && battle_participants[activeBank].level >=SCHOOLING_LEVEL)
                                 {
                                     effect = 1;
                                     new_species = POKE_WISHIWASHI_SCHOOL;
                                     string_chooser = 0x244;
-                                    //battle_scripting.active_bank=bank;
+                                    //battle_scripting.active_bank=activeBank;
                                     script = (BS_STAT_ONLY_FORMCHANGE_END2);
                                 }
                                 break;
                             case POKE_WISHIWASHI_SCHOOL:
-                                if(battle_participants[bank].current_hp && (battle_participants[bank].current_hp < (battle_participants[bank].max_hp / 4)))
+                                if(battle_participants[activeBank].current_hp && (battle_participants[activeBank].current_hp < (battle_participants[activeBank].max_hp / 4)))
                                 {
                                     effect = 1;
                                     new_species = POKE_WISHIWASHI;
-                                    //battle_scripting.active_bank=bank;
+                                    //battle_scripting.active_bank=activeBank;
                                     string_chooser = 0x245;
                                     script = (BS_STAT_ONLY_FORMCHANGE_END2);
                                 }
@@ -1127,65 +1127,65 @@ bool battle_turn_move_effects(void)
 							case 0x3EE:
 							case 0x3EF:
 							case 0x3F0:
-                                if((battle_participants[bank].current_hp > (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_SHIELDS_DOWN)) //JeremyZ
+                                if((battle_participants[activeBank].current_hp > (battle_participants[activeBank].max_hp / 2)) && check_ability(activeBank,ABILITY_SHIELDS_DOWN)) //JeremyZ
                                 {
                                     effect = 1;
                                     new_species = POKE_MINIOR_METEOR;
                                     string_chooser = 0x242;
-                                    //battle_scripting.active_bank=bank;
+                                    //battle_scripting.active_bank=activeBank;
                                     script = (BS_STAT_ONLY_FORMCHANGE_END2);
                                 }
                                 break;
                             case POKE_MINIOR_METEOR:
-                                if(battle_participants[bank].current_hp && (battle_participants[bank].current_hp <= (battle_participants[bank].max_hp / 2))) //JeremyZ
+                                if(battle_participants[activeBank].current_hp && (battle_participants[activeBank].current_hp <= (battle_participants[activeBank].max_hp / 2))) //JeremyZ
                                 {
                                     effect = 1;									
                                     new_species = POKE_MINIOR_CORE;
 									u8 change = __umodsi3(rng(), 7);
 									if (change)
 										new_species=0x3EA+change;
-                                    //battle_scripting.active_bank=bank;
+                                    //battle_scripting.active_bank=activeBank;
                                     string_chooser = 0x243;
                                     script = (BS_STAT_ONLY_FORMCHANGE_END2);
                                 }
                                 break;
                             case POKE_ZYGARDE_10:
                             case POKE_ZYGARDE_50:
-                                if(battle_participants[bank].current_hp && ((battle_participants[bank].current_hp <= (battle_participants[bank].max_hp / 2)) && check_ability(bank,ABILITY_POWER_CONSTRUCT))) //JeremyZ
+                                if(battle_participants[activeBank].current_hp && ((battle_participants[activeBank].current_hp <= (battle_participants[activeBank].max_hp / 2)) && check_ability(activeBank,ABILITY_POWER_CONSTRUCT))) //JeremyZ
                                 {
                                     effect = 1;
                                     // new_species = POKE_ZYGARDE_50;
                                     // if(species==POKE_ZYGARDE_50)
                                     // {
-                                        // if(get_bank_side(bank))
+                                        // if(get_bank_side(activeBank))
                                         // {
-                                            // new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[bank]];
+                                            // new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[activeBank]];
                                         // }
                                         // else
                                         // {
-                                            // new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[bank]];
+                                            // new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[activeBank]];
                                         // }
 										// new_species = POKE_ZYGARDE_100;
                                     // }
 									
 									//JeremyZ
-									if(get_bank_side(bank))
+									if(get_bank_side(activeBank))
 									{
 										if(species == POKE_ZYGARDE_50)
-											new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[bank]];
+											new_battlestruct->party_bit.is_base_z50_ai |= bits_table[battle_team_id_by_side[activeBank]];
 										else
-											new_battlestruct->party_bit.is_base_z50_ai &= ~bits_table[battle_team_id_by_side[bank]];
+											new_battlestruct->party_bit.is_base_z50_ai &= ~bits_table[battle_team_id_by_side[activeBank]];
 									}
 									else
 									{
 										if(species == POKE_ZYGARDE_50)
-											new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[bank]];
+											new_battlestruct->party_bit.is_base_z50_user |= bits_table[battle_team_id_by_side[activeBank]];
 										else
-											new_battlestruct->party_bit.is_base_z50_user &= ~bits_table[battle_team_id_by_side[bank]];
+											new_battlestruct->party_bit.is_base_z50_user &= ~bits_table[battle_team_id_by_side[activeBank]];
 									}
 									new_species = POKE_ZYGARDE_100;
 									
-                                    //battle_scripting.active_bank=bank;
+                                    //battle_scripting.active_bank=activeBank;
                                     string_chooser = 0x24A;
                                     script = (BS_ZYGARDE_FORM_CHANGE);
                                 }
@@ -1193,14 +1193,14 @@ bool battle_turn_move_effects(void)
 							case 0x422:
 								effect = 1;
 								new_species = 0x357;
-								//battle_scripting.active_bank = bank;
+								//battle_scripting.active_bank = activeBank;
 								string_chooser = 0x18c;
-								//mark_buffer_bank_for_execution(bank);
+								//mark_buffer_bank_for_execution(activeBank);
 								script = (BS_STAT_ONLY_FORMCHANGE_END2);
 								break;
                             }
 							if(effect){
-								battle_scripting.active_bank = bank;
+								battle_scripting.active_bank = activeBank;
 								new_battlestruct->various.var1 = new_species;
 								new_battlestruct->various.var2 = string_chooser;
 								call_bc_move_exec(script);

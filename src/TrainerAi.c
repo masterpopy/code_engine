@@ -59,8 +59,9 @@ static u8 tai_getmovetype(u8 atk_bank, u16 move)
         return move_table[move].type;
 }
 
-bool was_impossible_used(/*u8 bank*/)
+bool was_impossible_used(u8 bank)
 {
+    //TODO
     return 0;
 }
 
@@ -80,8 +81,9 @@ u16 ai_get_move(u8 bank, u8 slot)
         return battle_resources->battle_history->used_moves[bank].moves[slot];
 }
 
-bool has_poke_hidden_ability(/*u16 species*/)
+bool has_poke_hidden_ability(u16 species)
 {
+    //TODO
     return 0;
 }
 

@@ -173,10 +173,12 @@ u16 b_get_ball_to_throw(u8 bank)
         pokeball = new_battlestruct->bank_affecting[bank].illusion_ball;
     else
         pokeball = get_attributes(get_bank_poke_ptr(bank), ATTR_POKEBALL, 0);
-    if (!EXPANDED_POKEBALLS)
-        return itemID_to_ballID(pokeball);
-    else
-        return pokeball;
+
+#if EXPANDED_POKEBALLS == true
+    return pokeball;
+#else
+    return itemID_to_ballID(pokeball);
+#endif
 }
 
 void update_transform_sprite_pal(u8 bank, u16 pal_arg1)
