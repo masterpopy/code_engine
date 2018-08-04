@@ -180,11 +180,11 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 		const struct evolution_sub* evos = GET_EVO_TABLE(mega_current_species);
 		if(mega_current_species==0x42E)
 			species_to_revert=((u16*)sav1->balls_pocket)[i];
-		for (u8 i = 0; i < NUM_OF_EVOS; i++)
+		for (u8 j = 0; j < NUM_OF_EVOS; j++)
 		{
-			if (evos[i].method == 0xFF)
+			if (evos[j].method == 0xFF)
 			{
-				species_to_revert = evos[i].poke;
+				species_to_revert = evos[j].poke;
 				break;
 			}
 		}
@@ -204,11 +204,3 @@ void print_start_z(void)
     battle_communication_struct.is_message_displayed=1;
 }
 
-//Is Z Move
-bool is_z_move(u16 move)
-{
-	return ((move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) || 
-		(move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW) || 
-		move == MOVE_Z_ASH_PIKACHU || 
-		(move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA));
-}

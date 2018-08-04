@@ -26,7 +26,7 @@
 #define DISABLED_EXP_FLAG   0x276   //if that flag is set, receiving exp is disabled, if flag is 0 it has no effect
 #define DISABLED_EVS_FLAG   0x277     //if that flag is set, receiving EVS points is disabled, if flag is 0 it has no effect; this and above flag can be the same
 #define DOUBLE_WILD_BATTLES true    //set to false if you don't want have them in your hack at all
-#define DOUBLE_WILD_BATTLES_FLAG 0x27B//0x278ÊÇÓÐÎÊÌâµÄ,
+#define DOUBLE_WILD_BATTLES_FLAG 0x27B //0x278æ˜¯æœ‰é—®é¢˜çš„
 #define DOUBLE_WILD_TILES   4      //amount of tiles double wild battles are possible on
 #define EXPANDED_POKEBALLS  true  //set to true if your hack uses pokeball expansion
 #define INVERSE_FLAG        0x271   //if that flag is set, the battle is inverse

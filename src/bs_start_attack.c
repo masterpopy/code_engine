@@ -414,10 +414,16 @@ bool check_focus(u8 bank) {
     return is_bank_focusing;
 }
 
-bool is_z_move(u16 move);
+//Is Z Move
+bool is_z_move(u16 move)
+{
+    return (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) ||
+           (move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW) ||
+           move == MOVE_Z_ASH_PIKACHU ||
+           (move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA);
+}
 
 u16 check_z_move(u16 move, u8 bank) {
-    const struct evolution_sub *evo = GET_EVO_TABLE(battle_participants[bank].species);
     const struct move_info *info = &move_table[move];
     if (get_item_effect(bank, 0) != 153)
         return 0;
@@ -425,7 +431,6 @@ u16 check_z_move(u16 move, u8 bank) {
     u32 param = item_info->extra_param;
     u8 type = info->type;
     u16 z_move = 0;
-
     //决定Z招式文本
     u8 z_type = type;
     if (z_type == TYPE_FAIRY)
@@ -433,10 +438,10 @@ u16 check_z_move(u16 move, u8 bank) {
     else if (z_type > TYPE_EGG)
         z_type--;
     new_battlestruct->various.var2 = 0x24D + z_type; //default: 0x18D
-
     if (is_z_move(move))
         z_move = move;
     else if (param > TYPE_FAIRY) {
+        const struct evolution_sub *evo = GET_EVO_TABLE(battle_participants[bank].species);
         for (u8 i = 0; i < NUM_OF_EVOS; i++) {
             if (!evo[i].method && evo[i].paramter == battle_participants[bank].held_item &&
                 (param << 16) >> 16 == move) {
@@ -452,8 +457,6 @@ u16 check_z_move(u16 move, u8 bank) {
         else
             z_move = MOVE_Z_NORMAL_PHYS + (z_type << 1) + info->split;
     }
-    if (!z_move)
-        return 0;
     return z_move;
 }
 
