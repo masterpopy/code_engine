@@ -158,10 +158,7 @@ u8 get_attacking_move_type(void)
 
 bool is_of_type(u8 bank, u8 type)
 {
-    if (battle_participants[bank].type1 == type || battle_participants[bank].type2 == type || new_battlestruct->bank_affecting[bank].type3 == type)
-        return true;
-    else
-        return false;
+    return battle_participants[bank].type1 == type || battle_participants[bank].type2 == type || new_battlestruct->bank_affecting[bank].type3 == type;
 }
 
 void set_type(u8 bank, u8 type)
