@@ -421,11 +421,6 @@ u16 check_z_move(u32 move, u32 bank) {
     else if (z_type > TYPE_EGG)
         z_type--;
     new_battlestruct->various.var2 = 0x24D + z_type; //default: 0x18D
-    /*param:道具或者技能的额外参数，
-     * 普通Z代表对应属性，存放在道具里
-     * 专属Z则前两位代表专属Z技能对应的普通，后两位代表专属Z技能
-     * 第一次检查的时候传入道具的额外参数，第二次检查的时候传入技能的属性
-     * */
     u32 param = get_battle_item_extra_param(bank_attacker);
     if (is_z_move(move))
         z_move = move;
