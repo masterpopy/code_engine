@@ -2,7 +2,7 @@
 
 
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
-u32 get_item_extra_param(u16 item);
+u32 get_battle_item_extra_param(u32 bank);
 struct task* get_task(u8 taskID);
 enum drive_types
 {
@@ -102,7 +102,7 @@ u16 DRIVER_PALS[] = {0x7EEC, 0x1F, 0x7f75, 0x277f};
 
 void Techno_Blast_change_pal(u8 taskID)
 {
-	u16 item_effect = get_item_extra_param(battle_participants[animation_bank_attacker].held_item);
+	u16 item_effect = get_battle_item_extra_param(animation_bank_attacker);
 	if(get_item_effect(animation_bank_attacker, 1) == ITEM_EFFECT_DRIVES && item_effect <= 4)
     {
 		u16* pal = get_particle_pal(0x27e4);

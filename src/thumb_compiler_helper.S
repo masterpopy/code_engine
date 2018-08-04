@@ -150,4 +150,12 @@ rng:
 	str r0, [r2]
 	lsrs r0, r0, #0x10
 	bx lr
+
+LZ77UnCompWram:
+    swi 0x11
+    bx lr
+
+LZ77UnCompVram:
+    swi 0x12
+    bx lr
 	

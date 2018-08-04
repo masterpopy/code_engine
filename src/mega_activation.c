@@ -39,9 +39,13 @@ void set_mega_triggers(u8 bank,u8 set_mode)
         new_battlestruct->mega_related.link_indicator[bank] = set_mode;
 }
 
-u32 get_item_extra_param(u16 item)
+u32 get_item_extra_param(u32 item)
 {
     return (*item_table)[item].extra_param;
+}
+
+u32 get_battle_item_extra_param(u32 bank){
+    return get_item_extra_param(battle_participants[bank].held_item);
 }
 
 
@@ -93,9 +97,9 @@ u16 get_mega_species(u8 bank, u8 chosen_method)
                     if( item_effect== ITEM_EFFECT_MEGASTONE)
                     {
 						CHECK_SPECIES:
-                        if(evo[i].poke==get_item_extra_param(battle_participants[bank].held_item))
+                        if(evo[i].poke==get_battle_item_extra_param(bank))
                         {
-                            target_species = get_item_extra_param(battle_participants[bank].held_item);
+                            target_species = get_battle_item_extra_param(bank);
                         }
                     }
                 }

@@ -371,9 +371,8 @@ void healthbar_shake(struct object *parent_object)
     objects[child_object_id].pos2.y=ychange;
     parent_object->private[0] = -parent_object->private[0];
     u16 *reps = &parent_object->private[2];
-    bool is_hbar=true;
     struct mega_related* mega = &new_battlestruct->mega_related;
-    struct object *indi_obj;
+    struct object *indi_obj = NULL;
 
     if (child_object_id==healthbox_obj_id_pbs[0])
     {
@@ -391,23 +390,15 @@ void healthbar_shake(struct object *parent_object)
     {
         indi_obj=&objects[mega->indicator_id_pbs[3]];
     }
-    else
-    {
-        is_hbar=false;
-    }
 
-    if(is_hbar)
-    {
-        is_hbar=(is_hbar)&&(!indi_obj->private[DISABLED_INDICATOR]);
-    }
-    if(is_hbar)
+    if(indi_obj && !indi_obj->private[DISABLED_INDICATOR])
     {
         indi_obj->pos2.y=ychange;
     }
     (*reps)++;
     if(*reps==0x15)
     {
-        if(is_hbar)
+        if(indi_obj)
         {
             indi_obj->pos2.x=0;
             indi_obj->pos2.y=0;

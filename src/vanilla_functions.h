@@ -94,8 +94,6 @@ u8 __attribute__((long_call)) b_link_related(u8 switchID, u8 bank);
 void __attribute__((long_call)) load_poke_sprite_deoxys_form(void* sprite_ptr, void* dst, u16 species_no, u32 PiD, enum poke_sprite sprite);
 void __attribute__((long_call)) load_poke_sprite(void* sprite_ptr, void* dst, u16 species_no, u32 PiD, enum poke_sprite sprite);
 void* __attribute__((long_call)) poke_get_pal(u16 species, u32 TiD, u32 PiD);
-void __attribute__((long_call)) LZ77UnCompWram(const void* src, void* dst);
-void __attribute__((long_call)) LZ77UnCompVram(const void* src, void* dst);
 void __attribute__((long_call)) gpu_pal_apply(const struct palette* src, u16 index, u16 num_colours);
 void __attribute__((long_call)) gpu_pal_decompress_apply(const struct palette* src, u16 index, u16 num_colours);
 void* __attribute__((long_call)) shorten_str_to_10(void* src);
@@ -259,5 +257,6 @@ void __attribute__((long_call)) bb34_battle_animation(u8 buffID, u8 animID, u16 
 //functions rewritten in ASM to get rid of long calls
 u32 read_word(const void*);
 u16 rng(void);
-
+void LZ77UnCompWram(const void* src, void* dst);
+void LZ77UnCompVram(const void* src, void* dst);
 #endif /* VANILLA_FUNCTIONS */

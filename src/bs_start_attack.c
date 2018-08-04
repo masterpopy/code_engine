@@ -8,45 +8,29 @@ enum drive_types {
     SHOCK_DRIVE_EFFECT
 };
 
-u32 get_item_extra_param(u16 item);
-
+u32 get_battle_item_extra_param(u32 bank);
 u16 get_mega_species(u8 bank, u8 chosen_method);
-
 u8 weather_abilities_effect();
-
 bool find_move_in_table(u16 move, const u16 *table_ptr);
-
 void setup_berry_consume_buffers(u8 bank);
-
 u8 get_attacking_move_type();
-
 bool check_ability(u8 bank, u8 ability);
-
 u16 get_speed(u8 bank);
-
 u8 has_ability_effect(u8 bank, u8 mold_breaker);
-
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
-
 u8 get_bank_side(u8 bank);
-
 void bs_push_current(void *now);
-
 void bs_execute(void *bs);
-
 void call_bc_move_exec(void *bs_ptr);
-
 void reset_multiple_turn_effects(u8 bank);
-
 bool not_impostered(u8 bank);
+u32 get_battle_item_extra_param(u32 bank);
+bool is_immune_to_powder(u8 bank); //JeremyZ
 
-bool is_bank_present(u8 bank) {
-    if ((absent_bank_flags & BIT_GET(bank)) || battle_participants[bank].current_hp == 0 || bank >= no_of_all_banks)
-        return 0;
-    return 1;
+bool is_bank_present(u32 bank) {
+    return bank <= no_of_all_banks && battle_participants[bank].current_hp && !(absent_bank_flags & BIT_GET(bank));
 }
 
-bool is_immune_to_powder(u8 bank); //JeremyZ
 
 u8 get_target_of_move(u16 move, u8 target_given, u8 adjust) {
     u8 target_case;
@@ -201,13 +185,13 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
                 break;
             case MOVE_JUDGMENT: {
                 if (get_item_effect(bank, 1) == ITEM_EFFECT_PLATES) {
-                    move_type = (u16) get_item_extra_param(battle_participants[bank].held_item);
+                    move_type = (u16) get_battle_item_extra_param(bank);
                 }
             }
                 break;
             case MOVE_TECHNO_BLAST: {
                 if (get_item_effect(bank, 1) == ITEM_EFFECT_DRIVES) {
-                    switch ((u16) get_item_extra_param(battle_participants[bank].held_item)) {
+                    switch ((u16) get_battle_item_extra_param(bank)) {
                         case DOUSE_DRIVE_EFFECT: //DOUSEDRIVE
                             move_type = TYPE_WATER;
                             break;
@@ -415,20 +399,19 @@ bool check_focus(u8 bank) {
 }
 
 //Is Z Move
-bool is_z_move(u16 move)
-{
+bool is_z_move(u16 move) {
     return (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) ||
            (move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW) ||
            move == MOVE_Z_ASH_PIKACHU ||
            (move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA);
 }
 
-u16 check_z_move(u16 move, u8 bank) {
+u16 check_z_move(u32 move, u32 bank, u32 param) {
     const struct move_info *info = &move_table[move];
     if (get_item_effect(bank, 0) != 153)
         return 0;
-    const struct item_struct *item_info = &(*item_table)[battle_participants[bank].held_item];
-    u32 param = item_info->extra_param;
+    //const struct item_struct *item_info = &(*item_table)[battle_participants[bank].held_item];
+    //u32 param = item_info->extra_param;
     u8 type = info->type;
     u16 z_move = 0;
     //决定Z招式文本
@@ -438,6 +421,11 @@ u16 check_z_move(u16 move, u8 bank) {
     else if (z_type > TYPE_EGG)
         z_type--;
     new_battlestruct->various.var2 = 0x24D + z_type; //default: 0x18D
+    /*param:道具或者技能的额外参数，
+     * 普通Z代表对应属性，存放在道具里
+     * 专属Z则前两位代表专属Z技能对应的普通，后两位代表专属Z技能
+     * 第一次检查的时候传入道具的额外参数，第二次检查的时候传入技能的属性
+     * */
     if (is_z_move(move))
         z_move = move;
     else if (param > TYPE_FAIRY) {
@@ -460,7 +448,7 @@ u16 check_z_move(u16 move, u8 bank) {
     return z_move;
 }
 
-u16 get_z_moves(u16 move, u8 bank) {
+u16 get_z_moves(u16 move, u32 bank, u32 param) {
     u8 bank_z_mode = 0;
     if (bank == 0)
         bank_z_mode = new_battlestruct->mega_related.user_trigger;
@@ -472,7 +460,7 @@ u16 get_z_moves(u16 move, u8 bank) {
         bank_z_mode = 0;
     if (bank_z_mode != 1) //bank_z_mode == 0
         return 0;
-    return check_z_move(move, bank);
+    return check_z_move(move, bank, param);
 }
 
 u16 get_move_from_pledge(u8 bank);
@@ -539,7 +527,7 @@ void bs_start_attack(void) {
                     } else {
                         //current_move=chosen_move_by_banks[bank_attacker];
                         u16 z_move = current_move = chosen_move_by_banks[bank_attacker];
-                        z_move = get_z_moves(z_move, bank_attacker);
+                        z_move = get_z_moves(z_move, bank_attacker, get_battle_item_extra_param(bank_attacker));
                         if (z_move) {
                             current_move = z_move;
                             hitmarker |= HITMARKER_NO_PPDEDUCT;
