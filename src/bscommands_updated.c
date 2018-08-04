@@ -1607,7 +1607,7 @@ bool is_there_no_target(u16 move) {
     return 0;
 }
 
-u16 get_z_moves(u16 move, u32 bank, u32 param);
+u16 get_z_moves(u16 move, u32 bank);
 
 void atk00_move_canceller(void) {
     if (battle_outcome) {
@@ -1706,7 +1706,7 @@ void atk00_move_canceller(void) {
         }
     }
     battlescripts_curr_instruction++;
-    if (get_z_moves(current_move, bank_attacker, get_attacking_move_type())) {
+    if (get_z_moves(current_move, bank_attacker)) {
         if (bank_attacker == 0) {    /*	if(bank_attacker==0)
 				{
 					new_battlestruct->mega_related.z_happened_pbs|=0x1;

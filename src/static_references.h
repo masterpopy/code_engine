@@ -5,50 +5,50 @@
 #include "battle_structs.h"
 
 //locations in other C files
-extern const struct move_info move_table[1024];
+const struct move_info move_table[1024];
 
 //move tables
-extern const u16 sound_moves[];
-extern const u16 powder_moves[];
-extern const u16 ball_bomb_moves[];
-extern const u16 reckless_moves_table[];
-extern const u16 ironfist_moves_table[];
-extern const u16 sheerforce_moves_table[];
-extern const u16 biting_moves_table[];
-extern const u16 megalauncher_moves_table[];
-extern const u16 moveshitting_onair[];
-extern const u16 moveshitting_underground[];
-extern const u16 moveshitting_underwater[];
-extern const u16 dual_type_moves[];
-extern const u16 user_thawing_moves[];
-extern const u16 ignore_targetstats_moves[];
-extern const u16 always_crit_hits[];
-extern const u16 dancing_moves[];
-extern const u16 instruct_banlist[];
-extern const u16 moves_with_charging_turn[];
-extern const u16 moves_calling_another_move[];
+const u16 sound_moves[];
+const u16 powder_moves[];
+const u16 ball_bomb_moves[];
+const u16 reckless_moves_table[];
+const u16 ironfist_moves_table[];
+const u16 sheerforce_moves_table[];
+const u16 biting_moves_table[];
+const u16 megalauncher_moves_table[];
+const u16 moveshitting_onair[];
+const u16 moveshitting_underground[];
+const u16 moveshitting_underwater[];
+const u16 dual_type_moves[];
+const u16 user_thawing_moves[];
+const u16 ignore_targetstats_moves[];
+const u16 always_crit_hits[];
+const u16 dancing_moves[];
+const u16 instruct_banlist[];
+const u16 moves_with_charging_turn[];
+const u16 moves_calling_another_move[];
 
-extern const u8 type_effectiveness_table[TYPE_FAIRY-0x4][TYPE_FAIRY-0x4];
+const u8 type_effectiveness_table[TYPE_FAIRY - 0x4][TYPE_FAIRY - 0x4];
 
-extern void* fogcontinues_bs;
-extern void* fogends_bs;
-extern void* fog_animation;
-extern void* stickybarbswap;
-extern void* frisk_bs();
-extern void* bad_dreams_bs();
-extern void* CANCELER_FAIL();
-extern void* defogblows_bs;
+extern void *fogcontinues_bs;
+extern void *fogends_bs;
+extern void *fog_animation;
+extern void *stickybarbswap;
+extern void *frisk_bs();
+extern void *bad_dreams_bs();
+extern void *CANCELER_FAIL();
+extern void *defogblows_bs;
 
-extern void* aegislash_change_bs;
-extern void* zen_change_bs;
-extern void* combined_move_bs;
-extern void* fire_sea_bs;
-extern void* swamp_bs;
-extern void* rainbow_bs;
-extern void* end_pledge_effect_bs;
-extern void* sea_of_fire_hurt_bs;
+void *aegislash_change_bs;
+void *zen_change_bs;
+void *combined_move_bs;
+void *fire_sea_bs;
+void *swamp_bs;
+void *rainbow_bs;
+void *end_pledge_effect_bs;
+void *sea_of_fire_hurt_bs;
 
-extern void* capture_exp_bs;
+void *capture_exp_bs;
 
 //extern scripts from battlescripts.s file
 extern u8 BS_TELEKINESIS_ENDS_RET[];
@@ -253,6 +253,6 @@ extern const u8 ability_names_table[250][13];
 extern const u8 move_names_table[1025][13];
 extern const u8 z_move_names_table[47][15];
 extern const u8 type_names[TYPE_FAIRY][7];
-extern u8* battlescripts_table[183];
+extern u8 *battlescripts_table[183];
 
 #endif /* static_references */

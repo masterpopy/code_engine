@@ -406,7 +406,7 @@ bool is_z_move(u16 move) {
            (move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA);
 }
 
-u16 check_z_move(u32 move, u32 bank, u32 param) {
+u16 check_z_move(u32 move, u32 bank) {
     const struct move_info *info = &move_table[move];
     if (get_item_effect(bank, 0) != 153)
         return 0;
@@ -426,6 +426,7 @@ u16 check_z_move(u32 move, u32 bank, u32 param) {
      * 专属Z则前两位代表专属Z技能对应的普通，后两位代表专属Z技能
      * 第一次检查的时候传入道具的额外参数，第二次检查的时候传入技能的属性
      * */
+    u32 param = get_battle_item_extra_param(bank_attacker);
     if (is_z_move(move))
         z_move = move;
     else if (param > TYPE_FAIRY) {
@@ -448,7 +449,7 @@ u16 check_z_move(u32 move, u32 bank, u32 param) {
     return z_move;
 }
 
-u16 get_z_moves(u16 move, u32 bank, u32 param) {
+u16 get_z_moves(u16 move, u32 bank) {
     u8 bank_z_mode = 0;
     if (bank == 0)
         bank_z_mode = new_battlestruct->mega_related.user_trigger;
@@ -460,7 +461,7 @@ u16 get_z_moves(u16 move, u32 bank, u32 param) {
         bank_z_mode = 0;
     if (bank_z_mode != 1) //bank_z_mode == 0
         return 0;
-    return check_z_move(move, bank, param);
+    return check_z_move(move, bank);
 }
 
 u16 get_move_from_pledge(u8 bank);
@@ -527,7 +528,7 @@ void bs_start_attack(void) {
                     } else {
                         //current_move=chosen_move_by_banks[bank_attacker];
                         u16 z_move = current_move = chosen_move_by_banks[bank_attacker];
-                        z_move = get_z_moves(z_move, bank_attacker, get_battle_item_extra_param(bank_attacker));
+                        z_move = get_z_moves(z_move, bank_attacker);
                         if (z_move) {
                             current_move = z_move;
                             hitmarker |= HITMARKER_NO_PPDEDUCT;
