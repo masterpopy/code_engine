@@ -474,8 +474,8 @@ u16 check_z_move(u16 move, u8 bank)
 	u32 param = item_info->extra_param;
 	u8 type = info->type;
 	u16 z_move = 0;
-	
-	//¾ö¶¨ZÕĞÊ½ÎÄ±¾
+
+    //å†³å®šZæ‹›å¼æ–‡æœ¬
 	u8 z_type = type;
 	if (z_type == TYPE_FAIRY)
 		z_type -= 0x6;
@@ -681,27 +681,27 @@ void bs_start_attack(void)
                 *species = POKE_AEGISLASH_BLADE;
                 change = 1;
             }           
-        }//ÂêÏÄ¶à
-		else if(*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW))
-		{
-			*species = 0x422;
+        }//ç›å¤å¤š
+        else if(*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW))
+        {
+            *species = 0x422;
             change = 1;
-		}//Ë÷¶ûåÈÀ×Å·
-		else if(*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO))
-		{
-			*species = 0x42a;
+        }//ç´¢å°”è¿¦é›·æ¬§
+        else if(*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO))
+        {
+            *species = 0x42a;
             change = 1;
-		}//Â¶ÄÎÑÅÀ­
-		else if(*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA))
-		{
-			*species = 0x42b;
+        }//éœ²å¥ˆé›…æ‹‰
+        else if(*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA))
+        {
+            *species = 0x42b;
             change = 1;
-		}//ÕÜ¶ûÄáÑÇË¹
-		else if(*species == 0x301 && current_move == MOVE_GEOMANCY)
-		{
-			*species = 0x421;
+        }//å“²å°”å°¼äºšæ–¯
+        else if(*species == 0x301 && current_move == MOVE_GEOMANCY)
+        {
+            *species = 0x421;
             change = 1;
-		}
+        }
 		if (change)
         {
             battle_scripting.active_bank = active_bank = bank_attacker;
