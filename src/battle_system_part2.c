@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "static_references.h"
 
 u8 is_bank_present(u8 bank);
 struct pokemon* get_party_ptr(u8 bank);

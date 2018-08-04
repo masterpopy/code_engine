@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "static_references.h"
 
 
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
