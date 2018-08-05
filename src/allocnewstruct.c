@@ -83,10 +83,10 @@ void free_new_struct(void)
 		if(get_poke_ability(poke)== ABILITY_HONEY_GATHER && get_attributes(poke, ATTR_HELD_ITEM, 0)== 0)
 		{
 			u8 percent = get_attributes(poke, ATTR_LEVEL, 0);
-			percent = __udivsi3(percent, 4);
+			percent = percent / 4;
 			if (percent_chance(percent))
 			{
-				u16 item= __umodsi3(rng(), 4) + 617;
+				u16 item= rng() % 4 + 617;
 				set_attributes(poke, ATTR_HELD_ITEM, &item);
 			}
 		}

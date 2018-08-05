@@ -23,6 +23,7 @@ u8 get_bank_side(u8 bank);
 void bs_push(void* to_return, void* now);
 void bs_push_current(void* now);
 void call_bc_move_exec(void* bs_ptr);
+u32 random_value(u32 limit);
 
 enum COMMON_ITEM_EFFECT
 {
@@ -182,7 +183,7 @@ bool stat_raise_berry(u8 bank, bool checkHP, u8 item_effect, enum call_mode call
             }
             while (doable)
             {
-                u8 rand = __umodsi3(rng(), 5);
+                u8 rand = /*__umodsi3(rng(), 5)*/random_value(5);
                 if (doable & BIT_GET(rand))
                 {
                     battle_scripting.stat_changer = 0x21 + rand;
@@ -272,7 +273,7 @@ enum COMMON_ITEM_EFFECT berry_handle_lansat(u8 bank, bool checkHP, enum call_mod
     }
     return NO_ITEM_EFFECT;
 }
-
+u32 random_value(u32 limit);
 u8 get_random_to_switch(u8 bank)
 {
     u32 to_switch = 0;
@@ -285,7 +286,7 @@ u8 get_random_to_switch(u8 bank)
     u8 to_ret;
     do
     {
-        to_ret = __umodsi3(rng(), 6);
+        to_ret = /*__umodsi3(rng(), 6)*/random_value(6);
     } while (!(BIT_GET(to_ret) & to_switch));
     return to_ret;
 }

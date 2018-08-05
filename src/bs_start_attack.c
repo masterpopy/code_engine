@@ -178,7 +178,8 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
                 u32 sum = ((ivs->iv_hp) & 1) + (((ivs->iv_atk) & 1) << 1) + (((ivs->iv_def) & 1) << 2) +
                           (((ivs->iv_spd) & 1) << 3)
                           + (((ivs->iv_sp_atk) & 1) << 4) + (((ivs->iv_sp_def) & 1) << 5);
-                move_type = (__udivsi3(sum * 15, 63)) + 1;
+                //move_type = (__udivsi3(sum * 15, 63)) + 1;
+                move_type = sum * 15 / 63 + 1;
                 if (move_type > 8)
                     move_type = move_type + 1;
             }

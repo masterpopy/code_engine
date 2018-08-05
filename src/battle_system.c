@@ -35,7 +35,7 @@ void clear_twoturn(u8 bank);
 u8  get_trainer_opponent_A_class();
 bool not_impostered(u8 bank);
 struct pokemon* get_bank_poke_ptr(u8 bank); //JeremyZ
-
+u32 random_value(u32 limit);
 u8 get_battle_bank(u8 to_get)
 {
     switch (to_get)
@@ -170,7 +170,7 @@ void set_type(u8 bank, u8 type)
 
 bool percent_chance(u8 percent)
 {
-    if (__umodsi3(rng(), 100) + 1 <= percent) {return true;}
+    if (random_value(100) + 1 <= percent) {return true;}
     return false;
 }
 
@@ -903,7 +903,7 @@ bool battle_turn_move_effects(void)
                             {
                             case 0: //can become confused
                                 effect = 1;
-                                attacker_struct->status2.confusion = 2 + __umodsi3(rng(), 4);
+                                attacker_struct->status2.confusion = 2 + rng() % 4/*__umodsi3(rng(), 4)*/;
                                 call_bc_move_exec((void*)(0x082DB2AF));
                                 break;
                             case 4: //poke's ability doesn't allow it
@@ -1034,7 +1034,7 @@ bool battle_turn_move_effects(void)
                         {
                             reset_multiple_turn_effects(active_bank);
                             effect = 1;
-                            battle_participants[active_bank].status.flags.sleep = 2 + __umodsi3(rng(), 4); //2 + 0/1/2/3
+                            battle_participants[active_bank].status.flags.sleep = 2 + rng() % 4/*__umodsi3(rng(), 4)*/; //2 + 0/1/2/3
                             bb2_setattributes_in_battle(0, REQUEST_STATUS_BATTLE, 0, 4, &battle_participants[active_bank].status);
                             mark_buffer_bank_for_execution(active_bank);
                             bank_partner_def = active_bank;
@@ -1141,7 +1141,7 @@ bool battle_turn_move_effects(void)
                                 {
                                     effect = 1;									
                                     new_species = POKE_MINIOR_CORE;
-									u8 change = __umodsi3(rng(), 7);
+									u8 change = random_value(7)/* __umodsi3(rng(), 7)*/;
 									if (change)
 										new_species=0x3EA+change;
                                     //battle_scripting.active_bank=activeBank;

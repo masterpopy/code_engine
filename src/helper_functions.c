@@ -48,7 +48,7 @@ void bs_push_current(void* now);
 //void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
 void revert_mega_to_normalform_new(u8 opponent_side);
 bool not_impostered(u8 bank);
-
+u32 random_value(u32 limit);
 bool is_poke_valid(struct pokemon* poke)
 {
     u16 species = get_attributes(poke, ATTR_SPECIES, 0);
@@ -314,7 +314,7 @@ void damagecalc2(void)
         damage = battle_participants[bank_attacker].current_hp;
         break;
     case MOVE_PSYWAVE:
-        damage = battle_participants[bank_attacker].level * 10 * (__umodsi3(rng(),11) + 5) / 100;
+        damage = battle_participants[bank_attacker].level * 10 * (/*(__umodsi3(rng(),11)*/ random_value(11) + 5) / 100;
         break;
     case MOVE_ENDEAVOR:
         {
@@ -2303,7 +2303,7 @@ void conversion_effect(void)
                 last_type -= 5;
             while (searched_moves < 18)
             {
-                type = __umodsi3(rng(), 0x18);
+                type = /*__umodsi3(rng(), 0x18)*/ random_value(0x18);
                 if (type != TYPE_EGG && (type <= 0x11 || type == TYPE_FAIRY) && ((searched_moves_bitfield & bits_table[type]) == 0))
                 {
                     searched_moves_bitfield |= bits_table[type];
@@ -2433,7 +2433,7 @@ void accupressure_effect(void)
     u8* statvalue = &battle_participants[bank_target].atk_buff;
     while (checked_stats_int < 7)
     {
-        stat = __umodsi3(rng(), 7);
+        stat = random_value(7)/*__umodsi3(rng(), 7)*/;
         if (!(checked_stats_bitfield & bits_table[stat]))
         {
             checked_stats_bitfield |= bits_table[stat];
@@ -2989,7 +2989,7 @@ void jumpifalloppositepokemonbehindsubstitute(void)
 void triattackrand(void)
 {
     u16* effect = &new_battlestruct->move_effect.effect1;
-    switch (__umodsi3(rng(), 3))
+    switch (random_value(3)/*__umodsi3(rng(), 3)*/)
     {
     case 0:
         *effect = MOVEEFFECT_BRN;

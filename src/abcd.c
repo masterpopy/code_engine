@@ -40,7 +40,9 @@ void rain_task(u8 taskID)
 		move_anim_task_del(taskID);	
 }
 
-
+void test_u(){
+    move_anim_task_del(-3 % rng());
+}
 
 void move_anim_task_delete(u8 taskID)
 {
@@ -70,7 +72,7 @@ u16 is_using_two_frame_anim(u16 species)
     return 1;
 }
 
-struct template template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x85249cc, (struct frame **)0x82ec69c, 0,
+struct template const template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x85249cc, (struct frame **)0x82ec69c, 0,
  (struct rotscale_frame**) 0x82ec6a8, (void*)0x810851d};
 
 void* sub_0x8108ad4()//玩水

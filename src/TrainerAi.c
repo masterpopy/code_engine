@@ -187,7 +187,7 @@ u8 tai_get_move_effectiveness(void)
     else
         return 3;
 }
-
+u32 random_value(u32 limit);
 u32 ai_calculate_damage(u8 atk_bank, u8 def_bank, u16 move)
 {
     u8 saved_target_bank = bank_target;
@@ -221,7 +221,7 @@ u32 ai_calculate_damage(u8 atk_bank, u8 def_bank, u16 move)
         if (check_ability(atk_bank, ABILITY_SKILL_LINK))
             no_of_hits = 5;
         else
-            no_of_hits = 2 + __umodsi3(rng(), 3) + __umodsi3(rng(), 2); //2 + 0/1/2 + 0/1 = 2/3/4/5
+            no_of_hits = 2 + random_value(5)/*__umodsi3(rng(), 3) + __umodsi3(rng(), 2)*/; //2 + 0/1/2 + 0/1 = 2/3/4/5
     }
     u32 damage = damage_loc * no_of_hits;
     if (no_of_hits == 1 && has_ability_effect(def_bank, 1) && battle_participants[def_bank].ability_id == ABILITY_STURDY && battle_participants[def_bank].current_hp == battle_participants[def_bank].max_hp)

@@ -85,6 +85,27 @@ __aeabi_idiv:
 	ldr r3, =(__divsi3)
 	bx r3
 	.size __aeabi_idiv, . - __aeabi_idiv
+
+@取余数这个方法两个参数都是无符号
+    .syntax unified
+    .global __aeabi_uidivmod
+    .thumb_func
+    .type __aeabi_uidivmod,function
+__aeabi_uidivmod:
+	ldr r3, =(__umodsi3)
+	bx r3
+	.size __aeabi_uidivmod, . - __aeabi_uidivmod
+
+@取余数其中一个有符号就会走这个，我们不需要这个方法
+    .syntax unified
+    .global __aeabi_idivmod
+    .thumb_func
+    .type __aeabi_idivmod,function
+__aeabi_idivmod:
+	ldr r3, =(__umodsi3)
+    bx r3
+	.size __aeabi_idivmod, . - __aeabi_idivmod
+
 	
     .syntax unified
     .global memcpy

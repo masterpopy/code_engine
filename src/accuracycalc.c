@@ -16,6 +16,11 @@ u8 find_move_in_table(u16 move, const u16* table_ptr);
 u8 check_ability(u8 bank, u8 ability);
 u8 get_bank_side(u8 bank);
 
+
+u32 random_value(u32 limit){
+    return rng() % limit;
+}
+
 u8 protect_affects(u16 move, u8 set)
 {
     u8 effect = 0;
@@ -139,7 +144,8 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
         else if (buff > 0xC)
             buff = 0xC;
 
-        accuracy = __udivsi3(move_accuracy * fraction_stat_buffs2[buff].numerator, fraction_stat_buffs2[buff].denumenator);
+        //accuracy = __udivsi3(move_accuracy * fraction_stat_buffs2[buff].numerator, fraction_stat_buffs2[buff].denumenator);
+        accuracy = move_accuracy * fraction_stat_buffs2[buff].numerator / fraction_stat_buffs2[buff].denumenator;
         if (has_ability_effect(bankatk, 0))
         {
             switch (battle_participants[bankatk].ability_id)
@@ -213,7 +219,8 @@ void atk01_accuracy_calc(void)
             if (!protect_affecting_moves(checked_move) && !accuracy_helper_replacement(checked_move))
             {
                 u16 accuracy = accuracy_percent(checked_move, bank_attacker, bank_target);
-                if (__umodsi3(rng(), 100) + 1 > accuracy)
+                //if (__umodsi3(rng(), 100) + 1 > accuracy)
+                if(rng() % 100 + 1 > accuracy)
                 {
                     move_outcome.missed = 1;
                     if (battle_flags.double_battle && (move_table[checked_move].target == 0x8 || move_table[checked_move].target == 0x20))

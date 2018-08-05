@@ -2,124 +2,67 @@
 #include "static_references.h"
 
 u8 hp_condition(u8 bank, u8 percent);
-
 bool check_ability(u8 bank, u8 ability);
-
 u32 percent_lose(u32 number, u16 percent);
-
 u32 percent_boost(u32 number, u16 percent);
-
 u8 is_of_type(u8 bank, u8 type);
-
 u16 get_airborne_state(u8 bank, u8 mode, u8 check_levitate);
-
 u16 apply_type_effectiveness(u16 chained_effect, u8 move_type, u8 target_bank, u8 atk_bank, u8 airstatus);
-
 u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted);
-
 u8 get_attacking_move_type();
-
 u8 item_battle_effects(u8 switchid, u8 bank, u8 move_turn);
-
 u8 percent_chance(u8 percent);
-
 void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_effectiveness);
-
 u8 find_move_in_table(u16 move, const u16 *table_ptr);
-
 u8 protect_affects(u16 move, u8 set);
-
 u8 berry_eaten(u8 how_tocall, u8 bank);
-
 u8 set_type(u8 bank, u8 type);
-
 u8 get_target_of_move(u16 move, u8 target_given, u8 adjust);
-
 void *get_move_battlescript_ptr(u32 move);
-
 u8 affected_by_substitute(u8 bank);
-
 u16 type_effectiveness_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u8 effects_handling_and_recording);
-
 void set_attacking_move_type();
-
 //void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
 void revert_mega_to_normalform_new(u8 opponent_side);
-
 bool is_bank_present(u8 bank);
-
 u8 calculate_effect_chance(u8 bank, u16 move);
-
 struct pokemon *get_bank_poke_ptr(u8 bank);
-
 u16 get_item_extra_param(u16 item);
-
 u8 try_cherrim_change(u8 bank);
-
 u8 check_move_limitations(u8 bank, u8 not_usable_moves, u8 limitations);
-
 u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef);
-
 u8 is_poke_valid(struct pokemon *poke);
-
 struct pokemon *get_party_ptr(u8 bank);
-
 u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special_cases_argument, u16 move);
-
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
-
 u8 has_ability_effect(u8 bank, u8 mold_breaker);
-
 s8 get_move_position(u8 bank, u16 move);
-
 u8 weather_abilities_effect();
-
 u8 count_party_pokemon(u8 bank);
-
 u8 *get_slide_msg(u16 trainerID, u8 caseID);
-
 s8 get_priority(u16 move, u8 bank);
-
 u8 cant_fall_asleep(u8 bank, u8 self_inflicted);
-
 u8 cant_become_burned(u8 bank, u8 self_inflicted);
-
 u8 cant_become_freezed(u8 bank, u8 self_inflicted);
-
 u8 cant_become_paralyzed(u8 bank, u8 self_inflicted);
-
 u8 change_stats(u8 bank, u8 bits, void *bs_unable);
-
 void move_to_buff1(u16 move);
-
 bool try_stealing_bank_item(u8 thief_bank, u8 victim_bank);
-
 u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
-
 enum poke_abilities get_ally_ability(u8 bank, u8 mold);
-
 u8 findability_in_table(u8 ability, const u8 *table);
-
 u8 get_battle_bank(u8 to_get);
-
 u8 check_if_move_failed(u8 bank);
-
 void prep_string(u16 strID, u8 bank);
-
 u8 get_bank_side(u8 bank);
-
 void bs_push(void *to_return, void *now);
-
 void bs_push_current(void *now);
-
 void reset_multiple_turn_effects(u8 bank);
-
 bool not_impostered(u8 bank);
-
 bool does_move_make_contact(u16 move, u8 atk_bank); //JeremyZ
 bool photon_geyser_special(u16 move); //JeremyZ
 void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
-
+u32 random_value(u32 limit);
 void set_unburden(u8 bank) {
     if (check_ability(bank, ABILITY_UNBURDEN)) {
         status3[bank].unburden = 1;
@@ -288,7 +231,8 @@ void atkE2_switchout_abilities(void) {
                 u16 *current_hp = &battle_participants[active_bank].current_hp;
                 u16 *max_hp = &battle_participants[active_bank].max_hp;
                 if (current_hp) {
-                    u16 added_hp = __udivsi3(*max_hp, 3);
+                    //u16 added_hp = __udivsi3(*max_hp, 3);
+                    u16 added_hp = *max_hp / 3;
                     if (*current_hp + added_hp > *max_hp) {
                         added_hp = *max_hp - *current_hp;
                     }
@@ -1746,7 +1690,7 @@ void atk88_drain_damage(void) {
         u8 percent_restore = move_table[current_move].arg1;
         u8 rounding = move_table[current_move].arg2;
         damage = percent_lose(hp_dealt, 100 - percent_restore);
-        if (rounding && __umodsi3(hp_dealt, damage * ((100 * hp_dealt + 100 - percent_restore) / 100)) &&
+        if (rounding && hp_dealt % (damage * ((100 * hp_dealt + 100 - percent_restore) / 100))/*__umodsi3(hp_dealt, damage * ((100 * hp_dealt + 100 - percent_restore) / 100))*/ &&
             damage != hp_dealt)
             damage++;
         if (get_item_effect(bank_attacker, 1) == ITEM_EFFECT_BIGROOT)
@@ -2240,7 +2184,7 @@ u8 can_select_this_random_move(u16 move) {
     }
     return can;
 }
-
+u32 random_value(u32);
 void atkDE_assistmovechoose(void) {
     struct pokemon *poke = get_party_ptr(bank_attacker);
     u8 viable_pokes = 0;
@@ -2251,7 +2195,7 @@ void atkDE_assistmovechoose(void) {
     }
     while (viable_pokes) {
         u8 chosen_poke;
-        do { chosen_poke = __umodsi3(rng(), 6); } while (!(viable_pokes & bits_table[chosen_poke])); //choose poke
+        do { chosen_poke = random_value(6); } while (!(viable_pokes & bits_table[chosen_poke])); //choose poke
         u8 viable_moves = 0;
         u16 move[4];
         for (u8 i = 0; i < 4; i++) {
@@ -2263,7 +2207,7 @@ void atkDE_assistmovechoose(void) {
         {
             u8 chosen_move;
             do {
-                chosen_move = __umodsi3(rng(), 4);
+                chosen_move = rng() & 4/*__umodsi3(rng(), 4)*/;
             } while (!(viable_moves & bits_table[chosen_move])); //choose move
             randomly_chosen_move = move[chosen_move];
             hitmarker &= 0xFFFFFBFF;
@@ -2319,7 +2263,7 @@ void atk9E_metronome_chooser(void) {
             MOVE_THOUSAND_ARROWS, MOVE_THOUSAND_WAVES, MOVE_TRANSFORM,
             MOVE_TRICK, MOVE_VCREATE, MOVE_WIDE_GUARD, 0xFFFF};
     do {
-        current_move = __umodsi3(rng(), MOVE_MAX) + 1;
+        current_move = random_value(MOVE_MAX)/*__umodsi3(rng(), MOVE_MAX)*/ + 1;
     } while (find_move_in_table(current_move, metronome_forbidden_moves));
 
     hitmarker &= 0xFFFFFBFF;
@@ -2388,7 +2332,7 @@ void atkCC_nature_power(void) {
 }
 
 void atkB7_present_calc(void) {
-    u32 random_rumber = __umodsi3(rng() + 100, 101);
+    u32 random_rumber = /*__umodsi3(rng() + 100, 101)*/ (rng() + 100) % 101;
     if (random_rumber < 40)
         dynamic_base_power = 40;
     else if (random_rumber < 70)
@@ -2485,7 +2429,7 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokem
                 if (species == revert_mapping[i].current_species) {
                     species = revert_mapping[i].base_form;
                     if (species == POKE_MINIOR_CORE) {
-                        u8 change = __umodsi3(rng(), 7);
+                        u8 change = random_value(7)/*__umodsi3(rng(), 7)*/;
                         if (change)
                             species = 0x3EA + change;
                     }
@@ -2716,7 +2660,7 @@ bool move_effect_setter(bool primary, bool certain) {
             switch (cant_fall_asleep(bank, 0)) {
                 case 0:
                     effect = 1;
-                    moveeffect_set_status(bank, __umodsi3(rng(), 4) + 2, 4);
+                    moveeffect_set_status(bank, rng() % 4/*__umodsi3(rng(), 4)*/ + 2, 4);
                     break;
             }
         }
@@ -2736,7 +2680,7 @@ bool move_effect_setter(bool primary, bool certain) {
             switch (cant_become_confused(bank)) {
                 case 0: //can confuse
                     effect = 1;
-                    battle_participants[bank].status2.confusion = 2 + __umodsi3(rng(), 4);
+                    battle_participants[bank].status2.confusion = 2 + rng() % 4/*__umodsi3(rng(), 4)*/;
                     bs_push_current((void *) (0x082DB3E6)); //poke became confused
                     break;
             }
