@@ -20,7 +20,7 @@ u8 get_first_to_strike(u8 bank1, u8 bank2, u8 ignore_priority);
 u16 get_poke_weight(u8 bank);
 u8 get_attacking_move_type();
 u16 type_effectiveness_calc(u16 move, u8 type, u8 atkbank, u8 defbank, u8 effectshandling);
-void* get_move_battlescript_ptr(u16 move);
+void* get_move_battlescript_ptr(u32 move);
 u8 get_target_of_move(u16 move, u8 target_given, u8 adjust);
 void move_to_buff1(u16 move);
 u8 check_mega_evo(u8 bank);

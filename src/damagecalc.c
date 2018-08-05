@@ -629,7 +629,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
             break;
     }
     if (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_FAIRY_SPEC)
-        base_power = z_moves_power[last_used_move];
+        base_power = z_moves_power[CURRENT_Z_MOVE];
     curr_move_BP = base_power;
     return base_power;
 }

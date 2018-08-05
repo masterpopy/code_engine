@@ -267,9 +267,7 @@ inline void clear_move_outcome(void) {
     memset(&move_outcome, 0, sizeof(struct move_outcome));
 }
 
-void *get_move_battlescript_ptr(u16 move) {
-    return battlescripts_table[move_table[move].script_id];
-}
+
 
 void reset_indicators_height(void) {
     struct mega_related *mega = &new_battlestruct->mega_related;
@@ -410,8 +408,6 @@ u16 check_z_move(u32 move, u32 bank) {
     const struct move_info *info = &move_table[move];
     if (get_item_effect(bank, 0) != 153)
         return 0;
-    //const struct item_struct *item_info = &(*item_table)[battle_participants[bank].held_item];
-    //u32 param = item_info->extra_param;
     u8 type = info->type;
     u16 z_move = 0;
     //决定Z招式文本
@@ -432,7 +428,7 @@ u16 check_z_move(u32 move, u32 bank) {
                 z_move = param >> 16;
             }
         }
-    } else if (param == type ||
+    } else if (param == type||
                (param == TYPE_NORMAL && last_used_move != 0xFFFF &&
                 find_move_in_table(last_used_move, moves_calling_another_move) && last_used_move != MOVE_MIRROR_MOVE) ||
                (param == TYPE_FLYING && last_used_move == MOVE_MIRROR_MOVE)) {
@@ -444,7 +440,8 @@ u16 check_z_move(u32 move, u32 bank) {
     return z_move;
 }
 
-u16 get_z_moves(u16 move, u32 bank) {
+u16 get_z_moves(u16 move) {
+    u32 bank = bank_attacker;
     u8 bank_z_mode = 0;
     if (bank == 0)
         bank_z_mode = new_battlestruct->mega_related.user_trigger;
@@ -457,6 +454,16 @@ u16 get_z_moves(u16 move, u32 bank) {
     if (bank_z_mode != 1) //bank_z_mode == 0
         return 0;
     return check_z_move(move, bank);
+}
+
+void *get_move_battlescript_ptr(u32 move) {
+    u32 z_move = get_z_moves(move);
+    if (z_move) {
+        current_move = z_move;
+        CURRENT_Z_MOVE = move;
+        hitmarker |= HITMARKER_NO_PPDEDUCT;
+    }
+    return battlescripts_table[move_table[z_move].script_id];
 }
 
 u16 get_move_from_pledge(u8 bank);
@@ -520,14 +527,8 @@ void bs_start_attack(void) {
                     u16 pledge_move = get_move_from_pledge(bank_attacker);
                     if (pledge_move) {
                         current_move = pledge_move;
-                    } else {
-                        //current_move=chosen_move_by_banks[bank_attacker];
-                        u16 z_move = current_move = chosen_move_by_banks[bank_attacker];
-                        z_move = get_z_moves(z_move, bank_attacker);
-                        if (z_move) {
-                            current_move = z_move;
-                            hitmarker |= HITMARKER_NO_PPDEDUCT;
-                        }
+                    }else{
+                        current_move = chosen_move_by_banks[bank_attacker];
                     }
                     if (chosen_move_by_banks[bank_attacker] != attacker_struct->moves[current_move_position])
                         mode = 1;

@@ -19,6 +19,7 @@
 #define PR_crafty_shield 0x8
 #define PR_baneful_bunker 0x9
 
+#define CURRENT_Z_MOVE *((u16*)0x2037610)
 enum move_split{
     MOVE_PHYSICAL, //0
     MOVE_SPECIAL, //1
@@ -37,7 +38,7 @@ enum poke_gender{
 };
 
 enum menu_action{
-    ACTION_MOVE, //0x0
+    ACTION_MOVE=0, //0x0
     ACTION_ITEM, //0x1
     ACTION_SWITCH, //0x2
     ACTION_RUN, //0x3

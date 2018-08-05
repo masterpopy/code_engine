@@ -35,7 +35,7 @@ u8 set_type(u8 bank, u8 type);
 
 u8 get_target_of_move(u16 move, u8 target_given, u8 adjust);
 
-void *get_move_battlescript_ptr(u16 move);
+void *get_move_battlescript_ptr(u32 move);
 
 u8 affected_by_substitute(u8 bank);
 
@@ -1607,7 +1607,7 @@ bool is_there_no_target(u16 move) {
     return 0;
 }
 
-u16 get_z_moves(u16 move, u32 bank);
+u16 get_z_moves(u16 move);
 
 void atk00_move_canceller(void) {
     if (battle_outcome) {
@@ -1706,7 +1706,7 @@ void atk00_move_canceller(void) {
         }
     }
     battlescripts_curr_instruction++;
-    if (get_z_moves(current_move, bank_attacker)) {
+    if (get_z_moves(current_move)) {
         if (bank_attacker == 0) {    /*	if(bank_attacker==0)
 				{
 					new_battlestruct->mega_related.z_happened_pbs|=0x1;
