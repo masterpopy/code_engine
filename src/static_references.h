@@ -5,7 +5,7 @@
 #include "battle_structs.h"
 
 //locations in other C files
-extern const struct move_info move_table[1024];
+extern const struct move_info const move_table[1024];
 
 //move tables
 extern const u16 sound_moves[];
@@ -249,10 +249,10 @@ extern u8 BS_MIMIKYU_BUST[];
 extern u8 BS_START_Z[];
 
 //locations in asm files
-extern const u8 ability_names_table[250][13];
-extern const u8 move_names_table[1025][13];
-extern const u8 z_move_names_table[47][15];
-extern const u8 type_names[TYPE_FAIRY][7];
+extern const u8 const ability_names_table[250][13];
+extern const u8 const move_names_table[1025][13];
+extern const u8 const z_move_names_table[47][15];
+extern const u8 const type_names[TYPE_FAIRY][7];
 extern u8* battlescripts_table[183];
 
 #endif /* static_references */
