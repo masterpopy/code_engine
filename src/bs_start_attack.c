@@ -11,7 +11,7 @@ enum drive_types {
 u32 get_battle_item_extra_param(u32 bank);
 u16 get_mega_species(u8 bank, u8 chosen_method);
 u8 weather_abilities_effect();
-bool find_move_in_table(u16 move, const u16 *table_ptr);
+bool find_move_in_table(u16 move, const u16* table_ptr);
 void setup_berry_consume_buffers(u8 bank);
 u8 get_attacking_move_type();
 bool check_ability(u8 bank, u8 ability);
@@ -19,9 +19,9 @@ u16 get_speed(u8 bank);
 u8 has_ability_effect(u8 bank, u8 mold_breaker);
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 u8 get_bank_side(u8 bank);
-void bs_push_current(void *now);
-void bs_execute(void *bs);
-void call_bc_move_exec(void *bs_ptr);
+void bs_push_current(void* now);
+void bs_execute(void* bs);
+void call_bc_move_exec(void* bs_ptr);
 void reset_multiple_turn_effects(u8 bank);
 bool not_impostered(u8 bank);
 u32 get_battle_item_extra_param(u32 bank);
@@ -174,7 +174,7 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
                 }
                 break;
             case MOVE_HIDDEN_POWER: {
-                struct iv_set *ivs = &battle_participants[bank].ivs;
+                struct iv_set* ivs = &battle_participants[bank].ivs;
                 u32 sum = ((ivs->iv_hp) & 1) + (((ivs->iv_atk) & 1) << 1) + (((ivs->iv_def) & 1) << 2) +
                           (((ivs->iv_spd) & 1) << 3)
                           + (((ivs->iv_sp_atk) & 1) << 4) + (((ivs->iv_sp_def) & 1) << 5);
@@ -268,22 +268,21 @@ inline void clear_move_outcome(void) {
 }
 
 
-
 void reset_indicators_height(void) {
-    struct mega_related *mega = &new_battlestruct->mega_related;
+    struct mega_related* mega = &new_battlestruct->mega_related;
     for (u8 i = 0; i < no_of_all_banks; i++) {
         objects[mega->indicator_id_pbs[i]].pos2.y = 0;
     }
 }
 
-void set_mega_attr(struct battle_participant *bank_struct, struct pokemon *poke_address, u16 new_species);
+void set_mega_attr(struct battle_participant* bank_struct, struct pokemon* poke_address, u16 new_species);
 
-struct pokemon *get_bank_poke_ptr(u8 bank);
+struct pokemon* get_bank_poke_ptr(u8 bank);
 
 u8 check_mega_evo(u8 bank) {
     if (!not_impostered(bank))
         return 0;
-    struct battle_participant *attacker_struct = &battle_participants[bank];
+    struct battle_participant* attacker_struct = &battle_participants[bank];
     u8 ai_mega_mode = 0;
     u16 mega_species = get_mega_species(bank, 0xFB);
     if (mega_species) {
@@ -333,7 +332,7 @@ u8 check_mega_evo(u8 bank) {
     }
     if (mega_species && bank_mega_mode > 1) //JeremyZ
     {
-        struct pokemon *poke_address = get_bank_poke_ptr(bank);
+        struct pokemon* poke_address = get_bank_poke_ptr(bank);
         if (banks_side == 1) {
             if (bank_mega_mode == 3) //bank_mega_mode > 1
                 new_battlestruct->mega_related.ai_party_mega_check |= BIT_GET(battle_team_id_by_side[bank]);
@@ -356,7 +355,7 @@ u8 check_mega_evo(u8 bank) {
             bs_execute(BS_FERVENT_EVO);
         } else if (bank_mega_mode == 2) //bank_mega_mode == 1
         {
-            ((u16 *) sav1->balls_pocket)[banks_side] = attacker_struct->species;
+            ((u16*) sav1->balls_pocket)[banks_side] = attacker_struct->species;
             bs_execute(BS_LIGHT_UP);
         } else {
             //buffer for mega ring
@@ -381,31 +380,28 @@ bool check_focus(u8 bank) {
     if (status3[bank].focus_punch_charge) {
         is_bank_focusing = true;
         status3[bank].focus_punch_charge = 0;
-        bs_execute((void *) 0x82DB1FF);
+        bs_execute((void*) 0x82DB1FF);
     }
         //JeremyZ
     else if (new_battlestruct->bank_affecting[bank].beak_blast_charge == 1) {
         is_bank_focusing = true;
         new_battlestruct->bank_affecting[bank].beak_blast_charge = 2;
-        bs_execute((void *) 0x82DB1FF); //Needs Revision
+        bs_execute((void*) 0x82DB1FF); //Needs Revision
     } else if (new_battlestruct->bank_affecting[bank].shell_trap_charge == 1) {
         is_bank_focusing = true;
         new_battlestruct->bank_affecting[bank].shell_trap_charge = 2;
-        bs_execute((void *) 0x82DB1FF); //Needs Revision
+        bs_execute((void*) 0x82DB1FF); //Needs Revision
     }//
     return is_bank_focusing;
 }
 
 //Is Z Move
-bool is_z_move(u16 move) {
-    return (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA) ||
-           (move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW) ||
-           move == MOVE_Z_ASH_PIKACHU ||
-           (move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA);
+inline bool is_z_move(u16 move) {
+    return move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_ASH_GRENINJA;
 }
 
 u16 check_z_move(u32 move, u32 bank) {
-    const struct move_info *info = &move_table[move];
+    const struct move_info* info = &move_table[move];
     if (get_item_effect(bank, 0) != 153)
         return 0;
     u8 type = info->type;
@@ -421,14 +417,14 @@ u16 check_z_move(u32 move, u32 bank) {
     if (is_z_move(move))
         z_move = move;
     else if (param > TYPE_FAIRY) {
-        const struct evolution_sub *evo = GET_EVO_TABLE(battle_participants[bank].species);
+        const struct evolution_sub* evo = GET_EVO_TABLE(battle_participants[bank].species);
         for (u8 i = 0; i < NUM_OF_EVOS; i++) {
             if (!evo[i].method && evo[i].paramter == battle_participants[bank].held_item &&
                 (param << 16) >> 16 == move) {
                 z_move = param >> 16;
             }
         }
-    } else if (param == type||
+    } else if (param == type ||
                (param == TYPE_NORMAL && last_used_move != 0xFFFF &&
                 find_move_in_table(last_used_move, moves_calling_another_move) && last_used_move != MOVE_MIRROR_MOVE) ||
                (param == TYPE_FLYING && last_used_move == MOVE_MIRROR_MOVE)) {
@@ -456,7 +452,7 @@ u16 get_z_moves(u16 move) {
     return check_z_move(move, bank);
 }
 
-void *get_move_battlescript_ptr(u32 move) {
+void* get_move_battlescript_ptr(u32 move) {
     u32 z_move = get_z_moves(move);
     if (z_move) {
         current_move = z_move;
@@ -472,7 +468,6 @@ void bs_start_attack(void) {
     u8 mode = 0;  //mode 0 - get type with adjusting chosen target
     //mode 1 - get type with calculating target from scratch
     //mode 2 - don't get type and calculating target from scratch
-
     for (u8 i = 0; i < no_of_all_banks; i++) {
         bank_attacker = i;
         if (menu_choice_pbs[i] == ACTION_MOVE) {
@@ -481,12 +476,11 @@ void bs_start_attack(void) {
         }
     }
     bank_attacker = turn_order[current_move_turn];
-
     if (new_battlestruct->bank_affecting[bank_attacker].sky_drop_target && is_bank_present(bank_attacker)) {
         reset_multiple_turn_effects(bank_attacker);
         battle_state_mode = 0xB;
     } else if (!(bits_table[bank_attacker] & battle_stuff_ptr->absent_bank_flags_prev_turn)) {
-        struct battle_participant *attacker_struct = &battle_participants[bank_attacker];
+        struct battle_participant* attacker_struct = &battle_participants[bank_attacker];
         crit_loc = 1;
         battle_scripting.damage_multiplier = 0;
         battle_stuff_ptr->atk_canceller_state_tracker = 0;
@@ -505,9 +499,9 @@ void bs_start_attack(void) {
                 current_move = locked_move[bank_attacker];
                 last_used_move = locked_move[bank_attacker];
             } else {
-                u16 *enc_move = &disable_structs[bank_attacker].encored_move;
-                u8 *enc_idx = &disable_structs[bank_attacker].encored_index;
-                u16 *atk_enc_move = &(attacker_struct->moves[*enc_idx]);
+                u16* enc_move = &disable_structs[bank_attacker].encored_move;
+                u8* enc_idx = &disable_structs[bank_attacker].encored_index;
+                u16* atk_enc_move = &(attacker_struct->moves[*enc_idx]);
                 if (*enc_move) {
                     if (*atk_enc_move == *enc_move) {
                         current_move = *enc_move;
@@ -527,7 +521,7 @@ void bs_start_attack(void) {
                     u16 pledge_move = get_move_from_pledge(bank_attacker);
                     if (pledge_move) {
                         current_move = pledge_move;
-                    }else{
+                    } else {
                         current_move = chosen_move_by_banks[bank_attacker];
                     }
                     if (chosen_move_by_banks[bank_attacker] != attacker_struct->moves[current_move_position])
@@ -574,7 +568,7 @@ void bs_start_attack(void) {
             hitmarker |= HITMARKER_IGNORE_UNDERWATER;
         if (!not_impostered(bank_attacker))
             return;
-        u16 *species = &battle_participants[bank_attacker].species;
+        u16* species = &battle_participants[bank_attacker].species;
         u8 change = 0;
         if (battle_participants[bank_attacker].ability_id == ABILITY_STANCE_CHANGE &&
             !battle_participants[bank_attacker].status2.transformed) {
@@ -630,7 +624,7 @@ void set_shell_charge(void); //Shell Trap, JeremyZ
 
 void bc_preattacks(void) {
     u8 play_script = 0;
-    u8 *count = &(battle_stuff_ptr->pre_attacks_bank_counter);
+    u8* count = &(battle_stuff_ptr->pre_attacks_bank_counter);
     if (!(hitmarker & HITMARKER_FLEE)) {
         reset_indicators_height();
         while (*count < no_of_all_banks) {

@@ -346,14 +346,14 @@ u8* get_chosen_poke_nick_with_prefix(u8 bank, u8 ID, u8*dst)
 
 const u8* get_move_name(u16 move)
 {
-	if (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_CATASTROPIKA)
+	if (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_ASH_GRENINJA)
 		return z_move_names_table[move - MOVE_Z_NORMAL_PHYS];
-	else if (move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW)
+	/*else if (move >= MOVE_Z_DECIDUEYE && move <= MOVE_Z_MEW)
 		return z_move_names_table[move - MOVE_Z_DECIDUEYE + 37];
 	else if (move == MOVE_Z_ASH_PIKACHU)
 		return z_move_names_table[46];
 	else if (move >= MOVE_Z_KOMMO_O && move <= MOVE_Z_ASH_GRENINJA) //JeremyZ
-		return z_move_names_table[move - MOVE_Z_KOMMO_O + 47];
+		return z_move_names_table[move - MOVE_Z_KOMMO_O + 47];*/
 	return move_names_table[move];
 }
 
