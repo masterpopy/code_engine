@@ -536,6 +536,7 @@ void bs_start_attack(void) {
                 }
             }
         }
+        battlescripts_curr_instruction = get_move_battlescript_ptr(current_move);
         if (mode == 0) {
             set_attacking_move_type();
             bank_target = get_target_of_move(current_move, 0, 1);
@@ -550,7 +551,6 @@ void bs_start_attack(void) {
         } else {
             battle_trace.ai_team_move = current_move;
         }
-        battlescripts_curr_instruction = get_move_battlescript_ptr(current_move);
         battle_state_mode = 0xA;
         if (current_move == last_used_moves[bank_attacker]) {
             if (new_battlestruct->bank_affecting[bank_attacker].same_move_used < 5)
