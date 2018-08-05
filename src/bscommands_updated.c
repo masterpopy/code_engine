@@ -1607,7 +1607,7 @@ bool is_there_no_target(u16 move) {
     return 0;
 }
 
-u16 get_z_moves(u16 move);
+u32 get_z_moves(u32 move);
 
 void atk00_move_canceller(void) {
     if (battle_outcome) {

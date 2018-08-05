@@ -436,7 +436,7 @@ u16 check_z_move(u32 move, u32 bank) {
     return z_move;
 }
 
-u16 get_z_moves(u16 move) {
+u32 get_z_moves(u32 move) {
     u32 bank = bank_attacker;
     u8 bank_z_mode = 0;
     if (bank == 0)
@@ -458,7 +458,7 @@ void* get_move_battlescript_ptr(u32 move) {
         current_move = is_z;
         CURRENT_Z_MOVE = move;
         hitmarker |= HITMARKER_NO_PPDEDUCT;
-    }else{
+    } else {
         is_z = move;
     }
     return battlescripts_table[move_table[is_z].script_id];

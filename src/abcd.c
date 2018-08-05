@@ -155,7 +155,7 @@ void GEAR_GRIND_callback(struct object* obj)
 	obj->callback=(void*)0x815a1b1;
 }
 
-struct coords8 v_creator_pos[] = {{-65,-35},{23,-35},{-65,1}};
+const struct coords8 v_creator_pos[] = {{-65,-35},{23,-35},{-65,1}};
 void v_creator_callback(struct object *self)
 {
 	/*switch(anim_arguments[5])
