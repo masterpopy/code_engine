@@ -20,37 +20,39 @@ u8 protect_affects(u16 move, u8 set)
 {
     u8 effect = 0;
     u8 protect_flag = move_table[move].move_flags.flags.affected_by_protect;
+    if(!protect_flag)
+        return effect;
     u8 split = move_table[move].split;
     u8 contact = does_move_make_contact(move, bank_attacker);
     u8 target = move_table[move].target;
     u8 targets_side = get_bank_side(bank_target);
-    if (protect_structs[bank_target].flag0_protect && protect_flag)
+    if (protect_structs[bank_target].flag0_protect)
         effect = 1;
-    else if (new_battlestruct->bank_affecting[bank_target].kings_shield && protect_flag && split != 2)
+    else if (new_battlestruct->bank_affecting[bank_target].kings_shield && split != 2)
     {
         effect = 1;
         if (contact && set)
             new_battlestruct->bank_affecting[bank_attacker].kingsshield_damage = 1;
     }
-    else if (new_battlestruct->bank_affecting[bank_target].spiky_shield && protect_flag)
+    else if (new_battlestruct->bank_affecting[bank_target].spiky_shield)
     {
         effect = 1;
         if (contact && set)
             new_battlestruct->bank_affecting[bank_attacker].spikyshield_damage = 1;
     }
-    else if (new_battlestruct->bank_affecting[bank_target].baneful_bunker && protect_flag)
+    else if (new_battlestruct->bank_affecting[bank_target].baneful_bunker)
     {
         effect = 1;
         if (contact && set)
             new_battlestruct->bank_affecting[bank_attacker].banefulbunker_damage = 1;
     }
-    else if (new_battlestruct->side_affecting[targets_side].crafty_shield && protect_flag && split == 2)
+    else if (new_battlestruct->side_affecting[targets_side].crafty_shield && split == 2)
         effect = 1;
-    else if (new_battlestruct->side_affecting[targets_side].quick_guard && protect_flag && get_priority(current_move, bank_attacker) > 0)
+    else if (new_battlestruct->side_affecting[targets_side].quick_guard && get_priority(current_move, bank_attacker) > 0)
         effect = 1;
-    else if (new_battlestruct->side_affecting[targets_side].mat_block && protect_flag && split != 2)
+    else if (new_battlestruct->side_affecting[targets_side].mat_block && split != 2)
         effect = 1;
-    else if (new_battlestruct->side_affecting[targets_side].wide_guard && protect_flag && (target == move_target_both || target == move_target_foes_and_ally))
+    else if (new_battlestruct->side_affecting[targets_side].wide_guard && (target == move_target_both || target == move_target_foes_and_ally))
         effect = 1;
     return effect;
 }
