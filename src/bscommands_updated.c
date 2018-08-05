@@ -281,7 +281,7 @@ void atkE2_switchout_abilities(void) {
             case ABILITY_NATURAL_CURE:
                 battle_participants[active_bank].status.int_status = 0;
                 bb2_setattributes_in_battle(0, REQUEST_STATUS_BATTLE, second_arg, 4,
-                                            &battle_participants[active_bank].status);
+                        &battle_participants[active_bank].status);
                 mark_buffer_bank_for_execution(active_bank);
                 break;
             case ABILITY_REGENERATOR: {
@@ -324,7 +324,7 @@ void atk8D_multihit_move_loop_counter(void) {
 
 void atk42_jump_if_type(void) {
     if (is_of_type(get_battle_bank(read_byte(battlescripts_curr_instruction + 1)),
-                   read_byte(battlescripts_curr_instruction + 2)))
+            read_byte(battlescripts_curr_instruction + 2)))
         battlescripts_curr_instruction = (void *) read_word(battlescripts_curr_instruction + 3);
     else
         battlescripts_curr_instruction += 7;
@@ -548,7 +548,7 @@ bool move_effect2_setter(void) {
                 battle_stuff_ptr->binded_by[bank] = bank_attacker;
                 bs_push_current(BS_BINDEFFECT);
                 static const u16 trapping_moves[8] = {MOVE_BIND, MOVE_WHIRLPOOL, MOVE_WRAP, MOVE_CLAMP, MOVE_SAND_TOMB,
-                                                      MOVE_FIRE_SPIN, MOVE_MAGMA_STORM, MOVE_INFESTATION};
+                        MOVE_FIRE_SPIN, MOVE_MAGMA_STORM, MOVE_INFESTATION};
                 for (u8 i = 0; i < 8; i++) {
                     if (current_move == trapping_moves[i]) {
                         battle_communication_struct.multistring_chooser = i;
@@ -1275,8 +1275,8 @@ bool healblock_forbidden_moves(u16 move, u8 with_leechseed) {
 
 bool gravity_forbidden_move(u16 move) {
     static const u16 gravity_forbidden_moves[] = {MOVE_TELEKINESIS, MOVE_MAGNET_RISE, MOVE_SPLASH, MOVE_BOUNCE,
-                                                  MOVE_FLY, MOVE_FLYING_PRESS, MOVE_JUMP_KICK, MOVE_HIGH_JUMP_KICK,
-                                                  MOVE_SKY_DROP, 0xFFFF};
+            MOVE_FLY, MOVE_FLYING_PRESS, MOVE_JUMP_KICK, MOVE_HIGH_JUMP_KICK,
+            MOVE_SKY_DROP, 0xFFFF};
     if (find_move_in_table(move, gravity_forbidden_moves))
         return 1;
     return 0;
@@ -1808,7 +1808,7 @@ void atkA4_encore_move(void) {
     u16 move = last_used_moves[bank_target];
     s8 position = get_move_position(bank_target, move);
     static const u16 encore_forbidden_moves[] = {MOVE_STRUGGLE, MOVE_ENCORE, MOVE_MIRROR_MOVE, MOVE_MIMIC,
-                                                 MOVE_TRANSFORM, MOVE_SKETCH, 0xFFFF};
+            MOVE_TRANSFORM, MOVE_SKETCH, 0xFFFF};
     if (move && position != -1 && disable_structs[bank_target].encored_move == 0 &&
         battle_participants[bank_target].current_pp[position]
         && !find_move_in_table(move, encore_forbidden_moves)) {
@@ -2262,10 +2262,12 @@ void atkDE_assistmovechoose(void) {
         if (viable_moves) //move can be found
         {
             u8 chosen_move;
-            do { chosen_move = __umodsi3(rng(), 4); } while (!(viable_moves & bits_table[chosen_move])); //choose move
+            do {
+                chosen_move = __umodsi3(rng(), 4);
+            } while (!(viable_moves & bits_table[chosen_move])); //choose move
             randomly_chosen_move = move[chosen_move];
             hitmarker &= 0xFFFFFBFF;
-            bank_target = get_target_of_move(move[chosen_move], 0, 0);
+            bank_target = get_target_of_move(randomly_chosen_move, 0, 0);
             battlescripts_curr_instruction += 5;
             return;
         }
@@ -2302,20 +2304,20 @@ void atkA9_sleeptalkmovechoose(void) //void* success_ptr
 void atk9E_metronome_chooser(void) {
 #define MOVE_MAX 621
     static const u16 metronome_forbidden_moves[] = {MOVE_AFTER_YOU, MOVE_ASSIST, MOVE_BELCH, MOVE_BESTOW,
-                                                    MOVE_CELEBRATE, MOVE_CHATTER, MOVE_COPYCAT, MOVE_COUNTER,
-                                                    MOVE_COVET, MOVE_CRAFTY_SHIELD, MOVE_DESTINY_BOND, MOVE_DETECT,
-                                                    MOVE_DIAMOND_STORM, MOVE_ENDURE, MOVE_FEINT, MOVE_FOCUS_PUNCH,
-                                                    MOVE_FOLLOW_ME, MOVE_FREEZE_SHOCK, MOVE_HAPPY_HOUR,
-                                                    MOVE_HELPING_HAND, MOVE_HOLD_HANDS, MOVE_HYPERSPACE_HOLE,
-                                                    MOVE_ICE_BURN, MOVE_KINGS_SHIELD, MOVE_LIGHT_OF_RUIN,
-                                                    MOVE_MAT_BLOCK, MOVE_ME_FIRST, MOVE_METRONOME, MOVE_MIMIC,
-                                                    MOVE_MIRROR_COAT, MOVE_MIRROR_MOVE, MOVE_NATURE_POWER, MOVE_PROTECT,
-                                                    MOVE_QUASH, MOVE_QUICK_GUARD, MOVE_RAGE_POWDER, MOVE_RELIC_SONG,
-                                                    MOVE_SECRET_SWORD, MOVE_SKETCH, MOVE_SLEEP_TALK, MOVE_SNARL,
-                                                    MOVE_SNATCH, MOVE_SNORE, MOVE_SPIKY_SHIELD, MOVE_STEAM_ERUPTION,
-                                                    MOVE_STRUGGLE, MOVE_SWITCHEROO, MOVE_TECHNO_BLAST, MOVE_THIEF,
-                                                    MOVE_THOUSAND_ARROWS, MOVE_THOUSAND_WAVES, MOVE_TRANSFORM,
-                                                    MOVE_TRICK, MOVE_VCREATE, MOVE_WIDE_GUARD, 0xFFFF};
+            MOVE_CELEBRATE, MOVE_CHATTER, MOVE_COPYCAT, MOVE_COUNTER,
+            MOVE_COVET, MOVE_CRAFTY_SHIELD, MOVE_DESTINY_BOND, MOVE_DETECT,
+            MOVE_DIAMOND_STORM, MOVE_ENDURE, MOVE_FEINT, MOVE_FOCUS_PUNCH,
+            MOVE_FOLLOW_ME, MOVE_FREEZE_SHOCK, MOVE_HAPPY_HOUR,
+            MOVE_HELPING_HAND, MOVE_HOLD_HANDS, MOVE_HYPERSPACE_HOLE,
+            MOVE_ICE_BURN, MOVE_KINGS_SHIELD, MOVE_LIGHT_OF_RUIN,
+            MOVE_MAT_BLOCK, MOVE_ME_FIRST, MOVE_METRONOME, MOVE_MIMIC,
+            MOVE_MIRROR_COAT, MOVE_MIRROR_MOVE, MOVE_NATURE_POWER, MOVE_PROTECT,
+            MOVE_QUASH, MOVE_QUICK_GUARD, MOVE_RAGE_POWDER, MOVE_RELIC_SONG,
+            MOVE_SECRET_SWORD, MOVE_SKETCH, MOVE_SLEEP_TALK, MOVE_SNARL,
+            MOVE_SNATCH, MOVE_SNORE, MOVE_SPIKY_SHIELD, MOVE_STEAM_ERUPTION,
+            MOVE_STRUGGLE, MOVE_SWITCHEROO, MOVE_TECHNO_BLAST, MOVE_THIEF,
+            MOVE_THOUSAND_ARROWS, MOVE_THOUSAND_WAVES, MOVE_TRANSFORM,
+            MOVE_TRICK, MOVE_VCREATE, MOVE_WIDE_GUARD, 0xFFFF};
     do {
         current_move = __umodsi3(rng(), MOVE_MAX) + 1;
     } while (find_move_in_table(current_move, metronome_forbidden_moves));
@@ -2374,10 +2376,10 @@ void atkCC_nature_power(void) {
         current_move = MOVE_PSYCHIC;
     else {
         static const u16 naturepower_table[] = {MOVE_ENERGY_BALL /*GRASS*/, MOVE_ENERGY_BALL /*LONG GRASS*/,
-                                                MOVE_EARTH_POWER /*SAND*/, MOVE_HYDRO_PUMP /*UNDERWATER*/,
-                                                MOVE_HYDRO_PUMP /*WATER*/, MOVE_HYDRO_PUMP /*POND*/,
-                                                MOVE_POWER_GEM /*ROCK*/, MOVE_POWER_GEM /*CAVE*/, MOVE_TRI_ATTACK,
-                                                MOVE_TRI_ATTACK};
+                MOVE_EARTH_POWER /*SAND*/, MOVE_HYDRO_PUMP /*UNDERWATER*/,
+                MOVE_HYDRO_PUMP /*WATER*/, MOVE_HYDRO_PUMP /*POND*/,
+                MOVE_POWER_GEM /*ROCK*/, MOVE_POWER_GEM /*CAVE*/, MOVE_TRI_ATTACK,
+                MOVE_TRI_ATTACK};
         current_move = naturepower_table[battle_env_bg]; //JeremyZ
     }
     bank_target = get_target_of_move(current_move, 0, 0);
@@ -2466,19 +2468,19 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokem
             //change mmikkyu only when it faints and at the end of battle, not on switchout
             if (species != POKE_AEGISLASH_BLADE && current_hp && !battle_outcome) { return; }
             static const struct revert_form_struct revert_mapping[] =
-                    {{POKE_CHERRIM_SUNSHINE,   POKE_CHERRIM},
-                     {POKE_AEGISLASH_BLADE,    POKE_AEGISLASH_SHIELD},
-                     {POKE_ZEN_MODE,           POKE_DARMANITAN},
-                     {POKE_MELOETTA_PIROUETTE, POKE_MELOETTA_ARIA},
-                     {POKE_MINIOR_METEOR,      POKE_MINIOR_CORE},
-                     {POKE_WISHIWASHI_SCHOOL,  POKE_WISHIWASHI},
-                     {POKE_ASH_GRENJA,         POKE_GRENJA},
-                     {POKE_MIMIKKYU_BUSTED,    POKE_MIMIKKYU},
-                     {0x42b,  0x34D},
-                     {0x421,  0x301},
-                     {0x42a,  0x34c},
-                     {0x422,  0x357},
-                     {0xFFFF, 0}};
+                    {{POKE_CHERRIM_SUNSHINE, POKE_CHERRIM},
+                            {POKE_AEGISLASH_BLADE, POKE_AEGISLASH_SHIELD},
+                            {POKE_ZEN_MODE, POKE_DARMANITAN},
+                            {POKE_MELOETTA_PIROUETTE, POKE_MELOETTA_ARIA},
+                            {POKE_MINIOR_METEOR, POKE_MINIOR_CORE},
+                            {POKE_WISHIWASHI_SCHOOL, POKE_WISHIWASHI},
+                            {POKE_ASH_GRENJA, POKE_GRENJA},
+                            {POKE_MIMIKKYU_BUSTED, POKE_MIMIKKYU},
+                            {0x42b, 0x34D},
+                            {0x421, 0x301},
+                            {0x42a, 0x34c},
+                            {0x422, 0x357},
+                            {0xFFFF, 0}};
             for (u32 i = 0; revert_mapping[i].current_species != 0xFFFF; i++) {
                 if (species == revert_mapping[i].current_species) {
                     species = revert_mapping[i].base_form;
@@ -2537,7 +2539,7 @@ void atk47_set_statchange_values(void) {
         *statgfx = 7;
     else {
         static const u8 statID_to_colorID[] = {0, 1, 3, 5, 6, 2,
-                                               4}; //colors: atk = 0, def = 1, acc = 2, spd = 3 , 4 = evs, 5 = spatk, 6 = spdef
+                4}; //colors: atk = 0, def = 1, acc = 2, spd = 3 , 4 = evs, 5 = spatk, 6 = spdef
         *statgfx = statID_to_colorID[(statchanger & STAT_STATID) - 1];
     }
 
@@ -3102,11 +3104,12 @@ void atk23_exp_evs_lvlup(void) {
                 *sentin_exp = ATLEAST_ONE(exp / via_sentin);
             else
                 *sentin_exp = ATLEAST_ONE(exp);
-            if (EXP_DIVIDE == true)
-                expshare_exp = ATLEAST_ONE(exp);
-                //expshare_exp = ATLEAST_ONE(exp / via_expshare);
-            else
-                expshare_exp = ATLEAST_ONE(exp);
+#if (EXP_DIVIDE == true)
+            expshare_exp = ATLEAST_ONE(exp);
+            //expshare_exp = ATLEAST_ONE(exp / via_expshare);
+#else
+            expshare_exp = ATLEAST_ONE(exp);
+#endif
             *exp_getter_id = 0;
             battle_stuff_ptr->sentin_pokes = sent_in;
             (*tracker)++;
@@ -3334,8 +3337,8 @@ void atk09_attackanimation(void) {
             }
             active_bank = bank_attacker;
             bbF_move_animation(0, current_move, battle_scripting.field18, curr_move_BP, damage_loc,
-                               battle_participants[bank_attacker].happiness, &disable_structs[bank_attacker],
-                               multihit_counter);
+                    battle_participants[bank_attacker].happiness, &disable_structs[bank_attacker],
+                    multihit_counter);
             mark_buffer_bank_for_execution(active_bank);
         }
     }
@@ -3350,7 +3353,7 @@ void atk89_changestats(void) //BANK orred by 0x40 if self inflicted and fail add
     u8 bits = bank & 0x40;
     bank = get_battle_bank(BIC(bank, 0x40));
     if (change_stats(bank, bits | STAT_CHANGE_VALUES | STAT_PRINTABILITY,
-                     (void *) read_word(battlescripts_curr_instruction + 2)) != STAT_UNABLE)
+            (void *) read_word(battlescripts_curr_instruction + 2)) != STAT_UNABLE)
         battlescripts_curr_instruction += 6;
 }
 
@@ -3389,25 +3392,15 @@ void atk41_call(void) {
 
 //extern BS commands in other files
 void atk01_accuracy_calc(void);
-
 void atk04_critcalc(void);
-
 void atk05_dmg_calc(void);
-
 void atk07_final_dmg_calc(void);
-
 void atk83_callasm(void);
-
 void atkEF_ballthrow(void);
-
 void atkF0_copy_caught_poke(void);
-
 void atkF1_setpoke_as_caught(void);
-
 void atkF2_display_dex_info(void);
-
 void atkF3_nickname_caught_poke(void);
-
 void atkF9_pollen_puff(void); //JeremyZ
 void atkFA_blowifnotdamp(void); //JeremyZ
 
