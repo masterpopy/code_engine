@@ -453,13 +453,15 @@ u16 get_z_moves(u16 move) {
 }
 
 void* get_move_battlescript_ptr(u32 move) {
-    u32 z_move = get_z_moves(move);
-    if (z_move) {
-        current_move = z_move;
+    u32 is_z = get_z_moves(move);
+    if (is_z) {
+        current_move = is_z;
         CURRENT_Z_MOVE = move;
         hitmarker |= HITMARKER_NO_PPDEDUCT;
+    }else{
+        is_z = move;
     }
-    return battlescripts_table[move_table[z_move].script_id];
+    return battlescripts_table[move_table[is_z].script_id];
 }
 
 u16 get_move_from_pledge(u8 bank);
