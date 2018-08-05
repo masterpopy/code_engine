@@ -151,10 +151,14 @@ rng:
 	lsrs r0, r0, #0x10
 	bx lr
 
+    .global LZ77UnCompWram
+	.thumb_func
 LZ77UnCompWram:
     swi 0x11
     bx lr
 
+    .global LZ77UnCompVram
+	.thumb_func
 LZ77UnCompVram:
     swi 0x12
     bx lr

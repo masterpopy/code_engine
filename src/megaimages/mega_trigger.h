@@ -1,4 +1,6 @@
-#include "types.h"
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned long u32;
 
 #ifndef GRIT_MEGA_TRIGGER_H
 #define GRIT_MEGA_TRIGGER_H

@@ -396,8 +396,8 @@ text_trainerB_sent_out = 0x085CCE04;
 text_trainerA_sent_out = 0x085CBC14;
 
 poke_get_pal = 0x0806E740 | 1;
-LZ77UnCompWram = 0x082E7090|1;
-LZ77UnCompVram = 0x082E708C|1;
+/*LZ77UnCompWram = 0x082E7090|1;
+LZ77UnCompVram = 0x082E708C|1;*/
 bbp05_send_out_poke = 0x0805B1CC|1;
 bbp06_return_poke_to_pokeball = 0x0805B3D4|1;
 bbo_06_return_poke_to_ball = 0x0806156C|1;

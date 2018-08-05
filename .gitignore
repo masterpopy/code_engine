@@ -4,4 +4,4 @@
 *.sav
 *.sgm
 *.py
-build
+build/

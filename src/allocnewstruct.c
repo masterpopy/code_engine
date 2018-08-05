@@ -93,16 +93,6 @@ void free_new_struct(void)
     }
     free(battle_stuff_ptr);
     free(new_battlestruct);
-	//u16 flag = 0x272;
-	//clearflag(flag);
-	if(battle_flags.roaming /*&& getflag(flag+6) && battle_outcome == 1*/)
-	{
-	//	u16* vars = sav1->vars;
-	//	*(vars + 0xF24) = 0;//0x31e4
-		//void (*set_roaming) (struct pokemon* poke);
-		//set_roaming = (void*)(0x8161f18|1);
-		//set_roaming(party_opponent);
-	}
 	memset(&battle_flags, 0, sizeof(struct battle_flags));//0x8161f18;
     battle_chosen_bg = 0;
 }
