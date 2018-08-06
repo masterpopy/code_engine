@@ -186,6 +186,30 @@ void v_creator_callback(struct object *self)
 	self->callback=(void*)0x8109365;
 }
 
+u8 stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats)
+{
+	u8 bits = 0;
+	if (self_inflicted)
+		bits |= STAT_SELFINFLICTED;
+	if (print_ability)
+		bits |= STAT_PRINTABILITY;
+	if (change_stats)
+		bits |= STAT_CHANGE_VALUES;
+	return bits;
+}
+
+bool can_change_stat(u8 bank, bool self_inflicted, u8 statchanger)
+{
+	battle_scripting.stat_changer = statchanger;
+	if (change_stats(bank, stat_get_bits_arg(self_inflicted, 0, 0), 0) == STAT_CHANGED)
+		return 1;
+	return 0;
+}
+
+const struct evolution_sub* GET_EVO_TABLE(u16 species){
+	return (*evo_table)[species];
+}
+
 /*
 void sub_8100128(u8 taskID)
 {

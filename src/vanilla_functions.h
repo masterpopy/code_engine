@@ -41,8 +41,7 @@ void __attribute__((long_call)) attack_iteration_cleanup();
 void __attribute__((long_call)) prepare_pokemon_battle_sprite_manipulation_buffer(u8 unknown, u8 unknown2);
 u8 __attribute__((long_call)) check_failure_due_to_status(u8 bank);
 void __attribute__((long_call)) sub_803CEDC(u8 bank1, u8 bank2);
-u32 __attribute__((long_call)) get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
-void __attribute__((long_call)) set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
+
 u8 __attribute__((long_call)) item_is_mail(u8 itemID);
 u8 __attribute__((long_call)) get_lvl_from_exp(const struct pokemon*);
 u16 __attribute__((long_call)) teach_move_in_available_slot(const struct pokemon* , u16 move);
@@ -259,4 +258,8 @@ u32 read_word(const void*);
 u16 rng(void);
 void LZ77UnCompWram(const void* src, void* dst);
 void LZ77UnCompVram(const void* src, void* dst);
+u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
+void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
+
+
 #endif /* VANILLA_FUNCTIONS */

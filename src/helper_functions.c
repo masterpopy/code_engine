@@ -2946,7 +2946,6 @@ void set_effect1_formove(void)
 void shiftgear_checkifworks(void)
 {
     u8 statsNO = 0;
-
     set_statchanger_to_arg1();
     if (change_stats(bank_attacker, stat_get_bits_arg(1, 0, 0), battlescripts_curr_instruction) == STAT_CHANGED)
         statsNO++;

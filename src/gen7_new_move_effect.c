@@ -14,26 +14,27 @@ void prep_string(u16 strID, u8 bank);
 
 bool time_check(u8 from, u8 to)
 {
-    update_rtc();
-    u8 hour = rtc_hex.hour;
-    if (to >= from)
-    {
-        if (hour >= from && hour <= to)
-            return 1;
-        return 0;
-    }
-    else
-    {
-        if (hour >= from || hour <= to)
-            return 1;
+	update_rtc();
+	u8 hour = rtc_hex.hour;
+	if (to >= from)
+	{
+		if (hour >= from && hour <= to)
+			return 1;
 		return 0;
-    }
+	}
+	else
+	{
+		if (hour >= from || hour <= to)
+			return 1;
+		return 0;
+	}
 }
 
 //Rage Powder
 bool is_immune_to_powder(u8 bank)
 {
-	if (is_of_type(bank, TYPE_GRASS) || check_ability(bank, ABILITY_OVERCOAT) || get_item_effect(bank_attacker, 1) == ITEM_EFFECT_SAFETYGOOGLES)
+	if (is_of_type(bank, TYPE_GRASS) || check_ability(bank, ABILITY_OVERCOAT) ||
+		get_item_effect(bank_attacker, 1) == ITEM_EFFECT_SAFETYGOOGLES)
 		return 1;
 	return 0;
 }
@@ -41,9 +42,12 @@ bool is_immune_to_powder(u8 bank)
 //Photon Geyser & Z_Necrozma
 bool photon_geyser_special(u16 move)
 {
-	if (move == MOVE_PHOTON_GEYSER || move == MOVE_Z_NECROZMA){
-		u16 attack_stat = apply_statboost(battle_participants[bank_attacker].atk, battle_participants[bank_attacker].atk_buff);
-		u16 spatk_stat = apply_statboost(battle_participants[bank_attacker].sp_atk, battle_participants[bank_attacker].sp_atk_buff);
+	if (move == MOVE_PHOTON_GEYSER || move == MOVE_Z_NECROZMA)
+	{
+		u16 attack_stat = apply_statboost(battle_participants[bank_attacker].atk,
+				battle_participants[bank_attacker].atk_buff);
+		u16 spatk_stat = apply_statboost(battle_participants[bank_attacker].sp_atk,
+				battle_participants[bank_attacker].sp_atk_buff);
 		if (attack_stat > spatk_stat)
 			return 0; //switch to a physical move
 	}
@@ -53,31 +57,32 @@ bool photon_geyser_special(u16 move)
 //Pollen Puff, JeremyZ
 void atkF9_pollen_puff(void)
 {
-	if ((bank_target ^ bank_attacker) == 2){ //Targeting Friend
+	if ((bank_target ^ bank_attacker) == 2)
+	{ //Targeting Friend
 		dynamic_base_power = 0;
 		if (battle_participants[bank_target].current_hp >= battle_participants[bank_target].max_hp)
-			battlescripts_curr_instruction = (void*)0x082D9EFB;
+			battlescripts_curr_instruction = (void*) 0x082D9EFB;
 		else if (new_battlestruct->bank_affecting[bank_target].heal_block)
 			battlescripts_curr_instruction = BS_HEALBLOCK_PREVENTS;
 		else
 		{
 			damage_loc = (battle_participants[bank_target].max_hp / 2) * (-1);
-			battlescripts_curr_instruction = (void*)0x082D9EE1;
+			battlescripts_curr_instruction = (void*) 0x082D9EE1;
 		}
 	}
 	else
 		dynamic_base_power = move_table[current_move].base_power;
 	if (dynamic_base_power)
-		battlescripts_curr_instruction = (void*)0x082D8A30;
+		battlescripts_curr_instruction = (void*) 0x082D8A30;
 }
 
 //Mind Blown
 void jumpifuserheadblown(void)
 {
-    if (!new_battlestruct->bank_affecting[bank_attacker].head_blown) //Not Jump
-        battlescripts_curr_instruction += 4;
-    else //Jump
-        battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
+	if (!new_battlestruct->bank_affecting[bank_attacker].head_blown) //Not Jump
+		battlescripts_curr_instruction += 4;
+	else //Jump
+		battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
 }
 
 void atkFA_blowifnotdamp(void)
@@ -91,7 +96,7 @@ void atkFA_blowifnotdamp(void)
 			record_usage_of_ability(i, ABILITY_DAMP);
 			move_outcome.failed = 1;
 			move_outcome.explosion_stop = 1;
-			battlescripts_curr_instruction = (void*)(0x082DB560);
+			battlescripts_curr_instruction = (void*) (0x082DB560);
 			return;
 		}
 	}
@@ -114,7 +119,7 @@ void set_spotlight(void)
 //Throat Chop
 void set_throatchop(void)
 {
-	void* failjump = (void*)read_word(battlescripts_curr_instruction /*+ 1*/);
+	void* failjump = (void*) read_word(battlescripts_curr_instruction /*+ 1*/);
 	if (new_battlestruct->bank_affecting[bank_target].throatchop_timer)
 		battlescripts_curr_instruction = failjump;
 	else
@@ -135,41 +140,42 @@ void speed_swap(void)
 //Beak Blast
 void set_beak_charge(void)
 {
-    for(u8 i=0; i<4; i++)
-    {
-        if(menu_choice_pbs[i]==0 && chosen_move_by_banks[i]==MOVE_BEAK_BLAST 
-            && !(disable_structs[i].truant_counter & 1) && !(protect_structs[i].flag0_onlystruggle))
-        {
-            new_battlestruct->bank_affecting[i].beak_blast_charge = 1;
-        }
+	for (u8 i = 0; i < 4; i++)
+	{
+		if (menu_choice_pbs[i] == 0 && chosen_move_by_banks[i] == MOVE_BEAK_BLAST
+			&& !(disable_structs[i].truant_counter & 1) && !(protect_structs[i].flag0_onlystruggle))
+		{
+			new_battlestruct->bank_affecting[i].beak_blast_charge = 1;
+		}
 		else
 			new_battlestruct->bank_affecting[i].beak_blast_charge = 0;
-    }
+	}
 }
 
 //Shell Trap
 void set_shell_charge(void)
 {
-    for(u8 i=0; i<4; i++)
-    {
-        if(menu_choice_pbs[i]==0 && chosen_move_by_banks[i]==MOVE_SHELL_TRAP && !battle_participants[i].status.flags.sleep
-            && !(disable_structs[i].truant_counter & 1) && !(protect_structs[i].flag0_onlystruggle))
-        {
-            new_battlestruct->bank_affecting[i].shell_trap_charge = 1;
-        }
+	for (u8 i = 0; i < 4; i++)
+	{
+		if (menu_choice_pbs[i] == 0 && chosen_move_by_banks[i] == MOVE_SHELL_TRAP &&
+			!battle_participants[i].status.flags.sleep
+			&& !(disable_structs[i].truant_counter & 1) && !(protect_structs[i].flag0_onlystruggle))
+		{
+			new_battlestruct->bank_affecting[i].shell_trap_charge = 1;
+		}
 		else
 			new_battlestruct->bank_affecting[i].shell_trap_charge = 0;
-    }
+	}
 }
 
 //Mega Related
 void revert_mega_to_normalform_new(u8 opponent_side)
 {
-    struct pokemon* poke_address;
-    if (opponent_side)
-        poke_address = &party_opponent[0];
-    else
-        poke_address = &party_player[0];
+	struct pokemon* poke_address;
+	if (opponent_side)
+		poke_address = &party_opponent[0];
+	else
+		poke_address = &party_player[0];
 	for (u8 i = 0; i < 6; i++)
 	{
 		u16 mega_current_species = get_attributes(poke_address + i, ATTR_SPECIES, 0);
@@ -178,8 +184,8 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 			continue;
 		u16 species_to_revert = 0;
 		const struct evolution_sub* evos = GET_EVO_TABLE(mega_current_species);
-		if(mega_current_species==0x42E)
-			species_to_revert=((u16*)sav1->balls_pocket)[i];
+		if (mega_current_species == 0x42E)
+			species_to_revert = ((u16*) sav1->balls_pocket)[i];
 		for (u8 j = 0; j < NUM_OF_EVOS; j++)
 		{
 			if (evos[j].method == 0xFF)
@@ -194,13 +200,13 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 			calculate_stats_pokekmon(poke_address + i);
 		}
 	}
-    return;
+	return;
 }
 
 //Start Z
 void print_start_z(void)
 {
-    prep_string(new_battlestruct->various.var2, bank_attacker);
-    battle_communication_struct.is_message_displayed=1;
+	prep_string(new_battlestruct->various.var2, bank_attacker);
+	battle_communication_struct.is_message_displayed = 1;
 }
 

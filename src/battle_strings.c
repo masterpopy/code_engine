@@ -743,7 +743,7 @@ const u8* get_trainer_opponent_A_name(u8* text) {
     return string;
 }
 
-u16 b_strcpy_decode(const u8* const src, u8* const dst) {
+u32 b_strcpy_decode(const u8* const src, u8* const dst) {
     u8 link_id = get_link_id();
     u32 dst_id = 0;
     u32 src_id = 0;

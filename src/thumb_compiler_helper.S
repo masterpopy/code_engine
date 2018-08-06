@@ -76,7 +76,7 @@ __aeabi_uidiv:
 	ldr r3, =(__udivsi3)
 	bx r3
 	.size __aeabi_uidiv, . - __aeabi_uidiv
-	
+
     .syntax unified
     .global __aeabi_idiv
     .thumb_func
@@ -183,4 +183,16 @@ LZ77UnCompWram:
 LZ77UnCompVram:
     swi 0x12
     bx lr
+
+    .global get_attributes
+    .thumb_func
+get_attributes:
+    ldr r3, =(__get_attributes)
+    bx r3
+
+    .global set_attributes
+	.thumb_func
+set_attributes:
+    ldr r3, =(__set_attributes)
+    bx r3
 	

@@ -136,27 +136,6 @@ enum map_type{
 #define STAT_CANT_GO_UP     0x2
 #define STAT_CANT_GO_DOWN   0x3
 
-inline u8 stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats)
-{
-    u8 bits = 0;
-    if (self_inflicted)
-        bits |= STAT_SELFINFLICTED;
-    if (print_ability)
-        bits |= STAT_PRINTABILITY;
-    if (change_stats)
-        bits |= STAT_CHANGE_VALUES;
-    return bits;
-}
-
-u8 change_stats(u8 bank, u8 bits, void* bs_unable);
-
-inline bool can_change_stat(u8 bank, bool self_inflicted, u8 statchanger)
-{
-    battle_scripting.stat_changer = statchanger;
-    if (change_stats(bank, stat_get_bits_arg(self_inflicted, 0, 0), 0) == STAT_CHANGED)
-        return 1;
-    return 0;
-}
 
 #define EFFECT2_AFFECTSUSER 0x40
 
@@ -263,15 +242,12 @@ enum trainer_class{
 #define ATLEAST_ONE(value)(value != 0 ? value : 1)
 #define PERCENT_100(value, percent)((value * percent) / 100)
 #define GETS_VIA_EXPSHARE(held_item)((GENVI_EXPSHARE == false && held_item == ITEM_EFFECT_EXPSHARE) || (GENVI_EXPSHARE == true && checkitem(ITEM_EXPSHARE, 1) && getflag(EXPSHARE_FLAG)))
-#define SET_u32(ptr, val)((*(u32*)(ptr) = 0))
-#define GET_EVO_TABLE(species)((*evo_table)[species])
 #define COIN_FLIP(option1, option2)((rng() & 1) ? option1 : option2)
 #define GET_CUSTOMFLAG(flagID)((flagID == 0 ? 0 : (getflag(flagID))))
 #define get_1_16_of_max_hp(bank)(ATLEAST_ONE(battle_participants[bank].max_hp >> 4))
 #define get_1_8_of_max_hp(bank)(ATLEAST_ONE(battle_participants[bank].max_hp >> 3))
 #define get_1_4_of_max_hp(bank)(ATLEAST_ONE(battle_participants[bank].max_hp >> 2))
 #define BIC(value, bit)(value & (~(bit)))
-#define NEG_AND(value, to_neg)(value & (to_neg * (-1)))
 #define BANK_PSN(bank)((battle_participants[bank].status.flags.poison || battle_participants[bank].status.flags.toxic_poison))
 #define FULL_HP(bank)((battle_participants[bank].current_hp) && (battle_participants[bank].current_hp == battle_participants[bank].max_hp))
 #define RAIN_WEATHER ((battle_weather.flags.rain || battle_weather.flags.downpour || battle_weather.flags.permament_rain || battle_weather.flags.heavy_rain))
@@ -407,5 +383,10 @@ enum call_mode
     BATTLE_TURN,
     MOVE_TURN
 };
+
+bool can_change_stat(u8 bank, bool self_inflicted, u8 statchanger);
+const struct evolution_sub* GET_EVO_TABLE(u16 species);
+u8 stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats);
+u8 change_stats(u8 bank, u8 bits, void* bs_unable);
 
 #endif /* DEFINES_H */
