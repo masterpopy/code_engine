@@ -1084,13 +1084,13 @@ bool battle_turn_move_effects(void)
                                 if(battle_participants[activeBank].current_hp && (battle_participants[activeBank].current_hp < (battle_participants[activeBank].max_hp / 2)) && check_ability(activeBank,ABILITY_ZEN_MODE))
                                 {
                                     effect = 1;
-                                    new_species = POKE_ZEN_MODE;
+                                    new_species = POKE_DARMANITAN_ZEN;
                                     string_chooser = 0x21C;
                                     //battle_scripting.active_bank = activeBank;
                                     script = (BS_FORMCHANGE_WITH_TYPE_CHANGE);
                                 }
                                 break;
-                            case POKE_ZEN_MODE:
+                            case POKE_DARMANITAN_ZEN:
                                 if((battle_participants[activeBank].current_hp >= (battle_participants[activeBank].max_hp / 2)) || !check_ability(activeBank,ABILITY_ZEN_MODE))
                                 {
                                     effect = 1;

@@ -37,7 +37,7 @@ void atk04_critcalc(void)
                 crit_chance++;
                 break;
             case ITEM_EFFECT_STICK:
-                if (battle_participants[bank_attacker].species == POKE_FARFETCHED)
+                if (battle_participants[bank_attacker].species == POKE_FARFETCHD)
                     crit_chance += 2;
                 break;
             case ITEM_EFFECT_LUCKYPUNCH:

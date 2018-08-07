@@ -1986,7 +1986,7 @@ void atk0C_datahpupdate(void) {
             if (not_impostered(bank)) {
                 battle_scripting.active_bank = bank;
                 bs_push_current(BS_MIMIKYU_BUST);
-                new_battlestruct->various.var1 = POKE_MIMIKKYU_BUSTED;
+                new_battlestruct->various.var1 = POKE_MIMIKYU_BUSTED;
                 new_battlestruct->various.var2 = 0x24B;
             }
         } else {
@@ -2414,12 +2414,12 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokem
             static const struct revert_form_struct revert_mapping[] =
                     {{POKE_CHERRIM_SUNSHINE, POKE_CHERRIM},
                             {POKE_AEGISLASH_BLADE, POKE_AEGISLASH_SHIELD},
-                            {POKE_ZEN_MODE, POKE_DARMANITAN},
+                            {POKE_DARMANITAN_ZEN, POKE_DARMANITAN},
                             {POKE_MELOETTA_PIROUETTE, POKE_MELOETTA_ARIA},
                             {POKE_MINIOR_METEOR, POKE_MINIOR_CORE},
                             {POKE_WISHIWASHI_SCHOOL, POKE_WISHIWASHI},
-                            {POKE_ASH_GRENJA, POKE_GRENJA},
-                            {POKE_MIMIKKYU_BUSTED, POKE_MIMIKKYU},
+                            {POKE_ASH_GRENJA, POKE_GRENINJA},
+                            {POKE_MIMIKYU_BUSTED, POKE_MIMIKYU},
                             {0x42b, 0x34D},
                             {0x421, 0x301},
                             {0x42a, 0x34c},

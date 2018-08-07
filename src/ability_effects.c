@@ -638,7 +638,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                                 case ABILITY_RKS_SYSTEM:
                                     break;
                                 case ABILITY_DISGUISE:
-                                    if (battle_participants[bank_attacker].species == POKE_MIMIKKYU)
+                                    if (battle_participants[bank_attacker].species == POKE_MIMIKYU)
                                         break;
                                 default:
                                     effect = true;

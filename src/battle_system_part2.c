@@ -146,7 +146,7 @@ void update_pokenick_in_healthbox(u8 objectID, struct pokemon* poke)
         gender = poke_get_gender(poke);
     }
     //append gender sign unless it's already there
-    if ((species == POKE_NIDORANM || species == POKE_NIDORANF) && compare_two_strings(string_loc, (*poke_name_table)[species]) == 0)
+    if ((species == POKE_NIDORANMALE || species == POKE_NIDORANFEMALE) && compare_two_strings(string_loc, (*poke_name_table)[species]) == 0)
     {
         gender = POKE_GENDERLESS;
     }
