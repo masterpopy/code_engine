@@ -18,4 +18,9 @@ os.system("python scripts/make.py")
 	#rom.seek(evo+40*0x42C)
 	#rom.write(b'\xFA\x00\x00\x00\x2E\x04')
 
+def clear(_from ,to):
+    rom.seek(_from)
+    rom.write(b'\xFF'*(to-_from+1))
 
+with open('test.gba', 'rb+') as rom:
+    clear(0x1516000, 0x1517e80)

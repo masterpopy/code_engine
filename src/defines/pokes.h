@@ -1,422 +1,1074 @@
 #ifndef POKE_INDICES_H
 #define POKE_INDICES_H
 
-#define POKE_BULBASAUR 0x1
-#define POKE_IVYSAUR 0x2
-#define POKE_VENUSAUR 0x3
-#define POKE_CHARMANDER 0x4
-#define POKE_CHARMELEON 0x5
-#define POKE_CHARIZARD 0x6
-#define POKE_SQUIRTLE 0x7
-#define POKE_WARTORTLE 0x8
-#define POKE_BLASTOISE 0x9
-#define POKE_CATERPIE 0xA
-#define POKE_METAPOD 0xB
-#define POKE_BUTTERFREE 0xC
-#define POKE_WEEDLE 0xD
-#define POKE_KAKUNA 0xE
-#define POKE_BEEDRILL 0xF
-#define POKE_PIDGEY 0x10
-#define POKE_PIDGEOTTO 0x11
-#define POKE_PIDGEOT 0x12
-#define POKE_RATTATA 0x13
-#define POKE_RATICATE 0x14
-#define POKE_SPEAROW 0x15
-#define POKE_FEAROW 0x16
-#define POKE_EKANS 0x17
-#define POKE_ARBOK 0x18
-#define POKE_PIKACHU 0x19
-#define POKE_RAICHU 0x1A
-#define POKE_SANDSHREW 0x1B
-#define POKE_SANDSLASH 0x1C
-#define POKE_NIDORANF 0x1D
-#define POKE_NIDORINA 0x1E
-#define POKE_NIDOQUEEN 0x1F
-#define POKE_NIDORANM 0x20
-#define POKE_NIDORINO 0x21
-#define POKE_NIDOKING 0x22
-#define POKE_CLEFAIRY 0x23
-#define POKE_CLEFABLE 0x24
-#define POKE_VULPIX 0x25
-#define POKE_NINETALES 0x26
-#define POKE_JIGGLYPUFF 0x27
-#define POKE_WIGGLYTUFF 0x28
-#define POKE_ZUBAT 0x29
-#define POKE_GOLBAT 0x2A
-#define POKE_ODDISH 0x2B
-#define POKE_GLOOM 0x2C
-#define POKE_VILEPLUME 0x2D
-#define POKE_PARAS 0x2E
-#define POKE_PARASECT 0x2F
-#define POKE_VENONAT 0x30
-#define POKE_VENOMOTH 0x31
-#define POKE_DIGLETT 0x32
-#define POKE_DUGTRIO 0x33
-#define POKE_MEOWTH 0x34
-#define POKE_PERSIAN 0x35
-#define POKE_PSYDUCK 0x36
-#define POKE_GOLDUCK 0x37
-#define POKE_MANKEY 0x38
-#define POKE_PRIMEAPE 0x39
-#define POKE_GROWLITHE 0x3A
-#define POKE_ARCANINE 0x3B
-#define POKE_POLIWAG 0x3C
-#define POKE_POLIWHIRL 0x3D
-#define POKE_POLIWRATH 0x3E
-#define POKE_ABRA 0x3F
-#define POKE_KADABRA 0x40
-#define POKE_ALAKAZAM 0x41
-#define POKE_MACHOP 0x42
-#define POKE_MACHOKE 0x43
-#define POKE_MACHAMP 0x44
-#define POKE_BELLSPROUT 0x45
-#define POKE_WEEPINBELL 0x46
-#define POKE_VICTREEBEL 0x47
-#define POKE_TENTACOOL 0x48
-#define POKE_TENTACRUEL 0x49
-#define POKE_GEODUDE 0x4A
-#define POKE_GRAVELER 0x4B
-#define POKE_GOLEM 0x4C
-#define POKE_PONYTA 0x4D
-#define POKE_RAPIDASH 0x4E
-#define POKE_SLOWPOKE 0x4F
-#define POKE_SLOWBRO 0x50
-#define POKE_MAGNEMITE 0x51
-#define POKE_MAGNETON 0x52
-#define POKE_FARFETCHED 0x53
-#define POKE_DODUO 0x54
-#define POKE_DODRIO 0x55
-#define POKE_SEEL 0x56
-#define POKE_DEWGONG 0x57
-#define POKE_GRIMER 0x58
-#define POKE_MUK 0x59
-#define POKE_SHELLDER 0x5A
-#define POKE_CLOYSTER 0x5B
-#define POKE_GASTLY 0x5C
-#define POKE_HAUNTER 0x5D
-#define POKE_GENGAR 0x5E
-#define POKE_ONIX 0x5F
-#define POKE_DROWZEE 0x60
-#define POKE_HYPNO 0x61
-#define POKE_KRABBY 0x62
-#define POKE_KINGLER 0x63
-#define POKE_VOLTORB 0x64
-#define POKE_ELECTRODE 0x65
-#define POKE_EXEGGCUTE 0x66
-#define POKE_EXEGGUTOR 0x67
-#define POKE_CUBONE 0x68
-#define POKE_MAROWAK 0x69
-#define POKE_HITMONLEE 0x6A
-#define POKE_HITMONCHAN 0x6B
-#define POKE_LICKITUNG 0x6C
-#define POKE_KOFFING 0x6D
-#define POKE_WEEZING 0x6E
-#define POKE_RHYHORN 0x6F
-#define POKE_RHYDON 0x70
-#define POKE_CHANSEY 0x71
-#define POKE_TANGELA 0x72
-#define POKE_KANGASKHAN 0x73
-#define POKE_HORSEA 0x74
-#define POKE_SEADRA 0x75
-#define POKE_GOLDEEN 0x76
-#define POKE_SEAKING 0x77
-#define POKE_STARYU 0x78
-#define POKE_STARMIE 0x79
-#define POKE_MRMIME 0x7A
-#define POKE_SCYTHER 0x7B
-#define POKE_JYNX 0x7C
-#define POKE_ELECTABUZZ 0x7D
-#define POKE_MAGMAR 0x7E
-#define POKE_PINSIR 0x7F
-#define POKE_TAUROS 0x80
-#define POKE_MAGIKARP 0x81
-#define POKE_GYARADOS 0x82
-#define POKE_LAPRAS 0x83
-#define POKE_DITTO 0x84
-#define POKE_EEVEE 0x85
-#define POKE_VAPOREON 0x86
-#define POKE_JOLTEON 0x87
-#define POKE_FLAREON 0x88
-#define POKE_PORYGON 0x89
-#define POKE_OMANYTE 0x8A
-#define POKE_OMASTAR 0x8B
-#define POKE_KABUTO 0x8C
-#define POKE_KABUTOPS 0x8D
-#define POKE_AERODACTYL 0x8E
-#define POKE_SNORLAX 0x8F
-#define POKE_ARTICUNO 0x90
-#define POKE_ZAPDOS 0x91
-#define POKE_MOLTRES 0x92
-#define POKE_DRATINI 0x93
-#define POKE_DRAGONAIR 0x94
-#define POKE_DRAGONITE 0x95
-#define POKE_MEWTWO 0x96
-#define POKE_MEW 0x97
-#define POKE_CHIKORITA 0x98
-#define POKE_BAYLEEF 0x99
-#define POKE_MEGANIUM 0x9A
-#define POKE_CYNDAQUIL 0x9B
-#define POKE_QUILAVA 0x9C
-#define POKE_TYPHLOSION 0x9D
-#define POKE_TOTODILE 0x9E
-#define POKE_CROCONAW 0x9F
-#define POKE_FERALIGATR 0xA0
-#define POKE_SENTRET 0xA1
-#define POKE_FURRET 0xA2
-#define POKE_HOOTHOOT 0xA3
-#define POKE_NOCTOWL 0xA4
-#define POKE_LEDYBA 0xA5
-#define POKE_LEDIAN 0xA6
-#define POKE_SPINARAK 0xA7
-#define POKE_ARIADOS 0xA8
-#define POKE_CROBAT 0xA9
-#define POKE_CHINCHOU 0xAA
-#define POKE_LANTURN 0xAB
-#define POKE_PICHU 0xAC
-#define POKE_CLEFFA 0xAD
-#define POKE_IGGLYBUFF 0xAE
-#define POKE_TOGEPI 0xAF
-#define POKE_TOGETIC 0xB0
-#define POKE_NATU 0xB1
-#define POKE_XATU 0xB2
-#define POKE_MAREEP 0xB3
-#define POKE_FLAAFFY 0xB4
-#define POKE_AMPHAROS 0xB5
-#define POKE_BELLOSSOM 0xB6
-#define POKE_MARILL 0xB7
-#define POKE_AZUMARILL 0xB8
-#define POKE_SUDOWOODO 0xB9
-#define POKE_POLITOED 0xBA
-#define POKE_HOPPIP 0xBB
-#define POKE_SKIPLOOM 0xBC
-#define POKE_JUMPLUFF 0xBD
-#define POKE_AIPOM 0xBE
-#define POKE_SUNKERN 0xBF
-#define POKE_SUNFLORA 0xC0
-#define POKE_YANMA 0xC1
-#define POKE_WOOPER 0xC2
-#define POKE_QUAGSIRE 0xC3
-#define POKE_ESPEON 0xC4
-#define POKE_UMBREON 0xC5
-#define POKE_MURKROW 0xC6
-#define POKE_SLOWKING 0xC7
-#define POKE_MISDREAVUS 0xC8
-#define POKE_UNOWN 0xC9
-#define POKE_WOBBUFFET 0xCA
-#define POKE_GIRAFARIG 0xCB
-#define POKE_PINECO 0xCC
-#define POKE_FORRETRESS 0xCD
-#define POKE_DUNSPARCE 0xCE
-#define POKE_GLIGAR 0xCF
-#define POKE_STEELIX 0xD0
-#define POKE_SNUBBULL 0xD1
-#define POKE_GRANBULL 0xD2
-#define POKE_QWILFISH 0xD3
-#define POKE_SCIZOR 0xD4
-#define POKE_SHUCKLE 0xD5
-#define POKE_HERACROSS 0xD6
-#define POKE_SNEASEL 0xD7
-#define POKE_TEDDIURSA 0xD8
-#define POKE_URSARING 0xD9
-#define POKE_SLUGMA 0xDA
-#define POKE_MAGCARGO 0xDB
-#define POKE_SWINUB 0xDC
-#define POKE_PILOSWINE 0xDD
-#define POKE_CORSOLA 0xDE
-#define POKE_REMORAID 0xDF
-#define POKE_OCTILLERY 0xE0
-#define POKE_DELIBIRD 0xE1
-#define POKE_MANTINE 0xE2
-#define POKE_SKARMORY 0xE3
-#define POKE_HOUNDOUR 0xE4
-#define POKE_HOUNDOOM 0xE5
-#define POKE_KINGDRA 0xE6
-#define POKE_PHANPY 0xE7
-#define POKE_DONPHAN 0xE8
-#define POKE_PORYGON2 0xE9
-#define POKE_STANTLER 0xEA
-#define POKE_SMEARGLE 0xEB
-#define POKE_TYROGUE 0xEC
-#define POKE_HITMONTOP 0xED
-#define POKE_SMOOCHUM 0xEE
-#define POKE_ELEKID 0xEF
-#define POKE_MAGBY 0xF0
-#define POKE_MILTANK 0xF1
-#define POKE_BLISSEY 0xF2
-#define POKE_RAIKOU 0xF3
-#define POKE_ENTEI 0xF4
-#define POKE_SUICUNE 0xF5
-#define POKE_LARVITAR 0xF6
-#define POKE_PUPITAR 0xF7
-#define POKE_TYRANITAR 0xF8
-#define POKE_LUGIA 0xF9
-#define POKE_HOOH 0xFA
-#define POKE_CELEBI 0xFB
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#define POKE_TREECKO 0x115
-#define POKE_GROVYLE 0x116
-#define POKE_SCEPTILE 0x117
-#define POKE_TORCHIC 0x118
-#define POKE_COMBUSKEN 0x119
-#define POKE_BLAZIKEN 0x11A
-#define POKE_MUDKIP 0x11B
-#define POKE_MARSHTOMP 0x11C
-#define POKE_SWAMPERT 0x11D
-#define POKE_POOCHYENA 0x11E
-#define POKE_MIGHTYENA 0x11F
-#define POKE_ZIGZAGOON 0x120
-#define POKE_LINOONE 0x121
-#define POKE_WURMPLE 0x122
-#define POKE_SILCOON 0x123
-#define POKE_BEAUTIFLY 0x124
-#define POKE_CASCOON 0x125
-#define POKE_DUSTOX 0x126
-#define POKE_LOTAD 0x127
-#define POKE_LOMBRE 0x128
-#define POKE_LUDICOLO 0x129
-#define POKE_SEEDOT 0x12A
-#define POKE_NUZLEAF 0x12B
-#define POKE_SHIFTRY 0x12C
-#define POKE_NINCADA 0x12D
-#define POKE_NINJASK 0x12E
-#define POKE_SHEDINJA 0x12F
-#define POKE_TAILLOW 0x130
-#define POKE_SWELLOW 0x131
-#define POKE_SHROOMISH 0x132
-#define POKE_BRELOOM 0x133
-#define POKE_SPINDA 0x134
-#define POKE_WINGULL 0x135
-#define POKE_PELIPPER 0x136
-#define POKE_SURSKIT 0x137
-#define POKE_MASQUERAIN 0x138
-#define POKE_WAILMER 0x139
-#define POKE_WAILORD 0x13A
-#define POKE_SKITTY 0x13B
-#define POKE_DELCATTY 0x13C
-#define POKE_KECLEON 0x13D
-#define POKE_BALTOY 0x13E
-#define POKE_CLAYDOL 0x13F
-#define POKE_NOSEPASS 0x140
-#define POKE_TORKOAL 0x141
-#define POKE_SABLEYE 0x142
-#define POKE_BARBOACH 0x143
-#define POKE_WHISCASH 0x144
-#define POKE_LUVDISC 0x145
-#define POKE_CORPHISH 0x146
-#define POKE_CRAWDAUNT 0x147
-#define POKE_FEEBAS 0x148
-#define POKE_MILOTIC 0x149
-#define POKE_CARVANHA 0x14A
-#define POKE_SHARPEDO 0x14B
-#define POKE_TRAPINCH 0x14C
-#define POKE_VIBRAVA 0x14D
-#define POKE_FLYGON 0x14E
-#define POKE_MAKUHITA 0x14F
-#define POKE_HARIYAMA 0x150
-#define POKE_ELECTRIKE 0x151
-#define POKE_MANECTRIC 0x152
-#define POKE_NUMEL 0x153
-#define POKE_CAMERUPT 0x154
-#define POKE_SPHEAL 0x155
-#define POKE_SEALEO 0x156
-#define POKE_WALREIN 0x157
-#define POKE_CACNEA 0x158
-#define POKE_CACTURNE 0x159
-#define POKE_SNORUNT 0x15A
-#define POKE_GLALIE 0x15B
-#define POKE_LUNATONE 0x15C
-#define POKE_SOLROCK 0x15D
-#define POKE_AZURILL 0x15E
-#define POKE_SPOINK 0x15F
-#define POKE_GRUMPIG 0x160
-#define POKE_PLUSLE 0x161
-#define POKE_MINUN 0x162
-#define POKE_MAWILE 0x163
-#define POKE_MEDITITE 0x164
-#define POKE_MEDICHAM 0x165
-#define POKE_SWABLU 0x166
-#define POKE_ALTARIA 0x167
-#define POKE_WYNAUT 0x168
-#define POKE_DUSKULL 0x169
-#define POKE_DUSCLOPS 0x16A
-#define POKE_ROSELIA 0x16B
-#define POKE_SLAKOTH 0x16C
-#define POKE_VIGOROTH 0x16D
-#define POKE_SLAKING 0x16E
-#define POKE_GULPIN 0x16F
-#define POKE_SWALOT 0x170
-#define POKE_TROPIUS 0x171
-#define POKE_WHISMUR 0x172
-#define POKE_LOUDRED 0x173
-#define POKE_EXPLOUD 0x174
-#define POKE_CLAMPERL 0x175
-#define POKE_HUNTAIL 0x176
-#define POKE_GOREBYSS 0x177
-#define POKE_ABSOL 0x178
-#define POKE_SHUPPET 0x179
-#define POKE_BANETTE 0x17A
-#define POKE_SEVIPER 0x17B
-#define POKE_ZANGOOSE 0x17C
-#define POKE_RELICANTH 0x17D
-#define POKE_ARON 0x17E
-#define POKE_LAIRON 0x17F
-#define POKE_AGGRON 0x180
-#define POKE_CASTFORM 0x181
-#define POKE_VOLBEAT 0x182
-#define POKE_ILLUMISE 0x183
-#define POKE_LILEEP 0x184
-#define POKE_CRADILY 0x185
-#define POKE_ANORITH 0x186
-#define POKE_ARMALDO 0x187
-#define POKE_RALTS 0x188
-#define POKE_KIRLIA 0x189
-#define POKE_GARDEVOIR 0x18A
-#define POKE_BAGON 0x18B
-#define POKE_SHELGON 0x18C
-#define POKE_SALAMENCE 0x18D
-#define POKE_BELDUM 0x18E
-#define POKE_METANG 0x18F
-#define POKE_METAGROSS 0x190
-#define POKE_REGIROCK 0x191
-#define POKE_REGICE 0x192
-#define POKE_REGISTEEL 0x193
-#define POKE_KYOGRE 0x194
-#define POKE_GROUDON 0x195
-#define POKE_RAYQUAZA 0x196
-#define POKE_LATIAS 0x197
-#define POKE_LATIOS 0x198
-#define POKE_JIRACHI 0x199
-#define POKE_DEOXYS 0x19A
-#define POKE_CHIMECHO 0x19B
-#define POKE_EGG 0x19C
-#define POKE_DIALGA 0x218
-#define POKE_PALKIA 0x219
-#define POKE_GIRATINA 0x21C
-#define POKE_ARCEUS 0x21C + 6
-#define POKE_GENESECT 0x2BE
+#define POKE_EMPTYSLOT 0x                /*？？*/
+#define POKE_BULBASAUR 0x1                /*妙蛙种子*/
+#define POKE_IVYSAUR 0x2                  /*妙蛙草*/
+#define POKE_VENUSAUR 0x3                 /*妙蛙花*/
+#define POKE_CHARMANDER 0x4               /*小火龙*/
+#define POKE_CHARMELEON 0x5               /*火恐龙*/
+#define POKE_CHARIZARD 0x6                /*喷火龙*/
+#define POKE_SQUIRTLE 0x7                 /*杰尼龟*/
+#define POKE_WARTORTLE 0x8                /*卡咪龟*/
+#define POKE_BLASTOISE 0x9                /*水箭龟*/
+#define POKE_CATERPIE 0xA                 /*绿毛虫*/
+#define POKE_METAPOD 0xB                  /*铁甲蛹*/
+#define POKE_BUTTERFREE 0xC               /*巴大蝶*/
+#define POKE_WEEDLE 0xD                   /*独角虫*/
+#define POKE_KAKUNA 0xE                   /*铁壳蛹*/
+#define POKE_BEEDRILL 0xF                 /*大针蜂*/
+#define POKE_PIDGEY 0x10                   /*波波*/
+#define POKE_PIDGEOTTO 0x11                /*比比鸟*/
+#define POKE_PIDGEOT 0x12                  /*大比鸟*/
+#define POKE_RATATTA 0x13                  /*小拉达*/
+#define POKE_RATICATE 0x14                 /*拉达*/
+#define POKE_SPEARROW 0x15                 /*烈雀*/
+#define POKE_FEARROW 0x16                  /*大嘴雀*/
+#define POKE_EKANS 0x17                    /*阿柏蛇*/
+#define POKE_ARBOK 0x18                    /*阿柏怪*/
+#define POKE_PIKACHU 0x19                  /*皮卡丘*/
+#define POKE_RAICHU 0x1A                   /*雷丘*/
+#define POKE_SANDSHREW 0x1B                /*穿山鼠*/
+#define POKE_SANDSLASH 0x1C                /*穿山王*/
+#define POKE_NIDORANFEMALE 0x1D            /*尼多兰*/
+#define POKE_NIDORINA 0x1E                 /*尼多娜*/
+#define POKE_NIDOQUEEN 0x1F                /*尼多后*/
+#define POKE_NIDORANMALE 0x20              /*尼多朗*/
+#define POKE_NIDORINO 0x21                 /*尼多力诺*/
+#define POKE_NIDOKING 0x22                 /*尼多王*/
+#define POKE_CLEFAIRY 0x23                 /*皮皮*/
+#define POKE_CLEFABLE 0x24                 /*皮可西*/
+#define POKE_VULPIX 0x25                   /*六尾*/
+#define POKE_NINETALES 0x26                /*九尾*/
+#define POKE_JIGGLYPUFF 0x27               /*胖丁*/
+#define POKE_WIGGLYTUFF 0x28               /*胖可丁*/
+#define POKE_ZUBAT 0x29                    /*超音蝠*/
+#define POKE_GOLBAT 0x2A                   /*大嘴蝠*/
+#define POKE_ODDISH 0x2B                   /*走路草*/
+#define POKE_GLOOM 0x2C                    /*臭臭花*/
+#define POKE_VILEPLUME 0x2D                /*霸王花*/
+#define POKE_PARAS 0x2E                    /*派拉斯*/
+#define POKE_PARASECT 0x2F                 /*派拉斯特*/
+#define POKE_VENONAT 0x30                  /*毛球*/
+#define POKE_VENOMOTH 0x31                 /*摩鲁蛾*/
+#define POKE_DIGLETT 0x32                  /*地鼠*/
+#define POKE_DUGTRIO 0x33                  /*三地鼠*/
+#define POKE_MEOWTH 0x34                   /*喵喵*/
+#define POKE_PERSIAN 0x35                  /*猫老大*/
+#define POKE_PSYDUCK 0x36                  /*可达鸭*/
+#define POKE_GOLDUCK 0x37                  /*哥达鸭*/
+#define POKE_MANKEY 0x38                   /*猴怪*/
+#define POKE_PRIMAPE 0x39                  /*火暴猴*/
+#define POKE_GROWLITHE 0x3A                /*卡蒂狗*/
+#define POKE_ARCANINE 0x3B                 /*风速狗*/
+#define POKE_POLIWAG 0x3C                  /*蚊香蝌蚪*/
+#define POKE_POLIWHIRL 0x3D                /*蚊香君*/
+#define POKE_POLIWRATH 0x3E                /*蚊香泳士*/
+#define POKE_ABRA 0x3F                     /*凯西*/
+#define POKE_KADABRA 0x40                  /*勇基拉*/
+#define POKE_ALAKAZAM 0x41                 /*胡地*/
+#define POKE_MACHOP 0x42                   /*腕力*/
+#define POKE_MACHOKE 0x43                  /*豪力*/
+#define POKE_MACHAMP 0x44                  /*怪力*/
+#define POKE_BELLSPROUT 0x45               /*喇叭芽*/
+#define POKE_WEEPINBELL 0x46               /*口呆花*/
+#define POKE_VICTREEBEL 0x47               /*大食花*/
+#define POKE_TENTACOOL 0x48                /*玛瑙水母*/
+#define POKE_TENTACRUEL 0x49               /*毒刺水母*/
+#define POKE_GEODUDE 0x4A                  /*小拳石*/
+#define POKE_GRAVELER 0x4B                 /*隆隆石*/
+#define POKE_GOLEM 0x4C                    /*隆隆岩*/
+#define POKE_PONYTA 0x4D                   /*小火马*/
+#define POKE_RAPIDASH 0x4E                 /*烈焰马*/
+#define POKE_SLOWPOKE 0x4F                 /*呆呆兽*/
+#define POKE_SLOWBRO 0x50                  /*呆壳兽*/
+#define POKE_MAGNEMITE 0x51                /*小磁怪*/
+#define POKE_MAGNETON 0x52                 /*三合一磁怪*/
+#define POKE_FARFETCHD 0x53                /*大葱鸭*/
+#define POKE_DODUO 0x54                    /*嘟嘟*/
+#define POKE_DODRIO 0x55                   /*嘟嘟利*/
+#define POKE_SEEL 0x56                     /*小海狮*/
+#define POKE_DEWGONG 0x57                  /*白海狮*/
+#define POKE_GRIMER 0x58                   /*臭泥*/
+#define POKE_MUK 0x59                      /*臭臭泥*/
+#define POKE_SHELLDER 0x5A                 /*大舌贝*/
+#define POKE_CLOYSTER 0x5B                 /*刺甲贝*/
+#define POKE_GASTLY 0x5C                   /*鬼斯*/
+#define POKE_HAUNTER 0x5D                  /*鬼斯通*/
+#define POKE_GENGAR 0x5E                   /*耿鬼*/
+#define POKE_ONIX 0x5F                     /*大岩蛇*/
+#define POKE_DROWZEE 0x60                  /*催眠貘*/
+#define POKE_HYPNO 0x61                    /*引梦貘人*/
+#define POKE_KRABBY 0x62                   /*大钳蟹*/
+#define POKE_KINGLER 0x63                  /*巨钳蟹*/
+#define POKE_VOLTORB 0x64                  /*霹雳电球*/
+#define POKE_ELECTRODE 0x65                /*顽皮雷弹*/
+#define POKE_EXEGGCUTE 0x66                /*蛋蛋*/
+#define POKE_EXEGGUTOR 0x67                /*椰蛋树*/
+#define POKE_CUBONE 0x68                   /*卡拉卡拉*/
+#define POKE_MAROWAK 0x69                  /*嘎啦嘎啦*/
+#define POKE_HITMONLEE 0x6A                /*飞腿郎*/
+#define POKE_HITMONCHAN 0x6B               /*快拳郎*/
+#define POKE_LICKITUNG 0x6C                /*大舌头*/
+#define POKE_KOFFING 0x6D                  /*瓦斯弹*/
+#define POKE_WEEZING 0x6E                  /*双弹瓦斯*/
+#define POKE_RHYHORN 0x6F                  /*独角犀牛*/
+#define POKE_RHYDON 0x70                   /*钻角犀兽*/
+#define POKE_CHANSEY 0x71                  /*吉利蛋*/
+#define POKE_TANGELA 0x72                  /*蔓藤怪*/
+#define POKE_KANGASKHAN 0x73               /*袋兽*/
+#define POKE_HORSEA 0x74                   /*墨海马*/
+#define POKE_SEADRA 0x75                   /*海刺龙*/
+#define POKE_GOLDEEN 0x76                  /*角金鱼*/
+#define POKE_SEAKING 0x77                  /*金鱼王*/
+#define POKE_STARYU 0x78                   /*海星星*/
+#define POKE_STARMIE 0x79                  /*宝石海星*/
+#define POKE_MRMIME 0x7A                   /*魔墙人偶*/
+#define POKE_SCYTHER 0x7B                  /*飞天螳螂*/
+#define POKE_JYNX 0x7C                     /*迷唇姐*/
+#define POKE_ELECTABUZZ 0x7D               /*电击兽*/
+#define POKE_MAGMAR 0x7E                   /*鸭嘴火兽*/
+#define POKE_PINSIR 0x7F                   /*凯罗斯*/
+#define POKE_TAUROS 0x80                   /*肯泰罗*/
+#define POKE_MAGIKARP 0x81                 /*鲤鱼王*/
+#define POKE_GYARADOS 0x82                 /*暴鲤龙*/
+#define POKE_LAPRAS 0x83                   /*拉普拉斯*/
+#define POKE_DITTO 0x84                    /*百变怪*/
+#define POKE_EEVEE 0x85                    /*伊布*/
+#define POKE_VAPOREON 0x86                 /*水伊布*/
+#define POKE_JOLTEON 0x87                  /*雷伊布*/
+#define POKE_FLAREON 0x88                  /*火伊布*/
+#define POKE_PORYGON 0x89                  /*多边兽*/
+#define POKE_OMANYTE 0x8A                  /*菊石兽*/
+#define POKE_OMASTAR 0x8B                  /*多刺菊石兽*/
+#define POKE_KABUTO 0x8C                   /*化石盔*/
+#define POKE_KABUTOPS 0x8D                 /*镰刀盔*/
+#define POKE_AERODACTYL 0x8E               /*化石翼龙*/
+#define POKE_SNORLAX 0x8F                  /*卡比兽*/
+#define POKE_ARTICUNO 0x90                 /*急冻鸟*/
+#define POKE_ZAPDOS 0x91                   /*闪电鸟*/
+#define POKE_MOLTRES 0x92                  /*火焰鸟*/
+#define POKE_DRATINI 0x93                  /*迷你龙*/
+#define POKE_DRAGONAIR 0x94                /*哈克龙*/
+#define POKE_DRAGONITE 0x95                /*快龙*/
+#define POKE_MEWTWO 0x96                   /*超梦*/
+#define POKE_MEW 0x97                      /*梦幻*/
+#define POKE_CHIKORITA 0x98                /*菊草叶*/
+#define POKE_BAYLEEF 0x99                  /*月桂叶*/
+#define POKE_MEGANIUM 0x9A                 /*大竺葵*/
+#define POKE_CYNDAQUIL 0x9B                /*火球鼠*/
+#define POKE_QUILAVA 0x9C                  /*火岩鼠*/
+#define POKE_TYPHLOSION 0x9D               /*火暴兽*/
+#define POKE_TOTODILE 0x9E                 /*小锯鳄*/
+#define POKE_CROCONAW 0x9F                 /*蓝鳄*/
+#define POKE_FERALIGATR 0xA0               /*大力鳄*/
+#define POKE_SENTRET 0xA1                  /*尾立*/
+#define POKE_FURRET 0xA2                   /*大尾立*/
+#define POKE_HOOTHOOT 0xA3                 /*咕咕*/
+#define POKE_NOCTOWL 0xA4                  /*猫头夜鹰*/
+#define POKE_LEDYBA 0xA5                   /*芭瓢虫*/
+#define POKE_LEDIAN 0xA6                   /*安瓢虫*/
+#define POKE_SPINARAK 0xA7                 /*圆丝蛛*/
+#define POKE_ARIADOS 0xA8                  /*阿利多斯*/
+#define POKE_CROBAT 0xA9                   /*叉字蝠*/
+#define POKE_CHINCHOU 0xAA                 /*灯笼鱼*/
+#define POKE_LANTURN 0xAB                  /*电灯怪*/
+#define POKE_PICHU 0xAC                    /*皮丘*/
+#define POKE_CLEFFA 0xAD                   /*皮宝宝*/
+#define POKE_IGGLYBUFF 0xAE                /*宝宝丁*/
+#define POKE_TOGEPI 0xAF                   /*波克比*/
+#define POKE_TOGETIC 0xB0                  /*波克基古*/
+#define POKE_NATU 0xB1                     /*天然雀*/
+#define POKE_XATU 0xB2                     /*天然鸟*/
+#define POKE_MAREEP 0xB3                   /*咩利羊*/
+#define POKE_FLAAFFY 0xB4                  /*茸茸羊*/
+#define POKE_AMPHAROS 0xB5                 /*电龙*/
+#define POKE_BELLOSSOM 0xB6                /*美丽花*/
+#define POKE_MARILL 0xB7                   /*玛力露*/
+#define POKE_AZUMARILL 0xB8                /*玛力露丽*/
+#define POKE_SUDOWOODO 0xB9                /*树才怪*/
+#define POKE_POLITOED 0xBA                 /*蚊香蛙皇*/
+#define POKE_HOPPIP 0xBB                   /*毽子草*/
+#define POKE_SKIPLOOM 0xBC                 /*毽子花*/
+#define POKE_JUMPLUFF 0xBD                 /*毽子棉*/
+#define POKE_AIPOM 0xBE                    /*长尾怪手*/
+#define POKE_SUNKERN 0xBF                  /*向日种子*/
+#define POKE_SUNFLORA 0xC0                 /*向日花怪*/
+#define POKE_YANMA 0xC1                    /*蜻蜻蜓*/
+#define POKE_WOOPER 0xC2                   /*乌波*/
+#define POKE_QUAGSIRE 0xC3                 /*沼王*/
+#define POKE_ESPEON 0xC4                   /*太阳伊布*/
+#define POKE_UMBREON 0xC5                  /*月亮伊布*/
+#define POKE_MURKROW 0xC6                  /*黑暗鸦*/
+#define POKE_SLOWKING 0xC7                 /*呆呆王*/
+#define POKE_MISDREAVUS 0xC8               /*梦妖*/
+#define POKE_UNOWN 0xC9                    /*未知图腾*/
+#define POKE_WOBBUFFET 0xCA                /*果然翁*/
+#define POKE_GIRAFARIG 0xCB                /*麒麟奇*/
+#define POKE_PINECO 0xCC                   /*榛果球*/
+#define POKE_FORRETRESS 0xCD               /*佛烈托斯*/
+#define POKE_DUNSPARCE 0xCE                /*土龙弟弟*/
+#define POKE_GLIGAR 0xCF                   /*天蝎*/
+#define POKE_STEELIX 0xD0                  /*大钢蛇*/
+#define POKE_SNUBBULL 0xD1                 /*布鲁*/
+#define POKE_GRANBULL 0xD2                 /*布鲁皇*/
+#define POKE_QWILFISH 0xD3                 /*千针鱼*/
+#define POKE_SCIZOR 0xD4                   /*巨钳螳螂*/
+#define POKE_SHUCKLE 0xD5                  /*壶壶*/
+#define POKE_HERACROSS 0xD6                /*赫拉克罗斯*/
+#define POKE_SNEASEL 0xD7                  /*狃拉*/
+#define POKE_TEDDIURSA 0xD8                /*熊宝宝*/
+#define POKE_URSARING 0xD9                 /*圈圈熊*/
+#define POKE_SLUGMA 0xDA                   /*熔岩虫*/
+#define POKE_MAGCARGO 0xDB                 /*熔岩蜗牛*/
+#define POKE_SWINUB 0xDC                   /*小山猪*/
+#define POKE_PILOSWINE 0xDD                /*长毛猪*/
+#define POKE_CORSOLA 0xDE                  /*太阳珊瑚*/
+#define POKE_REMORAID 0xDF                 /*铁炮鱼*/
+#define POKE_OCTILLERY 0xE0                /*章鱼桶*/
+#define POKE_DELIBIRD 0xE1                 /*信使鸟*/
+#define POKE_MANTINE 0xE2                  /*巨翅飞鱼*/
+#define POKE_SKARMORY 0xE3                 /*盔甲鸟*/
+#define POKE_HOUNDOUR 0xE4                 /*戴鲁比*/
+#define POKE_HOUNDOOM 0xE5                 /*黑鲁加*/
+#define POKE_KINGDRA 0xE6                  /*刺龙王*/
+#define POKE_PHANPY 0xE7                   /*小小象*/
+#define POKE_DONPHAN 0xE8                  /*顿甲*/
+#define POKE_PORYGON2 0xE9                 /*多边兽II*/
+#define POKE_STANTLER 0xEA                 /*惊角鹿*/
+#define POKE_SMEARGLE 0xEB                 /*图图犬*/
+#define POKE_TYROGUE 0xEC                  /*无畏小子*/
+#define POKE_HITMONTOP 0xED                /*战舞郎*/
+#define POKE_SMOOCHUM 0xEE                 /*迷唇娃*/
+#define POKE_ELEKID 0xEF                   /*电击怪*/
+#define POKE_MAGBY 0xF0                    /*鸭嘴宝宝*/
+#define POKE_MILTANK 0xF1                  /*大奶罐*/
+#define POKE_BLISSEY 0xF2                  /*幸福蛋*/
+#define POKE_RAIKOU 0xF3                   /*雷公*/
+#define POKE_ENTEI 0xF4                    /*炎帝*/
+#define POKE_SUICUNE 0xF5                  /*水君*/
+#define POKE_LARVITAR 0xF6                 /*幼基拉斯*/
+#define POKE_PUPITAR 0xF7                  /*沙基拉斯*/
+#define POKE_TYRANITAR 0xF8                /*班基拉斯*/
+#define POKE_LUGIA 0xF9                    /*洛奇亚*/
+#define POKE_HOOH 0xFA                     /*凤王*/
+#define POKE_CELEBI 0xFB                   /*时拉比*/
+#define POKE_TREECKO 0x115                  /*木守宫*/
+#define POKE_GROVYLE 0x116                  /*森林蜥蜴*/
+#define POKE_SCEPTILE 0x117                 /*蜥蜴王*/
+#define POKE_TORCHIC 0x118                  /*火稚鸡*/
+#define POKE_COMBUSKEN 0x119                /*力壮鸡*/
+#define POKE_BLAZIKEN 0x11A                 /*火焰鸡*/
+#define POKE_MUDKIP 0x11B                   /*水跃鱼*/
+#define POKE_MARSHTOMP 0x11C                /*沼跃鱼*/
+#define POKE_SWAMPERT 0x11D                 /*巨沼怪*/
+#define POKE_POOCHYENA 0x11E                /*土狼犬*/
+#define POKE_MIGHTYENA 0x11F                /*大狼犬*/
+#define POKE_ZIGZAGOON 0x120                /*蛇纹熊*/
+#define POKE_LINOONE 0x121                  /*直冲熊*/
+#define POKE_WURMPLE 0x122                  /*刺尾虫*/
+#define POKE_SILCOON 0x123                  /*甲壳茧*/
+#define POKE_BEAUTIFLY 0x124                /*狩猎凤蝶*/
+#define POKE_CASCOON 0x125                  /*盾甲茧*/
+#define POKE_DUSTOX 0x126                   /*毒粉蛾*/
+#define POKE_LOTAD 0x127                    /*莲叶童子*/
+#define POKE_LOMBRE 0x128                   /*莲帽小童*/
+#define POKE_LUDICOLO 0x129                 /*乐天河童*/
+#define POKE_SEEDOT 0x12A                   /*橡实果*/
+#define POKE_NUZLEAF 0x12B                  /*长鼻叶*/
+#define POKE_SHIFTRY 0x12C                  /*狡猾天狗*/
+#define POKE_NINCADA 0x12D                  /*土居忍士*/
+#define POKE_NINJASK 0x12E                  /*铁面忍者*/
+#define POKE_SHEDINJA 0x12F                 /*脱壳忍者*/
+#define POKE_TAILLOW 0x130                  /*傲骨燕*/
+#define POKE_SWELLOW 0x131                  /*大王燕*/
+#define POKE_SHROOMISH 0x132                /*蘑蘑菇*/
+#define POKE_BRELOOM 0x133                  /*斗笠菇*/
+#define POKE_SPINDA 0x134                   /*晃晃斑*/
+#define POKE_WINGULL 0x135                  /*长翅鸥*/
+#define POKE_PELIPPER 0x136                 /*大嘴鸥*/
+#define POKE_SURSKIT 0x137                  /*溜溜糖球*/
+#define POKE_MASQUERAIN 0x138               /*雨翅蛾*/
+#define POKE_WAILMER 0x139                  /*吼吼鲸*/
+#define POKE_WAILORD 0x13A                  /*吼鲸王*/
+#define POKE_SKITTY 0x13B                   /*向尾喵*/
+#define POKE_DELCATTY 0x13C                 /*优雅猫*/
+#define POKE_KECLEON 0x13D                  /*变隐龙*/
+#define POKE_BALTOY 0x13E                   /*天秤偶*/
+#define POKE_CLAYDOL 0x13F                  /*念力土偶*/
+#define POKE_NOSEPASS 0x140                 /*朝北鼻*/
+#define POKE_TORKOAL 0x141                  /*煤炭龟*/
+#define POKE_SABLEYE 0x142                  /*勾魂眼*/
+#define POKE_BARBOACH 0x143                 /*泥泥鳅*/
+#define POKE_WHISCASH 0x144                 /*鲶鱼王*/
+#define POKE_LUVDISC 0x145                  /*爱心鱼*/
+#define POKE_CORPHISH 0x146                 /*龙虾小兵*/
+#define POKE_CRAWDAUNT 0x147                /*铁螯龙虾*/
+#define POKE_FEEBAS 0x148                   /*丑丑鱼*/
+#define POKE_MILOTIC 0x149                  /*美纳斯*/
+#define POKE_CARVANHA 0x14A                 /*利牙鱼*/
+#define POKE_SHARPEDO 0x14B                 /*巨牙鲨*/
+#define POKE_TRAPINCH 0x14C                 /*大颚蚁*/
+#define POKE_VIBRAVA 0x14D                  /*超音波幼虫*/
+#define POKE_FLYGON 0x14E                   /*沙漠蜻蜓*/
+#define POKE_MAKUHITA 0x14F                 /*幕下力士*/
+#define POKE_HARIYAMA 0x150                 /*铁掌力士*/
+#define POKE_ELECTRIKE 0x151                /*落雷兽*/
+#define POKE_MANECTRIC 0x152                /*雷电兽*/
+#define POKE_NUMEL 0x153                    /*呆火驼*/
+#define POKE_CAMERUPT 0x154                 /*喷火驼*/
+#define POKE_SPHEAL 0x155                   /*海豹球*/
+#define POKE_SEALEO 0x156                   /*海魔狮*/
+#define POKE_WALREIN 0x157                  /*帝牙海狮*/
+#define POKE_CACNEA 0x158                   /*刺球仙人掌*/
+#define POKE_CACTURNE 0x159                 /*梦歌仙人掌*/
+#define POKE_SNORUNT 0x15A                  /*雪童子*/
+#define POKE_GLALIE 0x15B                   /*冰鬼护*/
+#define POKE_LUNATONE 0x15C                 /*月石*/
+#define POKE_SOLROCK 0x15D                  /*太阳岩*/
+#define POKE_AZURILL 0x15E                  /*露力丽*/
+#define POKE_SPOINK 0x15F                   /*跳跳猪*/
+#define POKE_GRUMPIG 0x160                  /*噗噗猪*/
+#define POKE_PLUSLE 0x161                   /*正电拍拍*/
+#define POKE_MINUM 0x162                    /*负电拍拍*/
+#define POKE_MAWILE 0x163                   /*大嘴娃*/
+#define POKE_MEDITITE 0x164                 /*玛沙那*/
+#define POKE_MEDICHAM 0x165                 /*恰雷姆*/
+#define POKE_SWABLU 0x166                   /*青绵鸟*/
+#define POKE_ALTARIA 0x167                  /*七夕青鸟*/
+#define POKE_WYNAUT 0x168                   /*小果然*/
+#define POKE_DUSKULL 0x169                  /*夜巡灵*/
+#define POKE_DUSCLOPS 0x16A                 /*彷徨夜灵*/
+#define POKE_ROSELIA 0x16B                  /*毒蔷薇*/
+#define POKE_SLAKOTH 0x16C                  /*懒人獭*/
+#define POKE_VIGOROTH 0x16D                 /*过动猿*/
+#define POKE_SLAKING 0x16E                  /*请假王*/
+#define POKE_GULPIN 0x16F                   /*溶食兽*/
+#define POKE_SWALOT 0x170                   /*吞食兽*/
+#define POKE_TROPIUS 0x171                  /*热带龙*/
+#define POKE_WHISMUR 0x172                  /*咕妞妞*/
+#define POKE_LOUDRED 0x173                  /*吼爆弹*/
+#define POKE_EXPLOUD 0x174                  /*爆音怪*/
+#define POKE_CLAMPERL 0x175                 /*珍珠贝*/
+#define POKE_HUNTAIL 0x176                  /*猎斑鱼*/
+#define POKE_GOREBYSS 0x177                 /*樱花鱼*/
+#define POKE_ABSOL 0x178                    /*阿勃梭鲁*/
+#define POKE_SHUPPET 0x179                  /*怨影娃娃*/
+#define POKE_BANETTE 0x17A                  /*诅咒娃娃*/
+#define POKE_SEVIPER 0x17B                  /*饭匙蛇*/
+#define POKE_ZANGOOSE 0x17C                 /*猫鼬斩*/
+#define POKE_RELICANTH 0x17D                /*古空棘鱼*/
+#define POKE_ARON 0x17E                     /*可可多拉*/
+#define POKE_LAIRON 0x17F                   /*可多拉*/
+#define POKE_AGGRON 0x180                   /*波士可多拉*/
+#define POKE_CASTFORM 0x181                 /*飘浮泡泡*/
+#define POKE_VOLBEAT 0x182                  /*电萤虫*/
+#define POKE_ILLUMISE 0x183                 /*甜甜萤*/
+#define POKE_LILEEP 0x184                   /*触手百合*/
+#define POKE_CRADILY 0x185                  /*摇篮百合*/
+#define POKE_ANORITH 0x186                  /*太古羽虫*/
+#define POKE_ARMALDO 0x187                  /*太古盔甲*/
+#define POKE_RALTS 0x188                    /*拉鲁拉丝*/
+#define POKE_KIRLIA 0x189                   /*奇鲁莉安*/
+#define POKE_GARDEVOIR 0x18A                /*沙奈朵*/
+#define POKE_BAGON 0x18B                    /*宝贝龙*/
+#define POKE_SHELGON 0x18C                  /*甲壳龙*/
+#define POKE_SALAMENCE 0x18D                /*暴飞龙*/
+#define POKE_BELDUM 0x18E                   /*铁哑铃*/
+#define POKE_METANG 0x18F                   /*金属怪*/
+#define POKE_METAGROSS 0x190                /*巨金怪*/
+#define POKE_REGIROCK 0x191                 /*雷吉洛克*/
+#define POKE_REGICE 0x192                   /*雷吉艾斯*/
+#define POKE_REGISTEEL 0x193                /*雷吉斯奇鲁*/
+#define POKE_KYOGRE 0x194                   /*盖欧卡*/
+#define POKE_GROUDON 0x195                  /*固拉多*/
+#define POKE_RAYQUAZA 0x196                 /*烈空坐*/
+#define POKE_LATIAS 0x197                   /*拉帝亚斯*/
+#define POKE_LATIOS 0x198                   /*拉帝欧斯*/
+#define POKE_JIRACHI 0x199                  /*基拉祈*/
+#define POKE_DEOXYS_SPEED 0x19A             /*代欧奇希斯速*/
+#define POKE_CHIMECHO 0x19B                 /*风铃铃*/
+#define POKE_EGG 0x19C                      /*蛋*/
+#define POKE_UNOWN_B 0x19D                  /*未知图腾B*/
+#define POKE_UNOWN_C 0x19E                  /*未知图腾C*/
+#define POKE_UNOWN_D 0x19F                  /*未知图腾D*/
+#define POKE_UNOWN_E 0x1A0                  /*未知图腾E*/
+#define POKE_UNOWN_F 0x1A1                  /*未知图腾F*/
+#define POKE_UNOWN_G 0x1A2                  /*未知图腾G*/
+#define POKE_UNOWN_H 0x1A3                  /*未知图腾H*/
+#define POKE_UNOWN_I 0x1A4                  /*未知图腾I*/
+#define POKE_UNOWN_J 0x1A5                  /*未知图腾J*/
+#define POKE_UNOWN_K 0x1A6                  /*未知图腾K*/
+#define POKE_UNOWN_L 0x1A7                  /*未知图腾L*/
+#define POKE_UNOWN_M 0x1A8                  /*未知图腾M*/
+#define POKE_UNOWN_N 0x1A9                  /*未知图腾N*/
+#define POKE_UNOWN_O 0x1AA                  /*未知图腾O*/
+#define POKE_UNOWN_P 0x1AB                  /*未知图腾P*/
+#define POKE_UNOWN_Q 0x1AC                  /*未知图腾Q*/
+#define POKE_UNOWN_R 0x1AD                  /*未知图腾R*/
+#define POKE_UNOWN_S 0x1AE                  /*未知图腾S*/
+#define POKE_UNOWN_T 0x1AF                  /*未知图腾T*/
+#define POKE_UNOWN_U 0x1B0                  /*未知图腾U*/
+#define POKE_UNOWN_V 0x1B1                  /*未知图腾V*/
+#define POKE_UNOWN_W 0x1B2                  /*未知图腾W*/
+#define POKE_UNOWN_X 0x1B3                  /*未知图腾X*/
+#define POKE_UNOWN_Y 0x1B4                  /*未知图腾Y*/
+#define POKE_UNOWN_Z 0x1B5                  /*未知图腾Z*/
+#define POKE_UNOWN_EMARK 0x1B6              /*未知图腾!*/
+#define POKE_UNOWN_QMARK 0x1B7              /*未知图腾？*/
+#define POKE_TURTWIG 0x1B8                  /*草苗龟*/
+#define POKE_GROTLE 0x1B9                   /*树林龟*/
+#define POKE_TORTERRA 0x1BA                 /*土台龟*/
+#define POKE_CHIMCHAR 0x1BB                 /*小火焰猴*/
+#define POKE_MONFERNO 0x1BC                 /*猛火猴*/
+#define POKE_INFERNAPE 0x1BD                /*烈焰猴*/
+#define POKE_PIPLUP 0x1BE                   /*波加曼*/
+#define POKE_PRINPLUP 0x1BF                 /*波皇子*/
+#define POKE_EMPOLEON 0x1C0                 /*帝王拿波*/
+#define POKE_STARLY 0x1C1                   /*姆克儿*/
+#define POKE_STARAVIA 0x1C2                 /*姆克鸟*/
+#define POKE_STARAPTOR 0x1C3                /*姆克鹰*/
+#define POKE_BIDOOF 0x1C4                   /*大牙狸*/
+#define POKE_BIBAREL 0x1C5                  /*大尾狸*/
+#define POKE_KRICKETOT 0x1C6                /*圆法师*/
+#define POKE_KRICKETUNE 0x1C7               /*音箱蟀*/
+#define POKE_SHINX 0x1C8                    /*小猫怪*/
+#define POKE_LUXIO 0x1C9                    /*勒克猫*/
+#define POKE_LUXRAY 0x1CA                   /*伦琴猫*/
+#define POKE_BUDEW 0x1CB                    /*含羞苞*/
+#define POKE_ROSERADE 0x1CC                 /*罗丝雷朵*/
+#define POKE_CRANIDOS 0x1CD                 /*头盖龙*/
+#define POKE_RAMPARDOS 0x1CE                /*战槌龙*/
+#define POKE_SHIELDON 0x1CF                 /*盾甲龙*/
+#define POKE_BASTIODON 0x1D0                /*护城龙*/
+#define POKE_BURMY_PLANT 0x1D1              /*结草儿植物*/
+#define POKE_WORMADAM_PLANT 0x1D2           /*结草贵妇植物*/
+#define POKE_MOTHIM 0x1D3                   /*绅士蛾*/
+#define POKE_COMBEE 0x1D4                   /*三蜜蜂*/
+#define POKE_VESPIQUEN 0x1D5                /*蜂女王*/
+#define POKE_PACHIRISU 0x1D6                /*帕奇利兹*/
+#define POKE_BUIZEL 0x1D7                   /*泳圈鼬*/
+#define POKE_FLOATZEL 0x1D8                 /*浮潜鼬*/
+#define POKE_CHERUBI 0x1D9                  /*樱花宝*/
+#define POKE_CHERRIM 0x1DA                  /*樱花儿*/
+#define POKE_SHELLOS_BLUE 0x1DB             /*无壳海兔蓝*/
+#define POKE_GASTRODON_BLUE 0x1DC           /*海兔兽蓝*/
+#define POKE_AMBIPOM 0x1DD                  /*双尾怪手*/
+#define POKE_DRIFLOON 0x1DE                 /*飘飘球*/
+#define POKE_DRIFBLIM 0x1DF                 /*随风球*/
+#define POKE_BUNEARY 0x1E0                  /*卷卷耳*/
+#define POKE_LOPUNNY 0x1E1                  /*长耳兔*/
+#define POKE_MISMAGIUS 0x1E2                /*梦妖魔*/
+#define POKE_HONCHKROW 0x1E3                /*乌鸦头头*/
+#define POKE_GLAMEOW 0x1E4                  /*魅力喵*/
+#define POKE_PURUGLY 0x1E5                  /*东施喵*/
+#define POKE_CHINGLING 0x1E6                /*铃铛响*/
+#define POKE_STUNKY 0x1E7                   /*臭鼬噗*/
+#define POKE_SKUNTANK 0x1E8                 /*坦克臭鼬*/
+#define POKE_BRONZOR 0x1E9                  /*铜镜怪*/
+#define POKE_BRONZONG 0x1EA                 /*青铜钟*/
+#define POKE_BONSLY 0x1EB                   /*盆才怪*/
+#define POKE_MIMEJR 0x1EC                   /*魔尼尼*/
+#define POKE_HAPPINY 0x1ED                  /*小福蛋*/
+#define POKE_CHATOT 0x1EE                   /*聒噪鸟*/
+#define POKE_SPIRITOMB 0x1EF                /*花岩怪*/
+#define POKE_GIBLE 0x1F0                    /*圆陆鲨*/
+#define POKE_GABITE 0x1F1                   /*尖牙陆鲨*/
+#define POKE_GARCHOMP 0x1F2                 /*烈咬陆鲨*/
+#define POKE_MUNCHLAX 0x1F3                 /*小卡比兽*/
+#define POKE_RIOLU 0x1F4                    /*利欧路*/
+#define POKE_LUCARIO 0x1F5                  /*路卡利欧*/
+#define POKE_HIPPOPOTAS 0x1F6               /*沙河马*/
+#define POKE_HIPPOWDON 0x1F7                /*河马兽*/
+#define POKE_SKORUPI 0x1F8                  /*钳尾蝎*/
+#define POKE_DRAPION 0x1F9                  /*龙王蝎*/
+#define POKE_CROAGUNK 0x1FA                 /*不良蛙*/
+#define POKE_TOXICROAK 0x1FB                /*毒骷蛙*/
+#define POKE_CARNIVINE 0x1FC                /*尖牙笼*/
+#define POKE_FINNEON 0x1FD                  /*荧光鱼*/
+#define POKE_LUMINEON 0x1FE                 /*霓虹鱼*/
+#define POKE_MANTYKE 0x1FF                  /*小球飞鱼*/
+#define POKE_SNOVER 0x200                   /*雪笠怪*/
+#define POKE_ABOMASNOW 0x201                /*暴雪王*/
+#define POKE_WEAVILE 0x202                  /*玛狃拉*/
+#define POKE_MAGNEZONE 0x203                /*自爆磁怪*/
+#define POKE_LICKILICKY 0x204               /*大舌舔*/
+#define POKE_RHYPERIOR 0x205                /*超甲狂犀*/
+#define POKE_TANGROWTH 0x206                /*巨蔓藤*/
+#define POKE_ELECTIVIRE 0x207               /*电击魔兽*/
+#define POKE_MAGMORTAR 0x208                /*鸭嘴炎兽*/
+#define POKE_TOGEKISS 0x209                 /*波克基斯*/
+#define POKE_YANMEGA 0x20A                  /*远古巨蜓*/
+#define POKE_LEAFEON 0x20B                  /*叶伊布*/
+#define POKE_GLACEON 0x20C                  /*冰伊布*/
+#define POKE_GLISCOR 0x20D                  /*天蝎王*/
+#define POKE_MAMOSWINE 0x20E                /*象牙猪*/
+#define POKE_PORYGONZ 0x20F                 /*多边兽Z*/
+#define POKE_GALLADE 0x210                  /*艾路雷朵*/
+#define POKE_PROBOPASS 0x211                /*大朝北鼻*/
+#define POKE_DUSKNOIR 0x212                 /*黑夜魔灵*/
+#define POKE_FROSLASS 0x213                 /*雪妖女*/
+#define POKE_ROTOM 0x214                    /*洛托姆*/
+#define POKE_UXIE 0x215                     /*由克希*/
+#define POKE_MESPRIT 0x216                  /*艾姆利多*/
+#define POKE_AZELF 0x217                    /*亚克诺姆*/
+#define POKE_DIALGA 0x218                   /*帝牙卢卡*/
+#define POKE_PALKIA 0x219                   /*帕路奇亚*/
+#define POKE_HEATRAN 0x21A                  /*席多蓝恩*/
+#define POKE_REGIGIGAS 0x21B                /*雷吉奇卡斯*/
+#define POKE_GIRATINA_ANOTHER 0x21C         /*骑拉帝纳*/
+#define POKE_CRESSELIA 0x21D                /*克雷色利亚*/
+#define POKE_PHIONE 0x21E                   /*霏欧纳*/
+#define POKE_MANAPHY 0x21F                  /*玛纳霏*/
+#define POKE_DARKRAI 0x220                  /*达克莱伊*/
+#define POKE_SHAYMIN_LAND 0x221             /*谢米*/
+#define POKE_ARCEUS 0x222                   /*阿尔宙斯*/
+#define POKE_VICTINI 0x223                  /*比克提尼*/
+#define POKE_SNIVY 0x224                    /*藤藤蛇*/
+#define POKE_SERVINE 0x225                  /*青藤蛇*/
+#define POKE_SERPERIOR 0x226                /*君主蛇*/
+#define POKE_TEPIG 0x227                    /*暖暖猪*/
+#define POKE_PIGNITE 0x228                  /*炒炒猪*/
+#define POKE_EMBOAR 0x229                   /*炎武王*/
+#define POKE_OSHAWOTT 0x22A                 /*水水獭*/
+#define POKE_DEWOTT 0x22B                   /*双刃丸*/
+#define POKE_SAMUROTT 0x22C                 /*大剑鬼*/
+#define POKE_PATRAT 0x22D                   /*探探鼠*/
+#define POKE_WATCHOG 0x22E                  /*步哨鼠*/
+#define POKE_LILLIPUP 0x22F                 /*小约克*/
+#define POKE_HERDIER 0x230                  /*哈约克*/
+#define POKE_STOUTLAND 0x231                /*长毛狗*/
+#define POKE_PURRLOIN 0x232                 /*扒手猫*/
+#define POKE_LIEPARD 0x233                  /*酷豹*/
+#define POKE_PANSAGE 0x234                  /*花椰猴*/
+#define POKE_SIMISAGE 0x235                 /*花椰猿*/
+#define POKE_PANSEAR 0x236                  /*爆香猴*/
+#define POKE_SIMISEAR 0x237                 /*爆香猿*/
+#define POKE_PANPOUR 0x238                  /*冷水猴*/
+#define POKE_SIMIPOUR 0x239                 /*冷水猿*/
+#define POKE_MUNNA 0x23A                    /*食梦梦*/
+#define POKE_MUSHARNA 0x23B                 /*梦梦蚀*/
+#define POKE_PIDOVE 0x23C                   /*豆豆鸽*/
+#define POKE_TRANQUILL 0x23D                /*咕咕鸽*/
+#define POKE_UNFEZANT_MALE 0x23E            /*高傲雉鸡公*/
+#define POKE_BLITZLE 0x23F                  /*斑斑马*/
+#define POKE_ZEBSTRIKA 0x240                /*雷电斑马*/
+#define POKE_ROGGENROLA 0x241               /*石丸子*/
+#define POKE_BOLDORE 0x242                  /*地幔岩*/
+#define POKE_GIGALITH 0x243                 /*庞岩怪*/
+#define POKE_WOOBAT 0x244                   /*滚滚蝙蝠*/
+#define POKE_SWOOBAT 0x245                  /*心蝙蝠*/
+#define POKE_DRILBUR 0x246                  /*螺钉地鼠*/
+#define POKE_EXCADRILL 0x247                /*龙头地鼠*/
+#define POKE_AUDINO 0x248                   /*差不多娃娃*/
+#define POKE_TIMBURR 0x249                  /*搬运小匠*/
+#define POKE_GURDURR 0x24A                  /*铁骨土人*/
+#define POKE_CONKELDURR 0x24B               /*修建老匠*/
+#define POKE_TYMPOLE 0x24C                  /*圆蝌蚪*/
+#define POKE_PALPITOAD 0x24D                /*蓝蟾蜍*/
+#define POKE_SEISMITOAD 0x24E               /*蟾蜍王*/
+#define POKE_THROH 0x24F                    /*投摔鬼*/
+#define POKE_SAWK 0x250                     /*打击鬼*/
+#define POKE_SEWADDLE 0x251                 /*虫宝包*/
+#define POKE_SWADLOON 0x252                 /*宝包茧*/
+#define POKE_LEAVANNY 0x253                 /*保姆虫*/
+#define POKE_VENIPEDE 0x254                 /*百足蜈蚣*/
+#define POKE_WHIRLIPEDE 0x255               /*车轮球*/
+#define POKE_SCOLIPEDE 0x256                /*蜈蚣王*/
+#define POKE_COTTONEE 0x257                 /*木棉球*/
+#define POKE_WHIMSICOTT 0x258               /*风妖精*/
+#define POKE_PETILIL 0x259                  /*百合根娃娃*/
+#define POKE_LILLIGANT 0x25A                /*裙儿小姐*/
+#define POKE_BASCULIN_RED 0x25B             /*野蛮鲈鱼红*/
+#define POKE_SANDILE 0x25C                  /*黑眼鳄*/
+#define POKE_KROKOROK 0x25D                 /*混混鳄*/
+#define POKE_KROOKODILE 0x25E               /*流氓鳄*/
+#define POKE_DARUMAKA 0x25F                 /*火红不倒翁*/
+#define POKE_DARMANITAN 0x260               /*达摩狒狒*/
+#define POKE_MARACTUS 0x261                 /*沙铃仙人掌*/
+#define POKE_DWEBBLE 0x262                  /*石居蟹*/
+#define POKE_CRUSTLE 0x263                  /*岩殿居蟹*/
+#define POKE_SCRAGGY 0x264                  /*滑滑小子*/
+#define POKE_SCRAFTY 0x265                  /*头巾混混*/
+#define POKE_SIGILYPH 0x266                 /*象征鸟*/
+#define POKE_YAMASK 0x267                   /*哭哭面具*/
+#define POKE_COFAGRIGUS 0x268               /*死神棺*/
+#define POKE_TIRTOUGA 0x269                 /*原盖海龟*/
+#define POKE_CARRACOSTA 0x26A               /*肋骨海龟*/
+#define POKE_ARCHEN 0x26B                   /*始祖小鸟*/
+#define POKE_ARCHEOPS 0x26C                 /*始祖大鸟*/
+#define POKE_TRUBBISH 0x26D                 /*破破袋*/
+#define POKE_GARBODOR 0x26E                 /*灰尘山*/
+#define POKE_ZORUA 0x26F                    /*索罗亚*/
+#define POKE_ZOROARK 0x270                  /*索罗亚克*/
+#define POKE_MINCCINO 0x271                 /*泡沫栗鼠*/
+#define POKE_CINCCINO 0x272                 /*奇诺栗鼠*/
+#define POKE_GOTHITA 0x273                  /*哥德宝宝*/
+#define POKE_GOTHORITA 0x274                /*哥德小童*/
+#define POKE_GOTHITELLE 0x275               /*哥德小姐*/
+#define POKE_SOLOSIS 0x276                  /*单卵细胞球*/
+#define POKE_DUOSION 0x277                  /*双卵细胞球*/
+#define POKE_REUNICLUS 0x278                /*人造细胞卵*/
+#define POKE_DUCKLETT 0x279                 /*鸭宝宝*/
+#define POKE_SWANNA 0x27A                   /*舞天鹅*/
+#define POKE_VANILLITE 0x27B                /*迷你冰*/
+#define POKE_VANILLISH 0x27C                /*多多冰*/
+#define POKE_VANILLUXE 0x27D                /*双倍多多冰*/
+#define POKE_DEERLING_SPRING 0x27E          /*四季鹿春*/
+#define POKE_SAWSBUCK_SPRING 0x27F          /*萌芽鹿春*/
+#define POKE_EMOLGA 0x280                   /*电飞鼠*/
+#define POKE_KARRABLAST 0x281               /*盖盖虫*/
+#define POKE_ESCAVALIER 0x282               /*骑士蜗牛*/
+#define POKE_FOONGUS 0x283                  /*哎呀球菇*/
+#define POKE_AMOONGUSS 0x284                /*败露球菇*/
+#define POKE_FRILLISH_MALE 0x285            /*轻飘飘蓝*/
+#define POKE_JELLICENT_MALE 0x286           /*胖嘟嘟蓝*/
+#define POKE_ALOMOMOLA 0x287                /*保姆曼波*/
+#define POKE_JOLTIK 0x288                   /*电电虫*/
+#define POKE_GALVANTULA 0x289               /*电蜘蛛*/
+#define POKE_FERROSEED 0x28A                /*种子铁球*/
+#define POKE_FERROTHORN 0x28B               /*坚果哑铃*/
+#define POKE_KLINK 0x28C                    /*齿轮儿*/
+#define POKE_KLANG 0x28D                    /*齿轮组*/
+#define POKE_KLINKLANG 0x28E                /*齿轮怪*/
+#define POKE_TYNAMO 0x28F                   /*麻麻小鱼*/
+#define POKE_EELEKTRIK 0x290                /*麻麻鳗*/
+#define POKE_EELEKTROSS 0x291               /*麻麻鳗鱼王*/
+#define POKE_ELGYEM 0x292                   /*小灰怪*/
+#define POKE_BEHEEYEM 0x293                 /*大宇怪*/
+#define POKE_LITWICK 0x294                  /*烛光灵*/
+#define POKE_LAMPENT 0x295                  /*灯火幽灵*/
+#define POKE_CHANDELURE 0x296               /*水晶灯火灵*/
+#define POKE_AXEW 0x297                     /*牙牙*/
+#define POKE_FRAXURE 0x298                  /*斧牙龙*/
+#define POKE_HAXORUS 0x299                  /*双斧战龙*/
+#define POKE_CUBCHOO 0x29A                  /*喷嚏熊*/
+#define POKE_BEARTIC 0x29B                  /*冻原熊*/
+#define POKE_CRYOGONAL 0x29C                /*几何雪花*/
+#define POKE_SHELMET 0x29D                  /*小嘴蜗*/
+#define POKE_ACCELGOR 0x29E                 /*敏捷虫*/
+#define POKE_STUNFISK 0x29F                 /*泥巴鱼*/
+#define POKE_MIENFOO 0x2A0                  /*功夫鼬*/
+#define POKE_MIENSHAO 0x2A1                 /*师父鼬*/
+#define POKE_DRUDDIGON 0x2A2                /*赤面龙*/
+#define POKE_GOLETT 0x2A3                   /*泥偶小人*/
+#define POKE_GOLURK 0x2A4                   /*泥偶巨人*/
+#define POKE_PAWNIARD 0x2A5                 /*驹刀小兵*/
+#define POKE_BISHARP 0x2A6                  /*劈斩司令*/
+#define POKE_BOUFFALANT 0x2A7               /*爆炸头水牛*/
+#define POKE_RUFFLET 0x2A8                  /*毛头小鹰*/
+#define POKE_BRAVIARY 0x2A9                 /*勇士雄鹰*/
+#define POKE_VULLABY 0x2AA                  /*秃鹰丫头*/
+#define POKE_MANDIBUZZ 0x2AB                /*秃鹰娜*/
+#define POKE_HEATMOR 0x2AC                  /*熔蚁兽*/
+#define POKE_DURANT 0x2AD                   /*铁蚁*/
+#define POKE_DEINO 0x2AE                    /*单首龙*/
+#define POKE_ZWEILOUS 0x2AF                 /*双首暴龙*/
+#define POKE_HYDREIGON 0x2B0                /*三首恶龙*/
+#define POKE_LARVESTA 0x2B1                 /*燃烧虫*/
+#define POKE_VOLCARONA 0x2B2                /*火神蛾*/
+#define POKE_COBALION 0x2B3                 /*勾帕路翁*/
+#define POKE_TERRAKION 0x2B4                /*代拉基翁*/
+#define POKE_VIRIZION 0x2B5                 /*毕力吉翁*/
+#define POKE_TORNADUS 0x2B6                 /*龙卷云*/
+#define POKE_THUNDURUS 0x2B7                /*雷电云*/
+#define POKE_RESHIRAM 0x2B8                 /*莱希拉姆*/
+#define POKE_ZEKROM 0x2B9                   /*捷克罗姆*/
+#define POKE_LANDORUS 0x2BA                 /*土地云*/
+#define POKE_KYUREM 0x2BB                   /*酋雷姆*/
+#define POKE_KELDEO 0x2BC                   /*凯路迪欧*/
+#define POKE_MELOETTA_ARIA 0x2BD            /*美洛耶塔歌*/
+#define POKE_GENESECT 0x2BE                 /*盖诺赛克特*/
+#define POKE_CHESPIN 0x2BF                  /*哈力栗*/
+#define POKE_QUILLADIN 0x2C0                /*胖胖哈力*/
+#define POKE_CHESNAUGHT 0x2C1               /*布里卡隆*/
+#define POKE_FENNEKIN 0x2C2                 /*火狐狸*/
+#define POKE_BRAIXEN 0x2C3                  /*长尾火狐*/
+#define POKE_DELPHOX 0x2C4                  /*妖火红狐*/
+#define POKE_FROAKIE 0x2C5                  /*呱呱泡蛙*/
+#define POKE_FROGADIER 0x2C6                /*呱头蛙*/
+#define POKE_GRENINJA 0x2C7                 /*甲贺忍蛙*/
+#define POKE_BUNNELBY 0x2C8                 /*掘掘兔*/
+#define POKE_DIGGERSBY 0x2C9                /*掘地兔*/
+#define POKE_FLETCHLING 0x2CA               /*小箭雀*/
+#define POKE_FLETCHINDER 0x2CB              /*火箭雀*/
+#define POKE_TALONFLAME 0x2CC               /*烈箭鹰*/
+#define POKE_SCATTERBUG 0x2CD               /*粉蝶虫*/
+#define POKE_SPEWPA 0x2CE                   /*粉蝶蛹*/
+#define POKE_VIVILLON_MEADOW 0x2CF          /*彩粉蝶*/
+#define POKE_LITLEO 0x2D0                   /*小狮狮*/
+#define POKE_PYROAR_MALE 0x2D1              /*火炎狮公*/
+#define POKE_FLABEBE_RED 0x2D2              /*花蓓蓓红*/
+#define POKE_FLOETTE_RED 0x2D3              /*花叶蒂红*/
+#define POKE_FLORGES_RED 0x2D4              /*花洁夫人红*/
+#define POKE_SKIDDO 0x2D5                   /*坐骑小羊*/
+#define POKE_GOGOAT 0x2D6                   /*坐骑山羊*/
+#define POKE_PANCHAM 0x2D7                  /*顽皮熊猫*/
+#define POKE_PANGORO 0x2D8                  /*流氓熊猫*/
+#define POKE_FURFROU 0x2D9                  /*多丽米亚*/
+#define POKE_ESPURR 0x2DA                   /*妙喵*/
+#define POKE_MEOWSTIC_MALE 0x2DB            /*超能妙喵公*/
+#define POKE_HONEDGE 0x2DC                  /*独剑鞘*/
+#define POKE_DOUBLADE 0x2DD                 /*双剑鞘*/
+#define POKE_AEGISLASH_DEFENSE 0x2DE        /*坚盾剑怪盾*/
+#define POKE_SPRITZEE 0x2DF                 /*粉香香*/
+#define POKE_AROMATISSE 0x2E0               /*芳香精*/
+#define POKE_SWIRLIX 0x2E1                  /*绵绵泡芙*/
+#define POKE_SLURPUFF 0x2E2                 /*胖甜妮*/
+#define POKE_INKAY 0x2E3                    /*好啦鱿*/
+#define POKE_MALAMAR 0x2E4                  /*乌贼王*/
+#define POKE_BINACLE 0x2E5                  /*龟脚脚*/
+#define POKE_BARBARACLE 0x2E6               /*龟足巨铠*/
+#define POKE_SKRELP 0x2E7                   /*垃垃藻*/
+#define POKE_DRAGALGE 0x2E8                 /*毒藻龙*/
+#define POKE_CLAUNCHER 0x2E9                /*铁臂枪虾*/
+#define POKE_CLAWITZER 0x2EA                /*钢炮臂虾*/
+#define POKE_HELIOPTILE 0x2EB               /*伞电蜥*/
+#define POKE_HELIOLISK 0x2EC                /*光电伞蜥*/
+#define POKE_TYRUNT 0x2ED                   /*宝宝暴龙*/
+#define POKE_TYRANTRUM 0x2EE                /*怪颚龙*/
+#define POKE_AMAURA 0x2EF                   /*冰雪龙*/
+#define POKE_AURORUS 0x2F0                  /*冰雪巨龙*/
+#define POKE_SYLVEON 0x2F1                  /*仙子伊布*/
+#define POKE_HAWLUCHA 0x2F2                 /*摔角鹰人*/
+#define POKE_DEDENNE 0x2F3                  /*咚咚鼠*/
+#define POKE_CARBINK 0x2F4                  /*小碎钻*/
+#define POKE_GOOMY 0x2F5                    /*黏黏宝*/
+#define POKE_SLIGGOO 0x2F6                  /*黏美儿*/
+#define POKE_GOODRA 0x2F7                   /*黏美龙*/
+#define POKE_KLEFKI 0x2F8                   /*钥圈儿*/
+#define POKE_PHANTUMP 0x2F9                 /*小木灵*/
+#define POKE_TREVENANT 0x2FA                /*朽木妖*/
+#define POKE_PUMPKABOO 0x2FB                /*南瓜精*/
+#define POKE_GOURGEIST 0x2FC                /*南瓜怪人*/
+#define POKE_BERGMITE 0x2FD                 /*冰宝*/
+#define POKE_AVALUGG 0x2FE                  /*冰岩怪*/
+#define POKE_NOIBAT 0x2FF                   /*嗡蝠*/
+#define POKE_NOIVERN 0x300                  /*音波龙*/
+#define POKE_XERNEAS 0x301                  /*哲尔尼亚斯*/
+#define POKE_YVELTAL 0x302                  /*伊裴尔塔尔*/
+#define POKE_ZYGARDE_50 0x303               /*基格尔德*/
+#define POKE_DIANCIE 0x304                  /*蒂安希*/
+#define POKE_HOOPA_CONFINED 0x305           /*胡帕*/
+#define POKE_VOLCANION 0x306                /*波尔凯尼恩*/
+#define POKE_ROWLET 0x307                   /*木木枭*/
+#define POKE_DARTRIX 0x308                  /*投羽枭*/
+#define POKE_DECIDUEYE 0x309                /*狙射树枭*/
+#define POKE_LITTEN 0x30A                   /*火斑喵*/
+#define POKE_TORRACAT 0x30B                 /*炎热喵*/
+#define POKE_INCINEROAR 0x30C               /*炽焰咆哮虎*/
+#define POKE_POPPLIO 0x30D                  /*球球海狮*/
+#define POKE_BRIONNE 0x30E                  /*花漾海狮*/
+#define POKE_PRIMARINA 0x30F                /*西狮海壬*/
+#define POKE_PIKIPEK 0x310                  /*小笃儿*/
+#define POKE_TRUMBEAK 0x311                 /*喇叭啄鸟*/
+#define POKE_TOUCANNON 0x312                /*铳嘴大鸟*/
+#define POKE_YUNGOOS 0x313                  /*猫鼬少*/
+#define POKE_GUMSHOOS 0x314                 /*猫鼬探长*/
+#define POKE_GRUBBIN 0x315                  /*强颚鸡母虫*/
+#define POKE_CHARJABUG 0x316                /*虫电宝*/
+#define POKE_VIKAVOLT 0x317                 /*锹农炮虫*/
+#define POKE_CRABRAWLER 0x318               /*好胜蟹*/
+#define POKE_CRABOMINABLE 0x319             /*好胜毛蟹*/
+#define POKE_ORICORIO_META 0x31A            /*花舞鸟火*/
+#define POKE_CUTIEFLY 0x31B                 /*萌虻*/
+#define POKE_RIBOMBEE 0x31C                 /*蝶结萌虻*/
+#define POKE_ROCKRUFF 0x31D                 /*岩狗狗*/
+#define POKE_LYCANROC_MIDDAY 0x31E          /*鬃岩狼人白昼*/
+#define POKE_WISHIWASHI 0x31F               /*弱丁鱼*/
+#define POKE_MAREANIE 0x320                 /*好坏星*/
+#define POKE_TOXAPEX 0x321                  /*超坏星*/
+#define POKE_MUDBRAY 0x322                  /*泥驴仔*/
+#define POKE_MUDSDALE 0x323                 /*重泥挽马*/
+#define POKE_DEWPIDER 0x324                 /*滴蛛*/
+#define POKE_ARAQUANID 0x325                /*滴蛛霸*/
+#define POKE_FOMANTIS 0x326                 /*伪螳草*/
+#define POKE_LURANTIS 0x327                 /*兰螳花*/
+#define POKE_MORELULL 0x328                 /*睡睡菇*/
+#define POKE_SHIINOTIC 0x329                /*灯罩夜菇*/
+#define POKE_SALANDIT 0x32A                 /*夜盗火蜥*/
+#define POKE_SALAZZLE 0x32B                 /*焰后蜥*/
+#define POKE_STUFFUL 0x32C                  /*童偶熊*/
+#define POKE_BEWEAR 0x32D                   /*穿着熊*/
+#define POKE_BOUNSWEET 0x32E                /*甜竹竹*/
+#define POKE_STEENEE 0x32F                  /*甜舞妮*/
+#define POKE_TSAREENA 0x330                 /*甜冷美后*/
+#define POKE_COMFEY 0x331                   /*花疗环环*/
+#define POKE_ORANGURU 0x332                 /*智挥猩*/
+#define POKE_PASSIMIAN 0x333                /*投掷猴*/
+#define POKE_WIMPOD 0x334                   /*胆小虫*/
+#define POKE_GOLISOPOD 0x335                /*具甲武者*/
+#define POKE_SANDYGAST 0x336                /*沙丘娃*/
+#define POKE_PALLOSOAND 0x337               /*噬沙堡爷*/
+#define POKE_PYUKUMUKU 0x338                /*拳海参*/
+#define POKE_TYPE_NULL 0x339                /*属性:空*/
+#define POKE_SILVALLY 0x33A                 /*银伴战兽*/
+#define POKE_MINIOR 0x33B                   /*小陨星*/
+#define POKE_KOMALA 0x33C                   /*树枕尾熊*/
+#define POKE_TURTONATOR 0x33D               /*爆焰龟兽*/
+#define POKE_TOGEDAMARU 0x33E               /*托戈德玛尔*/
+#define POKE_MIMIKYU 0x33F                  /*谜拟Q*/
+#define POKE_BRUXISH 0x340                  /*磨牙彩皮鱼*/
+#define POKE_DRAMPA 0x341                   /*老翁龙*/
+#define POKE_DHELMISE 0x342                 /*破破舵轮*/
+#define POKE_JANGMOO 0x343                  /*心鳞宝*/
+#define POKE_HAKAMOO 0x344                  /*鳞甲龙*/
+#define POKE_KOMMOO 0x345                   /*杖尾鳞甲龙*/
+#define POKE_TAPU_KOKO 0x346                /*卡璞·鸣鸣*/
+#define POKE_TAPU_LELE 0x347                /*卡璞·蝶蝶*/
+#define POKE_TAPU_BULU 0x348                /*卡璞·哞哞*/
+#define POKE_TAPU_FINI 0x349                /*卡璞·鳍鳍*/
+#define POKE_COSMOG 0x34A                   /*科斯莫古*/
+#define POKE_COSMOEM 0x34B                  /*科斯莫姆*/
+#define POKE_SOLGALEO 0x34C                 /*索尔迦雷欧*/
+#define POKE_LUNALA 0x34D                   /*露奈雅拉*/
+#define POKE_NIHILEGO 0x34E                 /*虚吾伊德*/
+#define POKE_BUZZWOLE 0x34F                 /*爆肌蚊*/
+#define POKE_PHEROMOSA 0x350                /*费洛美螂*/
+#define POKE_XURKITREE 0x351                /*电束木*/
+#define POKE_CELESTEELA 0x352               /*铁火辉夜*/
+#define POKE_KARTANA 0x353                  /*纸御剑*/
+#define POKE_GUZZLORD 0x354                 /*恶食大王*/
+#define POKE_NECROZMA 0x355                 /*奈克洛兹玛*/
+#define POKE_MAGEARNA 0x356                 /*玛机雅娜*/
+#define POKE_MARSHADOW 0x357                /*玛夏多*/
+#define POKE_ALOLA_RATTATA 0x358            /*小拉达阿罗拉*/
+#define POKE_ALOLA_RATICATE 0x359           /*拉达阿罗拉*/
+#define POKE_ALOLA_RAICHU 0x35A             /*雷丘阿罗拉*/
+#define POKE_ALOLA_SANDSHREW 0x35B          /*穿山鼠阿罗拉*/
+#define POKE_ALOLA_SANDSLASH 0x35C          /*穿山王阿罗拉*/
+#define POKE_ALOLA_VULPIX 0x35D             /*六尾阿罗拉*/
+#define POKE_ALOLA_NINETALES 0x35E          /*九尾阿罗拉*/
+#define POKE_ALOLA_DIGLETT 0x35F            /*地鼠阿罗拉*/
+#define POKE_ALOLA_DUGTRIO 0x360            /*三地鼠阿罗拉*/
+#define POKE_ALOLA_MEOWTH 0x361             /*喵喵阿罗拉*/
+#define POKE_ALOLA_PERSIAN 0x362            /*猫老大阿罗拉*/
+#define POKE_ALOLA_GEODUDE 0x363            /*小拳石阿罗拉*/
+#define POKE_ALOLA_GRAVELER 0x364           /*隆隆石阿罗拉*/
+#define POKE_ALOLA_GOLEM 0x365              /*隆隆岩阿罗拉*/
+#define POKE_ALOLA_GRIMER 0x366             /*臭泥阿罗拉*/
+#define POKE_ALOLA_MUK 0x367                /*臭臭泥阿罗拉*/
+#define POKE_ALOLA_EXEGGUTOR 0x368          /*椰蛋树阿罗拉*/
+#define POKE_ALOLA_MAROWAK 0x369            /*嘎啦嘎啦阿罗拉*/
+#define POKE_ARCEUS_FIGHTING 0x36A          /*阿尔宙斯格*/
+#define POKE_ARCEUS_FLYING 0x36B            /*阿尔宙斯飞*/
+#define POKE_ARCEUS_POISON 0x36C            /*阿尔宙斯毒*/
+#define POKE_ARCEUS_GROUND 0x36D            /*阿尔宙斯地*/
+#define POKE_ARCEUS_ROCK 0x36E              /*阿尔宙斯岩*/
+#define POKE_ARCEUS_BUG 0x36F               /*阿尔宙斯虫*/
+#define POKE_ARCEUS_GHOST 0x370             /*阿尔宙斯鬼*/
+#define POKE_ARCEUS_STEEL 0x371             /*阿尔宙斯钢*/
+#define POKE_ARCEUS_FIRE 0x372              /*阿尔宙斯火*/
+#define POKE_ARCEUS_WATER 0x373             /*阿尔宙斯水*/
+#define POKE_ARCEUS_GRASS 0x374             /*阿尔宙斯草*/
+#define POKE_ARCEUS_ELECTRIC 0x375          /*阿尔宙斯电*/
+#define POKE_ARCEUS_PSYCHIC 0x376           /*阿尔宙斯超*/
+#define POKE_ARCEUS_ICE 0x377               /*阿尔宙斯冰*/
+#define POKE_ARCEUS_DRAGON 0x378            /*阿尔宙斯龙*/
+#define POKE_ARCEUS_DARK 0x379              /*阿尔宙斯恶*/
+#define POKE_ARCEUS_FAIRY 0x37A             /*阿尔宙斯仙*/
+#define POKE_PIKACHU_POP_STAR 0x37B         /*偶像皮卡丘*/
+#define POKE_PIKACHU_BELLE 0x37C            /*贵妇皮卡丘*/
+#define POKE_PIKACHU_ROCK_STAR 0x37D        /*摇滚皮卡丘*/
+#define POKE_PIKACHU_PHD 0x37E              /*博士皮卡丘*/
+#define POKE_PIKACHU_LIBRE 0x37F            /*假面皮卡丘*/
+#define POKE_PIKACHU_COSPLAY 0x380          /*换装皮卡丘*/
+#define POKE_SHAYMIN_SKY 0x381              /*谢米飞*/
+#define POKE_GIRATINA_ORIGIN 0x382          /*骑拉帝纳起源*/
+#define POKE_TORNADUS_THERIAN 0x383         /*龙卷云灵兽*/
+#define POKE_THUNDURUS_THERIAN 0x384        /*雷电云灵兽*/
+#define POKE_LANDORUS_THERIAN 0x385         /*土地云灵兽*/
+#define POKE_VENUSAUR_MEGA 0x386            /*Mega妙蛙花*/
+#define POKE_CHARIZARD_MEGA 0x387           /*Mega喷火龙X*/
+#define POKE_CHARIZARD_MEGA 0x388           /*Mega喷火龙Y*/
+#define POKE_BLASTOISE_MEGA 0x389           /*Mega水箭龟*/
+#define POKE_BEEDRILL_MEGA 0x38A            /*Mega大针蜂*/
+#define POKE_PIDGEOT_MEGA 0x38B             /*Mega大比鸟*/
+#define POKE_ALAKAZAM_MEGA 0x38C            /*Mega胡地*/
+#define POKE_SLOWBRO_MEGA 0x38D             /*Mega呆壳兽*/
+#define POKE_GENGAR_MEGA 0x38E              /*Mega耿鬼*/
+#define POKE_KANGASKHAN_MEGA 0x38F          /*Mega袋兽*/
+#define POKE_PINSIR_MEGA 0x390              /*Mega凯罗斯*/
+#define POKE_GYARADOS_MEGA 0x391            /*Mega暴鲤龙*/
+#define POKE_AERODACTYL_MEGA 0x392          /*Mega化石翼龙*/
+#define POKE_MEWTWO_MEGA 0x393              /*Mega超梦X*/
+#define POKE_MEWTWO_MEGA 0x394              /*Mega超梦Y*/
+#define POKE_AMPHAROS_MEGA 0x395            /*Mega电龙*/
+#define POKE_STEELIX_MEGA 0x396             /*Mega大钢蛇*/
+#define POKE_SCIZOR_MEGA 0x397              /*Mega巨钳螳螂*/
+#define POKE_HERACROSS_MEGA 0x398           /*Mega赫拉克罗斯*/
+#define POKE_HOUNDOOM_MEGA 0x399            /*Mega黑鲁加*/
+#define POKE_TYRANITAR_MEGA 0x39A           /*Mega班基拉斯*/
+#define POKE_SCEPTILE_MEGA 0x39B            /*Mega蜥蜴王*/
+#define POKE_BLAZIKEN_MEGA 0x39C            /*Mega火焰鸡*/
+#define POKE_SWAMPERT_MEGA 0x39D            /*Mega巨沼怪*/
+#define POKE_GARDEVOIR_MEGA 0x39E           /*Mega沙奈朵*/
+#define POKE_SABLEYE_MEGA 0x39F             /*Mega勾魂眼*/
+#define POKE_MAWILE_MEGA 0x3A0              /*Mega大嘴娃*/
+#define POKE_AGGRON_MEGA 0x3A1              /*Mega波士可多拉*/
+#define POKE_MEDICHAM_MEGA 0x3A2            /*Mega恰雷姆*/
+#define POKE_MANECTRIC_MEGA 0x3A3           /*Mega雷电兽*/
+#define POKE_SHARPEDO_MEGA 0x3A4            /*Mega巨牙鲨*/
+#define POKE_CAMERUPT_MEGA 0x3A5            /*Mega喷火驼*/
+#define POKE_ALTARIA_MEGA 0x3A6             /*Mega七夕青鸟*/
+#define POKE_BANETTE_MEGA 0x3A7             /*Mega诅咒娃娃*/
+#define POKE_ABSOL_MEGA 0x3A8               /*Mega阿勃梭鲁*/
+#define POKE_GLALIE_MEGA 0x3A9              /*Mega冰鬼护*/
+#define POKE_SALAMENCE_MEGA 0x3AA           /*Mega暴飞龙*/
+#define POKE_METAGROSS_MEGA 0x3AB           /*Mega巨金怪*/
+#define POKE_LATIAS_MEGA 0x3AC              /*Mega拉帝亚斯*/
+#define POKE_LATIOS_MEGA 0x3AD              /*Mega拉帝欧斯*/
+#define POKE_KYOGRE_PRIMAL 0x3AE            /*原始盖欧卡*/
+#define POKE_GROUDON_PRIMAL 0x3AF           /*原始固拉多*/
+#define POKE_RAYQUAZA_MEGA 0x3B0            /*Mega烈空坐*/
+#define POKE_LOPUNNY_MEGA 0x3B1             /*Mega长耳兔*/
+#define POKE_GARCHOMP_MEGA 0x3B2            /*Mega烈咬陆鲨*/
+#define POKE_LUCARIO_MEGA 0x3B3             /*Mega路卡利欧*/
+#define POKE_ABOMASNOW_MEGA 0x3B4           /*Mega暴雪王*/
+#define POKE_GALLADE_MEGA 0x3B5             /*Mega艾路雷朵*/
+#define POKE_AUDINO_MEGA 0x3B6              /*Mega差不多娃娃*/
+#define POKE_DIANCIE_MEGA 0x3B7             /*Mega蒂安希*/
+#define POKE_DEOXYS_ATTACK 0x3B8            /*代欧奇希斯攻*/
+#define POKE_DEOXYS_NORMAL 0x3B9            /*代欧奇希斯普*/
+#define POKE_DEOXYS_DEFENSE 0x3BA           /*代欧奇希斯防*/
+#define POKE_HEAT_ROTOM 0x3BB               /*加热洛托姆*/
+#define POKE_WASH_ROTOM 0x3BC               /*冲洗洛托姆*/
+#define POKE_FROST_ROTOM 0x3BD              /*结霜洛托姆*/
+#define POKE_FAN_ROTOM 0x3BE                /*旋转洛托姆*/
+#define POKE_MOW_ROTOM 0x3BF                /*除草洛托姆*/
+#define POKE_AEGISLASH_ATTACK 0x3C0         /*坚盾剑怪刀剑*/
+#define POKE_DARMANITAN_ZEN 0x3C1           /*达摩狒狒达摩*/
+#define POKE_WISHIWASHI_SCHOOL 0x3C2        /*弱丁鱼鱼群*/
+#define POKE_GRENINJA_ASH 0x3C3             /*甲贺忍蛙羁绊*/
+#define POKE_MEOWSTIC_FEMALE 0x3C4          /*超能妙喵母*/
+#define POKE_MELOETTA_PIROUETTE 0x3C5       /*美洛耶塔舞*/
+#define POKE_BASCULIN_BLUE 0x3C6            /*野蛮鲈鱼蓝*/
+#define POKE_ZYGARDE_100 0x3C7              /*基格尔德完全*/
+#define POKE_ZYGARDE_10 0x3C8               /*基格尔德10%*/
+#define POKE_HOOPA_UNBOUND 0x3C9            /*胡帕解放*/
+#define POKE_LYCANROC_MIDNIGHT 0x3CA        /*鬃岩狼人黑夜*/
+#define POKE_MINIOR_RED 0x3CB               /*小陨星核心红*/
+#define POKE_ORICORIO_PACHI 0x3CC           /*花舞鸟电*/
+#define POKE_ORICORIO_FURA 0x3CD            /*花舞鸟超*/
+#define POKE_ORICORIO_MAI 0x3CE             /*花舞鸟幽*/
+#define POKE_GENESECT_WATER 0x3CF           /*盖诺赛克特水*/
+#define POKE_GENESECT_ELECTRIC 0x3D0        /*盖诺赛克特电*/
+#define POKE_GENESECT_FIRE 0x3D1            /*盖诺赛克特火*/
+#define POKE_GENESECT_ICE 0x3D2             /*盖诺赛克特冰*/
+#define POKE_BURMY_TRASH 0x3D3              /*结草儿垃圾*/
+#define POKE_BURMY_SAND 0x3D4               /*结草儿砂土*/
+#define POKE_WORMADAM_TRASH 0x3D5           /*结草贵妇垃圾*/
+#define POKE_WORMADAM_SAND 0x3D6            /*结草贵妇砂土*/
+#define POKE_CHERRIM_SUNSHINE 0x3D7         /*樱花儿晴天*/
+#define POKE_SHELLOS_PINK 0x3D8             /*无壳海兔粉*/
+#define POKE_GASTRODON_PINK 0x3D9           /*海兔兽粉*/
+#define POKE_KELDEO_RESOLUTE 0x3DA          /*凯路迪欧觉悟*/
+#define POKE_FRILLISH_FEMALE 0x3DB          /*轻飘飘粉*/
+#define POKE_JELLICENT_FEMALE 0x3DC         /*胖嘟嘟粉*/
+#define POKE_PIKACHU_ORIGINAL 0x3DD         /*初代皮神*/
+#define POKE_PIKACHU_HOENN 0x3DE            /*丰缘皮神*/
+#define POKE_PIKACHU_SINNOH 0x3DF           /*神奥皮神*/
+#define POKE_PIKACHU_UNOVA 0x3E0            /*合众皮神*/
+#define POKE_PIKACHU_KALOS 0x3E1            /*卡洛斯皮神*/
+#define POKE_PIKACHU_ALOLA 0x3E2            /*阿罗拉皮神*/
+#define POKE_KYUREM_WHITE 0x3E3             /*焰白酋雷姆*/
+#define POKE_KYUREM_BLACK 0x3E4             /*暗黑酋雷姆*/
+#define POKE_MIMIKYU_BUSTED 0x3E5           /*谜拟Q现形*/
+#define POKE_LYCANROC_DUSK 0x3E6            /*鬃岩狼人黄昏*/
+#define POKE_PYROAR_FEMALE 0x3E7            /*火炎狮母*/
+#define POKE_MAGEARNA_ORIGINAL 0x3E8        /*玛机雅娜500年前*/
+#define POKE_ETERNAL_FLOWER 0x3E9           /*永恒之花*/
+#define POKE_SPIKY_EARED_PICHU 0x3EA        /*刺刺耳皮丘*/
+#define POKE_MINIOR_BLUE 0x3EB              /*小陨星核心浅蓝*/
+#define POKE_MINIOR_GREEN 0x3EC             /*小陨星核心绿*/
+#define POKE_MINIOR_INDIGO 0x3ED            /*小陨星核心蓝*/
+#define POKE_MINIOR_ORANGE 0x3EE            /*小陨星核心橙*/
+#define POKE_MINIOR_VIOLET 0x3EF            /*小陨星核心紫*/
+#define POKE_MINIOR_YELLOW 0x3F0            /*小陨星核心黄*/
+#define POKE_VIVILLON_POLAR 0x3F1           /*雪国花纹*/
+#define POKE_VIVILLON_TUNDRA 0x3F2          /*雪原花纹*/
+#define POKE_VIVILLON_CONTINENTAL 0x3F3     /*大陆花纹*/
+#define POKE_VIVILLON_GARDEN 0x3F4          /*庭园花纹*/
+#define POKE_VIVILLON_ELEGANT 0x3F5         /*高雅花纹*/
+#define POKE_VIVILLON_ICY_SNOW 0x3F6        /*冰雪花纹*/
+#define POKE_VIVILLON_MODERN 0x3F7          /*摩登花纹*/
+#define POKE_VIVILLON_MARINE 0x3F8          /*大海花纹*/
+#define POKE_VIVILLON_ARCHIPELAGO 0x3F9     /*群岛花纹*/
+#define POKE_VIVILLON_HIGH_PLAINS 0x3FA     /*荒野花纹*/
+#define POKE_VIVILLON_SANDSTORM 0x3FB       /*沙尘花纹*/
+#define POKE_VIVILLON_RIVER 0x3FC           /*大河花纹*/
+#define POKE_VIVILLON_MONSOON 0x3FD         /*骤雨花纹*/
+#define POKE_VIVILLON_SAVANNA 0x3FE         /*热带草原*/
+#define POKE_VIVILLON_SUN 0x3FF             /*太阳花纹*/
+#define POKE_VIVILLON_OCEAN 0x400           /*大洋花纹*/
+#define POKE_VIVILLON_JUNGLE 0x401          /*热带雨林*/
+#define POKE_VIVILLON_POKEBALL 0x402        /*球球花纹*/
+#define POKE_VIVILLON_FANCY 0x403           /*幻彩花纹*/
+#define POKE_FLABEBE_ORANGE 0x404           /*花蓓蓓橙*/
+#define POKE_FLABEBE_BLUE 0x405             /*花蓓蓓蓝*/
+#define POKE_FLABEBE_WHITE 0x406            /*花蓓蓓白*/
+#define POKE_FLABEBE_YELLOW 0x407           /*花蓓蓓黄*/
+#define POKE_FLOETTE_ORANGE 0x408           /*花叶蒂橙*/
+#define POKE_FLOETTE_BLUE 0x409             /*花叶蒂蓝*/
+#define POKE_FLOETTE_WHITE 0x40A            /*花叶蒂白*/
+#define POKE_FLOETTE_RED 0x40B              /*花叶蒂黄*/
+#define POKE_FLORGES_ORANGE 0x40C           /*花洁夫人橙*/
+#define POKE_FLORGES_BLUE 0x40D             /*花洁夫人蓝*/
+#define POKE_FLORGES_WHITE 0x40E            /*花洁夫人白*/
+#define POKE_FLORGES_YELLOW 0x40F           /*花洁夫人黄*/
+#define POKE_SILVALLY_FIGHTING 0x410        /*银伴战兽格*/
+#define POKE_SILVALLY_FLYING 0x411          /*银伴战兽飞*/
+#define POKE_SILVALLY_POISON 0x412          /*银伴战兽毒*/
+#define POKE_SILVALLY_GROUND 0x413          /*银伴战兽地*/
+#define POKE_SILVALLY_ROCK 0x414            /*银伴战兽岩*/
+#define POKE_SILVALLY_BUG 0x415             /*银伴战兽虫*/
+#define POKE_SILVALLY_GHOST 0x416           /*银伴战兽鬼*/
+#define POKE_SILVALLY_STEEL 0x417           /*银伴战兽钢*/
+#define POKE_SILVALLY_FIRE 0x418            /*银伴战兽火*/
+#define POKE_SILVALLY_WATER 0x419           /*银伴战兽水*/
+#define POKE_SILVALLY_GRASS 0x41A           /*银伴战兽草*/
+#define POKE_SILVALLY_ELECTRIC 0x41B        /*银伴战兽电*/
+#define POKE_SILVALLY_PSYCHIC 0x41C         /*银伴战兽超*/
+#define POKE_SILVALLY_ICE 0x41D             /*银伴战兽冰*/
+#define POKE_SILVALLY_DRAGON 0x41E          /*银伴战兽龙*/
+#define POKE_SILVALLY_DARK 0x41F            /*银伴战兽恶*/
+#define POKE_SILVALLY_FAIRY 0x420           /*银伴战兽仙*/
+#define POKE_XERNEAS_ACTIVE 0x421           /*哲尔尼亚斯活跃*/
+#define POKE_MARSHADOW_ATTACK 0x422         /*玛夏多用技能*/
+#define POKE_DEERLING_SUMMER 0x423          /*四季鹿夏*/
+#define POKE_DEERLING_AUTUMN 0x424          /*四季鹿秋*/
+#define POKE_DEERLING_WINTER 0x425          /*四季鹿冬*/
+#define POKE_SAWSBUCK_SUMMER 0x426          /*萌芽鹿夏*/
+#define POKE_SAWSBUCK_AUTUMN 0x427          /*萌芽鹿秋*/
+#define POKE_SAWSBUCK_WINTER 0x428          /*萌芽鹿冬*/
+#define POKE_UNFEZANT_FEMALE 0x429          /*高傲雉鸡母*/
+#define POKE_SOLGALEO_RADIANT_SUN 0x42A     /*索尔迦雷欧旭日*/
+#define POKE_LUNALA_FULL_MOON 0x42B         /*露奈雅拉满月*/
+#define POKE_DUSK_MANE 0x42C                /*黄昏之鬃*/
+#define POKE_DAWN_WINGS 0x42D               /*拂晓之翼*/
+#define POKE_ULTRA_NECROZMA 0x42E           /*究极奈克洛兹玛*/
+#define POKE_POIPOLE 0x42F                  /*毒贝比*/
+#define POKE_NAGANADEL 0x430                /*四颚针龙*/
+#define POKE_STAKATAKA 0x431                /*垒磊石*/
+#define POKE_BLACEPHALON 0x432              /*砰头小丑*/
+#define POKE_ZERAORA 0x433                  /*捷拉奥拉*/
+#define POKE_PIKACHU_PARTNER 0x434          /*20周年皮神*/
+#define POKE_ZYGARDE_CELL 0x435             /*细胞*/
+#define POKE_ZYGARDE_CORE 0x436             /*核心*/
+#define POKE_SHADOW_LUGIA 0x437             /*暗黑洛奇亚*/
+#define POKE_SHADOW_HOOH 0x438              /*黯黑凤凰*/
+#define POKE_FURFROU_HEART 0x439            /*心形造型*/
+#define POKE_FURFROU_STAR 0x43A             /*星形造型*/
+#define POKE_FURFROU_DIAMOND 0x43B          /*菱形造型*/
+#define POKE_FURFROU_DEBUTANTE 0x43C        /*淑女造型*/
+#define POKE_FURFROU_MATRON 0x43D           /*贵妇造型*/
+#define POKE_FURFROU_DANDY 0x43E            /*绅士造型*/
+#define POKE_FURFROU_QUEEN 0x43F            /*女王造型*/
+#define POKE_FURFROU_KABUKI 0x440           /*歌舞伎造型*/
+#define POKE_FURFROU_PHARAOH 0x441          /*国王造型*/
+#define POKE_CRYSTAL_ONIX 0x448             /*水晶大岩蛇*/
+#define POKE_AEROBONEDRAGON 0x490           /*化石骨龙*/
+#define POKE_MISSINGNO 0x493                /*MissingNo*/
+#define POKE_GHOSTGARA 0x497                /*亡灵*/
 
 #endif /* POKE_INDICES_H */

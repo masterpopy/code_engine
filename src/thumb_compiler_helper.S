@@ -142,9 +142,8 @@ free:
 	ldr r1, =(free_)
 	bx r1
 	.size free, . - free
-	
+
 	.global read_word
-	.thumb_func
 read_word:
 	movs r2, r0
 	ldrb r0, [r2, #3]
@@ -160,7 +159,6 @@ read_word:
 	bx lr
 	
 	.global rng
-	.thumb_func
 rng:
 	ldr r2, =(rand_seed)
 	ldr r1, [r2]
@@ -173,25 +171,21 @@ rng:
 	bx lr
 
     .global LZ77UnCompWram
-	.thumb_func
 LZ77UnCompWram:
     swi 0x11
     bx lr
 
     .global LZ77UnCompVram
-	.thumb_func
 LZ77UnCompVram:
     swi 0x12
     bx lr
 
     .global get_attributes
-    .thumb_func
 get_attributes:
     ldr r3, =(__get_attributes)
     bx r3
 
     .global set_attributes
-	.thumb_func
 set_attributes:
     ldr r3, =(__set_attributes)
     bx r3
