@@ -30,7 +30,7 @@ void atk07_final_dmg_calc(void)
     if (battle_execution_buffer) {return;}
     battlescripts_curr_instruction++;
 
-    if(battle_participants[bank_target].species == POKE_MIMIKKYU && check_ability(bank_target,ABILITY_DISGUISE)
+    if(battle_participants[bank_target].species == POKE_MIMIKYU && check_ability(bank_target,ABILITY_DISGUISE)
        && has_ability_effect(bank_target, 1, 1) && MOVE_WORKED && !affected_by_substitute(bank_target) && not_impostered(bank_target)) //JeremyZ
     {
         new_battlestruct->various.bust_mimikyu = 1;

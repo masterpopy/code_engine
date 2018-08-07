@@ -2585,7 +2585,7 @@ void ash_greninja_check(void)
     bool side = get_bank_side(bank_attacker);
 	if(!not_impostered(bank_attacker))
 		return;
-    if(battle_participants[bank_attacker].species==POKE_GRENJA && check_ability(bank_attacker,ABILITY_BATTLE_BOND) &&
+    if(battle_participants[bank_attacker].species==POKE_GRENINJA && check_ability(bank_attacker,ABILITY_BATTLE_BOND) &&
        (!(side && new_battlestruct->party_bit.battle_bond_ai & bits_table[battle_team_id_by_side[bank_attacker]]) ||
         (!side && new_battlestruct->party_bit.battle_bond_user & bits_table[battle_team_id_by_side[bank_attacker]])))
     {
