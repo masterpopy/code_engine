@@ -666,7 +666,7 @@ struct battle_flags
 
 extern struct battle_flags battle_flags;
 
-struct Pokemon
+struct pokemon
 {
 	u32 PID;
 	u32 OTID;

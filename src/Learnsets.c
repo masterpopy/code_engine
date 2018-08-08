@@ -965,7 +965,7 @@ GASTLY_MOVESET, //0497
 };
 
 const struct learnset* get_learset_table(struct pokemon* poke){
-	return learnset_table[get_attributes(poke, ATTR_SPECIES, 0)];
+	return learnset_table[poke->spieces];
 }
 
 
