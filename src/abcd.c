@@ -4,6 +4,8 @@
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 u32 get_battle_item_extra_param(u32 bank);
 struct task* get_task(u8 taskID);
+void* get_particle_pal(u16 ID);
+
 enum drive_types
 {
     DOUSE_DRIVE_EFFECT=1,
@@ -82,7 +84,6 @@ void* sub_0x8108ad4()//玩水
 	return (void*)0x8595268;
 }
 
-void* get_particle_pal(u16 ID);
 void  toxic_thread_task(u8 taskID)
 {
 	u16 particle_id = 0x27C3;
