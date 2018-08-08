@@ -172,7 +172,7 @@ void set_shell_charge(void)
 void revert_mega_to_normalform_new(u8 opponent_side)
 {
 	struct pokemon* poke_address = opponent_side ? party_opponent : party_player;
-	for (void* i = poke_address + 6; poke_address < i; poke_address)
+	for (struct pokemon* i = poke_address + 6; poke_address < i; poke_address++)
 	{
 		if (poke_address->current_hp && !battle_outcome)
 			continue;
