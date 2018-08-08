@@ -225,7 +225,7 @@ enum trainer_class{
 
 #define SEPARATE_COURSE (new_battlestruct->various.instruct_phase || new_battlestruct->various.secondary_dancer)
 //#define MOVE_WORKED !(move_outcome.failed || move_outcome.missed || move_outcome.not_affected)
-#define MOVE_WORKED !(*((u8*)&move_outcome) & 0b101001)
+#define MOVE_WORKED !(*((u8*) &move_outcome) & 0b101001)
 #define TARGET_TURN_DAMAGED (special_statuses[bank_target].moveturn_losthp)
 #define DAMAGING_MOVE(move) (move_table[move].split!=2)
 #define CHOICE_ITEM(effect) (effect == ITEM_EFFECT_CHOICEBAND || effect == ITEM_EFFECT_CHOICESCARF || effect == ITEM_EFFECT_CHOICESPECS)
