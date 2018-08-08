@@ -196,7 +196,7 @@ void set_mega_triggers_for_user_team(u8 bank)
 
 }
 
-void revert_mega_to_normalform(u8 teamID, u8 opponent_side)
+/*void revert_mega_to_normalform(u8 teamID, u8 opponent_side)
 {
 	struct pokemon* poke_address;
 	if (opponent_side)
@@ -222,5 +222,5 @@ void revert_mega_to_normalform(u8 teamID, u8 opponent_side)
 		calculate_stats_pokekmon(poke_address);
 	}
 	return;
-}
+}*/
 

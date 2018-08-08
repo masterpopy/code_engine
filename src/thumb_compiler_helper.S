@@ -86,7 +86,7 @@ __aeabi_idiv:
 	bx r3
 	.size __aeabi_idiv, . - __aeabi_idiv
 
-@È¡ÓàÊıÕâ¸ö·½·¨Á½¸ö²ÎÊı¶¼ÊÇÎŞ·ûºÅ
+@å–ä½™æ•°è¿™ä¸ªæ–¹æ³•ä¸¤ä¸ªå‚æ•°éƒ½æ˜¯æ— ç¬¦å·
     .syntax unified
     .global __aeabi_uidivmod
     .thumb_func
@@ -96,7 +96,7 @@ __aeabi_uidivmod:
 	bx r3
 	.size __aeabi_uidivmod, . - __aeabi_uidivmod
 
-@È¡ÓàÊıÆäÖĞÒ»¸öÓĞ·ûºÅ¾Í»á×ßÕâ¸ö£¬ÎÒÃÇ²»ĞèÒªÕâ¸ö·½·¨
+@å–ä½™æ•°å…¶ä¸­ä¸€ä¸ªæœ‰ç¬¦å·å°±ä¼šèµ°è¿™ä¸ªï¼Œæˆ‘ä»¬ä¸éœ€è¦è¿™ä¸ªæ–¹æ³•
     .syntax unified
     .global __aeabi_idivmod
     .thumb_func

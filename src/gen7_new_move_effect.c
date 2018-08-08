@@ -171,21 +171,16 @@ void set_shell_charge(void)
 //Mega Related
 void revert_mega_to_normalform_new(u8 opponent_side)
 {
-	struct pokemon* poke_address;
-	if (opponent_side)
-		poke_address = &party_opponent[0];
-	else
-		poke_address = &party_player[0];
-	for (u8 i = 0; i < 6; i++)
+	struct pokemon* poke_address = opponent_side ? party_opponent : party_player;
+	for (void* i = poke_address + 6; poke_address < i; poke_address)
 	{
-		u16 mega_current_species = get_attributes(poke_address + i, ATTR_SPECIES, 0);
-		u16 current_hp = get_attributes(poke_address + i, ATTR_CURRENT_HP, 0);
-		if (current_hp && !battle_outcome)
+		if (poke_address->current_hp && !battle_outcome)
 			continue;
 		u16 species_to_revert = 0;
+		u16 mega_current_species = poke_address->spieces;
 		const struct evolution_sub* evos = GET_EVO_TABLE(mega_current_species);
-		if (mega_current_species == 0x42E)
-			species_to_revert = ((u16*) sav1->balls_pocket)[i];
+		if (mega_current_species == POKE_ULTRA_NECROZMA)
+			species_to_revert = ((u16*) sav1->balls_pocket)[opponent_side];
 		for (u8 j = 0; j < NUM_OF_EVOS; j++)
 		{
 			if (evos[j].method == 0xFF)
@@ -196,8 +191,8 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 		}
 		if (species_to_revert)
 		{
-			set_attributes(poke_address + i, ATTR_SPECIES, &species_to_revert);
-			calculate_stats_pokekmon(poke_address + i);
+			set_attributes(poke_address, ATTR_SPECIES, &species_to_revert);
+			calculate_stats_pokekmon(poke_address);
 		}
 	}
 	return;
