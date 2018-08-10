@@ -42,10 +42,6 @@ void rain_task(u8 taskID)
 		move_anim_task_del(taskID);	
 }
 
-void test_u(){
-    move_anim_task_del(-3 % rng());
-}
-
 void move_anim_task_delete(u8 taskID)
 {
 	move_anim_task_del(taskID);
