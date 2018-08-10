@@ -63,11 +63,9 @@ void AnimTask_HideShow_Sprite(u8 taskID)
 	move_anim_task_delete(taskID);
 }
 
-u16 is_using_two_frame_anim(u16 species)
+bool is_using_two_frame_anim(u16 species)
 {
-    if (species == POKE_UNOWN || species == POKE_SPINDA || species == POKE_DEOXYS || species == POKE_CASTFORM || species > (POKE_ARCEUS - 1))
-        return 0;
-    return 1;
+    return !(species == POKE_UNOWN || species == POKE_SPINDA || species == POKE_DEOXYS || species == POKE_CASTFORM || species > POKE_SHAYMIN_LAND);
 }
 
 struct template const template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x85249cc, (struct frame **)0x82ec69c, 0,
