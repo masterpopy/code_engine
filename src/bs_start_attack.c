@@ -354,7 +354,8 @@ u8 check_mega_evo(u8 bank) {
         if (bank_mega_mode == 3 && mega_species == 0x3b0) //bank_mega_mode == 2
         {
             bs_execute(BS_FERVENT_EVO);
-        } else if (bank_mega_mode == 2) //bank_mega_mode == 1
+        }
+        else if (bank_mega_mode == 2) //bank_mega_mode == 1
         {
             ((u16*) sav1->balls_pocket)[banks_side] = attacker_struct->species;
             bs_execute(BS_LIGHT_UP);
@@ -379,19 +380,17 @@ u8 check_mega_evo(u8 bank) {
 bool check_focus(u8 bank) {
     bool is_bank_focusing = false;
     if (status3[bank].focus_punch_charge) {
-        is_bank_focusing = true;
         status3[bank].focus_punch_charge = 0;
-        bs_execute((void*) 0x82DB1FF);
+        Is_bank_focusing_true:
+		is_bank_focusing = true;
+        bs_execute((void*) 0x82DB1FF);//Needs Revision
     }
-        //JeremyZ
-    else if (new_battlestruct->bank_affecting[bank].beak_blast_charge == 1) {
-        is_bank_focusing = true;
+    else if (new_battlestruct->bank_affecting[bank].beak_blast_charge == (char)1) {//JeremyZ
         new_battlestruct->bank_affecting[bank].beak_blast_charge = 2;
-        bs_execute((void*) 0x82DB1FF); //Needs Revision
-    } else if (new_battlestruct->bank_affecting[bank].shell_trap_charge == 1) {
-        is_bank_focusing = true;
+		goto Is_bank_focusing_true;
+    } else if (new_battlestruct->bank_affecting[bank].shell_trap_charge == (char)1) {
         new_battlestruct->bank_affecting[bank].shell_trap_charge = 2;
-        bs_execute((void*) 0x82DB1FF); //Needs Revision
+		goto Is_bank_focusing_true;
     }//
     return is_bank_focusing;
 }
@@ -572,39 +571,39 @@ void bs_start_attack(void) {
         if (!not_impostered(bank_attacker))
             return;
         u16* species = &battle_participants[bank_attacker].species;
-        u8 change = 0;
+        //u8 change = 0;
         if (battle_participants[bank_attacker].ability_id == ABILITY_STANCE_CHANGE &&
             !battle_participants[bank_attacker].status2.transformed) {
             if (*species == POKE_AEGISLASH_BLADE && current_move == MOVE_KINGS_SHIELD) {
                 *species = POKE_AEGISLASH_SHIELD;
-                change = 1;
+                //change = 1;
             } else if (*species == POKE_AEGISLASH_SHIELD && DAMAGING_MOVE(current_move)) {
                 *species = POKE_AEGISLASH_BLADE;
-                change = 1;
+                //change = 1;
             }
         }//玛夏多
         else if (*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW)) {
             *species = 0x422;
-            change = 1;
+            //change = 1;
         }//索尔迦雷欧
         else if (*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO)) {
             *species = 0x42a;
-            change = 1;
+            //change = 1;
         }//露奈雅拉
         else if (*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA)) {
             *species = 0x42b;
-            change = 1;
+            //change = 1;
         }//哲尔尼亚斯
         else if (*species == 0x301 && current_move == MOVE_GEOMANCY) {
             *species = 0x421;
-            change = 1;
-        }
-        if (change) {
+            //change = 1;
+        } else return;
+        //if (change) {
             battle_scripting.active_bank = active_bank = bank_attacker;
             bb2_setattributes_in_battle(0, REQUEST_SPECIES_BATTLE, 0, 2, species);
             mark_buffer_bank_for_execution(active_bank);
             bs_push_current(&aegislash_change_bs);
-        }
+        //}
 
     } else
         battle_state_mode = 0xC;
