@@ -264,7 +264,7 @@ void set_attacking_move_type(void) {
         battle_stuff_ptr->dynamic_move_type = 0;
 }
 
-inline void clear_move_outcome(void) {
+void clear_move_outcome() {
     memset(&move_outcome, 0, sizeof(struct move_outcome));
 }
 
