@@ -1089,7 +1089,7 @@ u8 z_moves_power[800] = {0, 100, 100, 100, 100, 160, 100, 140, 140, 140, 100, 10
 0x97, 0x5E
 */
 
-struct config z_move_config[20] = {{0, 0},
+const struct config const z_move_config[20] = {{0, 0},
         {MLTS_ATK, 0x10}, {MLTS_ATK, 0x20}, {MLTS_ATK, 0x30}, {MLTS_DEF, 0x10}, {MLTS_SPATK, 0x10}, {MLTS_SPATK, 0x20},
         {MLTS_SPDEF, 0x10}, {MLTS_SPDEF, 0x20}, {MLTS_SPD, 0x10}, {MLTS_SPD, 0x20}, {MLTS_ACC, 0x10}, {MLTS_EVS, 0x10},
         {0x1F, 0x10}

@@ -162,7 +162,7 @@ void __attribute__((long_call)) battle_vblank(void);
 void __attribute__((long_call)) sub_80356D0(void);
 void __attribute__((long_call)) load_battletextbox_and_elements(void);
 bool __attribute__((long_call)) sub_8001AD4(void);
-u8 __attribute__((long_call)) gpu_sync_bg_show();
+u8 __attribute__((long_call)) gpu_sync_bg_show(u8 bgid);
 void __attribute__((long_call)) sub_8056A3C(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
 void __attribute__((long_call)) sub_8056B74(u8 arg0);
 void __attribute__((long_call)) sub_8056BAC(u8 arg0);

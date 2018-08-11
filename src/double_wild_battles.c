@@ -10,7 +10,7 @@ u8 get_bank_side(u8 bank);
 void setflag(u16 flag);
 bool time_check(u8 from, u8 to); //JeremyZ
 
-#pragma pack(push,1)
+/*#pragma pack(push,1)
 struct double_grass_tile{
     u16 tile_id;
     u8 percent;
@@ -19,12 +19,12 @@ struct double_grass_tile{
 
 struct double_grass_tile double_grass_tiles[DOUBLE_WILD_TILES] = {
     {0xD, 70}
-};
+};*/
 
 bool doubles_tile_check(void)
 {
-    u16 tile = cur_map_get_blockid_at(sav1->x_coords + 7, sav1->y_coords + 7);
-    for (u32 i = 0; i < DOUBLE_WILD_TILES; i++)
+    return cur_map_get_blockid_at(sav1->x_coords + 7, sav1->y_coords + 7) == 0xD && percent_chance(70);
+    /*for (u32 i = 0; i < DOUBLE_WILD_TILES; i++)
     {
         if (double_grass_tiles[i].tile_id == tile)
         {
@@ -33,7 +33,7 @@ bool doubles_tile_check(void)
             return 0;
         }
     }
-    return 0;
+    return 0;*/
 }
 
 bool wild_grass_battle(void* wild_data)
@@ -103,9 +103,7 @@ bool is_poke_caught(u16 species)
 
 bool is_poke_ultrabeast(u16 species)
 {
-	if ((species > 0x34D && species < 0x355) || (species > 0x42E && species < 0x433)) //JeremyZ
-		return 1;
-    return 0;
+	return ((species > 0x34D && species < 0x355) || (species > 0x42E && species < 0x433)); //JeremyZ
 }
 
 u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catching)
