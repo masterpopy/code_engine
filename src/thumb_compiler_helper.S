@@ -189,4 +189,9 @@ get_attributes:
 set_attributes:
     ldr r3, =(__set_attributes)
     bx r3
+
+    .global move_anim_task_delete
+move_anim_task_delete:
+    ldr r3, =(move_anim_task_del)
+    bx r3
 	

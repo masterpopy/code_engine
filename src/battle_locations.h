@@ -7,10 +7,16 @@ extern u16 battle_turn_random_no;
 extern u8 last_used_ability;
 extern u16 last_used_item;
 extern u8 banks_by_side[4];
-extern u8 bank_attacker;
+/*extern u8 bank_attacker;
 extern u8 bank_target;
 extern u8 bank_partner_atk;
-extern u8 bank_partner_def;
+extern u8 bank_partner_def;*/
+extern u8 bank_attacker0[4];
+#define bank_attacker bank_attacker0[0]
+#define bank_target bank_attacker0[1]
+#define bank_partner_atk bank_attacker0[2]
+#define bank_partner_def bank_attacker0[3]
+
 extern u8 crit_loc;
 extern u8 abilities_by_banks[4];
 extern u16 curr_move_BP;
@@ -31,7 +37,8 @@ extern u8 multihit_counter;
 extern u16 chosen_move_by_banks[4];
 extern u16 dynamic_base_power;
 extern u8 animation_bank_attacker;
-extern u8 animation_bank_target;
+//extern u8 animation_bank_target;
+#define  animation_bank_target ((u8*)&animation_bank_attacker)[1]
 extern u8 turn_order[4];
 extern u16 battle_team_id_by_side[4];
 extern u16 sketchable_move_used[4];

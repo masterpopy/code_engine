@@ -460,7 +460,7 @@ chosen_move_by_banks = 0x02024274;
 battle_team_id_by_side = 0x0202406E;
 battle_execution_buffer = 0x02024068;
 menu_choice_pbs = 0x202421C;
-
+bank_attacker0 = 0x0202420B;
 bank_attacker = 0x0202420B;
 bank_target = 0x0202420C;
 bank_partner_atk = 0x0202420D;
@@ -470,7 +470,7 @@ turn_order = 0x0202407E;
 battle_flags = 0x02022FEC;
 battle_communication_struct = 0x02024332;
 animation_bank_attacker = 0x02038436; 
-animation_bank_target = 0x02038437;
+/*animation_bank_target = 0x02038437;*/
 move_anim_cursor = 0x020383F0;
 another_active_bank = 0x0202420F;
 

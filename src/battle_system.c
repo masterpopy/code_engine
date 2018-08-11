@@ -2143,7 +2143,7 @@ bool can_poke_be_switched_into(u8 index, u8 bank)
     return 0;
 }
 
-bool ai_switch_wonderguard(void)
+bool ai_switch_wonderguard()
 {
     u8 worth = 0;
     u8 wonder_bank = 0;
@@ -2230,7 +2230,7 @@ bool tai_should_switch(void)
     }
     if (available_to_switch)
     {
-        if (ai_switch_perish_song() )
+        if (ai_switch_perish_song())
             return 1;
         if (ai_switch_wonderguard())
             return 1;

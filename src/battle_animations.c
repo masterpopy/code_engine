@@ -1,6 +1,7 @@
 #include "defines.h"
 
 u8 get_bank_side(u8 bank);
+void move_anim_task_delete(u8 taskID);
 
 struct task* get_task(u8 taskID)
 {
@@ -39,7 +40,7 @@ void AnimTask_megaevo_swap_sprite(u8 taskID)
         default: //restore position, update altitude
             poke_obj->pos1.x = curr_task->private[11];
             poke_update_altitude(animation_bank_attacker, battle_participants[animation_bank_attacker].species);
-            move_anim_task_del(taskID);
+            move_anim_task_delete(taskID);
             break;
     }
 }
@@ -66,7 +67,7 @@ void AnimTask_animate_pokemon(u8 taskID) //argument is bank
             task_find_id_by_funcptr(task_animate_poke_after_delay) == 0xFF)
         {
             poke_obj->callback = (void*) (task_get_priv_u32(taskID, 2));
-            move_anim_task_del(taskID);
+            move_anim_task_delete(taskID);
         }
     }
 }
@@ -76,13 +77,13 @@ void AnimTask_swapbanks(u8 taskID)
     u8 temp = animation_bank_attacker;
     animation_bank_attacker = animation_bank_target;
     animation_bank_target = temp;
-    move_anim_task_del(taskID);
+    move_anim_task_delete(taskID);
 }
 
 void ANIMTASK_prepare_statargs(u8 taskID)
 {
     if (new_battlestruct->various.dont_play_stat_anim)
-    { move_anim_task_del(taskID); }
+    { move_anim_task_delete(taskID); }
     else
     {
         u16 info = battle_graphics.graphics_data->anims_info->arg;
@@ -102,12 +103,12 @@ void AnimTask_target_attacks(u8 taskID)
 {
     animation_bank_attacker = bank_target;
     animation_bank_target = bank_attacker;
-    move_anim_task_del(taskID);
+    move_anim_task_delete(taskID);
 }
 
 void AnimTask_banks_to_partnerbanks(u8 taskID)
 {
     animation_bank_attacker = bank_partner_atk;
     animation_bank_target = bank_partner_def;
-    move_anim_task_del(taskID);
+    move_anim_task_delete(taskID);
 }

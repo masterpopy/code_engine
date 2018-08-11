@@ -5,6 +5,7 @@ u8 get_item_effect(u8 bank, u8 check_negating_effects);
 u32 get_battle_item_extra_param(u32 bank);
 struct task* get_task(u8 taskID);
 void* get_particle_pal(u16 ID);
+void move_anim_task_delete(u8 taskID);
 
 enum drive_types
 {
@@ -42,10 +43,7 @@ void rain_task(u8 taskID)
 		move_anim_task_del(taskID);	
 }
 
-void move_anim_task_delete(u8 taskID)
-{
-	move_anim_task_del(taskID);
-}
+
 
 
 void AnimTask_HideShow_Sprite(u8 taskID)
@@ -73,17 +71,14 @@ struct template const template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x
 
 void* sub_0x8108ad4()//玩水
 {
-	if(anim_arguments[0] == 0x14)
-		return (void*)&template_SLUDGE_WAVE;
-	return (void*)0x8595268;
+	return anim_arguments[0] == 0x14 ? (void*)&template_SLUDGE_WAVE : (void*)0x8595268;
 }
 
 void  toxic_thread_task(u8 taskID)
 {
-	u16 particle_id = 0x27C3;
-	u16* pal = get_particle_pal(particle_id);
+	u16* pal = get_particle_pal(0x27C3);
 	pal[4] = 0x7C1E;
-	pal = get_particle_pal(particle_id + 1);
+	pal = get_particle_pal(0x27C4);
 	pal[4] = 0x7C1E;
 	move_anim_task_delete(taskID);
 }
@@ -95,7 +90,7 @@ void STICKY_WEB_callback(struct object* obj)
 	obj->callback=(void*)0x811067d;
 }
 
-u16 DRIVER_PALS[] = {0x7EEC, 0x1F, 0x7f75, 0x277f};
+const u16 DRIVER_PALS[] = {0x7EEC, 0x1F, 0x7f75, 0x277f};
 
 void Techno_Blast_change_pal(u8 taskID)
 {
@@ -121,13 +116,13 @@ void hex_task(u8 taskID)
 void change_animation_bank_target()
 {
 	u8* bank= &animation_bank_attacker;
-	*(bank+1)=*bank;
+	bank[1] = bank[0];
 }
 
 void change_animation_bank_attacker()
 {
 	u8* bank= &animation_bank_attacker;
-	*bank=*(bank+1);
+	bank[0] = bank[1];
 }
 
 
