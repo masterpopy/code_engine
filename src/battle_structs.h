@@ -700,7 +700,7 @@ struct pokemon
 	u32 CatchPlace : 8;        // @0x08, where the Pokemon was caught
 	u32 CatchLevel : 7;        // @0x10, the Pokemon's level when it was caught
 	u32 GameVersion : 4;    // @0x17, game version (sapphire=1, ruby=2, emerald=3, fire=4, leaf=5)
-	u32 PokeBall : 4;        // @0x1B, Poke-Ball type (Write twice, why?)
+	u32 ball : 4;        // @0x1B, Poke-Ball type (Write twice, why?)
 	u32 unk1 : 1;            // @0x1F, 0
 	u32 iv_hp : 5;
 	u32 iv_atk : 5;
