@@ -680,7 +680,7 @@ struct pokemon
 	u16 spieces;
 	u16 item;
 	u32 exp;
-	char PointUp;
+	char pointup;
 	//char	PointUp1 : 2;	// @0x42,
 	//char	PointUp2 : 2;	// @0x44,
 	//char	PointUp3 : 2;	// @0x46,
@@ -695,11 +695,11 @@ struct pokemon
 	char evs_spatk;
 	char evs_spdef;
 	char beauty[0x06];        // 帅气 美丽 可爱 聪明 强壮 光滑
-	u32 PokeVirus : 4;        // @0x00, if any bit is set, ポケルスがかかる
-	u32 BlackPoint : 4;        // @0x04, if any bit is set, 黒い点がつき
-	u32 CatchPlace : 8;        // @0x08, where the Pokemon was caught
-	u32 CatchLevel : 7;        // @0x10, the Pokemon's level when it was caught
-	u32 GameVersion : 4;    // @0x17, game version (sapphire=1, ruby=2, emerald=3, fire=4, leaf=5)
+	u32 virus : 4;        // @0x00, if any bit is set, ポケルスがかかる
+	u32 blackpoint : 4;        // @0x04, if any bit is set, 黑点
+	u32 catchplace : 8;
+	u32 catchlevel : 7;
+	u32 gameversion : 4;    // @0x17, game version (sapphire=1, ruby=2, emerald=3, fire=4, leaf=5)
 	u32 ball : 4;        // @0x1B, Poke-Ball type (Write twice, why?)
 	u32 unk1 : 1;            // @0x1F, 0
 	u32 iv_hp : 5;
@@ -710,19 +710,19 @@ struct pokemon
 	u32 iv_spdef : 5;
 	u32 isEgg : 1;
 	u32 ability : 1;
-	u32 Ribbon0 : 3;
-	u32 Ribbon1 : 3;
-	u32 Ribbon2 : 3;
-	u32 Ribbon3 : 3;
-	u32 Ribbon4 : 3;
-	u32 Ribbon5 : 12;
+	u32 ribbon0 : 3;
+	u32 ribbon1 : 3;
+	u32 ribbon2 : 3;
+	u32 ribbon3 : 3;
+	u32 ribbon4 : 3;
+	u32 ribbon5 : 12;
 	u32 unk2 : 4;
-	u32 Obedience : 1;
+	u32 obedience : 1;
 	// only for active (in group) pokemons
-	char Status;        // bit0-2:异常状态,
+	char status;        // bit0-2:异常状态,
 	char unkonw[3];
 	char level;
-	char pokerus;
+	char pokerus;        // this is always 'FF'
 	u16 current_hp;
 	u16 total_hp;
 	u16 attack;

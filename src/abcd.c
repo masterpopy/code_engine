@@ -44,8 +44,6 @@ void rain_task(u8 taskID)
 }
 
 
-
-
 void AnimTask_HideShow_Sprite(u8 taskID)
 {
     u8 objID = objID_pbs_moveanimations[animation_bank_target];
