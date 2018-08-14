@@ -1,25 +1,22 @@
 #include "defines.h"
 
-
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 u32 get_battle_item_extra_param(u32 bank);
 struct task* get_task(u8 taskID);
 void* get_particle_pal(u16 ID);
 void move_anim_task_delete(u8 taskID);
 
-enum drive_types
-{
-    DOUSE_DRIVE_EFFECT=1,
-    BURN_DRIVE_EFFECT,
-    CHILL_DRIVE_EFFECT,
-    SHOCK_DRIVE_EFFECT
-};
 
 struct template rain_template = {0x27a6, 0x27a6, (struct sprite*)0x852496c, (struct frame **)0x8596BF8, 0,
 				(struct rotscale_frame**) 0x85961a4, (void*)0x810721d};
 struct template eletric_template = {0x2711, 0x2711, (struct sprite*)0x8524904, (struct frame **)0x82ec69c, 0,
 				(struct rotscale_frame**) 0x82ec6a8, (void*)0x810a9dd};//0x810a9dd
-				
+struct template const template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x85249cc, (struct frame **)0x82ec69c, 0,
+		(struct rotscale_frame**) 0x82ec6a8, (void*)0x810851d};
+const u16 DRIVER_PALS[] = {0x7EEC, 0x1F, 0x7f75, 0x277f};
+const struct coords8 v_creator_pos[] = {{-65,-35},{23,-35},{-65,1}};
+
+
 void rain_task(u8 taskID)
 {
 	u16* state_tracker = get_task(taskID)->private;
@@ -43,10 +40,16 @@ void rain_task(u8 taskID)
 		move_anim_task_del(taskID);	
 }
 
+void AnimTask_HideShow_Sprite0(u8 bank){
+	struct object* poke_obj = &objects[objID_pbs_moveanimations[bank]];
+	poke_obj->private[7] = poke_obj->pos1.x;
+	poke_obj->pos1.x = -64;
+}
+
 
 void AnimTask_HideShow_Sprite(u8 taskID)
 {
-    u8 objID = objID_pbs_moveanimations[animation_bank_target];
+    /*u8 objID = objID_pbs_moveanimations[animation_bank_target];
     struct object* poke_obj = &objects[objID];
     poke_obj->private[7] = poke_obj->pos1.x;
     poke_obj->pos1.x = -64;
@@ -54,8 +57,9 @@ void AnimTask_HideShow_Sprite(u8 taskID)
 	objID = objID_pbs_moveanimations[animation_bank_attacker];
     poke_obj = &objects[objID];
     poke_obj->private[7] = poke_obj->pos1.x;
-    poke_obj->pos1.x = -64;
-    
+    poke_obj->pos1.x = -64;*/
+	AnimTask_HideShow_Sprite0(animation_bank_target);
+	AnimTask_HideShow_Sprite0(animation_bank_attacker);
 	move_anim_task_delete(taskID);
 }
 
@@ -64,8 +68,7 @@ bool is_using_two_frame_anim(u16 species)
     return !(species == POKE_UNOWN || species == POKE_SPINDA || species == POKE_DEOXYS || species == POKE_CASTFORM || species > POKE_SHAYMIN_LAND);
 }
 
-struct template const template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x85249cc, (struct frame **)0x82ec69c, 0,
- (struct rotscale_frame**) 0x82ec6a8, (void*)0x810851d};
+
 
 void* sub_0x8108ad4()//玩水
 {
@@ -83,12 +86,11 @@ void  toxic_thread_task(u8 taskID)
 
 void STICKY_WEB_callback(struct object* obj)
 {
-	obj->pos1.x+=(s16)anim_arguments[0];
-	obj->pos1.y+=(s16)anim_arguments[1];
+	obj->pos1.x += (s16)anim_arguments[0];
+	obj->pos1.y += (s16)anim_arguments[1];
 	obj->callback=(void*)0x811067d;
 }
 
-const u16 DRIVER_PALS[] = {0x7EEC, 0x1F, 0x7f75, 0x277f};
 
 void Techno_Blast_change_pal(u8 taskID)
 {
@@ -145,7 +147,6 @@ void GEAR_GRIND_callback(struct object* obj)
 	obj->callback=(void*)0x815a1b1;
 }
 
-const struct coords8 v_creator_pos[] = {{-65,-35},{23,-35},{-65,1}};
 void v_creator_callback(struct object *self)
 {
 	/*switch(anim_arguments[5])

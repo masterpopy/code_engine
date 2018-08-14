@@ -966,5 +966,7 @@ const struct learnset* const learnset_table[ALL_POKES] = {
 		[0x498 ... ALL_POKES - 1] = EMPTYSLOT_MOVESET
 };
 
+#endif // BUILD_LEARNSETS
+
 
 #endif //ENGINE7_LEARNSETS_H

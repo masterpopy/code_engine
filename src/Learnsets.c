@@ -1,3 +1,5 @@
+#if BUILD_LEARNSETS == true
+
 #include "Learnsets.h"
 #include "static_references.h"
 
@@ -51,7 +53,7 @@ u8 relearable_moves(struct pokemon* poke, u16 moves_table[])
     {
         known_moves[j] = get_attributes(poke, ATTR_ATTACK_1 + j, 0);
     }*/
-	u16* known_moves = &poke->moves;
+	u16* known_moves = poke->moves;
 	const struct learnset* const poke_moveset = get_learset_table(poke);
 	u8 level = get_attributes(poke, ATTR_LEVEL, 0);
 	for (u8 i = 0; poke_moveset[i].move != MOVE_BLANK && poke_moveset[i].level != 0xFF; i++)
@@ -91,4 +93,4 @@ u8 learnsanydamagingmove(u16 poke)
     return 0;
 }
 
-#endif // BUILD_LEARNSETS
+#endif
