@@ -308,8 +308,8 @@ void atkEF_ballthrow(void)
                 poke_restore_pp(poke);
                 u32 value = 0;
                 set_attributes(poke, ATTR_STATUS_AILMENT, &value);
-                value = get_attributes(poke, ATTR_TOTAL_HP, 0);
-                set_attributes(poke, ATTR_CURRENT_HP, &value);
+                //value = get_attributes(poke, ATTR_TOTAL_HP, 0);
+                set_attributes(poke, ATTR_CURRENT_HP, &poke->total_hp);
             }
             #endif // EXPANDED_POKEBALLS
             if (sp86_update_pokemon_quantity() == 6)
