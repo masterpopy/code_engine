@@ -1975,7 +1975,7 @@ void atk88_drain_damage(void)
 		u8 percent_restore = move_table[current_move].arg1;
 		u8 rounding = move_table[current_move].arg2;
 		damage = percent_lose(hp_dealt, 100 - percent_restore);
-		if (rounding && umodsi3(hp_dealt, damage * ((100 * hp_dealt + 100 - percent_restore) / 100)) &&
+		if (rounding && __umodsi3(hp_dealt, damage * ((100 * hp_dealt + 100 - percent_restore) / 100)) &&
 				damage != hp_dealt)
 			damage++;
 		if (get_item_effect(bank_attacker, 1) == ITEM_EFFECT_BIGROOT)
@@ -2735,7 +2735,7 @@ void atkCC_nature_power(void)
 
 void atkB7_present_calc(void)
 {
-	u32 random_rumber = umodsi3(rng() + 100, 101);
+	u32 random_rumber = __umodsi3(rng() + 100, 101);
 	if (random_rumber < 40)
 		dynamic_base_power = 40;
 	else if (random_rumber < 70)

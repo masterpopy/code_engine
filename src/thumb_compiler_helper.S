@@ -151,9 +151,9 @@ rng:
 	lsrs r0, r0, #0x10
 	bx lr
 
-	.global umodsi3
-umodsi3:
-    ldr r3, = (__umodsi3)
+	.global __umodsi3
+__umodsi3:
+    ldr r3, = (__umodsi3__)
     bx r3
 
     .global LZ77UnCompWram
