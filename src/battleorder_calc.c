@@ -35,7 +35,7 @@ s8 get_bracket_alteration_factor(u8 bank, u8 item_effect) // will be used for qu
     switch(item_effect)
     {
     case ITEM_EFFECT_QUICKCLAW:
-        if(/*__umodsi3(battle_turn_random_no, 0x64)*/battle_turn_random_no % 100 < get_item_quality(battle_participants[bank].held_item))
+        if(umodsi3(battle_turn_random_no, 0x64) < get_item_quality(battle_participants[bank].held_item))
             return 1;
         break;
     case ITEM_EFFECT_CUSTAPBERRY:

@@ -260,6 +260,6 @@ void LZ77UnCompWram(const void* src, void* dst);
 void LZ77UnCompVram(const void* src, void* dst);
 u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
 void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
-
+u32 umodsi3(u32, u32);
 
 #endif /* VANILLA_FUNCTIONS */

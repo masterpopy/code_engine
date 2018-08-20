@@ -376,7 +376,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         common_effect = 1;
                     break;
                 case ABILITY_SHED_SKIN:
-                    if (rng() % 3 == 0)
+                    if (umodsi3(rng(), 3) == 0)
                         common_effect = 1;
                     break;
                 case ABILITY_PICKUP:
