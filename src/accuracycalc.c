@@ -15,11 +15,7 @@ bool does_move_make_contact(u16 move, u8 atk_bank);
 u8 find_move_in_table(u16 move, const u16* table_ptr);
 u8 check_ability(u8 bank, u8 ability);
 u8 get_bank_side(u8 bank);
-
-
-u32 random_value(u32 limit){
-    return rng() % limit;
-}
+u32 random_value(u32 limit);
 
 u8 protect_affects(u16 move, u8 set)
 {
@@ -220,7 +216,7 @@ void atk01_accuracy_calc(void)
             {
                 u16 accuracy = accuracy_percent(checked_move, bank_attacker, bank_target);
                 //if (__umodsi3(rng(), 100) + 1 > accuracy)
-                if(rng() % 100 + 1 > accuracy)
+                if(random_value(100) + 1 > accuracy)
                 {
                     move_outcome.missed = 1;
                     if (battle_flags.double_battle && (move_table[checked_move].target == 0x8 || move_table[checked_move].target == 0x20))
