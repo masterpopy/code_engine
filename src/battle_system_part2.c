@@ -168,16 +168,16 @@ void update_pokenick_in_healthbox(u8 objectID, struct pokemon* poke)
 
 u16 b_get_ball_to_throw(u8 bank)
 {
-    u8 pokeball;
+    u16 pokeball;
     if (new_battlestruct->bank_affecting[bank].illusion_on)
         pokeball = new_battlestruct->bank_affecting[bank].illusion_ball;
     else
         pokeball = get_attributes(get_bank_poke_ptr(bank), ATTR_POKEBALL, 0);
 
-#if EXPANDED_POKEBALLS == true
-    return pokeball;
+#if !EXPANDED_POKEBALLS
+		return itemID_to_ballID(pokeball);
 #else
-    return itemID_to_ballID(pokeball);
+		return pokeball;
 #endif
 }
 

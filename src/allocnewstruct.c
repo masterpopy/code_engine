@@ -4,7 +4,7 @@ void revert_form_change(u8 mega_revert, u8 teamID, u8 side, struct pokemon* poke
 u16 try_illusion_change(u8 bank, struct pokemon* poke);
 //struct pokemon* get_party_ptr(u8 bank);
 bool percent_chance(u8 percent);
-u16* get_variable_address(u16 var_id);
+void  __attribute__((long_call)) setflag(u32 flag);
 void alloc_new_struct(void)
 {
     battle_stuff_ptr = (struct battle_stuff*) malloc_and_clear(sizeof(struct battle_stuff));

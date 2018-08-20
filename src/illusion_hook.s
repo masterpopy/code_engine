@@ -23,8 +23,7 @@ illusion_on_player_switch_in:
 illusion_on_player_switch_in_get_normal_species:
 	mov r0, r5 @party address
 	mov r1, #0xB
-	ldr r2, =(get_attributes)
-	bl r2_caller
+	bl get_attributes
 	mov r8, r0
 illusion_on_player_switch_in_return:
 	pop {r5}
@@ -35,7 +34,7 @@ illusion_pokenick_hpbox:
 	mov r0, r7
 	bl update_pokenick_in_healthbox
 	ldr r0, =(0x08074278 | 1)
-	bx r0
+	bx  r0
 
 anim_spritechange_pal:
 	mov r0, r7 @bank
@@ -59,8 +58,7 @@ illusion_on_opponent_switch_in:
 illusion_on_opponent_switch_in_normal:
 	mov r0, r5
 	mov r1, #0xB
-	ldr r2, =(get_attributes)
-	bl r2_caller
+	bl get_attributes
 	mov r8, r0
 illusion_on_opponent_switch_in_return:
 	pop {r5}
@@ -77,8 +75,7 @@ illusion_playcorrectcry: @r7 = pokestruct, r5 = bank
 illusion_playcorrectcry_nottransformed:
 	mov r0, r7
 	mov r1, #0xB
-	ldr r2, =(get_attributes)
-	bl r2_caller
+	bl get_attributes
 	mov r9, r0
 illusion_playcorrectcry_return:
 	ldr r1, =(0x08075DE4 | 1)
