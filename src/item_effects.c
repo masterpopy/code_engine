@@ -77,13 +77,7 @@ void setup_berry_consume_buffers(u8 bank)
         new_battlestruct->party_bit.eaten_berry_opponent |= bit;
 }
 
-void call_based_on_mode(enum call_mode calling_mode, void* BS_ptr)
-{
-    if (calling_mode == BATTLE_TURN)
-        call_bc_move_exec(BS_ptr);
-    else if (calling_mode == MOVE_TURN)
-        bs_push_current(BS_ptr);
-}
+
 
 void call_based_on_mode2(enum call_mode calling_mode, void* BS_END2, void* BS_RET)
 {
@@ -91,6 +85,15 @@ void call_based_on_mode2(enum call_mode calling_mode, void* BS_END2, void* BS_RE
         call_bc_move_exec(BS_END2);
     else if (calling_mode == MOVE_TURN)
         bs_push_current(BS_RET);
+}
+
+void call_based_on_mode(enum call_mode calling_mode, void* BS_ptr)
+{
+    /*if (calling_mode == BATTLE_TURN)
+        call_bc_move_exec(BS_ptr);
+    else if (calling_mode == MOVE_TURN)
+        bs_push_current(BS_ptr);*/
+    call_based_on_mode2(calling_mode, BS_ptr, BS_ptr);
 }
 
 bool handle_leppa(u8 bank, u8 PP_to_restore, enum call_mode calling_mode, void* BS_END2, void* BS_RET)
