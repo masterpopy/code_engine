@@ -67,7 +67,8 @@ __gnu_thumb1_case_shi:
 	pop     {r0, r1}
 	bx      lr
     .size __gnu_thumb1_case_shi, . - __gnu_thumb1_case_shi
-	
+
+
     .syntax unified
     .global __aeabi_uidiv
     .thumb_func
@@ -86,27 +87,7 @@ __aeabi_idiv:
 	bx r3
 	.size __aeabi_idiv, . - __aeabi_idiv
 
-@取余数这个方法两个参数都是无符号
-    .syntax unified
-    .global __aeabi_uidivmod
-    .thumb_func
-    .type __aeabi_uidivmod,function
-__aeabi_uidivmod:
-	ldr r3, =(__umodsi3)
-	bx r3
-	.size __aeabi_uidivmod, . - __aeabi_uidivmod
 
-@取余数其中一个有符号就会走这个，我们不需要这个方法
-    .syntax unified
-    .global __aeabi_idivmod
-    .thumb_func
-    .type __aeabi_idivmod,function
-__aeabi_idivmod:
-	ldr r3, =(__umodsi3)
-    bx r3
-	.size __aeabi_idivmod, . - __aeabi_idivmod
-
-	
     .syntax unified
     .global memcpy
     .thumb_func
@@ -170,6 +151,11 @@ rng:
 	lsrs r0, r0, #0x10
 	bx lr
 
+	.global umodsi3
+umodsi3:
+    ldr r3, = (__umodsi3)
+    bx r3
+
     .global LZ77UnCompWram
 LZ77UnCompWram:
     swi 0x11
@@ -194,4 +180,12 @@ set_attributes:
 move_anim_task_delete:
     ldr r3, =(move_anim_task_del)
     bx r3
-	
+
+	.global random_value
+random_value:
+    push {r0,lr}
+    bl rng
+    ldr r1, [sp]
+    bl umodsi3
+    pop {r1,pc}
+
