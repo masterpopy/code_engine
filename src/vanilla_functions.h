@@ -256,8 +256,8 @@ void __attribute__((long_call)) bb34_battle_animation(u8 buffID, u8 animID, u16 
 //functions rewritten in ASM to get rid of long calls
 u32 read_word(const void*);
 u16 rng(void);
-void LZ77UnCompWram(const void* src, void* dst);
-void LZ77UnCompVram(const void* src, void* dst);
+//void LZ77UnCompWram(const void* src, void* dst);
+//void LZ77UnCompVram(const void* src, void* dst);
 u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
 void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
 u32 __umodsi3(u32, u32);
