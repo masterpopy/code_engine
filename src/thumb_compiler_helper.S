@@ -186,6 +186,6 @@ random_value:
     push {r0,lr}
     bl rng
     ldr r1, [sp]
-    bl umodsi3
+    bl __umodsi3
     pop {r1,pc}
 
