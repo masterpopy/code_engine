@@ -5,7 +5,7 @@ u16 get_transform_species(u8 bank);
 u16 get_airborne_state(u8 bank, u8 mode, u8 check_levitate);
 bool is_of_type(u8 bank, u8 type);
 u8 check_ability(u8 bank, u8 ability);
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 u8 learnsanydamagingmove(u16 poke);
 u16 type_effectiveness_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u8 effects_handling_and_recording);
 u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus);

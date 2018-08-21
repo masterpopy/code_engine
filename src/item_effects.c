@@ -9,7 +9,7 @@ u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted);
 bool check_ability(u8 bank, u8 ability);
 u8 get_item_effect(u8 bank, bool check_negating_effects);
 bool has_ability_effect(u8 bank, u8 mold_breaker);
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 bool percent_chance(u8 percent);
 bool does_move_make_contact(u16 move, u8 atk_bank);
 bool is_of_type(u8 bank, u8 type);

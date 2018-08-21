@@ -43,9 +43,7 @@ bool is_controlled_by_trainer_in_multi(u8 bank)
 
 void handle_outcome_trainerbattle(void)
 {
-    bool loss = 0;
-    if (battle_outcome == OUTCOME_DRAW || battle_outcome == OUTCOME_LOSS) {loss = 1;}
-
+    bool loss = battle_outcome == OUTCOME_DRAW || battle_outcome == OUTCOME_LOSS;
     bool pyramid = is_in_battle_pyramid();
     bool frontier = frontier_sth();
 
@@ -68,8 +66,7 @@ void handle_outcome_trainerbattle(void)
 
 void handle_outcome_rematchbattle(void)
 {
-    bool loss = 0;
-    if (battle_outcome == OUTCOME_DRAW || battle_outcome == OUTCOME_LOSS) {loss = 1;}
+    bool loss = battle_outcome == OUTCOME_DRAW || battle_outcome == OUTCOME_LOSS;
 
     if (var_8015_trainer_opponent_A == 0x400)
         set_callback2(c2_exit_to_overworld_1_continue_scripts_restart_music);

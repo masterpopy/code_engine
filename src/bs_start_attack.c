@@ -265,7 +265,8 @@ void set_attacking_move_type(void) {
 }
 
 void clear_move_outcome() {
-    memset(&move_outcome, 0, sizeof(struct move_outcome));
+    //memset(&move_outcome, 0, sizeof(struct move_outcome));
+	*((u16*)0x0202427C) = 0;//move_out_come
 }
 
 

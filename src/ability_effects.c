@@ -2,7 +2,7 @@
 #include "static_references.h"
 
 
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 bool is_of_type(u8 bank, u8 type);
 void set_type(u8 bank, u8 type);
 s8 get_move_position(u8 bank, u16 move);

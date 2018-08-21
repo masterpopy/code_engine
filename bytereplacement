@@ -57,7 +57,9 @@
 085CB172 36
 ##### Wild Double Battles
 ## When starting a wild battle don't clear battle flags(it's done automatically after the end of a battle)
-080B06D4 00 00
+## 但是这会影响红蓝飞机
+##080B06D4 00 00
+080B06D4 20 60
 ## battlescript switch out after fainting your poke also applies to double
 082DA7E3 09
 ## print bank target name instead of the first opponent pokemon
@@ -79,9 +81,9 @@
 085CAD78 AB FF
 ## hook into bs that asks you if you want to switch poke
 082DA82D 28
-#�� -> ��
+#爸 -> 被
 085CBFA6 78
-#������ʾ
+#道具显示
 09f0003a 00
 09f0003e 00
 #807084e 281c

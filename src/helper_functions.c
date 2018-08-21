@@ -24,7 +24,7 @@ void* get_move_battlescript_ptr(u32 move);
 u8 get_target_of_move(u16 move, u8 target_given, u8 adjust);
 void move_to_buff1(u16 move);
 u8 check_mega_evo(u8 bank);
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 u8 can_lose_item(u8 bank, u8 stickyhold_check, u8 sticky_message);
 u8 canlose_megastone(u8 bank, u16 item);
 void b_load_sprite_opponent(struct pokemon* poke, u8 bank);

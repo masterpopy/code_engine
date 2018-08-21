@@ -5,7 +5,7 @@ u16 try_illusion_change(u8 bank, struct pokemon* poke);
 //struct pokemon* get_party_ptr(u8 bank);
 bool percent_chance(u8 percent);
 void  __attribute__((long_call)) setflag(u32 flag);
-void alloc_new_struct(void)
+void alloc_new_struct(void)//b06d0
 {
     battle_stuff_ptr = (struct battle_stuff*) malloc_and_clear(sizeof(struct battle_stuff));
     new_battlestruct = (struct new_battle_struct*) malloc_and_clear(sizeof(struct new_battle_struct));
@@ -54,7 +54,7 @@ void try_burmy_change(u8 id, struct pokemon* poke)
         }
     }
 }
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 void free_new_struct(void)
 {
     //revert forms to default ones
@@ -90,9 +90,11 @@ void free_new_struct(void)
 				set_attributes(poke, ATTR_HELD_ITEM, &item);
 			}
 		}
-    }
+    }//u16* vars = sav1->vars;
+	//	*(vars + 0xF24) = 0;//0x31e4
     free(battle_stuff_ptr);
     free(new_battlestruct);
-	memset(&battle_flags, 0, sizeof(struct battle_flags));//0x8161f18;
-    battle_chosen_bg = 0;
+	//memset(&battle_flags, 0, sizeof(struct battle_flags));//0x8161f18;
+	//*((u32*)0x02022FEC) = 0;//battle_flags
+	battle_chosen_bg = 0;
 }

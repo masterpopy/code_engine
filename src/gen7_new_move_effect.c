@@ -3,7 +3,7 @@
 
 u16 apply_statboost(u16 stat, u8 boost);
 u8 get_bank_side(u8 bank);
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 u8 has_ability_effect(u8 bank, u8 mold_breaker);
 bool check_ability(u8 bank, u8 ability);
 void atk0C_datahpupdate(void);

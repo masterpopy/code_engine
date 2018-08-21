@@ -24,7 +24,7 @@ u16 type_effectiveness_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u8
 void set_attacking_move_type();
 //void revert_mega_to_normalform(u8 teamID, u8 opponent_side);
 void revert_mega_to_normalform_new(u8 opponent_side);
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 u8 calculate_effect_chance(u8 bank, u16 move);
 struct pokemon* get_bank_poke_ptr(u8 bank);
 u16 get_item_extra_param(u16 item);

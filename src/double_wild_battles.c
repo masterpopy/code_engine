@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "static_references.h"
 
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 bool percent_chance(u8 percent);
 struct pokemon* get_bank_poke_ptr(u8 bank);
 bool is_poke_valid(const struct pokemon* poke);
@@ -41,9 +41,9 @@ bool wild_grass_battle(void* wild_data)
     u8 battle = consider_creating_wild_poke(wild_data, 0, 3);
     if (GET_CUSTOMFLAG (DOUBLE_WILD_BATTLES_FLAG) && DOUBLE_WILD_BATTLES && battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
-        struct pokemon poke = party_opponent[0];
+		party_opponent[1] = party_opponent[0];
         while (!consider_creating_wild_poke(wild_data, 0, 3));
-        party_opponent[1] = poke;
+        //party_opponent[1] = poke;
         battle_flags.double_battle = 1;
     }
     return battle;

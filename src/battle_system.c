@@ -10,7 +10,7 @@ u16 get_item_extra_param(u16 item);
 u16 get_mega_species(u8 bank, u8 chosen_method);
 struct pokemon* get_party_ptr(u8 bank);
 bool is_poke_valid(struct pokemon* poke);
-bool is_bank_present(u8 bank);
+bool is_bank_present(u32 bank);
 u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special_cases_argument, u16 move);
 u8 count_party_pokemon(u8 bank);
 u8* get_slide_msg(u16 trainerID, u8 caseID);

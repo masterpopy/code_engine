@@ -65,7 +65,6 @@ void __attribute__((long_call)) prepare_fainting_cry(u8 bufferID);
 void __attribute__((long_call)) bx_move_chosing_menu();
 s16 __attribute__((long_call)) get_pingpong(s16 phase, s16 scale);
 u8 __attribute__((long_call)) gpu_pal_tags_index_of(u16 tag);
-void __attribute__((long_call)) set_callback2(void* ptr);
 void __attribute__((long_call)) set_obj_pos(u8 ID, u16 x, u16 y);
 void __attribute__((long_call)) c2_80777E8(void);
 void __attribute__((long_call)) obj_delete(struct object*);
@@ -260,6 +259,7 @@ u16 rng(void);
 //void LZ77UnCompVram(const void* src, void* dst);
 u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
 void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
+void set_callback2(void* ptr);
 u32 __umodsi3(u32, u32);
 
 #endif /* VANILLA_FUNCTIONS */
