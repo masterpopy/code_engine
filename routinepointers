@@ -14,3 +14,5 @@ bbo_06_return_poke_to_ball_new 0831C6E0
 bbp15_open_bag_new 0831C568
 bbp16_open_poke_menu_new 0831C56C
 bbp2F_trainer_ball_throw_new 0831C5D0
+##clear_battleflags
+wildbattle_clear_battleflags 080b0724

@@ -18,7 +18,7 @@ sub_0x8108ac0_task:
 	
 trainer_battle_music: @0x806e4a8 r3
 	push {r0-r2}
-	ldrh r0,=(0x40fe)
+	ldr r0,=0x40fe
 	ldr r1,=(0x0809D648|1)
 	bl r1_caller
 	mov r2, r0
@@ -47,4 +47,12 @@ get_active_poke_ability2:
 	bl get_poke_ability_active_bank
 	ldr r1, = (0x803ad6c|1)
 	bx r1
-	
+
+wildbattle_clear_battleflags:
+    ldr r4, =battle_flags
+    ldr r0, [r4]
+    lsl r0,  #31
+    lsr r0,  #31
+    str r0, [r4]
+    bx  lr
+
