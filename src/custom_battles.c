@@ -154,7 +154,6 @@ void custom_stevenliketag_battle(void) //var 8005 = opponentB ID, var 8006 partn
 
     //create partner pokes
     partner_trainer = var_8006;
-	player_backsprite = 7;
     memset(&party_player[3], 0, sizeof(struct pokemon) * 3);
     create_trainer_pokemon(&party_player[3], partner_trainer, 0);
 
