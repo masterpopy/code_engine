@@ -90,11 +90,9 @@ void free_new_struct(void)
 				set_attributes(poke, ATTR_HELD_ITEM, &item);
 			}
 		}
-    }//u16* vars = sav1->vars;
-	//	*(vars + 0xF24) = 0;//0x31e4
+    }
     free(battle_stuff_ptr);
     free(new_battlestruct);
-	//memset(&battle_flags, 0, sizeof(struct battle_flags));//0x8161f18;
 	//*((u32*)0x02022FEC) = 0;//battle_flags
 	battle_chosen_bg = 0;
 }
