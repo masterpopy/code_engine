@@ -256,8 +256,8 @@ enum trainer_class{
 #define BIT_GET(bit)(((1 << bit)))
 
 
-#define LZ77UnCompWram(src, dest) __asm__("mov r0, %0\n\t mov r1, %1\n\t swi 0x11\n\t" : :"r"(src), "r"(dest) : "r0","r1","r2","r3")
-#define LZ77UnCompVram(src, dest) __asm__("mov r0, %0\n\t mov r1, %1\n\t swi 0x12\n\t" : :"r"(src), "r"(dest) : "r0","r1","r2","r3")
+//#define LZ77UnCompWram(src, dest) __asm__("mov r0, %0\n\t mov r1, %1\n\t swi 0x11\n\t" : :"r"(src), "r"(dest) : "r0","r1","r2","r3")
+//#define LZ77UnCompVram(src, dest) __asm__("mov r0, %0\n\t mov r1, %1\n\t swi 0x12\n\t" : :"r"(src), "r"(dest) : "r0","r1","r2","r3")
 
 #define TRAINER_STEVEN 0xC03
 #define PARTNER_ANIMATES 0x8000
