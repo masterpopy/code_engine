@@ -1076,11 +1076,6 @@ TAI_SCRIPT_1D: @roaming
 	jumpifbytevarEQ 0x1 END_LOCATION
 	flee
 
-
-
-.align 2
-correct_0x2ddf6A:
-.hword 0xB6,0xC5,0xFFFF
 .align 4
 tai_command_table:
 .byte 0x79, 0x11, 0x13, 0x08	@0x0
@@ -1222,3 +1217,7 @@ tai_command_table:
 .word tai88_jumpifstatusmovesnotworthusing + 1 		@0x88
 .word tai89_jumpifsamestatboosts + 1							@0x89
 .word tai8A_can_use_multitarget_move + 1					@0x8A
+
+.align 2
+correct_0x2ddf6A:
+.hword 0xB6,0xC5,0xFFFF
