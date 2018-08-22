@@ -27,8 +27,11 @@ bool not_impostered(u8 bank);
 u32 get_battle_item_extra_param(u32 bank);
 bool is_immune_to_powder(u8 bank); //JeremyZ
 
-bool is_bank_present(u32 bank) {
-    return bank < no_of_all_banks && battle_participants[bank].current_hp && !(absent_bank_flags & BIT_GET(bank));
+bool is_bank_present(u8 bank)
+{
+	if((absent_bank_flags & BIT_GET(bank)) || battle_participants[bank].current_hp == 0 || bank >= no_of_all_banks)
+		return 0;
+	return 1;
 }
 
 
@@ -466,7 +469,7 @@ void* get_move_battlescript_ptr(u32 move) {
 }
 
 u16 get_move_from_pledge(u8 bank);
-
+void species_data_change(u8 bank, u16 new_species);
 void bs_start_attack(void) {
     u8 mode = 0;  //mode 0 - get type with adjusting chosen target
     //mode 1 - get type with calculating target from scratch

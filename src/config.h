@@ -41,28 +41,18 @@
 
 
 //form indexes
-//#define POKE_CHERRIM                474
-//#define POKE_CHERRIM_SUNSHINE       983
-//#define POKE_DARMANITAN             608
-//#define POKE_ZEN_MODE               961
-//#define POKE_AEGISLASH_BLADE        960
-//#define POKE_AEGISLASH_SHIELD       734
-//#define POKE_MELOETTA_ARIA          701
-//#define POKE_MELOETTA_PIROUETTE     965
-//#define POKE_BURMY_PLANT            465
-//#define POKE_BURMY_SAND             979
-//#define POKE_BURMY_TRASH            980
-//#define POKE_GRENJA                 0x2C7
-//#define POKE_ASH_GRENJA             0x3C3
-//#define POKE_WISHIWASHI             0x31F
-//#define POKE_WISHIWASHI_SCHOOL      0x3C2
-//#define POKE_ZYGARDE_10            	0x3C8
-//#define POKE_ZYGARDE_50             0x303
-//#define POKE_ZYGARDE_100            0x3C7
-//#define POKE_MINIOR_CORE            0x3CB
-//#define POKE_MINIOR_METEOR          0x33B
-//#define POKE_MIMIKKYU               0x33F
-//#define POKE_MIMIKKYU_BUSTED        0x3E5
+#define POKE_ZEN_MODE               961
+#define POKE_GRENJA                 0x2C7
+#define POKE_ASH_GRENJA             0x3C3
+#define POKE_WISHIWASHI             0x31F
+#define POKE_WISHIWASHI_SCHOOL      0x3C2
+#define POKE_ZYGARDE_10            	0x3C8
+#define POKE_ZYGARDE_50             0x303
+#define POKE_ZYGARDE_100            0x3C7
+#define POKE_MINIOR_CORE            0x3CB
+#define POKE_MINIOR_METEOR          0x33B
+#define POKE_MIMIKKYU               0x33F
+#define POKE_MIMIKKYU_BUSTED        0x3E5
 
 //only change these if you want to adjust the position of mega icons or if you want to change the HP bars
 #define SINGLES_HEALTHBOX_X 116

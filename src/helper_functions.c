@@ -427,7 +427,7 @@ void multiplestats_prepare_custom(void) //u8 bank, u8 stats to change, s8 by how
 bool do_multiple_stats(u8 stats_to_change, s8 by_how_much)
 {
     u16* done_stats = &new_battlestruct->various.var1;
-	
+
     for (u8 i = 0; i < 7; i++)
     {
         if (stats_to_change & BIT_GET(i) && !(*done_stats & BIT_GET(i)))
@@ -451,7 +451,7 @@ bool do_multiple_stats(u8 stats_to_change, s8 by_how_much)
 void shadow_thief()
 {
 	//new_battlestruct->various.var1 = 0;
-	new_battlestruct->various.var2 = 0;	
+	new_battlestruct->various.var2 = 0;
 	for (u8 i = 0; i < 7; i++)
 	{
 		u8 *def_stat = &battle_participants[bank_target].atk_buff + i;
@@ -473,7 +473,7 @@ void shadow_thief()
 			if(by_how_much>3)
 				by_how_much=3;
 			//battle_scripting.stat_changer = (by_how_much<<4) | bit_to_stat(BIT_GET(i));
-			battle_scripting.stat_changer = (by_how_much<<4) | (i+1);			
+			battle_scripting.stat_changer = (by_how_much<<4) | (i+1);
 			battlescripts_curr_instruction -= 3;
 			bs_push_current((void*)(read_word(battlescripts_curr_instruction + 3)));
 			if (new_battlestruct->various.var2 > 1)
@@ -481,7 +481,7 @@ void shadow_thief()
                 battle_scripting.stat_changer |= STAT_MULTIPLE;
             }
 			return;
-		}							
+		}
 	}
 
 	new_battlestruct->various.dont_play_stat_anim = 0;

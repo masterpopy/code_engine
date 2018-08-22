@@ -92,7 +92,6 @@ void bs_push_current(void* now)
 
 void execute_bs_command(void);
 
-
 void callback_push(void* curr_callback)
 {
 	struct battle_stack* stack = battle_resources->callback_stack;
