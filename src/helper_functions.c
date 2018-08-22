@@ -2557,12 +2557,12 @@ void in_battle_form_change(u8 bank, bool change_hp, bool change_type)
         calculate_stats_pokekmon(poke);
         update_hpbar(bank);
     }
-	
-    battle_poke->atk = get_attributes(poke, ATTR_ATTACK, 0);
-    battle_poke->def = get_attributes(poke, ATTR_DEFENCE, 0);
-    battle_poke->spd = get_attributes(poke, ATTR_SPEED, 0);
-    battle_poke->sp_atk = get_attributes(poke, ATTR_SPECIAL_ATTACK, 0);
-    battle_poke->sp_def = get_attributes(poke, ATTR_SPECIAL_DEFENCE, 0);
+	memcpy(&battle_poke->atk, &poke->attack, 10);
+//    battle_poke->atk = get_attributes(poke, ATTR_ATTACK, 0);
+//    battle_poke->def = get_attributes(poke, ATTR_DEFENCE, 0);
+//    battle_poke->spd = get_attributes(poke, ATTR_SPEED, 0);
+//    battle_poke->sp_atk = get_attributes(poke, ATTR_SPECIAL_ATTACK, 0);
+//    battle_poke->sp_def = get_attributes(poke, ATTR_SPECIAL_DEFENCE, 0);
 }
 
 void stat_only_form_change(void)
