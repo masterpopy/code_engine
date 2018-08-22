@@ -2798,7 +2798,7 @@ struct revert_form_struct
 	u16 base_form;
 };
 
-void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokemon* poke)
+void revert_form_change(bool mega_revert, u8 teamID, u8 side, struct pokemon* poke)
 {
 	if (mega_revert)
 		revert_mega_to_normalform_new(side);//JeremyZ
