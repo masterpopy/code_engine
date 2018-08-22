@@ -28,7 +28,7 @@ u32 get_battle_item_extra_param(u32 bank);
 bool is_immune_to_powder(u8 bank); //JeremyZ
 
 bool is_bank_present(u32 bank) {
-    return bank <= no_of_all_banks && battle_participants[bank].current_hp && !(absent_bank_flags & BIT_GET(bank));
+    return bank < no_of_all_banks && battle_participants[bank].current_hp && !(absent_bank_flags & BIT_GET(bank));
 }
 
 
