@@ -2187,7 +2187,8 @@ bool ai_switch_wonderguard()
             {
                 for (u8 j = 0; j < 4; j++)
                 {
-                    u16 move = get_attributes(&poke[i], ATTR_ATTACK_1 + j, 0);
+                    //u16 move = get_attributes(&poke[i], ATTR_ATTACK_1 + j, 0);
+					u16 move = poke[i].moves[j];
                     if (move && wonderguard_good_move(wonder_bank, self, move, 0))
                     {
                         battle_stuff_ptr->switchout_index[self] = j;
