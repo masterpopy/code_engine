@@ -16,7 +16,7 @@ sub_0x8108ac0_task:
 	ldr r3, =(0x8108ae0|1)
 	bx r3
 	
-trainer_battle_music: @0x806e4a8 r3
+trainer_battle_music: //0x806e4a8 r3
 	push {r0-r2}
 	ldr r0,=0x40fe
 	ldr r1,=(0x0809D648|1)
@@ -55,4 +55,25 @@ wildbattle_clear_battleflags:
     lsr r0,  #31
     str r0, [r4]
     bx  lr
+
+.global toxic_thread_task
+toxic_thread_task:
+    push {r0,r4,lr}
+    ldr r4,=toxic_thread_task_data
+    ldrh r0,[r4]
+    bl get_particle_pal
+    ldrh r1,[r4,#2]
+    strh r1,[r0,#8]
+    ldrh r0,[r4]
+    add r0, #1
+    bl get_particle_pal
+    ldrh r1,[r4,#2]
+    strh r1,[r0,#8]
+    ldr r0,[sp]
+    bl move_anim_task_delete
+    pop {r0,r4,pc}
+
+toxic_thread_task_data:
+.hword 0x27C3, 0x7C1E
+
 
