@@ -41,7 +41,7 @@
 
 
 //form indexes
-#define POKE_ZEN_MODE               961
+/*#define POKE_ZEN_MODE               961
 #define POKE_GRENJA                 0x2C7
 #define POKE_ASH_GRENJA             0x3C3
 #define POKE_WISHIWASHI             0x31F
@@ -52,7 +52,7 @@
 #define POKE_MINIOR_CORE            0x3CB
 #define POKE_MINIOR_METEOR          0x33B
 #define POKE_MIMIKKYU               0x33F
-#define POKE_MIMIKKYU_BUSTED        0x3E5
+#define POKE_MIMIKKYU_BUSTED        0x3E5*/
 
 //only change these if you want to adjust the position of mega icons or if you want to change the HP bars
 #define SINGLES_HEALTHBOX_X 116

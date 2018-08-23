@@ -151,18 +151,12 @@ void update_pokenick_in_healthbox(u8 objectID, struct pokemon* poke)
         gender = POKE_GENDERLESS;
     }
     const u8* gender_sign = NULL;
-    switch (gender)
-    {
-    case POKE_MALE:
-        gender_sign = nick_male_sign;
-        break;
-    case POKE_FEMALE:
-        gender_sign = nick_female_sign;
-        break;
-    case POKE_GENDERLESS:
-        gender_sign = nick_genderless_sign;
-        break;
-    }
+    if(gender == POKE_MALE)
+		gender_sign = nick_male_sign;
+    else if(gender == POKE_FEMALE)
+    	gender_sign = nick_female_sign;
+    else// if(gender == POKE_GENDERLESS)
+		gender_sign = nick_genderless_sign;
     str_append(string_loc, gender_sign);
 }
 
@@ -303,7 +297,7 @@ u8 count_alive_mons(u8 bank)
     for (u8 i = 0; i < 6; i++)
     {
         struct pokemon* checking_poke = &poke[i];
-        if (is_poke_valid(checking_poke) && get_attributes(checking_poke, ATTR_CURRENT_HP, 0))
+        if (is_poke_valid(checking_poke) && checking_poke->current_hp)
             pokes_amount++;
     }
     return pokes_amount;
