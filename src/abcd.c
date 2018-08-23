@@ -75,12 +75,21 @@ void* sub_0x8108ad4()//玩水
 	return anim_arguments[0] == 0x14 ? (void*)&template_SLUDGE_WAVE : (void*)0x8595268;
 }
 
+struct u16_data{
+	u16 pal_id;
+	u16 pal_data;
+};
+
+const struct u16_data toxic_thread_task_data = {0x27C3, 0x7C1E};
+
+
 void  toxic_thread_task(u8 taskID)
 {
-	u16* pal = get_particle_pal(0x27C3);
-	pal[4] = 0x7C1E;
-	pal = get_particle_pal(0x27C4);
-	pal[4] = 0x7C1E;
+	struct u16_data* toxic_thread_task_data0 = &toxic_thread_task_data;
+	u16* pal = get_particle_pal(toxic_thread_task_data0->pal_id);
+	pal[4] = toxic_thread_task_data0->pal_data;
+	pal = get_particle_pal(toxic_thread_task_data0->pal_id + 1);
+	pal[4] = toxic_thread_task_data0->pal_data;
 	move_anim_task_delete(taskID);
 }
 
