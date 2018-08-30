@@ -2850,7 +2850,7 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, struct pokemon* po
 					species = revert_mapping[i].base_form;
 					if (species == POKE_MINIOR_CORE)
 					{
-						u8 change = random_value(7)/*__umodsi3(rng(), 7)*/;
+						u8 change = __umodsi3(get_attributes(poke, ATTR_PID, 0), 7);/*random_value(7)*/
 						if (change)
 							species = 0x3EA + change;
 					}
