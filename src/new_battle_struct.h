@@ -73,6 +73,7 @@ struct bank_affecting{
 	u8 shell_trap_charge : 2; //JeremyZ
 	u8 lastmove_fail : 1; //JeremyZ
 	u8 head_blown : 1; //JeremyZ
+	u8 stockpile_counter : 2; //JeremyZ	
 };
 
 struct side_affecting{

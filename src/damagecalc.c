@@ -429,8 +429,9 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
             }
             break;
         case MOVE_SPIT_UP:
-            base_power = 100 * disable_structs[atk_bank].stockpile_counter;
-            disable_structs[atk_bank].stockpile_counter = 0;
+            //base_power = 100 * disable_structs[atk_bank].stockpile_counter;
+            //disable_structs[atk_bank].stockpile_counter = 0;
+			base_power = 100 * new_battlestruct->bank_affecting[atk_bank].stockpile_counter;
             break;
         case MOVE_REVENGE:
         case MOVE_AVALANCHE: {

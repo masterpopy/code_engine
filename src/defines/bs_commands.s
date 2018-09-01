@@ -74,6 +74,13 @@
 .word \jumpifuserheadblown_address
 .endm
 
+@JeremyZ
+.macro jumpifnostockpile jumpifnostockpile_address
+.byte 0x83
+.hword 172
+.word \jumpifnostockpile_address
+.endm
+
 @@@@@@@@@@@@@@@@@ Macro
 
 @@ Delay

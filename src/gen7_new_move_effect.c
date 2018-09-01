@@ -205,3 +205,11 @@ void print_start_z(void)
 	battle_communication_struct.is_message_displayed = 1;
 }
 
+//Spit Up
+void jumpifnostockpile(void)
+{
+	if (new_battlestruct->bank_affecting[bank_attacker].stockpile_counter) //Not Jump
+		battlescripts_curr_instruction += 4;
+	else //Jump
+		battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
+}

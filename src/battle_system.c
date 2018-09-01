@@ -1141,7 +1141,7 @@ bool battle_turn_move_effects(void)
                                 {
                                     effect = 1;									
                                     new_species = POKE_MINIOR_CORE;
-									u8 change = random_value(7)/* __umodsi3(rng(), 7)*/;
+									u8 change = __umodsi3(battle_participants[activeBank].pid, 7);/*random_value(7)*/
 									if (change)
 										new_species=0x3EA+change;
                                     //battle_scripting.active_bank=activeBank;

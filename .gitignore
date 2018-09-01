@@ -5,3 +5,4 @@
 *.sgm
 *.py
 build/
+offsets.ini

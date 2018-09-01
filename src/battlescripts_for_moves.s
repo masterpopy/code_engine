@@ -814,6 +814,7 @@ SPIT_UP:
 	ppreduce
 	accuracycheck SPITUP_FAIL 0x0
 	jumpiftypenotaffected SPITUP_FAIL
+	jumpifnostockpile SPITUP_FAIL @JeremyZ
 	critcalc
 	damagecalc
 	damageadjustment
