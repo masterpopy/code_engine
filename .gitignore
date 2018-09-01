@@ -6,3 +6,4 @@
 *.py
 build/
 offsets.ini
+scripts/
