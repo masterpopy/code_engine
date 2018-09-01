@@ -628,7 +628,7 @@ struct side_timer
 
 extern struct side_timer side_timers[2];
 
-struct battle_flags
+struct battleflags
 {
 	u32 double_battle : 1; //1
 	u32 link : 1; //2
@@ -664,7 +664,7 @@ struct battle_flags
 	u32 flag_x80000000 : 1; //0x80 000 000
 };
 
-extern struct battle_flags battle_flags;
+extern struct battleflags battle_flags;
 
 struct pokemon
 {

@@ -1448,7 +1448,7 @@ void b_buffer_string(u16 strID)
 			break;
 	}
 
-	b_strcpy_decode(StrPtr, displayed_string_in_battle);
+	b_strcpy_decode(StrPtr, displayed_string_in_battle);//2daaf6
 }
 
 void prep_string(u16 strID, u8 bank)

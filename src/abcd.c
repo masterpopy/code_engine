@@ -5,6 +5,8 @@ u32 get_battle_item_extra_param(u32 bank);
 struct task* get_task(u8 taskID);
 void* get_particle_pal(u16 ID);
 void move_anim_task_delete(u8 taskID);
+void change_animation_bank_attacker();
+void change_animation_bank_target();
 
 
 struct template rain_template = {0x27a6, 0x27a6, (struct sprite*)0x852496c, (struct frame **)0x8596BF8, 0,
@@ -12,19 +14,35 @@ struct template rain_template = {0x27a6, 0x27a6, (struct sprite*)0x852496c, (str
 struct template eletric_template = {0x2711, 0x2711, (struct sprite*)0x8524904, (struct frame **)0x82ec69c, 0,
 				(struct rotscale_frame**) 0x82ec6a8, (void*)0x810a9dd};//0x810a9dd
 struct template const template_SLUDGE_WAVE = {0x27a6, 0x27a6, (struct sprite*)0x85249cc, (struct frame **)0x82ec69c, 0,
-		(struct rotscale_frame**) 0x82ec6a8, (void*)0x810851d};
+				(struct rotscale_frame**) 0x82ec6a8, (void*)0x810851d};
 const u16 DRIVER_PALS[] = {0x7EEC, 0x1F, 0x7f75, 0x277f};
 const struct coords8 v_creator_pos[] = {{-65,-35},{23,-35},{-65,1}};
 
+
+void after_hook(){
+	no_of_all_banks = 4;
+	//absent_bank_flags |= BIT_GET(2);
+	// battle_execution_buffer = 02024068;
+	// absent_bank_flags = 02024210;
+	//battle_flags = 02022FEC;
+	battle_flags.double_battle = 1;
+	banks_by_side[0] = 0;
+	banks_by_side[1] = 1;
+	banks_by_side[2] = 2;
+	banks_by_side[3] = 3;
+	tasks_for_banks[2] = (void*)0x0805748D;
+	tasks_for_banks[1] = tasks_for_banks[3] = (void*)0x0805F165;
+}
 
 void rain_task(u8 taskID)
 {
 	u16* state_tracker = get_task(taskID)->private;
     if (*state_tracker == 0)
     {
-		*(state_tracker + 1) = anim_arguments[0];
+    	memcpy(state_tracker + 1, anim_arguments, 6);
+		/**(state_tracker + 1) = anim_arguments[0];
 		*(state_tracker + 2) = anim_arguments[1];
-		*(state_tracker + 3) = anim_arguments[2];
+		*(state_tracker + 3) = anim_arguments[2];*/
 	}
 	(*state_tracker)++;
 	if(task_0x82e7651(*state_tracker, *(state_tracker + 2)))
@@ -37,7 +55,7 @@ void rain_task(u8 taskID)
 		template_instanciate_forward_search(template, x, y, 4);
 	}
 	if(*state_tracker == *(state_tracker + 3))
-		move_anim_task_del(taskID);	
+		move_anim_task_delete(taskID);
 }
 
 void AnimTask_HideShow_Sprite0(u8 bank){
@@ -75,24 +93,6 @@ void* sub_0x8108ad4()//玩水
 	return anim_arguments[0] == 0x14 ? (void*)&template_SLUDGE_WAVE : (void*)0x8595268;
 }
 
-struct u16_data{
-	u16 pal_id;
-	u16 pal_data;
-};
-
-const struct u16_data toxic_thread_task_data = {0x27C3, 0x7C1E};
-
-
-void  toxic_thread_task(u8 taskID)
-{
-	struct u16_data* toxic_thread_task_data0 = &toxic_thread_task_data;
-	u16* pal = get_particle_pal(toxic_thread_task_data0->pal_id);
-	pal[4] = toxic_thread_task_data0->pal_data;
-	pal = get_particle_pal(toxic_thread_task_data0->pal_id + 1);
-	pal[4] = toxic_thread_task_data0->pal_data;
-	move_anim_task_delete(taskID);
-}
-
 void STICKY_WEB_callback(struct object* obj)
 {
 	obj->pos1.x += (s16)anim_arguments[0];
@@ -122,7 +122,7 @@ void hex_task(u8 taskID)
     move_anim_task_delete(taskID);
 }
 
-void change_animation_bank_target()
+/*void change_animation_bank_target()
 {
 	u8* bank= &animation_bank_attacker;
 	bank[1] = bank[0];
@@ -132,7 +132,7 @@ void change_animation_bank_attacker()
 {
 	u8* bank= &animation_bank_attacker;
 	bank[0] = bank[1];
-}
+}*/
 
 
 void foul_play_task(u8 taskID)
@@ -199,9 +199,7 @@ u8 stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats)
 bool can_change_stat(u8 bank, bool self_inflicted, u8 statchanger)
 {
 	battle_scripting.stat_changer = statchanger;
-	if (change_stats(bank, stat_get_bits_arg(self_inflicted, 0, 0), 0) == STAT_CHANGED)
-		return 1;
-	return 0;
+	return change_stats(bank, stat_get_bits_arg(self_inflicted, 0, 0), 0) == STAT_CHANGED;
 }
 
 const struct evolution_sub* GET_EVO_TABLE(u16 species){

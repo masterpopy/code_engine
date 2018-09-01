@@ -17,23 +17,27 @@ bool is_in_tag_battle(void)
     return 0;
 }
 
+enum BANK_IDENTITY{
+    AWAYS_PLAYER, AI, PARTNER, AI_PARTNER
+};
+
 bool is_controlled_by_trainer_in_multi(u8 bank)
 {
     if (battle_flags.player_partner || battle_flags.multibattle)
     {
         switch (get_bank_identity(bank))
         {
-        case 0: //always player
+        case AWAYS_PLAYER: //always player
             return 1;
-        case 1: //ai
+        case AI: //ai
             if (battle_flags.trainer)
                 return 1;
             return 0;
-        case 2: //partner
+        case PARTNER: //partner
             if (battle_flags.double_battle && (battle_flags.player_ingame_partner || battle_flags.player_partner))
                 return 1;
             return 0;
-        case 3: //ai partner
+        case AI_PARTNER: //ai partner
             if (battle_flags.double_battle && battle_flags.multibattle)
                 return 1;
         }

@@ -1,3 +1,5 @@
+get_bank_identity0 = 0x080A6A44|1;
+get_bank_side0 = 0x080A6A30|1;
 pokemon_slot_purge = 0x08067A8C|1;
 /*ani_tasks*/
 task_0x82e7651 = 0x82e7651;

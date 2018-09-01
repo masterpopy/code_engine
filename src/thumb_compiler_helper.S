@@ -194,3 +194,12 @@ random_value:
     bl __umodsi3
     pop {r1,pc}
 
+    .global get_bank_side
+get_bank_side:
+    ldr r3, =get_bank_side0
+    bx r3
+
+    .global get_bank_identity
+get_bank_identity:
+     ldr r3, =get_bank_identity0
+     bx r3
