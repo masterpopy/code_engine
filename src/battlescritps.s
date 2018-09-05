@@ -4,9 +4,9 @@
 .include "asm_defines.s"
 .include "defines/bs_commands.s"
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@Poke Ball block
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+//Poke Ball block
+//
 
 	
 
@@ -26,18 +26,16 @@ BS_TRAINER_BLOCK:
 	printstring 0x104
 	waitmessage 0x40
 	goto_cmd BALLBLOCK_CONTINUE
-	
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@Custom loss
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//Custom loss
 
 .global BS_CUSTOM_LOSS
 BS_CUSTOM_LOSS:
 	printstring 0x22C
 	waitmessage 0x40
-	cmd76 1 19 @return to ball
+	cmd76 1 19 //return to ball
 	waitstate
-	cmd76 1 20 @return to ball second poke
+	cmd76 1 20 //return to ball second poke
 	waitstate
 	trainer_slide 1
 	waitstate

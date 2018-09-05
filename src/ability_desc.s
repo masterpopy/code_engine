@@ -4,7 +4,7 @@
 
 
 .include "asm_defines.s"
-@@ Descriptions abilities gen III
+// Descriptions abilities gen III
 
 
 ability_desc_table:

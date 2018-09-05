@@ -1,7 +1,7 @@
 .text
 .thumb
 
-@battle flags
+//battle flags
 .equ BATTLE_DOUBLE,						0x1
 .equ BATTLE_LINK,							0x2
 .equ BATTLE_TRAINER, 						0x8
@@ -17,7 +17,7 @@
 .equ BATTLE_INGAME_PARTNER, 		0x400000
 .equ BATTLE_FLAG_x2000000, 			0x2000000
 
-@move effects
+//move effects
 .equ MOVEEFFECT_SLP,     		0x7
 .equ MOVEEFFECT_PSN,			0x8
 .equ MOVEEFFECT_BRN,			0x10
@@ -32,7 +32,7 @@
 .equ MOVEEFFECT_AFFECTSUSER, 0x4000
 .equ MOVEEFFECT_ONECALC, 0x8000
 
-@move battlescript IDs
+//move battlescript IDs
 .equ MOVEBS_PUT_TO_SLEEP, 12
 .equ MOVEBS_POISONING, 13
 .equ MOVEBS_TOXIC, 14
@@ -43,11 +43,11 @@
 .equ MOVEBS_ENCORE, 76
 .equ MOVEBS_YAWN, 131
 
-@hitmarker
+//hitmarker
 .equ HITMARKER_NOATTACKSTRING, 0x200
 .equ HITMARKER_HITSSUBSTITUTE, 0x100
 
-@defines for moves that raise multiple stats
+//defines for moves that raise multiple stats
 .equ MLTS_ATK, 0x1
 .equ MLTS_DEF, 0x2
 .equ MLTS_SPD, 0x4
@@ -56,7 +56,7 @@
 .equ MLTS_ACC, 0x20
 .equ MLTS_EVS, 0x40
 
-@types
+//types
 .equ TYPE_NORMAL, 0x0
 .equ TYPE_FIGHTING, 0x1
 .equ TYPE_FLYING, 0x2
@@ -77,7 +77,7 @@
 .equ TYPE_DARK, 0x11
 .equ TYPE_FAIRY, 0x17
 
-@abilities
+//abilities
 .equ ABILITY_NO_ABILITY, 0x0
 .equ ABILITY_STENCH, 0x1
 .equ ABILITY_DRIZZLE, 0x2
@@ -271,7 +271,7 @@
 .equ ABILITY_DESOLATE_LAND, 0xBE
 .equ ABILITY_DELTA_STREAM, 0xBF
 
-@moves
+//moves
 .equ MOVE_ABSORB, 0x47
 .equ MOVE_ACID, 0x33
 .equ MOVE_ACID_ARMOR, 0x97
@@ -895,7 +895,7 @@
 .equ MOVE_ZEN_HEADBUTT, 0x1AC
 .equ MOVE_CORE_ENFORCER, 0x2AF
 
-@weather
+//weather
 .equ weather_rain, 0x1
 .equ weather_downpour, 0x2
 .equ weather_permament_rain, 0x4
@@ -911,12 +911,12 @@
 .equ weather_heavy_rain, 0x1000
 .equ weather_air_current, 0x2000
 
-@split
+//split
 .equ SPLIT_PHYSICAL, 0
 .equ SPLIT_SPECIAL, 1
 .equ SPLIT_STATUS, 2
 
-@stats
+//stats
 .equ STAT_HP, 0
 .equ STAT_ATK, 1
 .equ STAT_DEF, 2
@@ -926,7 +926,7 @@
 .equ STAT_ACC, 6
 .equ STAT_EVASION, 7
 
-@main status
+//main status
 .equ STATUS_SLEEP, 7
 .equ STATUS_POISON, 8
 .equ STATUS_BURN, 0x10
@@ -934,7 +934,7 @@
 .equ STATUS_PARALYSIS, 0x40
 .equ STATUS_BAD_POISON, 0x80
 
-@secondary status
+//secondary status
 .equ STATUS2_CONFUSION, 	0x7
 .equ STATUS2_UPROAR,		0x70
 .equ STATUS2_MULTIPLETURNS,	0x1000
@@ -951,7 +951,7 @@
 .equ STATUS2_CURLED,		0x40000000
 .equ STATUS2_TORMENTED, 	0x80000000
 
-@status 3
+//status 3
 .equ STATUS3_SEEDED, 			0x4
 .equ STATUS3_PERISHSONG, 		0x20
 .equ STATUS3_ONAIR, 			0x40
@@ -965,7 +965,7 @@
 .equ STATUS3_YAWN, 				0x1800
 .equ STATUS3_DISAPPEARED, 		0x200000
 
-@side affecting
+//side affecting
 .equ SIDE_REFLECT, 0x1
 .equ SIDE_LIGHTSCREEN, 0x2
 .equ SIDE_SPIKES, 0x10
@@ -973,7 +973,7 @@
 .equ SIDE_FUTUREATTACK, 0x40
 .equ SIDE_MIST, 0x100
 
-@item effects
+//item effects
 .equ ITEM_EFFECT_ORANBERRY, 1
 .equ ITEM_EFFECT_CHERIBERRY, 2
 .equ ITEM_EFFECT_CHESTOBERRY, 3
@@ -1115,7 +1115,7 @@
 .equ ITEM_EFFECT_SHEDSHELL, 0x8E
 .equ ITEM_EFFECT_GEM, 0x8F
 
-@strings
+//strings
 
 .equ Space, 0x00
 .equ JumpLine, 0xFE

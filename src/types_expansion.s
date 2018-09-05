@@ -4,7 +4,7 @@
 .include "asm_defines.s"
 .equ PointerForTypeNamesSomething, 0x85E8B25
 
-@@@@@@@@@@@@@ EXPANSION TYPE
+// EXPANSION TYPE
 
 
 .align 2

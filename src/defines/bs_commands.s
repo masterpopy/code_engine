@@ -1,18 +1,18 @@
-@@ Compare operands
+//// Compare operands
 .equ Equals, 0x0
 .equ Not_Equal_To, 0x1
 .equ Less_Than, 0x2
 .equ Greater_Than, 0x3
 .equ Has_One_Bit_Common, 0x4
 
-@banks
+//banks
 .equ bank_target, 0x0
 .equ bank_attacker, 0x1
 .equ bank_partner_def, 0x2
 .equ bank_scripting_active, 10
 .equ bank_newstruct, 15
 
-@script locations
+//script locations
 .equ MOVE_FAILED, 0x082D9F1A
 .equ MOVE_MISSED, 0x082D8A5E
 .equ ENDTURN, 0x82D8A4E
@@ -29,8 +29,8 @@
 
 .equ STAT_SELF_INFLICTED, 0x40
 
-@ callasm defines
-@@@macros for callasms
+// callasm defines
+//////macros for callasms
 .macro jumpifsubstituteaffects jumpifsubstituteaffects_address
 .byte 0x83
 .hword 26
@@ -67,23 +67,23 @@
 .word \jumpifuserhasnoHP_address
 .endm
 
-@JeremyZ
+//JeremyZ
 .macro jumpifuserheadblown jumpifuserheadblown_address
 .byte 0x83
 .hword 170
 .word \jumpifuserheadblown_address
 .endm
 
-@JeremyZ
+//JeremyZ
 .macro jumpifnostockpile jumpifnostockpile_address
 .byte 0x83
 .hword 172
 .word \jumpifnostockpile_address
 .endm
 
-@@@@@@@@@@@@@@@@@ Macro
+////////////////////////////////// Macro
 
-@@ Delay
+//// Delay
 .macro DELAY_HALFSECOND
 .byte 0x20
 .endm
@@ -92,17 +92,17 @@
 .byte 0x40
 .endm
 
-@@ Super commands
+//// Super commands
 .macro calculatedamage
 .word 0x7060504
 .endm
 
 .macro jumpiftypenotaffected jumpiftypenotaffected_address
-.byte 5 @damage calc 
+.byte 5 //damage calc 
 jumpifbyte 0x4 0x202427C 0x29 \jumpiftypenotaffected_address
 .endm
 
-@@ Index commands
+//// Index commands
 .macro attackcanceler
 .byte 0
 .endm
@@ -1349,18 +1349,18 @@ jumpifbyte 0x4 0x202427C 0x29 \jumpiftypenotaffected_address
 .byte \cmdf8_bank
 .endm
 
-@a new move setter callasm_cmd
+//a new move setter callasm_cmd
 .macro seteffect1 seteffecteffect
 callasm_cmd 145
 .hword \seteffecteffect
 .endm
 
-@JeremyZ
+//JeremyZ
 .macro pollenpuffdamagecalculation
 .byte 0xF9
 .endm
 
-@JeremyZ
+//JeremyZ
 .macro blowifabilitynotdamp
 .byte 0xFA
 .endm

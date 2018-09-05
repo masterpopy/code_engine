@@ -1,16 +1,16 @@
 .text
 
-@banks
+//banks
 .equ bank_attacker, 0x0
 .equ bank_target, 0x1
 .equ attacker_partner, 0x2
 .equ target_partner, 0x3
 
-@sides for commands A, B
+//sides for commands A, B
 .equ side_attacker, 0x2
 .equ side_target, 0x3
 
-@background IDs
+//background IDs
 .equ BG_DARK, 0x1
 .equ BG_GHOST, 0x2
 .equ BG_PSYCHIC, 0x3
@@ -38,7 +38,7 @@
 .equ BG_SOLARBEAM_ON_PLAYER, 0x19
 .equ BG_SOLARBEAM_CONTESTS, 0x1A
 
-@pals for pal fading tasks
+//pals for pal fading tasks
 .equ PAL_BG, 0x1
 .equ PAL_ATK, 0x2
 .equ PAL_DEF, 0x4
@@ -50,7 +50,7 @@
 .equ PAL_OPPONENT1, 0x200
 .equ PAL_OPPONENT2, 0x400
 
-@commands
+//commands
 .macro loadparticle loadparticleID
 .byte 0x0
 .hword \loadparticleID
@@ -61,7 +61,7 @@
 .hword \unloadparticleID
 .endm
 
-@22
+//22
 .macro launchtemplate launchtemplatePtr launchtemplatePriority launchtemplateArgsNo launchtemplatearg0 launchtemplatearg1 launchtemplatearg2 launchtemplatearg3 launchtemplatearg4 launchtemplatearg5 launchtemplatearg6 launchtemplatearg7 launchtemplatearg8
 .byte 0x2
 .word \launchtemplatePtr
@@ -318,7 +318,7 @@
 .byte 0x2F
 .endm
 
-@objtemplate
+//objtemplate
 
 .macro objtemplate objtemplatetiletag objtemplatepaltag objtemplateoam objtemplateimageanim objtemplategfx objtemplaterotscale objtemplatecallback
 .hword \objtemplatetiletag
@@ -330,7 +330,7 @@
 .word \objtemplatecallback
 .endm
 
-@supercommands
+//supercommands
 
 .macro unsetscrollingBG
 loaddefaultBG

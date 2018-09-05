@@ -45,7 +45,6 @@ trainer_battle_music: //0x806e4a8 r3  setvar 0x40fe
 	lsl r0,r0,#3
 	add r0,r0,r2
 	ldr r3,=(0x806e4b0|1)
-back0:
 	bx r3
 trainer_battle_music_return:
 	mov r1,#0
@@ -91,15 +90,3 @@ toxic_thread_task_data:
 .hword 0x27C3, 0x7C1E
 
 
-
-_080327A0_hook:
-    and r0,r1
-    cmp r0,#0
-    beq _080327A0_hook_2
-    ldr r3,=0x8032CC1
-_080327A0_hook_2:
-    ldr r3,=(0x08032824|1)
-    bl back0
-    bl after_hook
-    ldr r3,=(0x080327B4|1)
-    bx r3

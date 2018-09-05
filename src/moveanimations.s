@@ -125,7 +125,7 @@ move_animations_table:
 .word FOCUS_ENERGY_ANIM
 .word BIDE_ANIM
 .word METRONOME_ANIM
-.word PLACEHOLDER_ANIM		@Mirror Move
+.word PLACEHOLDER_ANIM		//Mirror Move
 .word SELF_DESTRUCT_ANIM
 .word EGG_BOMB_ANIM
 .word LICK_ANIM
@@ -273,7 +273,7 @@ move_animations_table:
 .word FOCUS_PUNCH_ANIM
 .word SMELLING_SALTS_ANIM
 .word FOLLOW_ME_ANIM
-.word PLACEHOLDER_ANIM		@Nature Power
+.word PLACEHOLDER_ANIM		//Nature Power
 .word CHARGE_ANIM
 .word TAUNT_ANIM
 .word HELPING_HAND_ANIM
@@ -419,7 +419,7 @@ move_animations_table:
 .word VACUUM_WAVE_ANIM
 .word FOCUS_BLAST_ANIM
 .word ENERGY_BALL_ANIM
-.word SKYATTACK_ATTACK		@brave bird
+.word SKYATTACK_ATTACK		//brave bird
 .word EARTH_POWER_ANIM
 .word SWITCHEROO_ANIM
 .word GIGA_IMPACT_ANIM
@@ -1233,7 +1233,7 @@ UNK_0x9f2b6ac:
 	launchtemplate TEMPL_0x9f2b758 0x82 0x4 0x1e 0x2 0xa 0x1  
 	playsound2 0x83 0x3f 
 	pause 0x2 
-	return 
+	return
 NATURAL_GIFT_ANIM:
 	launchtemplate TEMPL_0x8597274 0x2 0x5 0x1 0x1 0x0 0xa 0x33ed  
 	waitanimation 
@@ -1598,7 +1598,7 @@ HEAL_BLOCK_ANIM:
 	launchtask AnimTask_swapbanks + 1 0x5 0x0
 	waitanimation
 	pause 0x15
-	launchtask AnimTask_pal_fade 0xa 0x5 PAL_BG | PAL_DEF 0x2 0x6 0x0 0x0  @fade back
+	launchtask AnimTask_pal_fade 0xa 0x5 PAL_BG | PAL_DEF 0x2 0x6 0x0 0x0  //fade back
 	waitanimation
 	endanimation 
 WRING_OUT_ANIM:
@@ -1760,7 +1760,7 @@ POWER_SWAP_ANIM:
 	waitanimation 
 	endanimation 
 GUARD_SWAP_ANIM:
-	loadparticle 0x280b  @0xC2EE38
+	loadparticle 0x280b  //0xC2EE38
 	call 0x82D7CD1
 	launchtask 0x810FBF1 0x3 0x1 0x1
 	launchtask 0x80A7B99 0x5 0x5 0x1 0x7FFF 0xC 0x3 0x1
@@ -3079,8 +3079,8 @@ ROCK_CLIMB_ANIM:
 	resetblends 
 	endanimation 
 DEFOG_ANIM:
-	loadparticle 0x2720  @0xc03518
-	loadparticle 0x2846  @0x1d2393c
+	loadparticle 0x2720  //0xc03518
+	loadparticle 0x2846  //0x1d2393c
 	launchtask AnimTask_pal_fade 0xa 0x5 PAL_BG 0x0 0x0 0xa 0x0  
 	waitanimation 
 	launchtemplate TEMPL_0x9f2fccc 0x84 0x5 0x0 0xfff4 0x68 0x0 0x4b  

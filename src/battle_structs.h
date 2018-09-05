@@ -776,7 +776,7 @@ struct sprite
 	u8 y;
 	u8 flags1;
 	u16 x_and_flag2;
-	u16 attr2;
+	u16 attr2;//4~7位是调色板
 	u16 rotscaleinfo;
 };
 
@@ -1197,7 +1197,7 @@ struct saveblock1
 	u8 seenflags_2[52];
 };
 
-extern struct saveblock1* sav1;
+extern struct saveblock1* sav1;//0x3d88
 
 struct saveblock2
 {
@@ -1205,7 +1205,7 @@ struct saveblock2
 	u8 gender;
 };
 
-extern struct saveblock2* sav2;
+extern struct saveblock2* sav2;//0xF2C
 
 struct battle_record_pbs
 {
