@@ -38,7 +38,7 @@ bool doubles_tile_check(void)
 
 bool wild_grass_battle(void* wild_data)
 {
-    u8 battle = consider_creating_wild_poke(wild_data, 0, 3);
+    bool battle = consider_creating_wild_poke(wild_data, 0, 3);
     if (GET_CUSTOMFLAG (DOUBLE_WILD_BATTLES_FLAG) && DOUBLE_WILD_BATTLES && battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
 		party_opponent[1] = party_opponent[0];
@@ -251,7 +251,7 @@ void atkEF_ballthrow(void)
 {
     if (battle_execution_buffer){return;}
 
-    u8 catch_bank = bank_attacker ^ 1;
+    u8 catch_bank = bank_attacker ^ (u8)1;
     if (!is_bank_present(catch_bank)) {catch_bank ^= 2;}
 
     bank_target = catch_bank;

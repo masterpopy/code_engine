@@ -795,13 +795,18 @@ struct coords8
 struct object;
 typedef void (* object_callback)(struct object*);
 
+struct graphic{
+	void* img;
+	u32 size;
+};
+
 struct template
 {
 	u16 tiles_tag;
 	u16 pal_tag;
 	struct sprite* oam;
 	struct frame** animation;
-	u32* graphics;
+	struct graphic* graphics;
 	struct rotscale_frame** rotscale;
 	object_callback callback;
 };
@@ -950,6 +955,8 @@ struct b_graphics_loc
 {
 	void* beg_decompressed_sprites; //ptr to the decompressed sprite of the first pokemon
 	void* decompressed_sprite[4]; //four pointers to decompressed sprites
+	struct template sprite_template[4];
+	struct graphic graphics[4][4];
 };
 
 struct b_species_info
@@ -1197,7 +1204,7 @@ struct saveblock1
 	u8 seenflags_2[52];
 };
 
-extern struct saveblock1* sav1;//0x3d88
+extern struct saveblock1* sav1;//0x3d88 sav3=0x83D0
 
 struct saveblock2
 {

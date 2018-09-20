@@ -1,7 +1,7 @@
 #ifndef B_LOCATIONS
 #define B_LOCATIONS
 
-#include "types.h"
+//#include "types.h"
 
 extern u16 battle_turn_random_no;
 extern u8 last_used_ability;
@@ -29,7 +29,7 @@ extern u8 battle_text_buff1[0x10];
 extern u8 battle_text_buff2[0x10];
 extern u8 battle_text_buff3[0x10];
 extern u8 displayed_string_in_battle[0x100];
-extern u8 displayed_string_ov[0x3E8];
+extern u8 displayed_string_ov[1000];
 extern u8 active_bank;
 extern void* battlescripts_curr_instruction;
 extern void* move_anim_cursor;

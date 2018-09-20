@@ -45,6 +45,7 @@ trainer_battle_music: //0x806e4a8 r3  setvar 0x40fe
 	lsl r0,r0,#3
 	add r0,r0,r2
 	ldr r3,=(0x806e4b0|1)
+BX_R3:
 	bx r3
 trainer_battle_music_return:
 	mov r1,#0
@@ -88,5 +89,4 @@ toxic_thread_task:
 
 toxic_thread_task_data:
 .hword 0x27C3, 0x7C1E
-
 
