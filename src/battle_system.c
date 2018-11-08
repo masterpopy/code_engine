@@ -36,6 +36,7 @@ u8  get_trainer_opponent_A_class();
 bool not_impostered(u8 bank);
 struct pokemon* get_bank_poke_ptr(u8 bank); //JeremyZ
 u32 random_value(u32 limit);
+bool is_ability_present(u8 ability); //JeremyZ
 u8 get_battle_bank(u8 to_get)
 {
     switch (to_get)
@@ -310,7 +311,7 @@ u16 damage_type_effectiveness_update(u16 move, u8 attacking_type, u8 defending_t
     {
         effect = 10;
     }
-    else if (battle_weather.flags.air_current && defending_type == TYPE_FLYING && effect == 20 && weather_abilities_effect())
+    else if ((battle_weather.flags.air_current && is_ability_present(ABILITY_DELTA_STREAM)) && defending_type == TYPE_FLYING && effect == 20 && weather_abilities_effect())
     {
         effect = 10;
     }
@@ -465,7 +466,7 @@ u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted)
 	
     u8 ability = battle_participants[def_bank].ability_id;
     if (!has_ability_effect(def_bank, 0)) {ability = 0;}
-    if (ability == ABILITY_IMMUNITY || check_leafguard_shieldsdown(ability, def_bank))
+    if (ability == ABILITY_IMMUNITY || ability == ABILITY_COMATOSE || check_leafguard_shieldsdown(ability, def_bank))
         return 4;
     if (side_affecting_halfword[get_bank_side(def_bank)].safeguard_on && !self_inflicted)
         return 5;
@@ -1614,7 +1615,7 @@ bool update_turn_counters(void)
                 {
                     if((*sidebank)<=3)
                     {
-                        if((!battle_weather.flags.downpour && !battle_weather.flags.permament_rain && !battle_weather.flags.heavy_rain && !battle_weather.flags.rain)
+                        if((!battle_weather.flags.downpour && !battle_weather.flags.permament_rain && !(battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) && !battle_weather.flags.rain)
                            && is_bank_present(*sidebank) && !is_of_type(*sidebank,TYPE_FIRE))
                         {
                             effect=1;
@@ -1745,11 +1746,11 @@ bool update_turn_counters(void)
                 *statetracker += 1;
             }
         case 24: //rain
-            if (battle_weather.flags.rain || battle_weather.flags.downpour || battle_weather.flags.heavy_rain || battle_weather.flags.permament_rain)
+            if (battle_weather.flags.rain || battle_weather.flags.downpour || (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.permament_rain)
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
-                if (battle_weather.flags.heavy_rain || battle_weather.flags.permament_rain || battle_effects_duration.weather_dur)
+                if ((battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.permament_rain || battle_effects_duration.weather_dur)
                 {
                     if (battle_weather.flags.downpour)
                         *sidebank = 1;
@@ -1761,6 +1762,7 @@ bool update_turn_counters(void)
                     *sidebank = 2;
                     battle_weather.flags.downpour = 0;
                     battle_weather.flags.rain = 0;
+					battle_weather.flags.heavy_rain = 0;
                 }
 
                 call_bc_move_exec((void*)0x082DAC2C);
@@ -1770,21 +1772,22 @@ bool update_turn_counters(void)
             *statetracker += 1;
             break;
         case 25: //sun
-            if (battle_weather.flags.sun || battle_weather.flags.permament_sun || battle_weather.flags.harsh_sun)
+            if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)))
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
-                if (battle_weather.flags.permament_sun || battle_weather.flags.harsh_sun || battle_effects_duration.weather_dur)
+                if (battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || battle_effects_duration.weather_dur)
                     call_bc_move_exec((void*)0x82DACD2);
                 else
                 {
                     battle_weather.flags.sun = 0;
+					battle_weather.flags.harsh_sun = 0;
                     call_bc_move_exec((void*)0x82DACE0);
                 }
             }
             *statetracker += 1;
             break;
-        case 26: //darude
+        case 26: //sandstorm
             if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
             {
                 effect = 1;
@@ -1848,8 +1851,24 @@ bool update_turn_counters(void)
                 }
 
             }
-            *statetracker +=1;
+            *statetracker += 1;
             break;
+		case 30: //air current
+			if (battle_weather.flags.air_current)
+			{
+                effect = 1;
+                if (is_ability_present(ABILITY_DELTA_STREAM))
+                {
+                    call_bc_move_exec(&aircurcontinues_bs);
+                }
+                else
+                {
+                    battle_weather.flags.air_current = 0;
+                    call_bc_move_exec(&aircurends_bs);
+                }
+			}
+			*statetracker += 1;
+			break;
         default:
             *statetracker += 1;
         }
