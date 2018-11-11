@@ -464,7 +464,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
         }
             break;
         case MOVE_WAKEUP_SLAP:
-            if (battle_participants[def_bank].status.flags.sleep) {
+            if (battle_participants[def_bank].status.flags.sleep || check_ability(def_bank, ABILITY_COMATOSE)) {
                 base_power *= 2;
             }
             break;

@@ -784,16 +784,6 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                                 battle_participants[i].status2.nightmare = 0;
                             }
                             break;
-						case ABILITY_COMATOSE:
-							if (battle_participants[i].status.flags.paralysis ||
-								battle_participants[i].status.flags.freeze ||
-								battle_participants[i].status.flags.poison ||
-								battle_participants[i].status.flags.toxic_poison ||
-								battle_participants[i].status.flags.burn ||
-								battle_participants[i].status.flags.sleep) {
-								common_effect = 1;
-							}
-							break;
                         case ABILITY_OBLIVIOUS:
                             if (battle_participants[i].status2.in_love) {
                                 battle_participants[i].status2.in_love = 0;
@@ -1287,6 +1277,9 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
 							new_battlestruct->various.var2 = 0x218;
 							script_ptr = BS_STAT_ONLY_FORMCHANGE_END3;
 						}
+						break;
+					case ABILITY_COMATOSE: //JeremyZ
+						battle_participants[bank].status.flags.sleep = 1;
                 }
                 if (common_effect) {
                     effect = true;

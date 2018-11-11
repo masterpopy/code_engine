@@ -1450,6 +1450,11 @@ u8 check_if_cannot_attack(void)
 				new_battlestruct->bank_affecting[active_bank].head_blown = 0; //JeremyZ
 				break;
 			case 1: //check if asleep
+				if (check_ability(bank_attacker, ABILITY_COMATOSE))
+				{
+					attacker_struct->status.flags.sleep = 1;
+					break;
+				}
 				if (attacker_struct->status.flags.sleep)
 				{
 					if (uproar_wakeup_check(bank_attacker))

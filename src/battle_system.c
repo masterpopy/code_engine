@@ -466,7 +466,7 @@ u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted)
 	
     u8 ability = battle_participants[def_bank].ability_id;
     if (!has_ability_effect(def_bank, 0)) {ability = 0;}
-    if (ability == ABILITY_IMMUNITY || ability == ABILITY_COMATOSE || check_leafguard_shieldsdown(ability, def_bank))
+    if (ability == ABILITY_IMMUNITY || check_leafguard_shieldsdown(ability, def_bank))
         return 4;
     if (side_affecting_halfword[get_bank_side(def_bank)].safeguard_on && !self_inflicted)
         return 5;
