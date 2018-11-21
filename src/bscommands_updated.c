@@ -500,11 +500,11 @@ void switchin_newstruct_update(void)
 
 bool does_move_target_multiple(void)
 {
-	u8 retval = 0;
+	bool retval = 0;
 	if (battle_flags.double_battle)
 	{
 		u8 alive_targets = count_alive_on_side(bank_target);
-		u8 alive_atk_ally = is_bank_present(bank_attacker ^ 2);
+		bool alive_atk_ally = is_bank_present(bank_attacker ^ 2);
 		if (move_table[current_move].target == move_target_both)
 		{
 			retval = (alive_targets == 2);
@@ -557,7 +557,7 @@ bool move_effect2_setter(void)
 
 	bank_partner_def = bank; //for scripts
 
-	void* matcher = (void*) battlescripts_curr_instruction;
+	void* matcher = battlescripts_curr_instruction;
 
 	bool substitute = (affected_by_substitute(bank) && !(*move_effect & EFFECT2_AFFECTSUSER));
 
