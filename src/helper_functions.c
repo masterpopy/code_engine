@@ -3088,6 +3088,7 @@ void speed_swap(void); //Speed Swap, JeremyZ
 void jumpifuserheadblown(void); //Mind Blown, JeremyZ
 void print_start_z(void); //Start Z, JeremyZ
 void jumpifnostockpile(void); //Spit Up, JeremyZ
+void calc_recoil_dmg2(void); //Recoil damage, JeremyZ
 
 const command callasm_table[] = {&ability_switchin_effect /*0*/, &jump_if_forcesetflag_set /*1*/, &change_attacker_item /*2*/, &callasm_nop /*3*/, &callasm_nop /*4*/,
 &changestatvar1_atk /*5*/, &changestatvar2_atk /*6*/, &frisk_target_item /*7*/, &callasm_nop /*8*/, &set_type_msg_buffer /*9*/, &callasm_nop /*10*/, &bad_dreams_damage_calc /*11*/,
@@ -3121,7 +3122,8 @@ const command callasm_table[] = {&ability_switchin_effect /*0*/, &jump_if_forces
 &triattackrand /*151*/, &statustoeffect2 /*152*/, &multiplestats_prepare_custom /*153*/, &do_multiple_stats_custom /*154*/, &jumpifnotarg1type /*155*/,
 &set_stats_to_play /*156*/, &receiver_effect /*157*/, &bugbite_get_berry_effect /*158*/, &prepare_switchbank_data /*159*/, &ash_greninja_check /*160*/,
 &zygarde_message_based_on_side/*161*/, &hp_stat_form_change /*162*/, &revert_mega /*163*/, &instruct_canceler /*164*/, &set_instruct /*165*/,
-&apply_zmove_changes/*166*/, &set_spotlight/*167*/, &set_throatchop/*168*/, &speed_swap/*169*/, &jumpifuserheadblown/*170*/, &print_start_z/*171*/, &jumpifnostockpile/*172*/};
+&apply_zmove_changes/*166*/, &set_spotlight/*167*/, &set_throatchop/*168*/, &speed_swap/*169*/, &jumpifuserheadblown/*170*/,
+&print_start_z/*171*/, &jumpifnostockpile/*172*/, &calc_recoil_dmg2/*173*/};
 
 void atk83_callasm(void)
 {

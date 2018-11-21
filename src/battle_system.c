@@ -36,6 +36,7 @@ u8  get_trainer_opponent_A_class();
 bool not_impostered(u8 bank);
 struct pokemon* get_bank_poke_ptr(u8 bank); //JeremyZ
 u32 random_value(u32 limit);
+u8 get_bank_side(u8 bank);
 bool is_ability_present(u8 ability); //JeremyZ
 u8 get_battle_bank(u8 to_get)
 {
@@ -69,15 +70,15 @@ u8 get_battle_bank(u8 to_get)
     }
 }
 
-u8 get_bank_side(u8 bank)
-{
-    return banks_by_side[bank] & 1;
-}
+// u8 get_bank_side(u8 bank)
+// {
+    // return banks_by_side[bank] & 1;
+// }
 
-u8 get_bank_identity(u8 bank)
-{
-    return banks_by_side[bank];
-}
+// u8 get_bank_identity(u8 bank)
+// {
+    // return banks_by_side[bank];
+// }
 
 void bs_push(void* to_return, void* now)
 {

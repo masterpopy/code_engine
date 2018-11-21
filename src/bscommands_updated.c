@@ -518,7 +518,7 @@ bool does_move_target_multiple(void)
 	return retval;
 }
 
-bool calc_recoil_dmg(u8 bank, u16 move)
+/*bool calc_recoil_dmg(u8 bank, u16 move)
 {
 	if ((check_ability(bank, ABILITY_ROCK_HEAD) || check_ability(bank, ABILITY_MAGIC_GUARD)) && move != MOVE_STRUGGLE)
 	{
@@ -534,7 +534,7 @@ bool calc_recoil_dmg(u8 bank, u16 move)
 		recoil_dmg = hp_dealt / arg;
 	damage_loc = ATLEAST_ONE(recoil_dmg);
 	return 1;
-}
+}*/
 
 u8 can_lose_item(u8 bank, u8 stickyhold_check, u8 sticky_message);
 
@@ -701,13 +701,13 @@ bool move_effect2_setter(void)
 				bs_push_current(BS_BURNUP);
 			}
 			break;
-		case 48: //recoil
+		/*case 48: //recoil
 			if (battle_participants[bank_attacker].current_hp && TARGET_TURN_DAMAGED &&
 					calc_recoil_dmg(bank_attacker, current_move))
 			{
 				bs_push_current((void*) 0x082DB3F4);
 			}
-			break;
+			break;*/
 		case 0xb1: //recharge needed
 			if (current_hp)
 			{

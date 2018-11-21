@@ -2109,7 +2109,33 @@ ATTACK_FLINCH_CHANCE:
 RECOIL_ATTACK:
 	callasm_cmd 36 @changes status flag in arg1 to correct effect chooser value
 	setbyte EffectChooser 0x30 | 0x40
-	goto_cmd ATTACKING_MOVE
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	damageadjustment
+	attackanimation
+	waitanimation
+	effectiveness_sound
+	hitanim bank_target
+	waitstate
+	graphicalhpupdate bank_target
+	datahpupdate bank_target
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	faintpokemon bank_target 0x0 0x0 @faint target
+	callasm_cmd 173 @recoil damage
+	.byte bank_attacker
+	graphicalhpupdate bank_attacker
+	datahpupdate bank_attacker
+	faintpokemon bank_attacker 0x0 0x0
+	printstring 0x265
+	waitmessage 0x40	
+	goto_cmd ENDTURN
 
 ATTACK_STATUS_CHANCE:
 	callasm_cmd 36 @changes status flag in arg1 to correct effect chooser value
@@ -2453,7 +2479,6 @@ SPOTLIGHT: @JeremyZ
 THROAT_CHOP: @JeremyZ
 	attackcanceler
 	accuracycheck MOVE_MISSED 0x0
-	jumpiftypenotaffected MOVE_FAILED
 	attackstring
 	ppreduce
 	critcalc
@@ -2480,7 +2505,6 @@ THROAT_CHOP: @JeremyZ
 POLLEN_PUFF: @JeremyZ
 	attackcanceler
 	accuracycheck MOVE_MISSED 0x0
-	jumpiftypenotaffected MOVE_FAILED
 	attackstring
 	ppreduce
 	pollenpuffdamagecalculation
@@ -2513,7 +2537,6 @@ MIND_BLOWN: @JeremyZ
 PLASMA_FISTS: @JeremyZ
 	attackcanceler
 	accuracycheck MOVE_MISSED 0x0
-	jumpiftypenotaffected MOVE_FAILED
 	attackstring
 	ppreduce
 	critcalc
@@ -2540,7 +2563,6 @@ PLASMA_FISTS: @JeremyZ
 ATTACK_TERRAINCHANGE:
 	attackcanceler
 	accuracycheck MOVE_MISSED 0x0
-	jumpiftypenotaffected MOVE_FAILED	
 	attackstring
 	ppreduce
 	critcalc
