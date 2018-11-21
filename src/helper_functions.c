@@ -49,12 +49,13 @@ void bs_push_current(void* now);
 void revert_mega_to_normalform_new(u8 opponent_side);
 bool not_impostered(u8 bank);
 u32 random_value(u32 limit);
+u8 z_protect_affects(u16 move); //JeremyZ
+bool is_ability_present(u8 ability); //JeremyZ
+
 bool is_poke_valid(struct pokemon* poke)
 {
     u16 species = get_attributes(poke, ATTR_SPECIES, 0);
-    if (species != 0 && species != 412 && !get_attributes(poke, ATTR_IS_EGG, 0)) //JeremyZ
-        return 1;
-    return 0;
+    return (species != 0 && species != 412 && !get_attributes(poke, ATTR_IS_EGG, 0)); //JeremyZ
 }
 
 struct pokemon* get_party_ptr(u8 bank)
@@ -309,6 +310,8 @@ void damagecalc2(void)
         break;
 	case MOVE_Z_TAPU:
 		damage = battle_participants[bank_target].current_hp * 3 / 4;
+		if (z_protect_affects(current_move))
+			damage = battle_participants[bank_target].current_hp * 3 / 16;
 		break;
     case MOVE_FINAL_GAMBIT:
         damage = battle_participants[bank_attacker].current_hp;
@@ -673,7 +676,7 @@ u8 moveargweather_check(u8 arg)
 {
     if (weather_abilities_effect())
     {
-        if (arg & 1 && battle_weather.int_bw & (weather_downpour | weather_heavy_rain | weather_permament_rain | weather_rain))
+        if (arg & 1 && battle_weather.int_bw & (weather_downpour | (weather_heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) | weather_permament_rain | weather_rain))
             return 1;
         if (arg & 2 && battle_weather.int_bw & (weather_harsh_sun | weather_permament_sun | weather_sun))
             return 1;

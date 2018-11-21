@@ -11,6 +11,7 @@ u8 is_of_type(u8 bank, u8 type);
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 void update_rtc(void);
 void prep_string(u16 strID, u8 bank);
+s8 get_priority(u16 move, u8 bank);
 
 bool time_check(u8 from, u8 to)
 {
@@ -212,4 +213,32 @@ void jumpifnostockpile(void)
 		battlescripts_curr_instruction += 4;
 	else //Jump
 		battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
+}
+
+//Desolate Land, Primordial Sea & Delta Stream
+bool is_ability_present(u8 ability)
+{
+	for (u8 i = 0; i < 4; i++)
+	{
+		if (is_bank_present(i) && check_ability(i, ability))
+			return 1;
+	}
+	return 0;
+}
+
+//Z Move Protected
+u8 z_protect_affects(u16 move)
+{
+    u8 split = move_table[move].split;
+    u8 target = move_table[move].target;
+    u8 targets_side = get_bank_side(bank_target);
+	return (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_ASH_GRENINJA &&
+		(protect_structs[bank_target].flag0_protect ||
+		(new_battlestruct->bank_affecting[bank_target].kings_shield && split != 2) ||
+		(new_battlestruct->bank_affecting[bank_target].spiky_shield) ||
+		(new_battlestruct->bank_affecting[bank_target].baneful_bunker) ||
+		(new_battlestruct->side_affecting[targets_side].quick_guard && get_priority(current_move, bank_attacker) > 0) ||
+		(new_battlestruct->side_affecting[targets_side].mat_block && split != 2) ||
+		(new_battlestruct->side_affecting[targets_side].wide_guard && (target == move_target_both || target == move_target_foes_and_ally))
+		));
 }

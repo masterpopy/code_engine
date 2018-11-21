@@ -48,6 +48,9 @@ extern void* rainbow_bs;
 extern void* end_pledge_effect_bs;
 extern void* sea_of_fire_hurt_bs;
 
+extern void* aircurcontinues_bs;
+extern void* aircurends_bs;
+
 extern void* capture_exp_bs;
 
 //extern scripts from battlescripts.s file

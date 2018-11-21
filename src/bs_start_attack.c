@@ -26,6 +26,7 @@ void reset_multiple_turn_effects(u8 bank);
 bool not_impostered(u8 bank);
 u32 get_battle_item_extra_param(u32 bank);
 bool is_immune_to_powder(u8 bank); //JeremyZ
+bool is_ability_present(u8 ability); //JeremyZ
 
 bool is_bank_present(u32 bank)
 {
@@ -162,10 +163,10 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
             case MOVE_WEATHER_BALL:
                 if (weather_abilities_effect()) {
                     if (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                        battle_weather.flags.harsh_sun) {
+                        (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND))) {
                         move_type = TYPE_FIRE;
                     } else if (battle_weather.flags.rain || battle_weather.flags.permament_rain ||
-                               battle_weather.flags.heavy_rain || battle_weather.flags.downpour) {
+                               (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.downpour) {
                         move_type = TYPE_WATER;
                     } else if (battle_weather.flags.hail || battle_weather.flags.permament_hail) {
                         move_type = TYPE_ICE;
@@ -585,11 +586,11 @@ void bs_start_attack(void) {
                 *species = POKE_AEGISLASH_BLADE;
                 //change = 1;
             }
-        }//玛夏多
+        }//玛夏�?
         else if (*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW)) {
             *species = 0x422;
             //change = 1;
-        }//索尔迦雷欧
+        }//索尔迦雷�?
         else if (*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO)) {
             *species = 0x42a;
             //change = 1;
@@ -597,7 +598,7 @@ void bs_start_attack(void) {
         else if (*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA)) {
             *species = 0x42b;
             //change = 1;
-        }//哲尔尼亚斯
+        }//哲尔尼亚�?
         else if (*species == 0x301 && current_move == MOVE_GEOMANCY) {
             *species = 0x421;
             //change = 1;
