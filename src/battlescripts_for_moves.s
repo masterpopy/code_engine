@@ -165,7 +165,7 @@ battlescripts_table:
 .word BERRYDESTROY		@139 Incinerate, Pluck, Bug Bite; arg1 is 1 if berry is stolen and eaten, 0 if only destroyed
 .word SETTAILWIND		@140 Tailwind
 .word ACUPRESSURE		@141 Acupressure
-.word FLINGG			@142 Fling
+.word FLING				@142 Fling
 .word POWERTRICK		@143 Power Trick
 .word SETLUCKYCHANT		@144 Lucky Chant
 .word PSYCHIC_SWAPS		@145 arg1 stat to swap, arg2 stat to swap, if arg1 is 0 it acts like hearts swap
@@ -508,7 +508,7 @@ HOLDHANDS:
 	waitanimation
 	goto_cmd ENDTURN
 
-FLINGG:
+FLING:
 	attackcanceler
 	callasm_cmd 107
 	.word MOVE_FAILED

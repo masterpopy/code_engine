@@ -2461,8 +2461,10 @@ void mega_primal_cry(void)
 void canusefling(void)
 {
     u16 item = battle_participants[bank_attacker].held_item;
-    if (item == 0 || item == ITEM_REDORB || item == ITEM_BLUEORB || get_item_pocket_id(item) == 2 || get_item_pocket_id(item) == 3 || !can_lose_item(bank_attacker, 0, 0) || check_ability(bank_attacker, ABILITY_KLUTZ || new_battlestruct->bank_affecting[bank_attacker].embargo || new_battlestruct->field_affecting.magic_room))
-        battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
+    if (item == 0 || item == ITEM_REDORB || item == ITEM_BLUEORB || item == ITEM_ABILITYCAPSULE || ((item >= 0x236 && item <= 0x246) || item == 0x24A)
+		|| get_item_pocket_id(item) == 2 || get_item_pocket_id(item) == 3 || (get_item_pocket_id(item) == 4 && (check_ability(bank_target, ABILITY_UNNERVE) || check_ability(bank_target ^ 2, ABILITY_UNNERVE)))
+		|| !can_lose_item(bank_attacker, 0, 0) || check_ability(bank_attacker, ABILITY_KLUTZ) || new_battlestruct->bank_affecting[bank_attacker].embargo || new_battlestruct->field_affecting.magic_room)
+		battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
     else
         battlescripts_curr_instruction += 4;
 }
