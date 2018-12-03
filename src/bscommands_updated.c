@@ -63,7 +63,6 @@ bool does_move_make_contact(u16 move, u8 atk_bank); //JeremyZ
 bool photon_geyser_special(u16 move); //JeremyZ
 void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
 u32 random_value(u32 limit);
-bool is_ability_present(u8 ability); //JeremyZ
 
 void set_unburden(u8 bank)
 {
@@ -76,12 +75,12 @@ void set_unburden(u8 bank)
 void atk7D_set_rain(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && is_ability_present(ABILITY_DELTA_STREAM)) || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)))
+	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
 	else if (battle_weather.flags.downpour || battle_weather.flags.permament_rain || battle_weather.flags.rain ||
-			(battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)))
+			(battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -100,7 +99,7 @@ void atk7D_set_rain(void)
 void atk95_set_sandstorm(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && is_ability_present(ABILITY_DELTA_STREAM)) || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)))
+	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
@@ -123,11 +122,11 @@ void atk95_set_sandstorm(void)
 void atkBB_set_sunny(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && is_ability_present(ABILITY_DELTA_STREAM)) || (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)))
+	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)))
+	else if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -146,7 +145,7 @@ void atkBB_set_sunny(void)
 void atkC8_set_hail(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && is_ability_present(ABILITY_DELTA_STREAM)) || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)))
+	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
@@ -1676,13 +1675,13 @@ u8 check_if_cannot_attack(void)
 				}
 				break;
 			case 18: //weather prevents move usage, JeremyZ
-				if (weather_abilities_effect() && (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) &&
+				if (weather_abilities_effect() && battle_weather.flags.heavy_rain &&
 						get_attacking_move_type() == TYPE_FIRE)
 				{
 					effect = 3;
 					battlescripts_curr_instruction = BS_HEAVYRAIN_PREVENTS;
 				}
-				else if (weather_abilities_effect() && (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) &&
+				else if (weather_abilities_effect() && battle_weather.flags.harsh_sun &&
 						get_attacking_move_type() == TYPE_WATER)
 				{
 					effect = 3;

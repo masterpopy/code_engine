@@ -19,7 +19,7 @@ void bs_push_current(void *now);
 bool photon_geyser_special(u16 move); //JeremyZ
 u32 get_item_extra_param(u32 bank);
 u8 z_protect_affects(u16 move); //JeremyZ
-bool is_ability_present(u8 ability); //JeremyZ
+u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 
 struct natural_gift {
     u8 move_power;
@@ -466,12 +466,12 @@ u16 get_speed(u8 bank) {
         switch (battle_participants[bank].ability_id) {
             case ABILITY_CHLOROPHYLL:
                 if (weather_effect &&
-                    ((battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || battle_weather.flags.permament_sun || battle_weather.flags.sun))
+                    (battle_weather.flags.harsh_sun || battle_weather.flags.permament_sun || battle_weather.flags.sun))
                     speed *= 2;
                 break;
             case ABILITY_SWIFT_SWIM:
                 if (weather_effect && (battle_weather.flags.rain || battle_weather.flags.downpour ||
-                                       battle_weather.flags.permament_rain || (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA))))
+                                       battle_weather.flags.permament_rain || battle_weather.flags.heavy_rain))
                     speed *= 2;
                 break;
             case ABILITY_SAND_RUSH:
@@ -1106,7 +1106,7 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
             }
             break;
         case MOVE_SOLAR_BEAM:
-            if (!(battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) ||
+            if (!(battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) ||
                   battle_weather.int_bw == 0)) {
                 modifier = chain_modifier(modifier, 0x800);
             }
@@ -1210,7 +1210,7 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
                 break;
             case ABILITY_SOLAR_POWER:
                 if (move_split == MOVE_SPECIAL && (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                                                   (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)))) {
+                                                   (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))) {
                     modifier = chain_modifier(modifier, 0x1800);
                 }
                 break;
@@ -1265,7 +1265,7 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
         }
     }
 
-    if ((battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || battle_weather.flags.permament_sun || battle_weather.flags.sun) {
+    if ((battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || battle_weather.flags.permament_sun || battle_weather.flags.sun) {
         u8 flower_gift_bank = ability_battle_effects(13, atk_bank, ABILITY_FLOWER_GIFT, 0, 0);
         if (flower_gift_bank && move_split == MOVE_PHYSICAL) {
             flower_gift_bank--;
@@ -1438,13 +1438,13 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     }
     //weather modifier
     if (weather_abilities_effect()) {
-        if (battle_weather.flags.downpour || battle_weather.flags.rain || (battle_weather.flags.permament_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) ||
+        if (battle_weather.flags.downpour || battle_weather.flags.rain || battle_weather.flags.permament_rain ||
             battle_weather.flags.heavy_rain) {
             if (move_type == TYPE_FIRE)
                 damage = apply_modifier(0x800, damage);
             else if (move_type == TYPE_WATER)
                 damage = apply_modifier(0x1800, damage);
-        } else if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND))) {
+        } else if (battle_weather.flags.sun || battle_weather.flags.permament_sun || battle_weather.flags.harsh_sun) {
             if (move_type == TYPE_FIRE)
                 damage = apply_modifier(0x1800, damage);
             else if (move_type == TYPE_WATER)

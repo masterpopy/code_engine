@@ -50,7 +50,7 @@ void revert_mega_to_normalform_new(u8 opponent_side);
 bool not_impostered(u8 bank);
 u32 random_value(u32 limit);
 u8 z_protect_affects(u16 move); //JeremyZ
-bool is_ability_present(u8 ability); //JeremyZ
+u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 
 bool is_poke_valid(struct pokemon* poke)
 {
@@ -676,7 +676,7 @@ u8 moveargweather_check(u8 arg)
 {
     if (weather_abilities_effect())
     {
-        if (arg & 1 && battle_weather.int_bw & (weather_downpour | (weather_heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) | weather_permament_rain | weather_rain))
+        if (arg & 1 && battle_weather.int_bw & (weather_downpour | weather_heavy_rain | weather_permament_rain | weather_rain))
             return 1;
         if (arg & 2 && battle_weather.int_bw & (weather_harsh_sun | weather_permament_sun | weather_sun))
             return 1;

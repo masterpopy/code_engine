@@ -37,7 +37,7 @@ bool not_impostered(u8 bank);
 struct pokemon* get_bank_poke_ptr(u8 bank); //JeremyZ
 u32 random_value(u32 limit);
 u8 get_bank_side(u8 bank);
-bool is_ability_present(u8 ability); //JeremyZ
+u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 u8 get_battle_bank(u8 to_get)
 {
     switch (to_get)
@@ -312,7 +312,7 @@ u16 damage_type_effectiveness_update(u16 move, u8 attacking_type, u8 defending_t
     {
         effect = 10;
     }
-    else if ((battle_weather.flags.air_current && is_ability_present(ABILITY_DELTA_STREAM)) && defending_type == TYPE_FLYING && effect == 20 && weather_abilities_effect())
+    else if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) && defending_type == TYPE_FLYING && effect == 20 && weather_abilities_effect())
     {
         effect = 10;
     }
@@ -1616,7 +1616,7 @@ bool update_turn_counters(void)
                 {
                     if((*sidebank)<=3)
                     {
-                        if((!battle_weather.flags.downpour && !battle_weather.flags.permament_rain && !(battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) && !battle_weather.flags.rain)
+                        if((!battle_weather.flags.downpour && !battle_weather.flags.permament_rain && !(battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) && !battle_weather.flags.rain)
                            && is_bank_present(*sidebank) && !is_of_type(*sidebank,TYPE_FIRE))
                         {
                             effect=1;
@@ -1747,11 +1747,11 @@ bool update_turn_counters(void)
                 *statetracker += 1;
             }
         case 24: //rain
-            if (battle_weather.flags.rain || battle_weather.flags.downpour || (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.permament_rain)
+            if (battle_weather.flags.rain || battle_weather.flags.downpour || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || battle_weather.flags.permament_rain)
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
-                if ((battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.permament_rain || battle_effects_duration.weather_dur)
+                if ((battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || battle_weather.flags.permament_rain || battle_effects_duration.weather_dur)
                 {
                     if (battle_weather.flags.downpour)
                         *sidebank = 1;
@@ -1773,11 +1773,11 @@ bool update_turn_counters(void)
             *statetracker += 1;
             break;
         case 25: //sun
-            if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)))
+            if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
-                if (battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || battle_effects_duration.weather_dur)
+                if (battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || battle_effects_duration.weather_dur)
                     call_bc_move_exec((void*)0x82DACD2);
                 else
                 {
@@ -1858,7 +1858,7 @@ bool update_turn_counters(void)
 			if (battle_weather.flags.air_current)
 			{
                 effect = 1;
-                if (is_ability_present(ABILITY_DELTA_STREAM))
+                if (check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0))
                 {
                     call_bc_move_exec(&aircurcontinues_bs);
                 }

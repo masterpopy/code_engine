@@ -26,7 +26,7 @@ void reset_multiple_turn_effects(u8 bank);
 bool not_impostered(u8 bank);
 u32 get_battle_item_extra_param(u32 bank);
 bool is_immune_to_powder(u8 bank); //JeremyZ
-bool is_ability_present(u8 ability); //JeremyZ
+u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 
 bool is_bank_present(u32 bank)
 {
@@ -163,10 +163,10 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
             case MOVE_WEATHER_BALL:
                 if (weather_abilities_effect()) {
                     if (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                        (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND))) {
+                        (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0))) {
                         move_type = TYPE_FIRE;
                     } else if (battle_weather.flags.rain || battle_weather.flags.permament_rain ||
-                               (battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.downpour) {
+                               (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || battle_weather.flags.downpour) {
                         move_type = TYPE_WATER;
                     } else if (battle_weather.flags.hail || battle_weather.flags.permament_hail) {
                         move_type = TYPE_ICE;

@@ -16,7 +16,7 @@ u8 find_move_in_table(u16 move, const u16* table_ptr);
 u8 check_ability(u8 bank, u8 ability);
 u8 get_bank_side(u8 bank);
 u32 random_value(u32 limit);
-bool is_ability_present(u8 ability); //JeremyZ
+u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 
 u8 protect_affects(u16 move, u8 set)
 {
@@ -94,7 +94,7 @@ u8 accuracy_helper_replacement(u16 move)
         jump_if_move_has_no_effect(7, move);
         done_status = 1;
     }
-    else if ((weather_abilities_effect() && ((battle_weather.flags.heavy_rain && is_ability_present(ABILITY_PRIMORDIAL_SEA)) || battle_weather.flags.downpour || battle_weather.flags.rain || battle_weather.flags.permament_rain) && (current_move == MOVE_THUNDER || current_move == MOVE_HURRICANE))
+    else if ((weather_abilities_effect() && (battle_weather.flags.heavy_rain || battle_weather.flags.downpour || battle_weather.flags.rain || battle_weather.flags.permament_rain) && (current_move == MOVE_THUNDER || current_move == MOVE_HURRICANE))
              || (move_table[move].accuracy == 0))
     {
         jump_if_move_has_no_effect(7, move);
@@ -131,7 +131,7 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
         u8 move_accuracy = move_table[move].accuracy;
         if (has_ability_effect(bankdef, 1) && battle_participants[bankdef].ability_id == ABILITY_WONDER_SKIN && !DAMAGING_MOVE(move) && move_accuracy > 50)
             move_accuracy = 50;
-        else if ((move == MOVE_THUNDER || move == MOVE_HURRICANE) && weather_abilities_effect() && (battle_weather.flags.sun || (battle_weather.flags.harsh_sun && is_ability_present(ABILITY_DESOLATE_LAND)) || battle_weather.flags.permament_sun))
+        else if ((move == MOVE_THUNDER || move == MOVE_HURRICANE) && weather_abilities_effect() && (battle_weather.flags.sun || battle_weather.flags.harsh_sun || battle_weather.flags.permament_sun))
             move_accuracy = 50;
 		else if (move == MOVE_BLIZZARD && (battle_weather.flags.hail || battle_weather.flags.permament_hail))
 			move_accuracy = 100;

@@ -215,17 +215,6 @@ void jumpifnostockpile(void)
 		battlescripts_curr_instruction = (void*) read_word(battlescripts_curr_instruction);
 }
 
-//Desolate Land, Primordial Sea & Delta Stream
-bool is_ability_present(u8 ability)
-{
-	for (u8 i = 0; i < 4; i++)
-	{
-		if (is_bank_present(i) && check_ability(i, ability))
-			return 1;
-	}
-	return 0;
-}
-
 //Z Move Protected
 u8 z_protect_affects(u16 move)
 {
