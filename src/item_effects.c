@@ -248,7 +248,7 @@ enum COMMON_ITEM_EFFECT berry_HP_heal(u8 bank, bool checkHP, u32 HP, enum call_m
 
 enum COMMON_ITEM_EFFECT berry_heal_confuse(u8 bank, bool checkHP, u8 item_effect, u8 quality, enum call_mode calling_mode, void* BS_HEALHP, void* BS_HEALCONFUSE)
 {
-    if ((!checkHP || hp_condition(bank, 1)) && !new_battlestruct->bank_affecting[bank].heal_block)
+    if ((!checkHP || hp_condition(bank, 2)) && !new_battlestruct->bank_affecting[bank].heal_block)
     {
         damage_loc = ATLEAST_ONE(battle_participants[bank].max_hp / quality) * (-1);
         if (get_poke_flavour_relation(battle_participants[bank].pid, item_effect - ITEM_EFFECT_FIGYBERRY) == FLAVOUR_DISLIKED)
