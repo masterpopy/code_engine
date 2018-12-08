@@ -679,7 +679,7 @@ move_names_table:
 .byte 0x11,0x0C,0x0B,0x3B,0x10,0x7F,0x0A,0x0A,0xFF,0x00,0x00,0x00,0x00
 .byte 0x03,0x85,0x0C,0x39,0x0E,0x5F,0x04,0x6D,0x05,0x84,0xFF,0x00,0x00
 .byte 0x07, 0x5A, 0x01, 0x69, 0x02, 0xD3, 0x0D, 0x1F, Termin, Space, Space, Space, Space
-.byte 0x03, 0x0F, 0x08, 0x60, 0x11, 0x0B, 0x0B, 0x9F, 0x03, 0x2E, 0x0B, 0x2D, Termin
+.byte 0x03, 0x0F, 0x08, 0x60, 0x11, 0x0B, 0x03, 0x2E, 0x0B, 0x2D, Termin, Space, Space
 .byte 0x04, 0xAA, 0x11, 0x0B, 0x0A, 0x44, 0x0F, 0x6D, Termin, Space, Space, Space, Space
 @@@Z_NAME_HOLDER:53
 .byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
@@ -737,6 +737,20 @@ move_names_table:
 .byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
 .byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
 @@@@Z_NAME_HOLDER:53
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte 0x04, 0x40, 0x0B, 0x2D, 0x0C, 0x4E, 0x05, 0x84, Termin, Space, Space, Space, Space @MOVE_DOUBLE_IRON_BASH
 .word 0xFFFFFFFF
 
 .global z_move_names_table

@@ -828,7 +828,7 @@ bool does_move_make_contact(u16 move, u8 atk_bank) {
 u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 base_power) {
     u16 modifier = 0x1000;
     u8 move_split = move_table[move].split & photon_geyser_special(move); //JeremyZ
-    u16 quality_atk_modifier = percent_to_modifier(get_item_quality(battle_participants[atk_bank].held_item));
+    //u16 quality_atk_modifier = percent_to_modifier(get_item_quality(battle_participants[atk_bank].held_item));
     if (has_ability_effect(atk_bank, 0)) {
         switch (battle_participants[atk_bank].ability_id) {
             case ABILITY_TECHNICIAN:
@@ -992,97 +992,97 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
             break;
         case ITEM_EFFECT_PINKRIBBON:
             if (move_type == TYPE_FAIRY) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_SILKSCARF:
             if (move_type == TYPE_NORMAL) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_SHARPBEAK:
             if (move_type == TYPE_FLYING) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_BLACKBELT:
             if (move_type == TYPE_FIGHTING) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_SOFTSAND:
             if (move_type == TYPE_GROUND) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_HARDSTONE:
             if (move_type == TYPE_ROCK) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_MAGNET:
             if (move_type == TYPE_ELECTRIC) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_NEVERMELTICE:
             if (move_type == TYPE_ICE) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_BLACKGLASSES:
             if (move_type == TYPE_DARK) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_SILVERPOWDER:
             if (move_type == TYPE_BUG) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_SPELLTAG:
             if (move_type == TYPE_GHOST) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_DRAGONFANG:
             if (move_type == TYPE_DRAGON) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_MYSTICWATER:
             if (move_type == TYPE_WATER) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_CHARCOAL:
             if (move_type == TYPE_FIRE) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_MIRACLESEED:
             if (move_type == TYPE_GRASS) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_TWISTEDSPOON:
             if (move_type == TYPE_PSYCHIC) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_METALCOAT:
             if (move_type == TYPE_STEEL) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_POISONBARB:
             if (move_type == TYPE_POISON) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
             break;
         case ITEM_EFFECT_PLATES:
             if (move_type == (u16) get_battle_item_extra_param(bank_attacker)) {
-                modifier = chain_modifier(modifier, quality_atk_modifier);
+                modifier = chain_modifier(modifier, 0x1333);
             }
     }
 
@@ -1251,11 +1251,11 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
                     modifier = chain_modifier(modifier, 0x1800);
                 }
                 break;
-            case ABILITY_THICK_FAT:
+            /*case ABILITY_THICK_FAT:
                 if (move_type == TYPE_FIRE || move_type == TYPE_ICE) {
                     modifier = chain_modifier(modifier, 0x800);
                 }
-                break;
+                break;*/
             case ABILITY_PLUS:
             case ABILITY_MINUS:
                 if (move_split == MOVE_SPECIAL && (ability_battle_effects(20, atk_bank, ABILITY_PLUS, 0, 0) ||
@@ -1268,6 +1268,19 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
                     attack_stat = apply_modifier(0x1800, attack_stat);
                 }
                 break;
+			case ABILITY_GUTS:
+				if (move_split == MOVE_PHYSICAL && (battle_participants[atk_bank].status.flags.poison ||
+                    battle_participants[atk_bank].status.flags.toxic_poison || battle_participants[atk_bank].status.flags.burn ||
+					battle_participants[atk_bank].status.flags.paralysis || battle_participants[atk_bank].status.flags.sleep ||
+					battle_participants[atk_bank].status.flags.freeze)) {
+					attack_stat = apply_modifier(0x1800, attack_stat);
+				}
+				break;
+			case ABILITY_STAKEOUT:
+				if (new_battlestruct->various.switch_in_cos_switch) {
+					modifier = chain_modifier(modifier, 0x2000);
+				}
+				break;
         }
     }
 
@@ -1512,20 +1525,25 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     if (atk_ability == ABILITY_SNIPER && crit_loc == 2 && has_ability_effect(atk_bank, 0)) {
         final_modifier = chain_modifier(final_modifier, 0x1800);
     }
+	if (def_ability == ABILITY_THICK_FAT && (move_type == TYPE_FIRE || move_type == TYPE_ICE)) {
+		final_modifier = chain_modifier(final_modifier, 0x800);
+	}
     //reduces power of super effective moves
     if (move_outcome.super_effective &&
         ((def_ability == ABILITY_FILTER || def_ability == ABILITY_SOLID_ROCK || def_ability == ABILITY_PRISM_ARMOR) &&
          has_ability_effect(def_bank, 1))) {
         final_modifier = chain_modifier(final_modifier, 0xC00);
     }
+	if (move_outcome.super_effective && atk_ability == ABILITY_NEUROFORCE) {
+		final_modifier = chain_modifier(final_modifier, 0x1400);
+	}
     if (get_item_effect(atk_bank, 1) == ITEM_EFFECT_METRONOME) {
         if (new_battlestruct->bank_affecting[atk_bank].same_move_used > 4)
             final_modifier = chain_modifier(final_modifier, 0x2000);
         else
             final_modifier = chain_modifier(final_modifier,
                     0x1000 + new_battlestruct->bank_affecting[atk_bank].same_move_used * 0x333);
-    } else if ((get_item_effect(atk_bank, 1) == ITEM_EFFECT_EXPERTBELT || atk_ability == ABILITY_NEUROFORCE) &&
-               move_outcome.super_effective) //JeremyZ
+    } else if (get_item_effect(atk_bank, 1) == ITEM_EFFECT_EXPERTBELT && move_outcome.super_effective)
     {
         final_modifier = chain_modifier(final_modifier, 0x1333);
     } else if (get_item_effect(atk_bank, 1) == ITEM_EFFECT_LIFEORB) {

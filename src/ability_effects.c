@@ -37,6 +37,7 @@ u8 item_force_switching(u8 bank, void* BS_ptr);
 u32 random_value(u32 limit);
 u16 get_battle_item_extra_param(u32 bank); //JeremyZ
 u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
+u8 can_lose_item(u8 bank, u8 stickyhold_check, u8 sticky_message);
 
 bool not_impostered(u8 bank) {
     return !battle_participants[bank].status2.transformed;
@@ -867,7 +868,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         if (current_move == MOVE_DOOM_DESIRE || current_move == MOVE_FUTURE_SIGHT
                             || check_ability(bank_target, ABILITY_STICKY_HOLD))
                             break;
-                        if (try_stealing_bank_item(bank_attacker, bank_target)) {
+                        if (can_lose_item(bank_target, 1, 0) && try_stealing_bank_item(bank_attacker, bank_target)) {
                             bs_push_current(BS_MAGICIAN);
                             effect = true;
                             bank_partner_def = bank_target; //for animation
@@ -960,10 +961,9 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             if (check_ability(bank, ABILITY_PICKPOCKET) && MOVE_WORKED && TARGET_TURN_DAMAGED &&
                 battle_participants[bank].current_hp) {
                 if (!does_move_make_contact(curr_move, bank_attacker)
-                    || (new_battlestruct->various.sheerforce_bonus)
-                    || (check_ability(bank_attacker, ABILITY_STICKY_HOLD)))
+                    || (new_battlestruct->various.sheerforce_bonus))
                     break;
-                if (try_stealing_bank_item(bank, bank_attacker)) {
+                if (can_lose_item(bank_attacker, 1, 0) && try_stealing_bank_item(bank, bank_attacker)) {
                     bs_push_current(BS_PICKPOCKET);
                     effect = true;
                 }

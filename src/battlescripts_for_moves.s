@@ -218,6 +218,7 @@ battlescripts_table:
 .word MIND_BLOWN	@192 Mind Blown, JeremyZ
 .word PLASMA_FISTS	@193 Plasma Fists, JeremyZ
 .word ATTACK_TERRAINCHANGE @194 Z_MEW, Z_LYCANROC, JeremyZ
+.word HITS_TWO_TIMES_FLINCH @195 Double Iron Bash, JeremyZ
 
 SUNNYDAY_BS:
 	attackcanceler
@@ -2586,4 +2587,7 @@ ATTACK_TERRAINCHANGE:
 	waitmessage 0x40
 	callasm_cmd 141 @check battle pokemon for terrain seeds
 	goto_cmd ENDTURN
-	
+
+HITS_TWO_TIMES_FLINCH:
+	seteffect1 MOVEEFFECT_FLINCH
+	goto_cmd HITS_TWO_TIMES
