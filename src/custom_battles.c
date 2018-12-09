@@ -66,6 +66,8 @@ void handle_outcome_trainerbattle(void)
             set_battled_trainers_flags();
         }
     }
+	
+    battle_flags.double_battle = 0;
 }
 
 void handle_outcome_rematchbattle(void)
@@ -86,6 +88,8 @@ void handle_outcome_rematchbattle(void)
     {
         set_callback2(c2_whiteout);
     }
+	
+    battle_flags.double_battle = 0;
 }
 
 void battle_lost_set_script(void)

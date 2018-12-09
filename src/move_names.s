@@ -737,19 +737,19 @@ move_names_table:
 .byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
 .byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
 @@@@Z_NAME_HOLDER:53
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
-.byte Dash, Termin, Termin, Termin, Termin, Termin, Termin, Termin, Space, Space, Space, Space, Space
+.byte 0x03, 0x2E, 0x03, 0x2E, 0x05, 0xBE, 0x0C, 0x7C, Termin, Space, Space, Space, Space @MOVE_ZIPPY_ZAP
+.byte 0x0C, 0xD0, 0x0C, 0xD0, 0x02, 0x67, 0x08, 0x40, Termin, Space, Space, Space, Space @MOVE_SPLISHY_SPLASH
+.byte 0x0A, 0x69, 0x0A, 0x69, 0x10, 0xE8, 0x09, 0x1E, Termin, Space, Space, Space, Space @MOVE_FLOATY_FALL
+.byte 0x0B, 0x9F, 0x0B, 0x9F, 0x08, 0x4C, 0x04, 0xAA, Termin, Space, Space, Space, Space @MOVE_PIKA_PAPOW
+.byte 0x05, 0x7B, 0x05, 0x7B, 0x0A, 0xB3, 0x0A, 0x3A, Termin, Space, Space, Space, Space @MOVE_BOUNCY_BUBBLE
+.byte 0x09, 0x23, 0x09, 0x23, 0x03, 0x2E, 0x05, 0x84, Termin, Space, Space, Space, Space @MOVE_BUZZY_BLITZ
+.byte 0x0E, 0x67, 0x0E, 0x67, 0x05, 0x7D, 0x01, 0x69, Termin, Space, Space, Space, Space @MOVE_SIZZLY_SLIDE
+.byte 0x05, 0x36, 0x05, 0x36, 0x0A, 0xB3, 0x02, 0x23, Termin, Space, Space, Space, Space @MOVE_GLITZY_GLOW
+.byte 0x05, 0x42, 0x05, 0x42, 0x08, 0xBF, 0x0F, 0xA0, Termin, Space, Space, Space, Space @MOVE_BADDY_BAD
+.byte 0x10, 0xF1, 0x10, 0xF1, 0x05, 0x13, 0x10, 0x1B, Termin, Space, Space, Space, Space @MOVE_SAPPY_SEED
+.byte 0x01, 0xB6, 0x01, 0xB6, 0x0C, 0x4D, 0x03, 0x58, Termin, Space, Space, Space, Space @MOVE_FREEZY_FROST
+.byte 0x08, 0x94, 0x08, 0x94, 0x03, 0xEA, 0x01, 0x66, Termin, Space, Space, Space, Space @MOVE_SPARKLY_SWIRL
+.byte 0x0A, 0x46, 0x0A, 0x46, 0x05, 0x84, 0x0A, 0x81, Termin, Space, Space, Space, Space @MOVE_VEEVEE_VOLLEY
 .byte 0x04, 0x40, 0x0B, 0x2D, 0x0C, 0x4E, 0x05, 0x84, Termin, Space, Space, Space, Space @MOVE_DOUBLE_IRON_BASH
 .word 0xFFFFFFFF
 

@@ -580,7 +580,10 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
                 base_power = 20;
         }
             break;
-        case MOVE_RETURN: {
+        case MOVE_RETURN: 
+        case MOVE_PIKA_PAPOW:
+        case MOVE_VEEVEE_VOLLEY:
+		{
             u32 return_damage = battle_participants[atk_bank].happiness * 10 / 25;
             if (return_damage == 0)
                 return_damage = 1;

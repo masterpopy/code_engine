@@ -219,6 +219,7 @@ battlescripts_table:
 .word PLASMA_FISTS	@193 Plasma Fists, JeremyZ
 .word ATTACK_TERRAINCHANGE @194 Z_MEW, Z_LYCANROC, JeremyZ
 .word HITS_TWO_TIMES_FLINCH @195 Double Iron Bash, JeremyZ
+.word EEVEE_ATTACK @196 Glitzy Glow, Baddy Bad, Sappy Seed, Freezy Frost, Sparkly Swirl, JeremyZ
 
 SUNNYDAY_BS:
 	attackcanceler
@@ -2591,3 +2592,40 @@ ATTACK_TERRAINCHANGE:
 HITS_TWO_TIMES_FLINCH:
 	seteffect1 MOVEEFFECT_FLINCH
 	goto_cmd HITS_TWO_TIMES
+
+EEVEE_ATTACK:
+	attackcanceler
+	accuracycheck MOVE_MISSED 0x0
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	damageadjustment
+	attackanimation
+	waitanimation
+	effectiveness_sound
+	hitanim bank_target
+	waitstate
+	graphicalhpupdate bank_target
+	datahpupdate bank_target
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	faintpokemon bank_target 0x0 0x0 @faint target
+	jumpifmove 0x2E1 0x082D8F88
+	jumpifmove 0x2E2 0x082D9288
+	jumpifmove 0x2E3 SAPPY_SEED
+	jumpifmove 0x2E4 0x082D8D75
+SPARKLY_SWIRL:
+	call PARTYHEAL_STRING
+	printfromtable 0x85CC904
+	waitmessage 0x40
+	setbyte 0x02024211 0x0
+	callasm_cmd 104
+	goto_cmd ENDTURN	
+SAPPY_SEED:
+	setleechseed
+	printfromtable 0x85CC878
+	waitmessage 0x40
+	goto_cmd ENDTURN
