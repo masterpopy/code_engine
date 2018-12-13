@@ -597,7 +597,8 @@ bool poison_heal_check(void)
         if (!new_battlestruct->bank_affecting[active_bank].heal_block && !FULL_HP(active_bank))
         {
             damage_loc = get_1_8_of_max_hp(active_bank) * -1;
-            call_bc_move_exec(BS_ABILITYHPCHANGE_END2);
+            //call_bc_move_exec(BS_ABILITYHPCHANGE_END2);
+			call_bc_move_exec((void*)0x82DB23D);
             record_usage_of_ability(active_bank, ABILITY_POISON_HEAL);
         }
         return 1;

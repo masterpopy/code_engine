@@ -1310,6 +1310,13 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
                 modifier = chain_modifier(modifier, 0x2000);
             }
             break;
+		case 153: //Z-Crystals for Ash's Pikachu
+			if (move_split == MOVE_SPECIAL && battle_participants[atk_bank].held_item == ITEM_PIKASHUNIUMZ &&
+			((battle_participants[atk_bank].species >= 0X3DD && battle_participants[atk_bank].species <= 0X3E2) ||
+			battle_participants[atk_bank].species == 0x434)) {
+				modifier = chain_modifier(modifier, 0x2000);
+			}
+			break;
         case ITEM_EFFECT_LIGHTBALL:
 
             if (battle_participants[atk_bank].species == POKE_PIKACHU ||
