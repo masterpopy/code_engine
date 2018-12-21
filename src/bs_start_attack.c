@@ -282,8 +282,8 @@ void reset_indicators_height(void) {
 }
 
 void set_mega_attr(struct battle_participant* bank_struct, struct pokemon* poke_address, u16 new_species);
-
 struct pokemon* get_bank_poke_ptr(u8 bank);
+u8 get_first_to_strike(u8 bank1, u8 bank2, u8 ignore_priority);
 
 u8 check_mega_evo(u8 bank) {
     if (!not_impostered(bank))
@@ -377,6 +377,18 @@ u8 check_mega_evo(u8 bank) {
         }
         attacker_struct->species = mega_species;
         new_battlestruct->various.active_bank = bank;
+		
+		//Recalculate turn order after mega, Gen VII
+		for (u8 i = 1; i < no_of_all_banks; i++) {
+			for (u8 j = 0; j < no_of_all_banks - i; j++){
+				if (get_first_to_strike(turn_order[j], turn_order[j + 1], 0)) {
+					u8 placeholder = turn_order[j];
+					turn_order[j] = turn_order[j + 1];
+					turn_order[j + 1] = placeholder;
+				}
+			}
+		}
+
         return 1;
     } else
         return 0;
@@ -407,7 +419,7 @@ inline bool is_z_move(u16 move) {
 
 u16 check_z_move(u32 move, u32 bank) {
     const struct move_info* info = &move_table[move];
-    if (get_item_effect(bank, 0) != 153)
+    if (get_item_effect(bank, 0) != ITEM_EFFECT_ZCRYSTAL)
         return 0;
     u8 type = info->type;
     u16 z_move = 0;
@@ -470,7 +482,7 @@ void* get_move_battlescript_ptr(u32 move) {
 }
 
 u16 get_move_from_pledge(u8 bank);
-void species_data_change(u8 bank, u16 new_species);
+//void species_data_change(u8 bank, u16 new_species);
 void bs_start_attack(void) {
     u8 mode = 0;  //mode 0 - get type with adjusting chosen target
     //mode 1 - get type with calculating target from scratch

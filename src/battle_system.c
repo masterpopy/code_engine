@@ -650,7 +650,7 @@ bool canlose_megastone(u8 bank, u16 item)
         *item_ptr = holding_item;
         return ret;
     }
-	else if (get_item_battle_function(item) == 153)
+	else if (get_item_battle_function(item) == ITEM_EFFECT_ZCRYSTAL)
 		return 0;
     return 1;
 }

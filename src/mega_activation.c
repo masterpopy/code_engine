@@ -117,7 +117,7 @@ u16 get_mega_species(u8 bank, u8 chosen_method)
 				case 0xFC: //fervent wish mega
 				{
 					//JeremyZ, cannot mega if holding z-crystal
-					if (item_effect == 153)
+					if (item_effect == ITEM_EFFECT_ZCRYSTAL)
 						break;
 					u16 fervent_move = evo[i].paramter;
 					if (fervent_move)
@@ -135,7 +135,7 @@ u16 get_mega_species(u8 bank, u8 chosen_method)
 				}
 					break;
 				case 0xFA: //Ultra Burst
-					// if(item_effect == 153)
+					// if(item_effect == ITEM_EFFECT_ZCRYSTAL)
 					if (battle_participants[bank].held_item == 0x283) //JeremyZ
 						goto SET_SPECIES;
 					break;

@@ -43,9 +43,17 @@ u16 teach_move_player(struct pokemon* poke, u8 slot)
     return teach_move_in_available_slot(poke, move_to_learn);
 }
 
-#define MAX_RELEARNABLE 25
+bool find_move_in_table2(u16 move, u16 *table_ptr, u8 table_length)
+{
+    for (u8 i = 0; i < table_length; i++) {
+        if (table_ptr[i] == move) { return true; }
+    }
+    return false;
+}
 
-u8 relearable_moves(struct pokemon* poke, u16 moves_table[])
+#define MAX_RELEARNABLE 24
+
+u8 relearnable_moves(struct pokemon* poke, u16 moves_table[])
 {
     u8 number_of_moves = 0;
     /*u16 known_moves[4];
@@ -63,9 +71,14 @@ u8 relearable_moves(struct pokemon* poke, u16 moves_table[])
             u16 known_move = poke_moveset[i].move;
             if (known_move != known_moves[0] && known_move != known_moves[1] && known_move != known_moves[2] && known_move != known_moves[3] && number_of_moves < MAX_RELEARNABLE)
             {
-                if (moves_table)
+				if (!moves_table) {
+					number_of_moves++;
+					break;
+				}
+                else if (!find_move_in_table2(known_move, moves_table, number_of_moves)) {
                     moves_table[number_of_moves] = known_move;
-                number_of_moves++;
+					number_of_moves++;
+				}
             }
         }
     }
@@ -74,12 +87,12 @@ u8 relearable_moves(struct pokemon* poke, u16 moves_table[])
 
 u8 get_relearnable_moves(struct pokemon* poke, u16 moves_table[])
 {
-    return relearable_moves(poke, &moves_table[0]);
+    return relearnable_moves(poke, &moves_table[0]);
 }
 
 u8 get_number_of_relearnable_moves(struct pokemon* poke)
 {
-    return relearable_moves(poke, 0);
+    return relearnable_moves(poke, 0);
 }
 
 u8 learnsanydamagingmove(u16 poke)
