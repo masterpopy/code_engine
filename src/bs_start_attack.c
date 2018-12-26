@@ -431,7 +431,7 @@ u16 check_z_move(u32 move, u32 bank) {
     else if (z_type > TYPE_EGG)
         z_type--;
     new_battlestruct->various.var2 = 0x24D + z_type; //default: 0x18D
-    u32 param = get_battle_item_extra_param(active_bank);
+    u32 param = get_battle_item_extra_param(bank);
     if (is_z_move(move))
         z_move = move;
     else if (param > TYPE_FAIRY) {

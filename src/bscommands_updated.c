@@ -1929,7 +1929,7 @@ void atk00_move_canceller(void)
 	battlescripts_curr_instruction++;
 	if (get_z_moves(current_move))
 	{
-		if (active_bank == 0)
+		if (bank_attacker == 0)
 		{    /*	if(bank_attacker==0)
 				{
 					new_battlestruct->mega_related.z_happened_pbs|=0x1;
@@ -1951,7 +1951,7 @@ void atk00_move_canceller(void)
 			}
 			objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE] = DISABLE;
 		}
-		else if (active_bank == 2)
+		else if (bank_attacker == 2)
 		{
 			if (!/*battle_flags.multibattle*/is_in_tag_battle())
 			{
