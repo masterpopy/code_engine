@@ -63,6 +63,7 @@ bool does_move_make_contact(u16 move, u8 atk_bank); //JeremyZ
 bool photon_geyser_special(u16 move); //JeremyZ
 void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
 u32 random_value(u32 limit);
+bool is_in_tag_battle(void);
 
 void set_unburden(u8 bank)
 {
@@ -1940,7 +1941,7 @@ void atk00_move_canceller(void)
 					objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE]=DISABLE;
 				}
 			*/
-			if (!battle_flags.multibattle)
+			if (!/*battle_flags.multibattle*/is_in_tag_battle())
 			{
 				new_battlestruct->mega_related.z_happened_pbs |= 0x5;
 			}
@@ -1952,7 +1953,7 @@ void atk00_move_canceller(void)
 		}
 		else if (bank_attacker == 2)
 		{
-			if (!battle_flags.multibattle)
+			if (!/*battle_flags.multibattle*/is_in_tag_battle())
 			{
 				new_battlestruct->mega_related.z_happened_pbs |= 0x5;
 			}

@@ -27,6 +27,7 @@ bool not_impostered(u8 bank);
 u32 get_battle_item_extra_param(u32 bank);
 bool is_immune_to_powder(u8 bank); //JeremyZ
 u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
+bool is_in_tag_battle(void);
 
 bool is_bank_present(u32 bank)
 {
@@ -311,7 +312,7 @@ u8 check_mega_evo(u8 bank) {
             bank_mega_mode = new_battlestruct->mega_related.user_trigger;
             if (bank_mega_mode == 3) //bank_mega_mode > 1
             {
-                if (!battle_flags.multibattle) {
+                if (!/*battle_flags.multibattle*/is_in_tag_battle()) {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x5;
                 } else {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x1;
@@ -322,7 +323,7 @@ u8 check_mega_evo(u8 bank) {
             bank_mega_mode = new_battlestruct->mega_related.ally_trigger;
             if (bank_mega_mode == 3) //bank_mega_mode > 1
             {
-                if (!battle_flags.multibattle) {
+                if (!/*battle_flags.multibattle*/is_in_tag_battle()) {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x5;
                 } else {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x4;

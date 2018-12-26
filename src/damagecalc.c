@@ -1310,7 +1310,7 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
                 modifier = chain_modifier(modifier, 0x2000);
             }
             break;
-		case 153: //Z-Crystals for Ash's Pikachu
+		case ITEM_EFFECT_ZCRYSTAL: //Z-Crystals for Ash's Pikachu
 			if (move_split == MOVE_SPECIAL && battle_participants[atk_bank].held_item == ITEM_PIKASHUNIUMZ &&
 			((battle_participants[atk_bank].species >= 0X3DD && battle_participants[atk_bank].species <= 0X3E2) ||
 			battle_participants[atk_bank].species == 0x434)) {
@@ -1490,9 +1490,10 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     u16 final_modifier = 0x1000;
     //stab modifier
     if (move_type != TYPE_EGG && is_of_type(atk_bank, move_type) && move != MOVE_STRUGGLE) {
-        damage = apply_modifier(0x1800, damage);
         if (check_ability(atk_bank, ABILITY_ADAPTABILITY))
-            final_modifier = 0x2000;
+            damage = apply_modifier(0x2000, damage);
+		else
+			damage = apply_modifier(0x1800, damage);
     }
     //type effectiveness
     damage = (damage * chained_effectiveness) >> 6;
