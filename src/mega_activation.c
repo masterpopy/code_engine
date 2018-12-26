@@ -2,7 +2,7 @@
 #include "static_references.h"
 
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
-u16 check_z_move(u16 move, u8 bank);
+u16 check_z_move(u32 move, u32 bank);
 u16 get_mega_species(u8 bank, u8 chosen_method);
 bool is_in_tag_battle(void);
 
