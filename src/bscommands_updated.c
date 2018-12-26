@@ -1929,7 +1929,7 @@ void atk00_move_canceller(void)
 	battlescripts_curr_instruction++;
 	if (get_z_moves(current_move))
 	{
-		if (bank_attacker == 0)
+		if (active_bank == 0)
 		{    /*	if(bank_attacker==0)
 				{
 					new_battlestruct->mega_related.z_happened_pbs|=0x1;
@@ -1951,7 +1951,7 @@ void atk00_move_canceller(void)
 			}
 			objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE] = DISABLE;
 		}
-		else if (bank_attacker == 2)
+		else if (active_bank == 2)
 		{
 			if (!/*battle_flags.multibattle*/is_in_tag_battle())
 			{
@@ -1964,9 +1964,9 @@ void atk00_move_canceller(void)
 			objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE] = DISABLE;
 		}
 		else if (!(new_battlestruct->mega_related.z_happened_pbs &
-				(BIT_GET(bank_attacker) | BIT_GET(bank_attacker ^ 2))))
+				(BIT_GET(active_bank) | BIT_GET(active_bank ^ 2))))
 		{
-			new_battlestruct->mega_related.z_happened_pbs |= BIT_GET(bank_attacker);
+			new_battlestruct->mega_related.z_happened_pbs |= BIT_GET(active_bank);
 		}
 		//battlescripts_curr_instruction = BS_START_Z;
 		bs_push_current(BS_START_Z);
