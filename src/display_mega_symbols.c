@@ -9,43 +9,25 @@ void healthbar_indicator_callback(struct object* self);
 u8 is_in_triggering_state(u8 bank);
 u8 is_multi_battle();
 
-/*const struct SpriteTiles gfx_indicator = {indicatorsTiles, 0x80, 0x1234};
-const struct SpriteTiles gfx_ztrigger = {z_trigger, 0x400, 0x2346};
-const struct SpriteTiles gfx_trigger = {mega_triggerTiles, 0x400, 0x2345};*/
 
 const struct SpriteTiles mega_z_gfx[2] = {
-        {indicatorsTiles, 0x80, 0x1234}, {z_mega_trigger, 0x800, 0x2346}
+        {indicatorsTiles, 0x60, 0x1234}, {z_mega_trigger, 0x400, 0x2345}
 };
 #define gfx_indicator mega_z_gfx[0]
 #define gfx_trigger mega_z_gfx[1]
-/*
-const struct SpritePalette pal_indicator = {indicatorsPal, 0x1234};
-const struct SpritePalette pal_trigger = {mega_triggerPal, 0x2345};
-*/
+
 const struct SpritePalette mega_z_pals[2] = {
         {indicatorsPal, 0x1234}, {mega_triggerPal, 0x2345}
 };
 #define pal_indicator mega_z_pals[0]
 #define pal_trigger mega_z_pals[1]
 
-/*struct sprite mega_indicator = {0, 0x0, 0x0, 0x00, 0x0};
-struct sprite mega_trigger = {0, 0x0, 0x8000, 0x800, 0};*/
 
 struct sprite mega_triggers[2] = {
         {0, 0x0, 0x0, 0x00, 0x0}, {0, 0x0, 0x8000, 0x800, 0}
 };
 #define mega_indicator mega_triggers[0]
 #define mega_trigger mega_triggers[1]
-
-/*struct template template_indicator = {0x1234, 0x1234, &mega_indicator, (struct frame**) 0x82EC69C, 0,
-        (struct rotscale_frame**) 0x82EC6A8, healthbar_indicator_callback};
-
-struct template template_trigger = {0x2345, 0x2345, &mega_trigger, (struct frame**) 0x82EC69C, 0,
-        (struct rotscale_frame**) 0x82EC6A8,
-        healthbar_trigger_callback};
-
-struct template template_ztrigger = {0x2346, 0x2345, &mega_trigger, (struct frame**) 0x82EC69C, 0,
-        (struct rotscale_frame**) 0x82EC6A8, healthbar_trigger_callback};*/
 
 struct template mega_z_templtes[2] = {
         {0x1234, 0x1234, &mega_indicator, (struct frame**) 0x82EC69C, 0, (struct rotscale_frame**) 0x82EC6A8,
@@ -164,7 +146,7 @@ void healthbar_trigger_callback(struct object* self)
 
         case DISABLE:
             self->pos1.x = -32;
-            self->pos1.y = 0;
+            //self->pos1.y = 0;
             self->private[ANIM_STATE] = DISABLED;
             break;
         case SLIDED_OUT:
@@ -178,44 +160,22 @@ void healthbar_trigger_callback(struct object* self)
         case LIGHT_UP_TRIGGER:
         {
             struct palette* pal = get_particle_pal(0x2345);
-            // if(battle_flags.double_battle)
-            // {
-            //     for(u8 i = 1; i < 16; i++)
-            //    {
-            //       if (ignored_trigger_color(mega_triggerPalDbl[i]))
-            //           continue;
-            //       pal->c[i] = calcEnabled(mega_triggerPalDbl[i]);
-            //   }
-            //}
-            // else
-            // {
             for (u8 i = 1; i < 16; i++)
             {
                 if (ignored_trigger_color(mega_triggerPal[i]))
                     continue;
                 pal->c[i] = calcEnabled(mega_triggerPal[i]);
             }
-            // }
             self->private[PALLET_STATE] = TRIGGER_ON;
             break;
         }
         case REVERT_COLORS:
         {
             struct palette* pal = get_particle_pal(0x2345);
-            //if(battle_flags.double_battle)
-            //{
-            //    for(u8 i = 1; i < 16; i++)
-            //    {
-            //        pal->c[i] = mega_triggerPalDbl[i];
-            //    }
-            //}
-            // else
-            // {
             for (u8 i = 1; i < 16; i++)
             {
                 pal->c[i] = mega_triggerPal[i];
             }
-            // }
             self->private[PALLET_STATE] = REGULAR;
             break;
         }
@@ -232,36 +192,16 @@ void position_trigger()
     if (!set_mode)
         return;
     u8 trigger_id = new_battlestruct->mega_related.trigger_id;
-    if (objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE] == HIDDEN)
+    if (objects[trigger_id].private[ANIM_STATE] == HIDDEN)
     {
-        /*obj_delete_and_free_tiles(&objects[trigger_id]);
-        gpu_pal_obj_alloc_tag_and_apply(&pal_trigger);
-        const void* a;
-        void* b;
-        if (set_mode == 1)
-        {
-            a = &gfx_ztrigger;
-            b = &template_ztrigger;
-        }
-        else
-        {
-            a = &gfx_trigger;
-            b = &template_trigger;
-        }
-        gpu_tile_obj_decompress_alloc_tag_and_upload(a);
-        trigger_id = new_battlestruct->mega_related.trigger_id = template_instanciate_forward_search(b, 130, 90, 1);*/
         struct object* self = &objects[trigger_id];
         self->private[BANK_TO_ATTACH_TRIGGER] = active_bank;
         self->private[ANIM_STATE] = POS_BEHIND_HPBAR;
-        if (set_mode == 1) {
-        	self->final_oam.attr2 |= 16;
-        } else {
-        	u16 attr = self->final_oam.attr2;
-        	attr >>= 10;
-        	attr <<= 10;
-			self->final_oam.attr2 = attr;
-		}
-    }
+        u16 attr = self->anim_data_offset;
+        if(set_mode == 1)
+        	attr += 16;
+		self->final_oam.attr2 = self->final_oam.attr2 & 0xFC00 | attr;
+	}
 }
 
 void hide_trigger_on_pressing_A()
@@ -460,16 +400,8 @@ void healthbar_load_graphics(u8 state)
     {
         gpu_pal_obj_alloc_tag_and_apply(&pal_indicator);
         gpu_tile_obj_decompress_alloc_tag_and_upload(&gfx_indicator);
-        ////if(battle_flags.double_battle)
-        // {
-        //    gpu_pal_obj_alloc_tag_and_apply(&pal_trigger_dbl);
-        //   gpu_tile_obj_decompress_alloc_tag_and_upload(&gfx_trigger_dbl);
-        // }
-        // else
-        // {
         gpu_pal_obj_alloc_tag_and_apply(&pal_trigger);
         gpu_tile_obj_decompress_alloc_tag_and_upload(&gfx_trigger);
-        // }
         for (u8 bank = 0; bank < no_of_all_banks; ++bank)
         {
             objid = template_instanciate_forward_search(&template_indicator, 1, 0, 1);
