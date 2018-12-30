@@ -200,7 +200,7 @@ void position_trigger()
         u16 attr = self->anim_data_offset;
         if(set_mode == 1)
         	attr += 16;
-		self->final_oam.attr2 = self->final_oam.attr2 & 0xFC00 | attr;
+		self->final_oam.attr2 = (self->final_oam.attr2 & 0xFC00) | attr;
 	}
 }
 
