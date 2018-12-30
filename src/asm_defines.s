@@ -893,7 +893,8 @@
 .equ MOVE_YAWN, 0x119
 .equ MOVE_ZAP_CANNON, 0xC0
 .equ MOVE_ZEN_HEADBUTT, 0x1AC
-.equ MOVE_CORE_ENFORCER, 0x2AF
+.equ MOVE_CORE_ENFORCER, 0x28A
+.equ MOVE_SPECTRAL_THIEF, 0x29A
 
 //weather
 .equ weather_rain, 0x1
