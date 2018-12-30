@@ -1715,7 +1715,7 @@ EMBARGO:
 
 GASTROACID:
 	jumpifmove MOVE_CORE_ENFORCER CORE_ENFORCER
-	jumpifmove 0x2C8 CORE_ENFORCER
+	jumpifmove MOVE_SPECTRAL_THIEF CORE_ENFORCER
 	attackcanceler
 	accuracycheck MOVE_FAILED 0x0
 	callasm_cmd 54 @sets the bit
@@ -2613,8 +2613,8 @@ EEVEE_ATTACK:
 	resultmessage
 	waitmessage 0x40
 	faintpokemon bank_target 0x0 0x0 @faint target
-	jumpifmove 0x2E1 0x082D8F88
-	jumpifmove 0x2E2 0x082D9288
+	jumpifmove 0x2E1 GLITZY_GLOW
+	jumpifmove 0x2E2 BADDY_BAD
 	jumpifmove 0x2E3 SAPPY_SEED
 	jumpifmove 0x2E4 0x082D8D75
 SPARKLY_SWIRL:
@@ -2623,7 +2623,17 @@ SPARKLY_SWIRL:
 	waitmessage 0x40
 	setbyte 0x02024211 0x0
 	callasm_cmd 104
-	goto_cmd ENDTURN	
+	goto_cmd ENDTURN
+GLITZY_GLOW:
+	setlightscreen
+	printfromtable barrier_strings
+	waitmessage 0x40
+	goto_cmd ENDTURN
+BADDY_BAD:
+	setreflect
+	printfromtable barrier_strings
+	waitmessage 0x40
+	goto_cmd ENDTURN
 SAPPY_SEED:
 	setleechseed
 	printfromtable 0x85CC878
