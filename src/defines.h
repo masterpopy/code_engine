@@ -390,7 +390,17 @@ enum call_mode
 
 bool can_change_stat(u8 bank, bool self_inflicted, u8 statchanger);
 const struct evolution_sub* GET_EVO_TABLE(u16 species);
-u8 stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats);
+
+u8 inline stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats){
+    u8 bits = 0;
+    if (self_inflicted)
+        bits |= STAT_SELFINFLICTED;
+    if (print_ability)
+        bits |= STAT_PRINTABILITY;
+    if (change_stats)
+        bits |= STAT_CHANGE_VALUES;
+    return bits;
+}
 u8 change_stats(u8 bank, u8 bits, void* bs_unable);
 
 #endif /* DEFINES_H */

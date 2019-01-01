@@ -39,8 +39,8 @@ void set_mega_attr(struct battle_participant* bank_struct, struct pokemon* poke_
 	bank_struct->sp_atk = get_attributes(poke_address, ATTR_SPECIAL_ATTACK, 0);
 	bank_struct->sp_def = get_attributes(poke_address, ATTR_SPECIAL_DEFENCE, 0);*/
 	const struct poke_basestats* PokeStats = &((*basestat_table)[new_species]);
-	bank_struct->type1 = PokeStats->type1;
-	bank_struct->type2 = PokeStats->type2;
+    *(u16*)&bank_struct->type1 = *(u16*)&PokeStats->type1;
+	//bank_struct->type2 = PokeStats->type2;
 
 	bank_struct->ability_id = PokeStats->ability1;
 	/*

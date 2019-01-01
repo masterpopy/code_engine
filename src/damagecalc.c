@@ -363,7 +363,8 @@ const struct fling fling_table[] = {
 		{ITEM_HARDSTONE, 100, 0},
 		
 		{ITEM_IRONBALL, 130, 0},
-        {0xFFFF, 0, 0}};
+        {0xFFFF, 0, 0}
+};
 
 bool can_evolve(u16 species) {
     const struct evolution_sub *evo = GET_EVO_TABLE(species);
