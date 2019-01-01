@@ -46,8 +46,8 @@ reset_mega_trigger_hook:
 	ldr r1, =(0x08057590|1)
 	bx r1
 
-
-check_z_seted:
+	.global is_z_seted
+is_z_seted:
     ldr     r1,=0x2024218
     ldr     r1,[r1]
     add     r1,#0xD8
@@ -56,8 +56,13 @@ check_z_seted:
     ldrb r1, [r1]
     lsr r0,r0,r1
     mov r1,#3
-    and     r1,r0
-    cmp     r1,#0x1
+    and     r0,r1
+    bx lr
+
+
+check_z_seted:
+    bl is_z_seted
+    cmp     r0,#0x1
     beq     case1
     ldr     r1,=0x3005D90
     ldr     r1,[r1]

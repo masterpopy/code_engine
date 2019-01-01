@@ -19,18 +19,22 @@ void reset_indicators_height_except_bank(u8 bank)
 	}
 }
 
-void clear_mega_triggers(u8 bank)
-{
+void revert_triggers(u8 bank){
 	struct object* trigger = &objects[new_battlestruct->mega_related.trigger_id];
 	if (trigger->private[PALLET_STATE] == TRIGGER_ON)
 	{
 		trigger->private[PALLET_STATE] = REVERT_COLORS;
 	}
-	reset_indicators_height_except_bank(bank);
 	if (bank == 0)
 		new_battlestruct->mega_related.user_trigger = 0;
 	else if (bank == 2)
 		new_battlestruct->mega_related.ally_trigger = 0;
+}
+
+void clear_mega_triggers(u8 bank)
+{
+	revert_triggers(bank);
+	reset_indicators_height_except_bank(bank);
 }
 
 void set_mega_triggers(u8 bank, u8 set_mode)

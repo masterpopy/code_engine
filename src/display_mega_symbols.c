@@ -211,10 +211,16 @@ void hide_trigger_on_pressing_A()
         objects[trigger_id].private[ANIM_STATE] = SLIDE_IN;
 }
 
+extern bool is_z_seted();
+void revert_triggers(u8 bank);
 u8 hide_trigger()
 {
     u8 trigger_id = new_battlestruct->mega_related.trigger_id;
     u8 can_b_button_work = 0;
+    if(is_z_seted()){
+        revert_triggers(active_bank);
+        return can_b_button_work;
+    }
     if (objects[trigger_id].private[ANIM_STATE] == SLIDED_OUT)
     {
         objects[trigger_id].private[ANIM_STATE] = SLIDE_IN;
