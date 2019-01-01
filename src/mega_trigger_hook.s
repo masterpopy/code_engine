@@ -40,7 +40,7 @@ reset_mega_trigger_hook:
 	push {r4-r7, lr}
 	ldr r4, =active_bank
 	ldrb r0, [r4]
-	bl clear_mega_triggers
+	bl clear_triggers
 	ldr r3, =battle_bufferA
 	ldrb r0, [r4] 
 	ldr r1, =(0x08057590|1)
@@ -64,6 +64,9 @@ check_z_seted:
     bl is_z_seted
     cmp     r0,#0x1
     beq     case1
+    push {r0-r4}
+    bl position_trigger
+    pop {r0-r4}
     ldr     r1,=0x3005D90
     ldr     r1,[r1]
     ldrb    r1,[r1,#0x13]
@@ -74,6 +77,6 @@ check_z_seted:
 case1:
     ldr     r0,=0x8057F9F
     bx r0
-case2:
+case2://end
     ldr     r0,=0x8057C29
     bx      r0

@@ -9,6 +9,8 @@ void healthbar_indicator_callback(struct object* self);
 u8 is_in_triggering_state(u8 bank);
 u8 is_multi_battle();
 
+extern bool is_z_seted();
+void revert_triggers(u8 bank);
 
 const struct SpriteTiles mega_z_gfx[2] = {
         {indicatorsTiles, 0x60, 0x1234}, {z_mega_trigger, 0x400, 0x2345}
@@ -186,23 +188,7 @@ void healthbar_trigger_callback(struct object* self)
 }
 
 
-void position_trigger()
-{
-    u8 set_mode = can_set_mega_trigger(active_bank);
-    if (!set_mode)
-        return;
-    u8 trigger_id = new_battlestruct->mega_related.trigger_id;
-    if (objects[trigger_id].private[ANIM_STATE] == HIDDEN)
-    {
-        struct object* self = &objects[trigger_id];
-        self->private[BANK_TO_ATTACH_TRIGGER] = active_bank;
-        self->private[ANIM_STATE] = POS_BEHIND_HPBAR;
-		u16 attr = self->anim_data_offset;
-        if(set_mode == 1)
-        	attr += 16;
-		self->final_oam.attr2 = (self->final_oam.attr2 & 0xFC00) | attr;
-	}
-}
+
 
 void hide_trigger_on_pressing_A()
 {
@@ -211,8 +197,6 @@ void hide_trigger_on_pressing_A()
         objects[trigger_id].private[ANIM_STATE] = SLIDE_IN;
 }
 
-extern bool is_z_seted();
-void revert_triggers(u8 bank);
 u8 hide_trigger()
 {
     u8 trigger_id = new_battlestruct->mega_related.trigger_id;
@@ -221,16 +205,34 @@ u8 hide_trigger()
         revert_triggers(active_bank);
         return can_b_button_work;
     }
-    if (objects[trigger_id].private[ANIM_STATE] == SLIDED_OUT)
-    {
-        objects[trigger_id].private[ANIM_STATE] = SLIDE_IN;
-    }
+    hide_trigger_on_pressing_A();
     if (objects[trigger_id].private[ANIM_STATE] == DISABLED ||
         objects[trigger_id].private[ANIM_STATE] == HIDDEN || objects[trigger_id].private[RELATIVE_X] == 0)
     {
         can_b_button_work = 1;
     }
     return can_b_button_work;
+}
+
+void position_trigger()
+{
+    u8 set_mode = can_set_mega_trigger(active_bank);
+    if (!set_mode){
+        hide_trigger_on_pressing_A();
+        return;
+    }
+
+    u8 trigger_id = new_battlestruct->mega_related.trigger_id;
+    if (objects[trigger_id].private[ANIM_STATE] == HIDDEN)
+    {
+        struct object* self = &objects[trigger_id];
+        self->private[BANK_TO_ATTACH_TRIGGER] = active_bank;
+        self->private[ANIM_STATE] = POS_BEHIND_HPBAR;
+        u16 attr = self->anim_data_offset;
+        if(set_mode == 1)
+            attr += 16;
+        self->final_oam.attr2 = (self->final_oam.attr2 & 0xFC00) | attr;
+    }
 }
 
 bool not_mega_or_primal(u8 bank)

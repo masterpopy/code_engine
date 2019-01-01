@@ -31,7 +31,7 @@ void revert_triggers(u8 bank){
 		new_battlestruct->mega_related.ally_trigger = 0;
 }
 
-void clear_mega_triggers(u8 bank)
+void clear_triggers(u8 bank)
 {
 	revert_triggers(bank);
 	reset_indicators_height_except_bank(bank);
@@ -57,20 +57,15 @@ u32 get_battle_item_extra_param(u32 bank)
 	return get_item_extra_param(battle_participants[bank].held_item);
 }
 
-u8 have_z_move(u8 bank)
+inline bool choosen_z_move(u8 bank)
 {
-	for (u8 x = 0; x < 4; x++)
-	{
-		if (check_z_move(battle_participants[bank].moves[x], bank))
-			return 1;
-	}
-	return 0;
+    return check_z_move(battle_participants[bank].moves[move_selection_cursor_pbs[bank]], bank);
 }
 
 
 bool can_set_z_trigger(u8 bank)
 {
-	if (!(checkitem(622, 1) && have_z_move(bank)))
+	if (!(checkitem(622, 1) && choosen_z_move(bank)))
 		return false;
 	struct mega_related* mega = &new_battlestruct->mega_related;
 	if (bank == 0 && mega->user_trigger != 1 &&
