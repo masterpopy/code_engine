@@ -218,7 +218,7 @@ void position_trigger()
 {
     u8 set_mode = can_set_mega_trigger(active_bank);
     if (!set_mode){
-        hide_trigger_on_pressing_A();
+        if (new_battlestruct->mega_related.user_trigger == 0) hide_trigger_on_pressing_A();
         return;
     }
 

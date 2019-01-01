@@ -179,7 +179,7 @@ u8 can_set_mega_trigger(u8 bank) //JeremyZ
 	if (mega_mode == 0 && get_mega_species(bank, 0xFA))
 		mega_mode = 2;
 	//Z-Move
-	if (mega_mode == 0 && can_set_z_trigger(bank))
+	else if (mega_mode == 0 && can_set_z_trigger(bank))
 		mega_mode = 1;
 	return mega_mode;
 }
@@ -196,17 +196,6 @@ void set_mega_triggers_for_user_team(u8 bank)
 	}
 
 }
-
-u32 is_trigger_seted(){
-	if (new_battlestruct->mega_related.user_trigger == 1){
-		return 0x8057F9E|1;
-	}
-	else if(sav2->buttons_style == 2){
-		return 0x08057C28|1;
-	}
-	return 0x8057C44|1;
-}
-
 
 /*void revert_mega_to_normalform(u8 teamID, u8 opponent_side)
 {
