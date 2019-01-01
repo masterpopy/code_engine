@@ -27,6 +27,7 @@ check_start_press:
 	ldr r0, =active_bank
 	ldrb r0, [r0]
 	bl set_mega_triggers_for_user_team
+.global bx_move_menu_return
 bx_move_menu_return:
 	ldr r0, =(0x8057F9E|1)
 	bx r0
@@ -44,3 +45,30 @@ reset_mega_trigger_hook:
 	ldrb r0, [r4] 
 	ldr r1, =(0x08057590|1)
 	bx r1
+
+
+check_z_seted:
+    ldr     r1,=0x2024218
+    ldr     r1,[r1]
+    add     r1,#0xD8
+    ldrb    r0,[r1]
+    ldr r1,  =active_bank
+    ldrb r1, [r1]
+    lsr r0,r0,r1
+    mov r1,#3
+    and     r1,r0
+    cmp     r1,#0x1
+    beq     case1
+    ldr     r1,=0x3005D90
+    ldr     r1,[r1]
+    ldrb    r1,[r1,#0x13]
+    cmp     r1,#0x2
+    beq     case2
+    ldr     r0,=0x8057C45
+    bx       r0
+case1:
+    ldr     r0,=0x8057F9F
+    bx r0
+case2:
+    ldr     r0,=0x8057C29
+    bx      r0

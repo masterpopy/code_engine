@@ -197,7 +197,7 @@ void position_trigger()
         struct object* self = &objects[trigger_id];
         self->private[BANK_TO_ATTACH_TRIGGER] = active_bank;
         self->private[ANIM_STATE] = POS_BEHIND_HPBAR;
-        u16 attr = self->anim_data_offset;
+		u16 attr = self->anim_data_offset;
         if(set_mode == 1)
         	attr += 16;
 		self->final_oam.attr2 = (self->final_oam.attr2 & 0xFC00) | attr;
