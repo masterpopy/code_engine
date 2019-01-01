@@ -6,6 +6,7 @@ u16 check_z_move(u32 move, u32 bank);
 u16 get_mega_species(u8 bank, u8 chosen_method);
 bool is_in_tag_battle(void);
 
+
 void reset_indicators_height_except_bank(u8 bank)
 {
 	struct mega_related* mega = &new_battlestruct->mega_related;
@@ -196,6 +197,17 @@ void set_mega_triggers_for_user_team(u8 bank)
 	}
 
 }
+
+u32 is_trigger_seted(){
+	if (new_battlestruct->mega_related.user_trigger == 1){
+		return 0x8057F9E|1;
+	}
+	else if(sav2->buttons_style == 2){
+		return 0x08057C28|1;
+	}
+	return 0x8057C44|1;
+}
+
 
 /*void revert_mega_to_normalform(u8 teamID, u8 opponent_side)
 {

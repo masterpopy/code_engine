@@ -1024,6 +1024,19 @@ struct button
 	u16 L : 1;
 };
 
+enum buttons{
+	A = 1,
+	B = 0x2,
+	SELECT = 0x4,
+	START = 0x8,
+	RIGHT = 0x10,
+	LEFT = 0x20,
+	UP = 0x40,
+	DOWN = 0x80,
+	R = 0x100,
+	L = 0x200
+};
+
 struct superstate
 {
 	void* callback1;
@@ -1210,6 +1223,29 @@ struct saveblock2
 {
 	u8 name[8];
 	u8 gender;
+	u8 field_9;
+	u8 TiD_1;
+	u8 TiD_2;
+	u8 TiD_3;
+	u8 TiD_4;
+	u16 hours_played;
+	u8 mintues_played;
+	u8 seconds_played;
+	u8 frames_played;
+	u8 buttons_style;
+	u8 txt_speed_frame;
+	u8 battle_scene_style_sound;
+	u8 field16;
+	u8 field17;
+	u8 dex_order;
+	u8 dex_mode;
+	u8 national_dex;
+	u8 field1B;
+	u32 unown_PiD;
+	u32 spinda_PiD;
+	u8 field24[4];
+	u8 caught_flags[52];
+	u8 seen_flags[52];
 };
 
 extern struct saveblock2* sav2;//0xF2C
