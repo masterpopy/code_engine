@@ -77,7 +77,7 @@ bbpp07_correct_sprite: @hook at 0x081BD384, via r0
 bbpp07_correct_sprite_animate:
 	ldr r4, =(partner_sprite)
 	ldrb r4, [r4]
-	//mov r4, #7 @@@@ changed
+	mov r4, #7 @@@@ changed
 	mov r0, #0x5A
 	mov r9, r0
 	ldr r1, =(trainerhrow_positions)
@@ -127,7 +127,7 @@ bbpp2F_trainer_throw: @hook at 0x081BE1B0, via r1
 	ldr r0, =(trainerthrow_pals)
 	ldr r1, =(partner_sprite)
 	ldrb r1, [r1]
-	//mov r1, #7 @@@@ changed
+	mov r1, #7 @@@@ changed
 	lsl r1, r1, #3
 	ldr r0, [r0, r1]
 	ldr r2, =(0x081BE1C2 | 1)
