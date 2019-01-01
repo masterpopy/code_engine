@@ -14,3 +14,9 @@
 .equ LEAF_STORM_background, 0x25
 .equ ROCK_WRECKER_background, 0x26
 .equ MAGMA_STORM_background, 0x27
+.equ Z_EEVEE_background_user, 0x29
+.equ Z_EEVEE_background_foe, 0x2A
+.equ Z_EEVEE_background_foe_2, 0x2B
+.equ Z_ASH_PIKACHU_background_user, 0x2C
+.equ Z_ASH_PIKACHU_background_foe, 0x2D
+.equ Z_ASH_PIKACHU_background_foe_2, 0x2E

@@ -455,6 +455,11 @@ shiny_particle_image:
 .word Z_MEW_BALL_particle
 .byte 0x00, 0x08, 0x66, 0x28
 
+.word Z_ASH_GRENINJA_particle
+.byte 0x00, 0x08, 0x67, 0x28
+
+.word Z_ASH_GRENINJAGOLD_particle
+.byte 0x00, 0x08, 0x68, 0x28
 .align 2
 
 @Battle Animations Particles Table
@@ -852,4 +857,7 @@ particle_entry OMEGA_REVERSION_SYMBOL_palette OMEGAEVO_SYMBOL_particle 0x0
 .byte 0x65, 0x28, 0x00, 0x00
 .word Z_MEW_BALL_palette
 .byte 0x66, 0x28, 0x00, 0x00
-
+.word Z_ASH_GRENINJA_palette
+.byte 0x67, 0x28, 0x00, 0x00
+.word Z_ASH_GRENINJAGOLD_palette
+.byte 0x68, 0x28, 0x00, 0x00
