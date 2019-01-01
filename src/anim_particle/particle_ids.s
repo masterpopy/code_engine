@@ -32,3 +32,4 @@
 .equ LEAF_STORM_particle_ID, 0x47
 .equ WOOD_HAMMER_particle_ID, 0x48
 .equ ATTACK_ORDER_particle_ID, 0x49
+.equ Z_ASH_GRENINJA_particle_ID, 0x4A
