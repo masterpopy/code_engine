@@ -1753,7 +1753,7 @@ CORE_ENFORCER:
 	waitmessage 0x40
 	seteffectwithchance
 	faintpokemon bank_target 0x0 0x0 @faint target
-	jumpifmove 0x2C8 ENDTURN
+	jumpifmove MOVE_SPECTRAL_THIEF ENDTURN
 	callasm_cmd 54 @sets the bit
 	.word ENDTURN
 	printstring 0x1DD

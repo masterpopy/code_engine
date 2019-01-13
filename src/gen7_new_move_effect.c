@@ -12,6 +12,7 @@ u8 get_item_effect(u8 bank, u8 check_negating_effects);
 void update_rtc(void);
 void prep_string(u16 strID, u8 bank);
 s8 get_priority(u16 move, u8 bank);
+void bs_push_current(void* now);
 
 bool time_check(u8 from, u8 to)
 {
@@ -248,4 +249,22 @@ void calc_recoil_dmg2(void)
 		recoil_dmg = hp_dealt / arg;
 	damage_loc = ATLEAST_ONE(recoil_dmg);
 	battlescripts_curr_instruction++;
+}
+
+//Effects of Clanging Scales and Clangorous Soulblaze
+bool clanging_scales_stat(void)
+{
+	if ((MOVE_WORKED || new_battlestruct->various.move_worked_already) && (!battle_flags.double_battle || bank_target > 1))
+	{
+		if (current_move == MOVE_CLANGING_SCALES)
+		{
+			bs_push_current(BS_CHANGE_ATK_STAT);
+			battle_scripting.stat_changer = move_table[current_move].arg1;
+		}
+		if (current_move == MOVE_Z_KOMMO_O)
+			bs_push_current(BS_Z_KOMMO_O);
+		new_battlestruct->various.move_worked_already = 0;
+		return 1;
+	}
+	return 0;
 }

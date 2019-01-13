@@ -1770,4 +1770,16 @@ BS_MIMIKYU_BUST:
 	call BS_FORMCHANGE_GENERAL
 	callasm_cmd 118 @type_stat_form_change
 	return_cmd
-	
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Clangorous Soulblaze
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+.global BS_Z_KOMMO_O
+BS_Z_KOMMO_O:
+	waitstate
+	callasm_cmd 28 @checks if can change stats and gets how many
+	.byte bank_attacker | STAT_SELF_INFLICTED
+	.word MOVE_FAILED
+	callasm_cmd 29 @do all stat changes that are possible
+	.word BS_CHANGE_ATK_STAT_SELFINFLICTED
+	return_cmd

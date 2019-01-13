@@ -64,6 +64,7 @@ bool photon_geyser_special(u16 move); //JeremyZ
 void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
 u32 random_value(u32 limit);
 bool is_in_tag_battle(void);
+bool clanging_scales_stat(void);
 
 void set_unburden(u8 bank)
 {
@@ -818,15 +819,14 @@ void clear_twoturn(u8 bank)
 void atk49_move_end_turn(void)
 {
 #define INC_END_EVENTS battle_scripting.cmd49_state_tracker++;
-#define case_max 39
+#define case_max 40
 	u8 effect = 0;
 	u16 last_move;
 	if (last_used_move == 0xFFFF)
 		last_move = 0;
 	else
 		last_move = last_used_move;
-	new_battlestruct->bank_affecting[bank_attacker].lastmove_fail =
-			move_outcome.missed || move_outcome.failed || move_outcome.not_affected; //JeremyZ
+	new_battlestruct->bank_affecting[bank_attacker].lastmove_fail = !MOVE_WORKED; //JeremyZ
 	u8 arg1 = read_byte(battlescripts_curr_instruction + 1);
 	u8 arg2 = read_byte(battlescripts_curr_instruction + 2);
 	u8 current_move_type = get_attacking_move_type();
@@ -1161,6 +1161,7 @@ void atk49_move_end_turn(void)
 					battlescripts_curr_instruction = get_move_battlescript_ptr(current_move);
 					bs_push_current((void*) 0x82DB87D);
 					effect = 1;
+					new_battlestruct->various.move_worked_already = MOVE_WORKED;
 					break;
 				}
 				INC_END_EVENTS
@@ -1375,6 +1376,13 @@ void atk49_move_end_turn(void)
 					new_battlestruct->bank_affecting[bank_attacker].rage_powder = 1;
 				else
 					new_battlestruct->bank_affecting[bank_attacker].rage_powder = 0;
+				INC_END_EVENTS
+				break;
+			}
+			case 39: //Clanging Scales & Clangorous Soulblaze, JeremyZ
+			{
+				if ((current_move == MOVE_CLANGING_SCALES || current_move == MOVE_Z_KOMMO_O) && clanging_scales_stat())
+					effect = 1;
 				INC_END_EVENTS
 				break;
 			}
