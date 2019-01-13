@@ -2348,10 +2348,9 @@ void party_heal(void)
 {
     u8 ability_to_ignore = 0;
     u8 ignore_at_users = 0;
-    //if (current_move == MOVE_HEAL_BELL)
-        //ability_to_ignore = ABILITY_SOUNDPROOF;
-    //else
-	if (current_move == MOVE_AROMATHERAPY)
+    if (current_move == MOVE_HEAL_BELL)
+        ability_to_ignore = ABILITY_SOUNDPROOF;
+    else if (current_move == MOVE_AROMATHERAPY)
     {
         ability_to_ignore = ABILITY_SAP_SIPPER;
         ignore_at_users = 1;
