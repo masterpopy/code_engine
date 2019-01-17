@@ -374,7 +374,6 @@ enum mega_trigger_pallet_states
     REVERT_COLORS
 };
 
-#define TRIGGER_NUM_IGNORED_COLORS 4
 
 enum mega_indicator_properties
 {

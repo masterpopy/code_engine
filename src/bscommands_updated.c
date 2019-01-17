@@ -1972,9 +1972,9 @@ void atk00_move_canceller(void)
 			objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE] = DISABLE;
 		}
 		else if (!(new_battlestruct->mega_related.z_happened_pbs &
-				(BIT_GET(active_bank) | BIT_GET(active_bank ^ 2))))
+				(BIT_GET(bank_attacker) | BIT_GET(bank_attacker ^ 2))))
 		{
-			new_battlestruct->mega_related.z_happened_pbs |= BIT_GET(active_bank);
+			new_battlestruct->mega_related.z_happened_pbs |= BIT_GET(bank_attacker);
 		}
 		//battlescripts_curr_instruction = BS_START_Z;
 		bs_push_current(BS_START_Z);

@@ -41,6 +41,7 @@ struct template mega_z_templtes[2] = {
 #define template_indicator mega_z_templtes[0]
 #define template_trigger mega_z_templtes[1]
 
+#define TRIGGER_NUM_IGNORED_COLORS 4
 
 /* Declare the colors the trigger button ignores */
 const u16 ignored_cols[TRIGGER_NUM_IGNORED_COLORS] = {0x2147, 0x424F, 0x31AA, 0x00E4};
