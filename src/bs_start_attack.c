@@ -383,9 +383,10 @@ u8 check_mega_evo(u8 bank) {
 		for (u8 i = 1; i < no_of_all_banks; i++) {
 			for (u8 j = 0; j < no_of_all_banks - i; j++){
 				if (get_first_to_strike(turn_order[j], turn_order[j + 1], 0)) {
-					u8 placeholder = turn_order[j];
+					/*u8 placeholder = turn_order[j];
 					turn_order[j] = turn_order[j + 1];
-					turn_order[j + 1] = placeholder;
+					turn_order[j + 1] = placeholder;*/
+                    sub_803CEDC(j, j + 1);
 				}
 			}
 		}
