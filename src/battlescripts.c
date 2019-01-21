@@ -105,7 +105,7 @@ const u16 moldbreaker_strings[] = {0x189, 0x18A, 0x18B}; //mold, turbo, terra
 const u16 rapidspin_strings[] = {0x1ED, 0x1EE, 0x1EC}; //stealth, sticky web, toxic spikes
 const u16 bind_strings[] = {0x5A, 0x5B, 0x5C, 0x5D, 0x148, 0x17C, 0x17D,
         0x184}; //bind, whirlpool, wrap, clamp, sand tomb, fire spin, magma storm, infestation
-const u16 barrier_strings[] ={0x266, 0x267, 0x268, 0x269, 0x270};
+const u16 barrier_strings[] ={0x266, 0x267, 0x268, 0x269, 0x26A};
 #include "config.h"
 
 const u8 capture_exp_bs[] = {

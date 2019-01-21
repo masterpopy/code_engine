@@ -300,6 +300,7 @@ void atkE2_switchout_abilities(void)
 				}
 			}
 				break;
+			//三大特殊天气
 		}
 	}
 	battlescripts_curr_instruction += 2;
