@@ -2135,7 +2135,7 @@ RECOIL_ATTACK:
 	graphicalhpupdate bank_attacker
 	datahpupdate bank_attacker
 	faintpokemon bank_attacker 0x0 0x0
-	printstring 0x265
+	printfromtable recoil_strings
 	waitmessage 0x40	
 	goto_cmd ENDTURN
 

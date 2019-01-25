@@ -236,18 +236,22 @@ u8 z_protect_affects(u16 move)
 //Calculate Recoil Damage
 void calc_recoil_dmg2(void)
 {
-	if ((check_ability(bank_attacker, ABILITY_ROCK_HEAD) || check_ability(bank_attacker, ABILITY_MAGIC_GUARD)) && current_move != MOVE_STRUGGLE)
-	{
+	if ((check_ability(bank_attacker, ABILITY_ROCK_HEAD) || check_ability(bank_attacker, ABILITY_MAGIC_GUARD)) && current_move != MOVE_STRUGGLE) {
 		record_usage_of_ability(bank_attacker, battle_participants[bank_attacker].ability_id);
+		damage_loc = 0;
+		battle_communication_struct.multistring_chooser = 0;
 	}
-	u16 recoil_dmg;
-	//formula is dmg = HP dealt / arg2 or MaxHP / arg2 if value is negative
-	s8 arg = move_table[current_move].arg2;
-	if (arg < 0)
-		recoil_dmg = battle_participants[bank_attacker].max_hp / (arg * -1);
-	else
-		recoil_dmg = hp_dealt / arg;
-	damage_loc = ATLEAST_ONE(recoil_dmg);
+	else {
+		u16 recoil_dmg;
+		//formula is dmg = HP dealt / arg2 or MaxHP / arg2 if value is negative
+		s8 arg = move_table[current_move].arg2;
+		if (arg < 0)
+			recoil_dmg = battle_participants[bank_attacker].max_hp / (arg * -1);
+		else
+			recoil_dmg = hp_dealt / arg;
+		damage_loc = ATLEAST_ONE(recoil_dmg);
+		battle_communication_struct.multistring_chooser = 1;
+	}
 	battlescripts_curr_instruction++;
 }
 

@@ -106,6 +106,7 @@ const u16 rapidspin_strings[] = {0x1ED, 0x1EE, 0x1EC}; //stealth, sticky web, to
 const u16 bind_strings[] = {0x5A, 0x5B, 0x5C, 0x5D, 0x148, 0x17C, 0x17D,
         0x184}; //bind, whirlpool, wrap, clamp, sand tomb, fire spin, magma storm, infestation
 const u16 barrier_strings[] ={0x266, 0x267, 0x268, 0x269, 0x26A};
+const u16 recoil_strings[] ={0x265, 0x23B};
 #include "config.h"
 
 const u8 capture_exp_bs[] = {
