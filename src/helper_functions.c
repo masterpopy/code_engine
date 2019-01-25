@@ -2945,8 +2945,13 @@ void jumpifattackerfullhp(void)
 
 void set_effect1_formove(void)
 {
-    new_battlestruct->move_effect.effect1 = read_hword(battlescripts_curr_instruction);
-    battlescripts_curr_instruction += 2;
+	bool substitute = affected_by_substitute(bank_target);
+	bool shielddust = check_ability(bank_target, ABILITY_SHIELD_DUST);
+	bool sheerforce = new_battlestruct->various.sheerforce_bonus;
+	if (!(substitute || shielddust || sheerforce)) {
+		new_battlestruct->move_effect.effect1 = read_hword(battlescripts_curr_instruction);
+		battlescripts_curr_instruction += 2;
+	}
 }
 
 void shiftgear_checkifworks(void)
