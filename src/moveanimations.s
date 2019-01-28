@@ -11538,7 +11538,7 @@ BOUNCY_BUBBLE_ANIM:
 	resetblends
     endanimation
 	
-	BUZZY_BUZZ_ANIM:
+BUZZY_BUZZ_ANIM:
 	loadparticle 0x27e3  @0xc242b0
 	loadparticle 0x27e4  @0xc2407c
 	loadparticle 0x2711  @0xc1c6e0
@@ -11610,7 +11610,7 @@ BOUNCY_BUBBLE_ANIM:
 	resetblends
     endanimation
 	
-	SIZZLY_SLIDE_ANIM:
+SIZZLY_SLIDE_ANIM:
 	loadparticle 0x27c8  @0xc1e354
 	playsound2 0xab 0xc0
 	call 0x82cd6c7
@@ -11638,7 +11638,7 @@ BOUNCY_BUBBLE_ANIM:
 	pokespritefromBG side_target 
 	endanimation
 	
-	GLITZY_GLOW_ANIM:
+GLITZY_GLOW_ANIM:
 	pokespritetoBG 0x3
 	call 0x82d7cd1
 	setblends 0x808
@@ -11681,9 +11681,10 @@ BOUNCY_BUBBLE_ANIM:
 	resetblends
 	pause 0x1
 	call 0x82d7cdd
+	resetblends
 	endanimation
 	
-	BADDY_BAD_ANIM:
+BADDY_BAD_ANIM:
 	loadparticle 0x2745  @0xc2e830
 	launchtask 0x8158e9d 0x2 0x2 0x0 0xff
 	call 0x82cfecb
@@ -11721,7 +11722,7 @@ BOUNCY_BUBBLE_ANIM:
 	resetblends
 	endanimation
 	
-	SAPPY_SEED_ANIM:
+SAPPY_SEED_ANIM:
 	loadparticle 0x2716	
 	loadparticle 0x27ef  @0xc254e0
 	pokespritetoBG 0x3
@@ -11796,7 +11797,7 @@ BOUNCY_BUBBLE_ANIM:
 	resetblends
 	endanimation
 	
-	FREEZY_FROST_ANIM:
+FREEZY_FROST_ANIM:
 	loadparticle 0x279d
 	playsoundpanchange 0x99 0xc0 0x3f 0x2 0x0
 	call 0x82d0b7d
@@ -11814,7 +11815,7 @@ BOUNCY_BUBBLE_ANIM:
 	resetblends
 	endanimation
 		
-	SPARKLY_SWIRL_ANIM:	
+SPARKLY_SWIRL_ANIM:	
 	loadparticle 0x27fe  @0xc287f4
 	jumpifargmatches 0x7 0x1 0x9d0a73b
 	loadBG1 0x1e
@@ -11833,7 +11834,7 @@ BOUNCY_BUBBLE_ANIM:
 	waitanimation
 	endanimation
 	
-	SPARKLY_SWIRL_STORM:
+SPARKLY_SWIRL_STORM:
 	launchtemplate SPARKLY_SWIRL_template 0x2 0x7 0x0 0x1c 0x210 0x1e 0xd 0x32 0x1
 	@objtemplate 0x27fe 0x27fe 0x8524904 0x85ce538 0x0 0x8596b6c 0x8110b39
 	pause 0x2
@@ -11849,7 +11850,7 @@ BOUNCY_BUBBLE_ANIM:
 	pause 0x2
 	return
 	
-	VEEVEE_VOLLEY_ANIM:	
+VEEVEE_VOLLEY_ANIM:	
 	loadparticle 0x27e2  @0xc23218
 	launchtask 0x815c479 0x5 0x3 0x0 0x2 0x0
 	launchtemplate 0x8593970 0x3 0x2 0x0 0x14
@@ -11865,7 +11866,7 @@ BOUNCY_BUBBLE_ANIM:
 	goto GIGA_IMPACT_ANIM 
 	endanimation
 	
-	DOUBLE_IRON_BASH_ANIM:	
+DOUBLE_IRON_BASH_ANIM:	
 	soundcomplex 0x78 0xc0 0x1c 0x2
 	launchtask 0x81144f9 0x5 0x3 0x0 0x0 0x0
 	waitanimation
