@@ -318,9 +318,9 @@ u16 damage_type_effectiveness_update(u16 move, u8 attacking_type, u8 defending_t
     }
     else if (attacking_type == TYPE_GROUND)
     {
-        if(effect == 0 && (airstatus<2 || move==MOVE_THOUSAND_ARROWS)) // grounded pokemon
+        if ((effect == 0 && airstatus < 2) || (airstatus > 2 && move == MOVE_THOUSAND_ARROWS)) //grounded pokemon or Thousand Arrows
             effect = 10;
-        else if(airstatus>2 && move!=MOVE_THOUSAND_ARROWS)
+        else if (airstatus > 2 && move != MOVE_THOUSAND_ARROWS)
             effect = 0;
     }
     else if (move == MOVE_FREEZEDRY && defending_type == TYPE_WATER)
@@ -362,7 +362,7 @@ u16 apply_type_effectiveness(u16 move, u16 chained_effect, u8 move_type, u8 targ
 
 u16 type_effectiveness_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u8 effects_handling_and_recording)
 {
-    u8 airstatus = get_airborne_state(def_bank,1,effects_handling_and_recording);
+    u8 airstatus = get_airborne_state(def_bank, 0, effects_handling_and_recording);
     u16 chained_effect = 64;
     if (find_move_in_table(move, dual_type_moves))
     {

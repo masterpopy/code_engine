@@ -660,7 +660,7 @@ bool move_effect2_setter(void)
 			break;
 		case 14: //smack poke down
 			if (current_hp && new_battlestruct->bank_affecting[bank].smacked_down == 0 &&
-					(get_airborne_state(bank, 1, 1) >= 3 || is_of_type(bank, TYPE_FLYING) || status3[bank].on_air ||
+					(get_airborne_state(bank, 0, 1) >= 3 || status3[bank].on_air ||
 							new_battlestruct->bank_affecting[bank].sky_drop_attacker ||
 							new_battlestruct->bank_affecting[bank].sky_drop_target))
 			{

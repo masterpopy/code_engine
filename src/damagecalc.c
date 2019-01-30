@@ -1124,7 +1124,7 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
         case MOVE_EARTHQUAKE:
         case MOVE_MAGNITUDE:
         case MOVE_BULLDOZE:
-            if (new_battlestruct->field_affecting.grassy_terrain && get_airborne_state(def_bank, 1, 1) <= 2) {
+            if (new_battlestruct->field_affecting.grassy_terrain && get_airborne_state(def_bank, 0, 1) <= 2) {
                 modifier = chain_modifier(modifier, 0x800);
             }
             break;
