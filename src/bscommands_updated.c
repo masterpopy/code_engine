@@ -1848,6 +1848,14 @@ void atk00_move_canceller(void)
 		return;
 	else if (immune_to_powder_moves(bank_target, current_move))
 		return;
+	else if ((battle_participants[bank_attacker].ability_id == ABILITY_PRANKSTER &&
+			has_ability_effect(bank_attacker, 1)) &&
+			is_of_type(bank_target, TYPE_DARK) &&
+			!DAMAGING_MOVE(current_move)) //Dark type blocks Prankster
+	{
+		battlescripts_curr_instruction = bs_printmove_failed;
+		return;
+	}
 	else if (!(hitmarker & HITMARKER_NO_PPDEDUCT) &&
 			battle_participants[bank_attacker].current_pp[current_move_position] == 0 &&
 			current_move != MOVE_STRUGGLE && !battle_participants[bank_attacker].status2.multiple_turn_move &&
@@ -2461,7 +2469,8 @@ void atk93_ko_move(void)
 	u8 atk_lvl = battle_participants[bank_attacker].level;
 	u8 def_lvl = battle_participants[bank_target].level;
 	bool fail = 0;
-	if (atk_lvl <= def_lvl)
+	if (atk_lvl < def_lvl
+		|| (current_move == MOVE_SHEER_COLD && is_of_type(bank_target, TYPE_ICE)))
 	{
 		fail = 1;
 		battle_communication_struct.multistring_chooser = 1;
@@ -2475,7 +2484,11 @@ void atk93_ko_move(void)
 			record_usage_of_ability(bank_target, ABILITY_STURDY);
 			return;
 		}
+		
 		u8 accuracy = atk_lvl - def_lvl + move_table[current_move].accuracy;
+		if (current_move == MOVE_SHEER_COLD && !is_of_type(bank_attacker, TYPE_ICE))
+			accuracy -= 10;
+		
 		if ((MUST_HIT(bank_attacker, bank_target)) || accuracy >= 100 || percent_chance(accuracy))
 		{
 			damage_loc = battle_participants[bank_target].current_hp;

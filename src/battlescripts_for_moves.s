@@ -1322,7 +1322,7 @@ TRIPLEKICK_MISS:
 	
 ONEHITKO:
 	attackcanceler
-	accuracycheck MOVE_FAILED 0xFFFF
+	@accuracycheck MOVE_FAILED 0xFFFF
 	jumpiftypenotaffected MOVE_FAILED
 	attackstring
 	ppreduce
