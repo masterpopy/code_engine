@@ -65,6 +65,8 @@ const u16 moves_with_charging_turn[] = {MOVE_BOUNCE, MOVE_DIG, MOVE_DIVE, MOVE_F
 //assist=bs,copy_cat mefirst=cmd
 const u16 moves_calling_another_move[] = {MOVE_ASSIST, MOVE_COPYCAT, MOVE_ME_FIRST, MOVE_METRONOME, MOVE_MIRROR_MOVE,
         MOVE_NATURE_POWER, MOVE_SLEEP_TALK, 0xFFFF};
+const u16 pressing_moves_table[] = {MOVE_BODY_SLAM, MOVE_DRAGON_RUSH, MOVE_FLYING_PRESS, MOVE_HEAT_CRASH, MOVE_STEAMROLLER,
+		MOVE_STOMP, MOVE_HEAVY_SLAM, MOVE_Z_INCINEROAR, 0xFFFF};
 
 const u8 fogcontinues_bs[] = {0x9, 0xA, 0x10, 0xC7, 1, 0x12, 0x40, 0, 0x3E};
 const u8 fogends_bs[] = {0x10, 0xC8, 1, 0x12, 0x40, 0, 0x3E};

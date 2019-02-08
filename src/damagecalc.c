@@ -1572,13 +1572,18 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
         }
     }
 
-    if ((move == MOVE_STEAMROLLER || move == MOVE_STOMP) && status3[def_bank].minimized) {
-        final_modifier = chain_modifier(final_modifier, 0x2000);
-    } else if (move == MOVE_EARTHQUAKE && status3[def_bank].underground) {
-        final_modifier = chain_modifier(final_modifier, 0x2000);
-    } else if (move == MOVE_SURF && status3[def_bank].underwater) {
+    if (find_move_in_table(move, pressing_moves_table) && status3[def_bank].minimized) {
         final_modifier = chain_modifier(final_modifier, 0x2000);
     }
+	else if ((move == MOVE_EARTHQUAKE || move == MOVE_MAGNITUDE) && status3[def_bank].underground) {
+        final_modifier = chain_modifier(final_modifier, 0x2000);
+    }
+	else if ((move == MOVE_SURF || move == MOVE_WHIRLPOOL) && status3[def_bank].underwater) {
+        final_modifier = chain_modifier(final_modifier, 0x2000);
+    }
+	else if ((move == MOVE_GUST || move == MOVE_TWISTER) && status3[def_bank].on_air) {
+		final_modifier = chain_modifier(final_modifier, 0x2000);
+	}
 
     //JeremyZ
     if (new_battlestruct->various.ate_bonus) {

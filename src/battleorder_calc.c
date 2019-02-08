@@ -17,7 +17,7 @@ bool check_ability(u8 bank, u8 ability)
 s8 get_priority(u16 move, u8 bank)
 {
     s8 priority = move_table[move].priority;
-    if (check_ability(bank, ABILITY_GALE_WINGS) && move_table[move].type == TYPE_FLYING)
+    if (check_ability(bank, ABILITY_GALE_WINGS) && move_table[move].type == TYPE_FLYING && battle_participants[bank].current_hp == battle_participants[bank].max_hp)
         priority++;
     else if (check_ability(bank, ABILITY_PRANKSTER) && move_table[move].split == 2)
         priority++;

@@ -96,6 +96,7 @@ u8 accuracy_helper_replacement(u16 move)
     }
     else if (((current_move == MOVE_THUNDER || current_move == MOVE_HURRICANE) && weather_abilities_effect() && (battle_weather.flags.heavy_rain || battle_weather.flags.downpour || battle_weather.flags.rain || battle_weather.flags.permament_rain))
              || (current_move == MOVE_BLIZZARD && weather_abilities_effect() && (battle_weather.flags.hail || battle_weather.flags.permament_hail))
+             || (find_move_in_table(current_move, pressing_moves_table) && status3[bank_target].minimized)
              || (move_table[move].accuracy == 0))
     {
         jump_if_move_has_no_effect(7, move);

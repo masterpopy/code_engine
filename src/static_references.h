@@ -27,6 +27,7 @@ extern const u16 dancing_moves[];
 extern const u16 instruct_banlist[];
 extern const u16 moves_with_charging_turn[];
 extern const u16 moves_calling_another_move[];
+extern const u16 pressing_moves_table[];
 
 extern const u8 type_effectiveness_table[TYPE_FAIRY-0x4][TYPE_FAIRY-0x4];
 
