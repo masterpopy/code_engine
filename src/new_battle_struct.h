@@ -73,7 +73,8 @@ struct bank_affecting{
 	u8 shell_trap_charge : 2; //JeremyZ
 	u8 lastmove_fail : 1; //JeremyZ
 	u8 head_blown : 1; //JeremyZ
-	u8 stockpile_counter : 2; //JeremyZ	
+	u8 stockpile_counter : 2; //JeremyZ
+	u8 move_worked_thisturn : 1; //JeremyZ
 };
 
 struct side_affecting{
@@ -160,7 +161,6 @@ struct various{
     u8 original_dancer : 3;
     u8 secondary_dancer : 3;
     u8 instruct_phase : 1;
-    u8 move_worked_already : 1; //JeremyZ
 };
 
 #define PBOND_PARENT 2

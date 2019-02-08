@@ -257,8 +257,9 @@ void calc_recoil_dmg2(void)
 
 //Effects of Clanging Scales and Clangorous Soulblaze
 bool clanging_scales_stat(void)
-{
-	if ((MOVE_WORKED || new_battlestruct->various.move_worked_already) && (!battle_flags.double_battle || bank_target > 1))
+{	
+	if ((MOVE_WORKED || new_battlestruct->bank_affecting[bank_attacker].move_worked_thisturn) //move has worked at least once this turn
+		&& (!battle_flags.double_battle || !is_bank_present(bank_target ^ 2) || bank_target > (bank_target ^ 2))) //if it is the last target
 	{
 		if (current_move == MOVE_CLANGING_SCALES)
 		{
@@ -266,8 +267,7 @@ bool clanging_scales_stat(void)
 			battle_scripting.stat_changer = move_table[current_move].arg1;
 		}
 		if (current_move == MOVE_Z_KOMMO_O)
-			bs_push_current(BS_Z_KOMMO_O);
-		new_battlestruct->various.move_worked_already = 0;
+			bs_push_current(BS_MULTIPLESTATCHANCE_ATK_CERTAIN);
 		return 1;
 	}
 	return 0;

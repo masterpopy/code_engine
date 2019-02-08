@@ -1162,7 +1162,7 @@ void atk49_move_end_turn(void)
 					battlescripts_curr_instruction = get_move_battlescript_ptr(current_move);
 					bs_push_current((void*) 0x82DB87D);
 					effect = 1;
-					new_battlestruct->various.move_worked_already = MOVE_WORKED;
+					new_battlestruct->bank_affecting[bank_attacker].move_worked_thisturn |= MOVE_WORKED;
 					break;
 				}
 				INC_END_EVENTS
@@ -1192,6 +1192,7 @@ void atk49_move_end_turn(void)
 						battlescripts_curr_instruction = get_move_battlescript_ptr(current_move);
 						bs_push_current((void*) (0x82DB87D));
 						effect = 1;
+						new_battlestruct->bank_affecting[bank_attacker].move_worked_thisturn |= MOVE_WORKED;
 						break;
 					}
 				}

@@ -807,7 +807,8 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
                 base_power = 30;
             break;
         case MOVE_STOMPING_TANTRUM: //Stomping Tantrum, JeremyZ
-            if (new_battlestruct->bank_affecting[bank_attacker].lastmove_fail)
+            if (new_battlestruct->bank_affecting[bank_attacker].lastmove_fail
+				&& (!battle_flags.double_battle || !new_battlestruct->bank_affecting[bank_attacker].move_worked_thisturn))
                 base_power *= 2;
             break;
     }

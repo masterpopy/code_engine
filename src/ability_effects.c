@@ -493,6 +493,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             }
             if (table_ptr != NULL && find_move_in_table(current_move, table_ptr)) {
                 effect = true;
+                move_outcome.not_affected = 1;
                 battlescripts_curr_instruction = (void*) 0x082DB61F;
                 if (battle_participants[bank_attacker].status2.multiple_turn_move) {
                     hitmarker |= 0x800;

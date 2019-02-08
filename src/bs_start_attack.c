@@ -117,12 +117,14 @@ u8 get_target_of_move(u16 move, u8 target_given, u8 adjust) {
                 result_target = target_side;
                 if (!is_bank_present(result_target))
                     result_target ^= 2;
+                new_battlestruct->bank_affecting[bank_attacker].move_worked_thisturn = 0;
                 break;
             case 32:
                 result_target = 0;
                 while ((result_target == bank_attacker || !is_bank_present(result_target)) &&
                        result_target < no_of_all_banks)
                     result_target++;
+                new_battlestruct->bank_affecting[bank_attacker].move_worked_thisturn = 0;
                 break;
             case 18: //acupressure
                 if (!(old_target == (bank_attacker ^ 2) && !is_bank_present(bank_attacker ^ 2)))

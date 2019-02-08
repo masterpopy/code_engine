@@ -2945,9 +2945,10 @@ void jumpifattackerfullhp(void)
 
 void set_effect1_formove(void)
 {
+	u16 effect = read_hword(battlescripts_curr_instruction);
 	bool substitute = affected_by_substitute(bank_target);
-	if (!substitute) {
-		new_battlestruct->move_effect.effect1 = read_hword(battlescripts_curr_instruction);
+	if ((effect & MOVEEFFECT_AFFECTSUSER) || !substitute) {
+		new_battlestruct->move_effect.effect1 = effect;
 		battlescripts_curr_instruction += 2;
 	}
 }
