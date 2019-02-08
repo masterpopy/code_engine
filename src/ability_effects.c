@@ -481,15 +481,6 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                 case ABILITY_OVERCOAT:
                     table_ptr = powder_moves;
                     break;
-                case ABILITY_DAZZLING:
-                case ABILITY_QUEENLY_MAJESTY:
-                    if (get_priority(curr_move, bank_attacker) >= 1 && bank_side == get_bank_side(bank_target) &&
-                        bank_side != get_bank_side(bank_attacker)) //JeremyZ
-                    {
-                        effect = 1;
-                        battlescripts_curr_instruction = BS_CANTUSE_PRIORITY;
-                    }
-                    break;
             }
             if (table_ptr != NULL && find_move_in_table(current_move, table_ptr)) {
                 effect = true;

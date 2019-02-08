@@ -1725,6 +1725,23 @@ u8 check_if_cannot_attack(void)
 					battlescripts_curr_instruction = BS_CANTUSE_PRIORITY_TERRAIN;
 				}
 				break;
+			case 22: //Queenly Majesty, Dazzling
+			{
+				bool own_ability = check_ability(bank_target, ABILITY_QUEENLY_MAJESTY) || check_ability(bank_target, ABILITY_DAZZLING);
+				bool partners_ability = ability_battle_effects(20, bank_target, ABILITY_QUEENLY_MAJESTY, 1, 0) || ability_battle_effects(20, bank_target, ABILITY_DAZZLING, 1, 0);
+
+				if ((own_ability || partners_ability) &&
+					get_priority(current_move, bank_attacker) >= 1 &&
+					get_bank_side(bank_target) != get_bank_side(bank_attacker))
+				{
+					if (!own_ability)
+						bank_target ^= 2;
+					record_usage_of_ability(bank_target, ABILITY_QUEENLY_MAJESTY);
+					effect = 1;
+					battlescripts_curr_instruction = BS_CANTUSE_PRIORITY;
+				}
+				break;
+			}
 		}
 		if (effect == 2)
 		{
@@ -1738,7 +1755,7 @@ u8 check_if_cannot_attack(void)
 			reset_multiple_turn_effects(bank_attacker);
 		}
 		*state_tracker += 1;
-		if (*state_tracker >= 22 && effect == 0)
+		if (*state_tracker >= 23 && effect == 0)
 			break;
 	}
 	return effect;
@@ -3803,19 +3820,16 @@ void atk84_jumpifcannotsleep(void)
 		battlescripts_curr_instruction = jump_loc;
 	else
 	{
-		u8 ability = battle_participants[bank_target].ability_id;
-		u8 ability_effect = has_ability_effect(bank_target, 1);
-		u8 partnersweetveil = 0;
-		if (ability_effect && (ability == ABILITY_INSOMNIA || ability == ABILITY_VITAL_SPIRIT))
+		if (check_ability(bank_target, ABILITY_INSOMNIA) || check_ability(bank_target, ABILITY_VITAL_SPIRIT))
 		{
-			record_usage_of_ability(bank_target, ability);
+			record_usage_of_ability(bank_target, battle_participants[bank_target].ability_id);
 			battle_communication_struct.multistring_chooser = 2;
 			battlescripts_curr_instruction = jump_loc;
 		}
-		else if (ability == ABILITY_SWEET_VEIL ||
-				(partnersweetveil = ability_battle_effects(20, bank_target, ABILITY_SWEET_VEIL, 1, 0)))
+		else if (check_ability(bank_target, ABILITY_SWEET_VEIL) ||
+				ability_battle_effects(20, bank_target, ABILITY_SWEET_VEIL, 1, 0))
 		{
-			if (partnersweetveil)
+			if (!check_ability(bank_target, ABILITY_SWEET_VEIL))
 				record_usage_of_ability(bank_target ^ 2, ABILITY_SWEET_VEIL);
 			else
 				record_usage_of_ability(bank_target, ABILITY_SWEET_VEIL);
