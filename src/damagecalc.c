@@ -495,10 +495,12 @@ u16 get_speed(u8 bank) {
                 break;
             case ABILITY_QUICK_FEET:
                 if (battle_participants[bank].status.flags.poison ||
-                    battle_participants[bank].status.flags.toxic_poison || battle_participants[bank].status.flags.burn)
+                    battle_participants[bank].status.flags.toxic_poison ||
+                    battle_participants[bank].status.flags.burn ||
+                    battle_participants[bank].status.flags.paralysis ||
+                    battle_participants[bank].status.flags.sleep ||
+                    battle_participants[bank].status.flags.freeze)
                     speed = speed * 3 / 2;
-                else if (battle_participants[bank].status.flags.paralysis)
-                    speed *= 3;
                 break;
             case ABILITY_SLOW_START:
                 if (new_battlestruct->bank_affecting[bank].slowstart_duration) {
@@ -517,7 +519,7 @@ u16 get_speed(u8 bank) {
     if (new_battlestruct->side_affecting[get_bank_side(bank)].swamp_spd_reduce)
         speed /= 4;
     //paralysis
-    if (battle_participants[bank].status.flags.paralysis)
+    if (battle_participants[bank].status.flags.paralysis && !check_ability(bank, ABILITY_QUICK_FEET))
         speed /= 2;
     speed = apply_statboost(speed, battle_participants[bank].spd_buff);
 
@@ -1500,8 +1502,7 @@ void damage_calc(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 chained_e
     damage = (damage * chained_effectiveness) >> 6;
 
     //burn
-    if (battle_participants[atk_bank].status.flags.burn && move_split == MOVE_PHYSICAL && move != MOVE_FACADE &&
-        !(check_ability(atk_bank, ABILITY_GUTS))) //JeremyZ
+    if (battle_participants[atk_bank].status.flags.burn && move_split == MOVE_PHYSICAL && move != MOVE_FACADE && !check_ability(atk_bank, ABILITY_GUTS))
     {
         damage /= 2;
     }

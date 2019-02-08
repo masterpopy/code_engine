@@ -108,12 +108,6 @@ u8 accuracy_helper_replacement(u16 move)
 u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
 {
     u32 accuracy;
-    // if (move_table[move].script_id == 70) //one hit KO
-    // {
-        // accuracy = battle_participants[bankatk].level - battle_participants[bankdef].level + 30;
-    // }
-    // else
-    // {
 	u8 evs_buff = battle_participants[bankdef].evasion_buff;
 	if (new_battlestruct->field_affecting.gravity)
 		evs_buff -= 2;
@@ -124,13 +118,11 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
 		evs_buff = 6;
 
 	u8 accuracy_buff = battle_participants[bankatk].acc_buff;
-	if (weather_abilities_effect() && (battle_weather.flags.fog || battle_weather.flags.permament_fog))
-		accuracy_buff -= 2;
 	if (battle_participants[bankdef].ability_id == ABILITY_UNAWARE && has_ability_effect(bankdef, 1))
 		accuracy_buff = 6;
 
 	u8 move_accuracy = move_table[move].accuracy;
-	if (has_ability_effect(bankdef, 1) && battle_participants[bankdef].ability_id == ABILITY_WONDER_SKIN && !DAMAGING_MOVE(move) && move_accuracy > 50)
+	if (has_ability_effect(bankdef, 1) && battle_participants[bankdef].ability_id == ABILITY_WONDER_SKIN && !DAMAGING_MOVE(move) && move_accuracy > 0)
 		move_accuracy = 50;
 	else if ((move == MOVE_THUNDER || move == MOVE_HURRICANE) && weather_abilities_effect() && (battle_weather.flags.sun || battle_weather.flags.harsh_sun || battle_weather.flags.permament_sun))
 		move_accuracy = 50;
@@ -166,16 +158,16 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
 		switch (battle_participants[bankdef].ability_id)
 		{
 		case ABILITY_SAND_VEIL:
-			if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
-				accuracy = percent_lose(accuracy, 25);
+			if (weather_abilities_effect() && (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm))
+				accuracy = percent_lose(accuracy, 20);
 			break;
 		case ABILITY_SNOW_CLOAK:
-			if (battle_weather.flags.hail || battle_weather.flags.permament_hail)
-				accuracy = percent_lose(accuracy, 25);
+			if (weather_abilities_effect() && (battle_weather.flags.hail || battle_weather.flags.permament_hail))
+				accuracy = percent_lose(accuracy, 20);
 			break;
 		case ABILITY_TANGLED_FEET:
 			if (battle_participants[bankdef].status2.confusion)
-				accuracy = percent_lose(accuracy, 20);
+				accuracy = percent_lose(accuracy, 50);
 			break;
 		}
 	}
@@ -191,7 +183,8 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
 			accuracy = percent_boost(accuracy, 20);
 		break;
 	}
-    // }
+	if (weather_abilities_effect() && (battle_weather.flags.fog || battle_weather.flags.permament_fog))
+		accuracy = percent_lose(accuracy, 40);	
     return accuracy;
 }
 

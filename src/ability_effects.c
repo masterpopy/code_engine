@@ -971,7 +971,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             break;
         case 23: //emergency exit, wimp out
             if ((last_used_ability == ABILITY_WIMP_OUT || last_used_ability == ABILITY_EMERGENCY_EXIT) &&
-                HP_half_drop(bank) &&
+                HP_half_drop(bank) && !new_battlestruct->various.sheerforce_bonus && multihit_counter <= 1 &&
                 special_statuses[bank].moveturn_losthp && !protect_structs[bank].flag1_confusion_self_damage)
                 effect = item_force_switching(bank, BS_WIMPOUT);
             break;
