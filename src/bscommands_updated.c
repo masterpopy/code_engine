@@ -660,7 +660,7 @@ bool move_effect2_setter(void)
 			break;
 		case 14: //smack poke down
 			if (current_hp && new_battlestruct->bank_affecting[bank].smacked_down == 0 &&
-					(get_airborne_state(bank, 0, 1) >= 3 || status3[bank].on_air ||
+					(!GROUNDED(bank) || status3[bank].on_air ||
 							new_battlestruct->bank_affecting[bank].sky_drop_attacker ||
 							new_battlestruct->bank_affecting[bank].sky_drop_target))
 			{
@@ -1717,7 +1717,7 @@ u8 check_if_cannot_attack(void)
 				}
 				break;
 			case 21: //Psychic Terrain, JeremyZ
-				if (new_battlestruct->field_affecting.psychic_terrain && get_airborne_state(bank_target, 0, 1) <= 2 &&
+				if (new_battlestruct->field_affecting.psychic_terrain && GROUNDED(bank_target) &&
 						get_priority(current_move, bank_attacker) >= 1 &&
 						get_bank_side(bank_target) != get_bank_side(bank_attacker))
 				{
@@ -1742,6 +1742,13 @@ u8 check_if_cannot_attack(void)
 				}
 				break;
 			}
+			case 23: //Destiny Bond
+				if (current_move == MOVE_DESTINY_BOND && last_used_moves[bank_attacker] == MOVE_DESTINY_BOND)
+				{
+					move_outcome.failed = 1;
+					effect = 1;
+					battlescripts_curr_instruction = (void*) 0x082D9F1A;
+				}
 		}
 		if (effect == 2)
 		{
@@ -1755,7 +1762,7 @@ u8 check_if_cannot_attack(void)
 			reset_multiple_turn_effects(bank_attacker);
 		}
 		*state_tracker += 1;
-		if (*state_tracker >= 23 && effect == 0)
+		if (*state_tracker > 23 && effect == 0)
 			break;
 	}
 	return effect;
@@ -3055,7 +3062,7 @@ u8 cant_become_confused(u8 bank)
 		return 4;
 	if (side_affecting_halfword[get_bank_side(bank)].safeguard_on && !(hitmarker & HITMAKRER_IGNORE_SAFEGUARD))
 		return 5;
-	if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank, 0, 1) <= 2)
+	if (new_battlestruct->field_affecting.misty_terrain && GROUNDED(bank))
 		return 8;
 	return 0;
 }
@@ -3836,12 +3843,12 @@ void atk84_jumpifcannotsleep(void)
 			battle_communication_struct.multistring_chooser = 3;
 			battlescripts_curr_instruction = jump_loc;
 		}
-		else if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(bank_target, 0, 1) <= 2)
+		else if (new_battlestruct->field_affecting.misty_terrain && GROUNDED(bank_target))
 		{
 			battle_communication_struct.multistring_chooser = 4;
 			battlescripts_curr_instruction = jump_loc;
 		}
-		else if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(bank_target, 0, 1) <= 2)
+		else if (new_battlestruct->field_affecting.electic_terrain && GROUNDED(bank_target))
 		{
 			battle_communication_struct.multistring_chooser = 5;
 			battlescripts_curr_instruction = jump_loc;

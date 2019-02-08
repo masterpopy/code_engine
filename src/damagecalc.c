@@ -1127,7 +1127,7 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
         case MOVE_EARTHQUAKE:
         case MOVE_MAGNITUDE:
         case MOVE_BULLDOZE:
-            if (new_battlestruct->field_affecting.grassy_terrain && get_airborne_state(def_bank, 0, 1) <= 2) {
+            if (new_battlestruct->field_affecting.grassy_terrain) {
                 modifier = chain_modifier(modifier, 0x800);
             }
             break;
@@ -1153,19 +1153,19 @@ u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank,
     if (new_battlestruct->bank_affecting[atk_bank].me_first) {
         modifier = chain_modifier(modifier, 0x1800);
     }
-    if (new_battlestruct->field_affecting.grassy_terrain && get_airborne_state(atk_bank, 0, 1) <= 2 &&
+    if (new_battlestruct->field_affecting.grassy_terrain && GROUNDED(atk_bank) &&
         move_type == TYPE_GRASS) {
         modifier = chain_modifier(modifier, 0x1800);
     }
-    if (new_battlestruct->field_affecting.misty_terrain && get_airborne_state(def_bank, 0, 1) <= 2 &&
+    if (new_battlestruct->field_affecting.misty_terrain && GROUNDED(def_bank) &&
         move_type == TYPE_DRAGON) {
         modifier = chain_modifier(modifier, 0x800);
     }
-    if (new_battlestruct->field_affecting.electic_terrain && get_airborne_state(atk_bank, 0, 1) <= 2 &&
+    if (new_battlestruct->field_affecting.electic_terrain && GROUNDED(atk_bank) &&
         move_type == TYPE_ELECTRIC) {
         modifier = chain_modifier(modifier, 0x1800);
     }
-    if (new_battlestruct->field_affecting.psychic_terrain && get_airborne_state(atk_bank, 0, 1) <= 2 &&
+    if (new_battlestruct->field_affecting.psychic_terrain && GROUNDED(atk_bank) &&
         move_type == TYPE_PSYCHIC) {
         modifier = chain_modifier(modifier, 0x1800);
     }
@@ -1397,14 +1397,11 @@ u16 get_def_stat(u16 move, u8 atk_bank, u8 def_bank) {
         }
     }
 
-    if (has_ability_effect(def_bank, 1) && battle_participants[def_bank].ability_id == ABILITY_MARVEL_SCALE &&
-        battle_participants[def_bank].status.int_status && chosen_def == 0) {
+    if (check_ability(def_bank, ABILITY_MARVEL_SCALE) && battle_participants[def_bank].status.int_status && chosen_def == 0) {
         modifier = chain_modifier(modifier, 0x1800);
-    } else if (has_ability_effect(def_bank, 1) && battle_participants[def_bank].ability_id == ABILITY_FUR_COAT &&
-               chosen_def == 0) {
+    } else if (check_ability(def_bank, ABILITY_FUR_COAT) && chosen_def == 0) {
         modifier = chain_modifier(modifier, 0x2000);
-    } else if (has_ability_effect(def_bank, 1) && battle_participants[def_bank].ability_id == ABILITY_GRASS_PELT &&
-               new_battlestruct->field_affecting.grassy_terrain && chosen_def == 0) {
+    } else if (check_ability(def_bank, ABILITY_GRASS_PELT) && new_battlestruct->field_affecting.grassy_terrain && chosen_def == 0) {
         modifier = chain_modifier(modifier, 0x1800);
     }
 

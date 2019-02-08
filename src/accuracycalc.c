@@ -76,8 +76,8 @@ u8 accuracy_helper_replacement(u16 move)
     u8 done_status = 0;
     if (
         (status3[bank_target].always_hits && disable_structs[bank_target].always_hits_bank == bank_attacker)
-        || (has_ability_effect(bank_attacker, 0) && battle_participants[bank_attacker].ability_id == ABILITY_NO_GUARD)
-        || (has_ability_effect(bank_target, 0) && battle_participants[bank_target].ability_id == ABILITY_NO_GUARD)
+        || check_ability(bank_attacker, ABILITY_NO_GUARD)
+        || check_ability(bank_target, ABILITY_NO_GUARD)
         || (current_move == MOVE_TOXIC && is_of_type(bank_attacker, TYPE_POISON))
         || (new_battlestruct->bank_affecting[bank_target].telekinesis && move_table[current_move].script_id != 70)
         ) //lock-on/mind reader checked, then no guard, always hiting toxic on poison types, then always hitting telekinesis except OHKO moves
