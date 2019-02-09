@@ -2827,15 +2827,15 @@ void atk13_printfromtable(void)
 	prep_string(string_to_read, bank_attacker);
 	battlescripts_curr_instruction += 5;
 	u8 bank = battle_scripting.active_bank;
-	if ((string_to_read == 0x23D || string_to_read == 0x197) && lower && bank == bank_target &&
+	if (((string_to_read == 0x23D || string_to_read == 0x197) && lower && bank == bank_target &&
 			get_bank_side(bank) != get_bank_side(bank_attacker) && new_battlestruct->bank_affecting[bank].stat_lowered)
+			|| (new_battlestruct->side_affecting[get_bank_side(bank)].sticky_web_done && new_battlestruct->bank_affecting[bank].stat_lowered))
 	{
 		new_battlestruct->bank_affecting[bank].stat_lowered = 0;
 		if (check_ability(bank, ABILITY_DEFIANT) && battle_participants[bank].atk_buff != 0xC)
 		{
 			record_usage_of_ability(bank, ABILITY_DEFIANT);
 			bs_push_current(BS_DEFIANT);
-
 		}
 		else if (check_ability(bank, ABILITY_COMPETITIVE) && battle_participants[bank].sp_atk_buff != 0xC)
 		{
