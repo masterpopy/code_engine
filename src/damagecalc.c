@@ -804,7 +804,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
             break;
         case MOVE_WATER_SHURIKEN:
             if (battle_participants[bank_attacker].species == POKE_ASH_GRENJA)
-                base_power = 30;
+                base_power = 20;
             break;
         case MOVE_STOMPING_TANTRUM: //Stomping Tantrum, JeremyZ
             if (new_battlestruct->bank_affecting[bank_attacker].lastmove_fail
