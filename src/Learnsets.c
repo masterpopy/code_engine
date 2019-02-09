@@ -22,6 +22,26 @@ void fill_with_default_moves(struct pokemon* poke)
     }
 }
 
+u16 teach_move_evolving(struct pokemon* poke)
+{
+	const struct learnset* const poke_moveset = get_learset_table(poke);
+	if (poke->padding_maybe >> 7 & 1) {
+		poke->padding_maybe ^= 128;
+		for (slot_in_learnset_table = 0; ; slot_in_learnset_table++)
+		{
+			if (poke_moveset[slot_in_learnset_table].move == MOVE_BLANK || poke_moveset[slot_in_learnset_table].level == 0xFF)
+				return 0;
+			else if (poke_moveset[slot_in_learnset_table].level == LEVEL_EVO)
+				break;
+		}
+	}
+	if (poke_moveset[slot_in_learnset_table].level != LEVEL_EVO)
+		return 0;
+	move_to_learn = poke_moveset[slot_in_learnset_table].move;
+	slot_in_learnset_table++;
+	return teach_move_in_available_slot(poke, move_to_learn);
+}
+
 u16 teach_move_player(struct pokemon* poke, u8 slot)
 {
 	const struct learnset* const poke_moveset = get_learset_table(poke);
@@ -31,13 +51,14 @@ u16 teach_move_player(struct pokemon* poke, u8 slot)
         for (slot_in_learnset_table = 0; ; slot_in_learnset_table++)
         {
             if (poke_moveset[slot_in_learnset_table].move == MOVE_BLANK || poke_moveset[slot_in_learnset_table].level == 0xFF)
-                return 0;
+                goto TRY_MOVE_EVOLVING;
             else if (poke_moveset[slot_in_learnset_table].level == level)
                 break;
         }
     }
+    TRY_MOVE_EVOLVING:
     if (poke_moveset[slot_in_learnset_table].level != level)
-        return 0;
+        return teach_move_evolving(poke);
     move_to_learn = poke_moveset[slot_in_learnset_table].move;
     slot_in_learnset_table++;
     return teach_move_in_available_slot(poke, move_to_learn);
