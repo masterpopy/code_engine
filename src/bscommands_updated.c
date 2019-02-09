@@ -889,7 +889,7 @@ void atk49_move_end_turn(void)
 				break;
 			case 3: //defrosting via fire type move
 				if (target_struct->current_hp && target_struct->status.flags.freeze && TARGET_TURN_DAMAGED &&
-						MOVE_WORKED && (current_move == MOVE_SCALD || current_move_type == TYPE_FIRE))
+						MOVE_WORKED && (current_move_type == TYPE_FIRE || current_move == MOVE_SCALD || current_move == MOVE_STEAM_ERUPTION))
 				{
 					target_struct->status.flags.freeze = 0;
 					active_bank = bank_target;
