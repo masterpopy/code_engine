@@ -1727,16 +1727,21 @@ u8 check_if_cannot_attack(void)
 				break;
 			case 22: //Queenly Majesty, Dazzling
 			{
-				bool own_ability = check_ability(bank_target, ABILITY_QUEENLY_MAJESTY) || check_ability(bank_target, ABILITY_DAZZLING);
-				bool partners_ability = ability_battle_effects(20, bank_target, ABILITY_QUEENLY_MAJESTY, 1, 0) || ability_battle_effects(20, bank_target, ABILITY_DAZZLING, 1, 0);
+				u8 QM_present = check_field_for_ability(ABILITY_QUEENLY_MAJESTY, get_bank_side(bank_attacker), 1);
+				u8 DZ_present = check_field_for_ability(ABILITY_DAZZLING, get_bank_side(bank_attacker), 1);
 
-				if ((own_ability || partners_ability) &&
+				if ((QM_present || DZ_present) &&
 					get_priority(current_move, bank_attacker) >= 1 &&
 					get_bank_side(bank_target) != get_bank_side(bank_attacker))
 				{
-					if (!own_ability)
-						bank_target ^= 2;
-					record_usage_of_ability(bank_target, ABILITY_QUEENLY_MAJESTY);
+					if (QM_present) {
+						bank_target = QM_present - 1;
+						record_usage_of_ability(bank_target, ABILITY_QUEENLY_MAJESTY);
+					}
+					else {
+						bank_target = DZ_present - 1;
+						record_usage_of_ability(bank_target, ABILITY_DAZZLING);
+					}
 					effect = 1;
 					battlescripts_curr_instruction = BS_CANTUSE_PRIORITY;
 				}
@@ -1873,8 +1878,7 @@ void atk00_move_canceller(void)
 		return;
 	else if (immune_to_powder_moves(bank_target, current_move))
 		return;
-	else if ((battle_participants[bank_attacker].ability_id == ABILITY_PRANKSTER &&
-			has_ability_effect(bank_attacker, 1)) &&
+	else if (check_ability(bank_attacker, ABILITY_PRANKSTER) &&
 			is_of_type(bank_target, TYPE_DARK) &&
 			!DAMAGING_MOVE(current_move)) //Dark type blocks Prankster
 	{
@@ -3823,6 +3827,7 @@ void atk23_exp_evs_lvlup(void)
 void atk84_jumpifcannotsleep(void)
 {
 	void* jump_loc = (void*) read_word(battlescripts_curr_instruction + 1);
+	u8 sweet = check_field_for_ability(ABILITY_SWEET_VEIL, get_bank_side(bank_attacker), 1);
 	if (uproar_wakeup_check(bank_target))
 		battlescripts_curr_instruction = jump_loc;
 	else
@@ -3833,13 +3838,9 @@ void atk84_jumpifcannotsleep(void)
 			battle_communication_struct.multistring_chooser = 2;
 			battlescripts_curr_instruction = jump_loc;
 		}
-		else if (check_ability(bank_target, ABILITY_SWEET_VEIL) ||
-				ability_battle_effects(20, bank_target, ABILITY_SWEET_VEIL, 1, 0))
+		else if (sweet)
 		{
-			if (!check_ability(bank_target, ABILITY_SWEET_VEIL))
-				record_usage_of_ability(bank_target ^ 2, ABILITY_SWEET_VEIL);
-			else
-				record_usage_of_ability(bank_target, ABILITY_SWEET_VEIL);
+			record_usage_of_ability(sweet - 1, ABILITY_SWEET_VEIL);
 			battle_communication_struct.multistring_chooser = 3;
 			battlescripts_curr_instruction = jump_loc;
 		}
