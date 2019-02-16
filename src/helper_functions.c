@@ -509,9 +509,9 @@ void apply_zmove_changes()
 	u8 config = z_moves_power[current_move];
 	if (config <= 13){
 		if(config == 13)
-			new_battlestruct->various.var2=6;
+			new_battlestruct->various.var2 = 6;
 		else
-			new_battlestruct->various.var2=0;
+			new_battlestruct->various.var2 = 0;
 		if(do_multiple_stats(z_move_config[config].arg1, z_move_config[config].arg2))
 			return;
 	}
@@ -550,6 +550,7 @@ void apply_zmove_changes()
 					goto HEAL_USER;
 				else
 				{
+					to_add = 0;
 					new_battlestruct->various.var2 = 0;
 					if(do_multiple_stats(0x1, 0x10))
 						return;
