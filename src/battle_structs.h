@@ -811,31 +811,31 @@ struct template
 	object_callback callback;
 };
 
-struct object
+struct object//68
 {
-	struct sprite final_oam;
-	struct frame** animation_table;
-	void* gfx_table;
-	void* rotscale_table;
-	struct template* template;
-	u32 field_18;
-	void* callback;
-	struct coords16 pos1;
-	struct coords16 pos2;
-	struct coords8 pos_neg_center;
-	u8 anim_number;
-	u8 anim_frame;
-	u8 anim_delay_countdown;
-	u8 anim_unkown_counter;
-	u16 private[8];
-	u8 in_use : 1;
+	struct sprite final_oam;//0
+	struct frame** animation_table;//8
+	void* gfx_table;//12
+	void* rotscale_table;//16
+	struct template* template;//20
+	u32 field_18;//24
+	void* callback;//28
+	struct coords16 pos1;//32
+	struct coords16 pos2;//36
+	struct coords8 pos_neg_center;//40
+	u8 anim_number;//42
+	u8 anim_frame;//43
+	u8 anim_delay_countdown;//44
+	u8 anim_unkown_counter;//45
+	u16 private[8];//46
+	u8 in_use : 1;//62
 	u8 flag2 : 1;
 	u8 invisible : 1;
 	u8 flags : 5;
-	u8 bitfield2;
-	u16 anim_data_offset;
-	u8 field_42;
-	u8 y_height_related;
+	u8 bitfield2;//63
+	u16 anim_data_offset;//64
+	u8 field_42;//66
+	u8 y_height_related;//67
 };
 
 struct SpriteTiles
