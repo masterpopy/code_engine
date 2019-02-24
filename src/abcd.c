@@ -187,16 +187,11 @@ const struct evolution_sub* GET_EVO_TABLE(u16 species)
 
 void __attribute__((long_call)) setflag(u32 flag);
 
-
 void sub_82E1810(u32 a1)
 {
     u16 flag = DISABLED_EXP_FLAG;
     if (a1)
-    {
         setflag(flag);
-    }
     else
-    {
         clearflag(flag);
-    }
 }
