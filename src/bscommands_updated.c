@@ -77,12 +77,11 @@ void set_unburden(u8 bank)
 void atk7D_set_rain(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.harsh_sun)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.downpour || battle_weather.flags.permament_rain || battle_weather.flags.rain ||
-			(battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	else if (RAIN_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -101,11 +100,11 @@ void atk7D_set_rain(void)
 void atk95_set_sandstorm(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.harsh_sun || battle_weather.flags.heavy_rain)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
+	else if (SANDSTORM_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -124,11 +123,11 @@ void atk95_set_sandstorm(void)
 void atkBB_set_sunny(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.heavy_rain)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
+	else if (SUN_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -147,11 +146,11 @@ void atkBB_set_sunny(void)
 void atkC8_set_hail(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.harsh_sun || battle_weather.flags.heavy_rain)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.hail || battle_weather.flags.permament_hail)
+	else if (HAIL_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -239,7 +238,7 @@ void atk96_weather_damage(void)
 			!(ability_effect && (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_OVERCOAT)) &&
 			is_bank_present(bank_attacker))
 	{
-		if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
+		if (SANDSTORM_WEATHER)
 		{
 			if (!(is_of_type(bank_attacker, TYPE_GROUND) || is_of_type(bank_attacker, TYPE_STEEL) ||
 					is_of_type(bank_attacker, TYPE_ROCK)) && !(ability_effect &&
@@ -251,7 +250,7 @@ void atk96_weather_damage(void)
 				}
 			}
 		}
-		else if (battle_weather.flags.hail || battle_weather.flags.permament_hail)
+		else if (HAIL_WEATHER)
 		{
 			if (!(is_of_type(bank_attacker, TYPE_ICE)) && !(ability_effect && (ability == ABILITY_SNOW_CLOAK)))
 			{
@@ -298,9 +297,33 @@ void atkE2_switchout_abilities(void)
 					bb2_setattributes_in_battle(0, REQUEST_HP_BATTLE, second_arg, 2, current_hp);
 					mark_buffer_bank_for_execution(active_bank);
 				}
-			}
 				break;
-			//三大特殊天气
+			}
+			//Weather Trio
+			case ABILITY_PRIMORDIAL_SEA:
+			{
+				if (battle_weather.flags.heavy_rain && !ability_battle_effects(15, active_bank, ABILITY_PRIMORDIAL_SEA, 0, 0)) {
+					battle_weather.flags.downpour = 0;
+					battle_weather.flags.rain = 0;
+					battle_weather.flags.heavy_rain = 0;
+				}
+				break;
+			}
+			case ABILITY_DESOLATE_LAND:
+			{
+				if (battle_weather.flags.harsh_sun && !ability_battle_effects(15, active_bank, ABILITY_DESOLATE_LAND, 0, 0)) {
+                    battle_weather.flags.sun = 0;
+					battle_weather.flags.harsh_sun = 0;
+				}
+				break;
+			}
+			case ABILITY_DELTA_STREAM:
+			{
+				if (battle_weather.flags.air_current && !ability_battle_effects(15, active_bank, ABILITY_DELTA_STREAM, 0, 0)) {
+					battle_weather.flags.air_current = 0;
+				}
+				break;
+			}
 		}
 	}
 	battlescripts_curr_instruction += 2;

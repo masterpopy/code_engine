@@ -165,15 +165,13 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
         switch (move) {
             case MOVE_WEATHER_BALL:
                 if (weather_abilities_effect()) {
-                    if (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                        (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0))) {
+                    if (SUN_WEATHER) {
                         move_type = TYPE_FIRE;
-                    } else if (battle_weather.flags.rain || battle_weather.flags.permament_rain ||
-                               (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || battle_weather.flags.downpour) {
+                    } else if (RAIN_WEATHER) {
                         move_type = TYPE_WATER;
-                    } else if (battle_weather.flags.hail || battle_weather.flags.permament_hail) {
+                    } else if (HAIL_WEATHER) {
                         move_type = TYPE_ICE;
-                    } else if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm) {
+                    } else if (SANDSTORM_WEATHER) {
                         move_type = TYPE_ROCK;
                     }
                     if (move_type != TYPE_EGG && move_type != TYPE_ELECTRIC && set_bonus)
@@ -601,11 +599,11 @@ void bs_start_attack(void) {
                 *species = POKE_AEGISLASH_BLADE;
                 //change = 1;
             }
-        }//玛夏夿
+        }//玛夏�?
         else if (*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW)) {
             *species = 0x422;
             //change = 1;
-        }//索尔迦雷欿
+        }//索尔迦雷�?
         else if (*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO)) {
             *species = 0x42a;
             //change = 1;
@@ -613,7 +611,7 @@ void bs_start_attack(void) {
         else if (*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA)) {
             *species = 0x42b;
             //change = 1;
-        }//哲尔尼亚斿
+        }//哲尔尼亚�?
         else if (*species == 0x301 && current_move == MOVE_GEOMANCY) {
             *species = 0x421;
             //change = 1;

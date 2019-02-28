@@ -94,8 +94,8 @@ u8 accuracy_helper_replacement(u16 move)
         jump_if_move_has_no_effect(7, move);
         done_status = 1;
     }
-    else if (((current_move == MOVE_THUNDER || current_move == MOVE_HURRICANE) && weather_abilities_effect() && (battle_weather.flags.heavy_rain || battle_weather.flags.downpour || battle_weather.flags.rain || battle_weather.flags.permament_rain))
-             || (current_move == MOVE_BLIZZARD && weather_abilities_effect() && (battle_weather.flags.hail || battle_weather.flags.permament_hail))
+    else if (((current_move == MOVE_THUNDER || current_move == MOVE_HURRICANE) && weather_abilities_effect() && RAIN_WEATHER)
+             || (current_move == MOVE_BLIZZARD && weather_abilities_effect() && HAIL_WEATHER)
              || (find_move_in_table(current_move, pressing_moves_table) && status3[bank_target].minimized)
              || (move_table[move].accuracy == 0))
     {
@@ -125,7 +125,7 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
 	u8 move_accuracy = move_table[move].accuracy;
 	if (has_ability_effect(bankdef, 1) && battle_participants[bankdef].ability_id == ABILITY_WONDER_SKIN && !DAMAGING_MOVE(move) && move_accuracy > 0)
 		move_accuracy = 50;
-	else if ((move == MOVE_THUNDER || move == MOVE_HURRICANE) && weather_abilities_effect() && (battle_weather.flags.sun || battle_weather.flags.harsh_sun || battle_weather.flags.permament_sun))
+	else if ((move == MOVE_THUNDER || move == MOVE_HURRICANE) && weather_abilities_effect() && SUN_WEATHER)
 		move_accuracy = 50;
 	s8 buff = accuracy_buff + 6 - evs_buff;
 	if (buff < 0)
@@ -159,11 +159,11 @@ u32 accuracy_percent(u16 move, u8 bankatk, u8 bankdef)
 		switch (battle_participants[bankdef].ability_id)
 		{
 		case ABILITY_SAND_VEIL:
-			if (weather_abilities_effect() && (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm))
+			if (weather_abilities_effect() && SANDSTORM_WEATHER)
 				accuracy = percent_lose(accuracy, 20);
 			break;
 		case ABILITY_SNOW_CLOAK:
-			if (weather_abilities_effect() && (battle_weather.flags.hail || battle_weather.flags.permament_hail))
+			if (weather_abilities_effect() && HAIL_WEATHER)
 				accuracy = percent_lose(accuracy, 20);
 			break;
 		case ABILITY_TANGLED_FEET:

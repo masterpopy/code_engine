@@ -252,6 +252,7 @@ enum trainer_class{
 #define FULL_HP(bank)((battle_participants[bank].current_hp) && (battle_participants[bank].current_hp == battle_participants[bank].max_hp))
 #define RAIN_WEATHER ((battle_weather.flags.rain || battle_weather.flags.downpour || battle_weather.flags.permament_rain || battle_weather.flags.heavy_rain))
 #define SUN_WEATHER ((battle_weather.flags.sun || battle_weather.flags.permament_sun || battle_weather.flags.harsh_sun))
+#define SANDSTORM_WEATHER ((battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm))
 #define HAIL_WEATHER ((battle_weather.flags.hail || battle_weather.flags.permament_hail))
 #define BIT_GET(bit)(((1 << bit)))
 
