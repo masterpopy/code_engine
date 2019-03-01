@@ -87,7 +87,7 @@ void ANIMTASK_prepare_statargs(u8 taskID)
     else
     {
         u16 info = battle_graphics.graphics_data->anims_info->arg;
-        anim_arguments[0] = (info & STAT_NEGATIVE); //bool goes down
+        anim_arguments[0] = !(info & STAT_NEGATIVE); //bool goes down
         anim_arguments[1] = (info & STAT_STATID); //colour ID
         if (anim_arguments[1] == 7)
             new_battlestruct->various.dont_play_stat_anim = 1; //if the colour is gray, dont play anim later
