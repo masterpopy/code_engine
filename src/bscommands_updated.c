@@ -2985,14 +2985,14 @@ void atk47_set_statchange_values(void)
 	u8* statgfx = &battle_scripting.AnimInfo1;
 
 	//first three bits is colour
-	if (statchanger & STAT_MULTIPLE)
-		*statgfx = 7;
-	else
-	{
-		static const u8 statID_to_colorID[] = {0, 1, 3, 5, 6, 2,
-				4}; //colors: atk = 0, def = 1, acc = 2, spd = 3 , 4 = evs, 5 = spatk, 6 = spdef
+//	if (statchanger & STAT_MULTIPLE)
+//		*statgfx = 7;
+//	else
+//	{
+		static const u8 statID_to_colorID[] = {0, 1, 3, 5, 6, 2, 4};
+		//colors: atk = 0, def = 1, acc = 2, spd = 3, 4 = evs, 5 = spatk, 6 = spdef
 		*statgfx = statID_to_colorID[(statchanger & STAT_STATID) - 1];
-	}
+//	}
 
 	//0x10 and 0x20 and 0x40 is intensity
 	*statgfx |= (statchanger & STAT_STAGES);
