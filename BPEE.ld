@@ -288,6 +288,7 @@ AnimTask_arg7_to_return_case = 0x815f8a0 |1;
 AnimTask_scroll_background = 0x8117660 |1;
 AnimTask_get_rollout_timer = 0x810cdfc |1;
 AnimTask_set_invisibility_bit_to_all_except_attacker = 0x81177e4 |1;
+AnimTask_sprite_transform = 0x0815B7D0 | 1;
 
 task_add = 0x080A8FB0|1;
 task_is_running = 0x080A91E4|1;

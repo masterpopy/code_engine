@@ -21,11 +21,9 @@ struct double_grass_tile double_grass_tiles[DOUBLE_WILD_TILES] = {
     {0xD, 70}
 };*/
 
-#define DOUBLE_BATTLE_PERCENT 3
-
 bool doubles_tile_check(void)
 {
-    return cur_map_get_blockid_at(sav1->x_coords + 7, sav1->y_coords + 7) == 0xD && percent_chance(DOUBLE_BATTLE_PERCENT);
+    return cur_map_get_blockid_at(sav1->x_coords + 7, sav1->y_coords + 7) == 0xD && percent_chance(70);
     /*for (u32 i = 0; i < DOUBLE_WILD_TILES; i++)
     {
         if (double_grass_tiles[i].tile_id == tile)
@@ -41,7 +39,7 @@ bool doubles_tile_check(void)
 bool wild_grass_battle(void* wild_data)
 {
     bool battle = consider_creating_wild_poke(wild_data, 0, 3);
-    if (/*GET_CUSTOMFLAG (DOUBLE_WILD_BATTLES_FLAG) && DOUBLE_WILD_BATTLES &&*/ battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
+    if (GET_CUSTOMFLAG (DOUBLE_WILD_BATTLES_FLAG) && DOUBLE_WILD_BATTLES && battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
 		party_opponent[1] = party_opponent[0];
         while (!consider_creating_wild_poke(wild_data, 0, 3));
