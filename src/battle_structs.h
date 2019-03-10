@@ -1037,7 +1037,7 @@ enum buttons{
 	L = 0x200
 };
 
-struct superstate //0x030022C0
+struct superstate
 {
 	void* callback1;
 	void* callback2;
@@ -1052,7 +1052,7 @@ struct superstate //0x030022C0
 	u16 buttons0;
 	u16 buttons1;
 	u16 buttons2;
-	struct button pressed_buttons;//0x030022ee
+	struct button pressed_buttons;
 };
 
 extern struct superstate super;
