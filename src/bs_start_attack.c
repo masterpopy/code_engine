@@ -599,11 +599,11 @@ void bs_start_attack(void) {
                 *species = POKE_AEGISLASH_BLADE;
                 //change = 1;
             }
-        }//玛夏�?
+        }//玛夏多
         else if (*species == 0x357 && (current_move == MOVE_SPECTRAL_THIEF || current_move == MOVE_Z_MARSHADOW)) {
             *species = 0x422;
             //change = 1;
-        }//索尔迦雷�?
+        }//索尔迦雷欧
         else if (*species == 0x34c && (current_move == MOVE_SUNSTEEL_STRIKE || current_move == MOVE_Z_SOLGALEO)) {
             *species = 0x42a;
             //change = 1;
@@ -611,7 +611,7 @@ void bs_start_attack(void) {
         else if (*species == 0x34D && (current_move == MOVE_MOONGEIST_BEAM || current_move == MOVE_Z_LUNALA)) {
             *species = 0x42b;
             //change = 1;
-        }//哲尔尼亚�?
+        }//哲尔尼亚斯
         else if (*species == 0x301 && current_move == MOVE_GEOMANCY) {
             *species = 0x421;
             //change = 1;

@@ -184,16 +184,3 @@ const struct evolution_sub* GET_EVO_TABLE(u16 species)
 {
 	return (*evo_table)[species];
 }
-
-
-<<<<<<< HEAD
-void sub_82E1810(u32 a1)
-{
-    u16 flag = DISABLED_EXP_FLAG;
-    if (a1)
-        setflag(flag);
-    else
-        clearflag(flag);
-}
-=======
->>>>>>> parent of 3b2571e... Merge branch 'master' of https://github.com/UtralEmerland/code_two
