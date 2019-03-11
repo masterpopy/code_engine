@@ -472,7 +472,7 @@ void shadow_thief()
 			*atk_stat+=by_how_much;
 			if(*atk_stat>0xC)
 				*atk_stat=0xC;
-
+			//�?浣嶆槸鍙樺寲鐨勬暟鍊?鍚鍙?,浣庡洓浣嶆槸鍙樺寲鐨勫睘�?
 			if(by_how_much>3)
 				by_how_much=3;
 			//battle_scripting.stat_changer = (by_how_much<<4) | bit_to_stat(BIT_GET(i));
