@@ -65,6 +65,7 @@ void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
 u32 random_value(u32 limit);
 bool is_in_tag_battle(void);
 bool clanging_scales_stat(void);
+void revert_form_change_search(struct pokemon* poke);
 
 void set_unburden(u8 bank)
 {
@@ -2942,6 +2943,7 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, struct pokemon* po
 
 		}
 	}
+	revert_form_change_search(poke);
 }
 
 void atk56_prepare_fainting_cry(void)

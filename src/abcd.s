@@ -3,7 +3,6 @@
 .thumb_func
 
 
-
 .align 1
     .global sub_0x8108ac0_task
 sub_0x8108ac0_task:
@@ -90,3 +89,63 @@ toxic_thread_task:
 toxic_thread_task_data:
 .hword 0x27C3, 0x7C1E
 
+
+.global revert_form_change_search
+revert_form_change_search:
+	push {r0,r4-r7,lr}
+	ldrh r6, [r0, #0x20]
+	mov r1, #0xE1
+	lsl r1, #2
+	cmp r6, r1
+	bls rfcs_endturn
+	add r1, #(0x3C3-900)
+	cmp r6, r1
+	bne rfcs_mark_1
+	sub r1, #(0x3C3-0x2C7)
+	b rfcs_revert
+rfcs_mark_1:
+	ldr r7, =0x08F387C0
+	mov r1, #0
+rfcs_nextpoke:
+	add r1, #1
+	ldr r4, =(1200 - 1)
+	cmp r1, r4
+	beq rfcs_endturn
+	add r7, #40
+	mov r4, r7
+	mov r5, #0x0
+rfcs_nextevo:
+	ldrb r3, [r4]
+	ldrh r2, [r4, #2]
+	cmp r3, #0x0
+	bne rfcs_changeornot
+	cmp r2, #0x0
+	beq rfcs_nextpoke
+rfcs_changeornot:
+	cmp r3, #0xFA
+	bcc rfcs_nextline
+	cmp r3, #0xFF
+	beq rfcs_nextline
+	ldrh r2, [r4, #4]
+	cmp r2, r6
+	bne rfcs_nextline
+rfcs_revert:
+	strh r1, [r0, #0x20]
+	ldr r3, =(0x08068D0C|1)
+	bl rfcs_RX_r3
+	ldr r0, [sp]
+	ldrh r3, [r0, #0x20]
+	cmp r3, r6
+	beq rfcs_BOOM
+rfcs_endturn:
+	pop {r0,r4-r7,pc}
+rfcs_nextline:
+	cmp r5, #4
+	beq rfcs_nextpoke
+	add r5, #1
+	add r4, #8
+b rfcs_nextevo
+rfcs_BOOM:
+	mov r3, #0x0
+rfcs_RX_r3:
+	bx r3
