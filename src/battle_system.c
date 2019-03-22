@@ -462,7 +462,7 @@ u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted)
         return 1;
     if (battle_participants[def_bank].status.int_status ||is_class_FOUR(def_bank))
         return 2;
-    if ((is_of_type(def_bank, TYPE_POISON) || is_of_type(def_bank, TYPE_STEEL)) && atk_bank != def_bank && !self_inflicted && !check_ability(atk_bank, ABILITY_CORROSION))
+    if ((is_of_type(def_bank, TYPE_POISON) || is_of_type(def_bank, TYPE_STEEL)) && !check_ability(atk_bank, ABILITY_CORROSION))
         return 3;
 	
     u8 ability = battle_participants[def_bank].ability_id;
