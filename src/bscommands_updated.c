@@ -1903,6 +1903,7 @@ void atk00_move_canceller(void)
 	else if (immune_to_powder_moves(bank_target, current_move))
 		return;
 	else if (check_ability(bank_attacker, ABILITY_PRANKSTER) &&
+			bank_attacker != bank_target &&
 			is_of_type(bank_target, TYPE_DARK) &&
 			!DAMAGING_MOVE(current_move)) //Dark type blocks Prankster
 	{
