@@ -511,8 +511,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         }
                         break;
                     case ABILITY_LIGHTNING_ROD:
-                        if (move_type == TYPE_ELECTRIC &&
-                            (!is_of_type(bank, TYPE_GROUND) || get_item_effect(bank, 1) == ITEM_EFFECT_RINGTARGET)) {
+                        if (move_type == TYPE_ELECTRIC) {
                             common_effect = 2;
                             stat = STAT_SP_ATK;
                         }

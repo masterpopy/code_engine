@@ -630,13 +630,13 @@ void jumpifcantburn(void)
 {
     switch (cant_become_burned(bank_target, 0))
     {
-    case 1:
+    case 1: //already burned
         battlescripts_curr_instruction = (void*) 0x82DA0BB;
         break;
-    case 2:
+    case 2: //other major condition
         battlescripts_curr_instruction = (void*) 0x82D9F1C;
         break;
-    case 3:
+    case 3: //type protection
         battlescripts_curr_instruction = (void*) 0x82D9F2E;
         break;
     }

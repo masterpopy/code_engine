@@ -1900,6 +1900,8 @@ void atk00_move_canceller(void)
 		return;
 	else if (ability_battle_effects(2, bank_target, 0, 0, 0))
 		return;
+	else if (ability_battle_effects(3, bank_target, 0, 0, 0))
+		return;
 	else if (immune_to_powder_moves(bank_target, current_move))
 		return;
 	else if (check_ability(bank_attacker, ABILITY_PRANKSTER) &&
