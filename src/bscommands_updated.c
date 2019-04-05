@@ -1513,7 +1513,7 @@ u8 check_if_cannot_attack(void)
 						else if (current_move != MOVE_SLEEP_TALK && current_move != MOVE_SNORE)
 						{
 							effect = 1;
-							hitmarker |= 0x80000;
+							hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 							battlescripts_curr_instruction = (void*) 0x82DB213;
 						}
 					}
@@ -1524,16 +1524,16 @@ u8 check_if_cannot_attack(void)
 				{
 					if (percent_chance(20))
 					{
-						attacker_struct->status.flags.freeze = 0;
 						effect = 2;
+						attacker_struct->status.flags.freeze = 0;
 						battle_communication_struct.multistring_chooser = 0;
 						bs_push_current((void*) 0x82DB277);
 					}
 					else if (!find_move_in_table(current_move, user_thawing_moves))
 					{
 						effect = 1;
+						hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 						battlescripts_curr_instruction = (void*) 0x82DB26A;
-						hitmarker |= HITMARKER_NO_ATTACKSTRING;
 					}
 				}
 				break;
@@ -1634,7 +1634,7 @@ u8 check_if_cannot_attack(void)
 						bank_target = bank_attacker;
 						damage_calc(MOVE_CONFUSION_DMG, TYPE_EGG, bank_attacker, bank_attacker, 0x64);
 						protect_structs[bank_attacker].flag1_confusion_self_damage = 1;
-						hitmarker |= 0x80000;
+						hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 					}
 					effect = 1;
 				}
@@ -1645,7 +1645,7 @@ u8 check_if_cannot_attack(void)
 					effect = 1;
 					protect_structs[bank_attacker].flag0_prlz_immobility = 1;
 					battlescripts_curr_instruction = (void*) 0x82DB28B;
-					hitmarker |= 0x80000;
+					hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 				}
 				break;
 			case 14: //check infatuation
@@ -1787,7 +1787,7 @@ u8 check_if_cannot_attack(void)
 		}
 		else if (effect >= 3)
 		{
-			hitmarker |= 0x80000;
+			hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 			reset_multiple_turn_effects(bank_attacker);
 		}
 		*state_tracker += 1;
@@ -1887,7 +1887,7 @@ void atk00_move_canceller(void)
 	}
 	if (battle_participants[bank_attacker].current_hp == 0 && !(hitmarker & HITMARKER_NO_ATTACKSTRING))
 	{
-		hitmarker |= 0x80000;
+		hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 		battlescripts_curr_instruction = (void*) 0x082D8A4E; //bs_endturn and end
 		return;
 	}
