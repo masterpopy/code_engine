@@ -21,7 +21,7 @@ struct double_grass_tile double_grass_tiles[DOUBLE_WILD_TILES] = {
     {0xD, 70}
 };*/
 
-#define DOUBLE_BATTLE_PERCENT 3
+#define DOUBLE_BATTLE_PERCENT 0
 
 bool doubles_tile_check(void)
 {
@@ -232,6 +232,8 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         break;
     #endif // EXPANDED_POKEBALLS
     }
+	if (is_poke_ultrabeast(catching->species) && ball_no != BALL_MASTER && ball_no != BALL_BEAST)
+		multiplier = 1;
     u16 hp_max = catching->max_hp * 3;
     u32 formula = (catchrate * multiplier / 10) * (hp_max - catching->current_hp * 2) / hp_max;
     if (catching->status.flags.sleep || catching->status.flags.freeze)

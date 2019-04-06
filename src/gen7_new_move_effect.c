@@ -13,6 +13,7 @@ void update_rtc(void);
 void prep_string(u16 strID, u8 bank);
 s8 get_priority(u16 move, u8 bank);
 void bs_push_current(void* now);
+u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 
 bool time_check(u8 from, u8 to)
 {
@@ -288,4 +289,19 @@ bool is_bank_using_z_move(u8 bank) {
 
 bool check_ability_with_mold(u8 bank, u8 ability) {
 	return (has_ability_effect(bank, 1) && battle_participants[bank].ability_id == ability);
+}
+
+void check_weather_trio(void) {
+	if (battle_weather.flags.heavy_rain && !check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) {
+		battle_weather.flags.downpour = 0;
+		battle_weather.flags.rain = 0;
+		battle_weather.flags.heavy_rain = 0;
+	}
+	if (battle_weather.flags.harsh_sun && !check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) {
+		battle_weather.flags.sun = 0;
+		battle_weather.flags.harsh_sun = 0;
+	}
+	if (battle_weather.flags.air_current && !check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) {
+		battle_weather.flags.air_current = 0;
+	}
 }

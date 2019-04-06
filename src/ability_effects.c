@@ -38,6 +38,7 @@ u32 random_value(u32 limit);
 u16 get_battle_item_extra_param(u32 bank); //JeremyZ
 u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
 u8 can_lose_item(u8 bank, u8 stickyhold_check, u8 sticky_message);
+void check_weather_trio(void);
 
 bool not_impostered(u8 bank) {
     return !battle_participants[bank].status2.transformed;
@@ -79,10 +80,7 @@ enum poke_abilities get_ally_ability(u8 bank, u8 mold) {
 }
 
 bool weather_abilities_effect(void) {
-	if (check_field_for_ability(ABILITY_CLOUD_NINE, 3, 0) || check_field_for_ability(ABILITY_AIR_LOCK, 3, 0)
-		|| (battle_weather.flags.harsh_sun && !check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0))
-		|| (battle_weather.flags.heavy_rain && !check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0))
-		|| (battle_weather.flags.air_current && !check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)))
+	if (check_field_for_ability(ABILITY_CLOUD_NINE, 3, 0) || check_field_for_ability(ABILITY_AIR_LOCK, 3, 0))
         return false;
     else
         return true;
@@ -302,8 +300,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             bank_attacker = bank;
             switch (last_used_ability) {
                 case ABILITY_ICE_BODY:
-                    if (weather_abilities_effect() &&
-                        (battle_weather.flags.hail || battle_weather.flags.permament_hail)) {
+                    if (weather_abilities_effect() && HAIL_WEATHER) {
                         if (battle_participants[bank].current_hp < battle_participants[bank].max_hp &&
                             !new_battlestruct->bank_affecting[bank].heal_block) {
                             bs_execute(BS_ABILITYHPCHANGE_END3);
@@ -313,9 +310,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                     }
                     break;
                 case ABILITY_RAIN_DISH:
-                    if (weather_abilities_effect() && (battle_weather.flags.downpour || battle_weather.flags.rain ||
-                                                       battle_weather.flags.permament_rain ||
-                                                       battle_weather.flags.heavy_rain)) {
+                    if (weather_abilities_effect() && RAIN_WEATHER) {
                         if (battle_participants[bank].current_hp < battle_participants[bank].max_hp &&
                             !new_battlestruct->bank_affecting[bank].heal_block) {
                             bs_execute(BS_ABILITYHPCHANGE_END3);
@@ -327,16 +322,14 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                     break;
                 case ABILITY_DRY_SKIN:
                     if (weather_abilities_effect()) {
-                        if (battle_weather.flags.downpour || battle_weather.flags.rain ||
-                            battle_weather.flags.permament_rain || battle_weather.flags.heavy_rain) {
+                        if (RAIN_WEATHER) {
                             if (battle_participants[bank].current_hp < battle_participants[bank].max_hp &&
                                 !new_battlestruct->bank_affecting[bank].heal_block) {
                                 bs_execute(BS_ABILITYHPCHANGE_END3);
                                 damage_loc = get_1_8_of_max_hp(bank) * (-1);
                                 effect = true;
                             }
-                        } else if (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                                   battle_weather.flags.harsh_sun) {
+                        } else if (SUN_WEATHER) {
                             damage_loc = get_1_8_of_max_hp(bank);
                             bs_execute(BS_ABILITYHPCHANGE_END3);
                             effect = true;
@@ -344,8 +337,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                     }
                     break;
                 case ABILITY_SOLAR_POWER:
-                    if (weather_abilities_effect() && (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                                                       battle_weather.flags.harsh_sun)) {
+                    if (weather_abilities_effect() && SUN_WEATHER) {
                         damage_loc = get_1_8_of_max_hp(bank);
                         bs_execute(BS_ABILITYHPCHANGE_END3);
                         effect = true;
@@ -354,9 +346,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                 case ABILITY_HARVEST:
                     if (get_item_pocket_id(battle_stuff_ptr->used_held_items[bank]) == 4 &&
                         !battle_participants[bank].held_item) {
-                        if ((weather_abilities_effect() &&
-                             (battle_weather.flags.sun || battle_weather.flags.permament_sun ||
-                             battle_weather.flags.harsh_sun)) || (rng() & 1)) {
+                        if ((weather_abilities_effect() && SUN_WEATHER) || (rng() & 1)) {
                             effect = true;
                             bs_execute(BS_HARVEST);
                         }
@@ -376,9 +366,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                 }
                     break;
                 case ABILITY_HYDRATION:
-                    if (((battle_weather.flags.downpour || battle_weather.flags.rain ||
-                          battle_weather.flags.permament_rain || battle_weather.flags.heavy_rain) &&
-                         weather_abilities_effect()))
+                    if (RAIN_WEATHER && weather_abilities_effect())
                         common_effect = 1;
                     break;
                 case ABILITY_SHED_SKIN:
@@ -523,8 +511,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         }
                         break;
                     case ABILITY_LIGHTNING_ROD:
-                        if (move_type == TYPE_ELECTRIC &&
-                            (!is_of_type(bank, TYPE_GROUND) || get_item_effect(bank, 1) == ITEM_EFFECT_RINGTARGET)) {
+                        if (move_type == TYPE_ELECTRIC) {
                             common_effect = 2;
                             stat = STAT_SP_ATK;
                         }
@@ -748,7 +735,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                             battle_scripting.stat_changer = 0x14;
                         }
                         break;
-                }
+                }			
             }
             break;
         case 5: //status immunities
@@ -810,7 +797,8 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                 }
             }
             break;
-        case 6: //check castform and cherrim
+        case 6: //check weather trio, castform and cherrim
+			check_weather_trio();
             for (u8 i = 0; i < no_of_all_banks; i++) {
                 if ((effect = exec_castform_script(i, 1)))
                     break;
@@ -836,20 +824,19 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             break;
         case 9: // switch-in abilities executor
             for (u8 k = 0; k < no_of_all_banks; k++) {
-                if (status3[k].switchinlock) {
-                    status3[k].switchinlock = 0;
-                    if (handle_primal_reversion(k)) {
+                if (status3[turn_order[k]].switchinlock) {
+                    status3[turn_order[k]].switchinlock = 0;
+                    if (handle_primal_reversion(turn_order[k])) {
                         effect = 1;
                         break;
                     }
-                    status3[k].innerswitchinlock = 1;
-                    effect = ability_battle_effects(24, k, 0, 0, 0);
+                    status3[turn_order[k]].innerswitchinlock = 1;
+                    effect = ability_battle_effects(24, turn_order[k], 0, 0, 0);
                     if (effect) {
                         break;
                     }
                 }
             }
-
             break;
         case 10:
             if (has_ability_effect(bank, 0) && MOVE_WORKED
@@ -1029,7 +1016,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                     }
                         break;
                     case ABILITY_DROUGHT:
-                        if (!(SUN_WEATHER || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || (battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)))) {
+                        if (!(SUN_WEATHER || battle_weather.flags.heavy_rain || battle_weather.flags.air_current)) {
                             effect = true;
                             battle_weather.int_bw = weather_sun;
 
@@ -1043,7 +1030,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         }
                         break;
                     case ABILITY_DRIZZLE:
-                        if (!(RAIN_WEATHER || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)))) {
+                        if (!(RAIN_WEATHER || battle_weather.flags.harsh_sun || battle_weather.flags.air_current)) {
                             effect = true;
                             battle_weather.int_bw = weather_rain;
                             if (get_item_effect(bank, true) == ITEM_EFFECT_DAMPROCK)
@@ -1056,9 +1043,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         }
                         break;
                     case ABILITY_SAND_STREAM:
-                        if (!(battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm ||
-                              (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) ||
-                              (battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)))) {
+                        if (!(SANDSTORM_WEATHER || battle_weather.flags.harsh_sun || battle_weather.flags.heavy_rain || battle_weather.flags.air_current)) {
                             effect = true;
                             battle_weather.int_bw = weather_sandstorm;
                             if (get_item_effect(bank, true) == ITEM_EFFECT_SMOOTHROCK)
@@ -1071,8 +1056,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
                         }
                         break;
                     case ABILITY_SNOW_WARNING:
-                        if (!(HAIL_WEATHER || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) ||
-                              (battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)))) {
+                        if (!(HAIL_WEATHER || battle_weather.flags.harsh_sun || battle_weather.flags.heavy_rain || battle_weather.flags.air_current)) {
                             effect = true;
                             battle_weather.int_bw = weather_hail;
                             if (get_item_effect(bank, true) == ITEM_EFFECT_ICYROCK)

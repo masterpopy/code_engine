@@ -50,7 +50,7 @@ void revert_mega_to_normalform_new(u8 opponent_side);
 bool not_impostered(u8 bank);
 u32 random_value(u32 limit);
 u8 z_protect_affects(u16 move); //JeremyZ
-u8 check_field_for_ability(enum poke_abilities ability, u8 side_to_ignore, u8 mold);
+void check_weather_trio(void);
 
 bool is_poke_valid(struct pokemon* poke)
 {
@@ -472,7 +472,7 @@ void shadow_thief()
 			*atk_stat+=by_how_much;
 			if(*atk_stat>0xC)
 				*atk_stat=0xC;
-			//楂?浣嶆槸鍙樺寲鐨勬暟鍊?鍚鍙?,浣庡洓浣嶆槸鍙樺寲鐨勫睘鎬?
+			//�?浣嶆槸鍙樺寲鐨勬暟鍊?鍚鍙?,浣庡洓浣嶆槸鍙樺寲鐨勫睘�?
 			if(by_how_much>3)
 				by_how_much=3;
 			//battle_scripting.stat_changer = (by_how_much<<4) | bit_to_stat(BIT_GET(i));
@@ -630,13 +630,13 @@ void jumpifcantburn(void)
 {
     switch (cant_become_burned(bank_target, 0))
     {
-    case 1:
+    case 1: //already burned
         battlescripts_curr_instruction = (void*) 0x82DA0BB;
         break;
-    case 2:
+    case 2: //other major condition
         battlescripts_curr_instruction = (void*) 0x82D9F1C;
         break;
-    case 3:
+    case 3: //type protection
         battlescripts_curr_instruction = (void*) 0x82D9F2E;
         break;
     }
@@ -1047,6 +1047,7 @@ void ability_change(void)
         battlescripts_curr_instruction += 4;
         abilities_by_banks[bank_attacker] = *ability_atk;
         abilities_by_banks[bank_target] = *ability_def;
+		check_weather_trio(); //Weather Trio
     }
 }
 
@@ -1189,6 +1190,7 @@ void gastroacid(void)
     {
         battlescripts_curr_instruction += 4;
         new_battlestruct->bank_affecting[bank_target].gastro_acided = 1;
+		check_weather_trio(); //Weather Trio
     }
 }
 
@@ -2837,7 +2839,7 @@ void set_laser_focus(void)
 void set_aurora_veil(void)
 {
     u8 side = get_bank_side(bank_attacker);
-    if (!new_battlestruct->side_affecting[side].aurora_veil && weather_abilities_effect() && (battle_weather.flags.hail || battle_weather.flags.permament_hail))
+    if (!new_battlestruct->side_affecting[side].aurora_veil && weather_abilities_effect() && HAIL_WEATHER)
     {
         u8 turns = 5;
         if (get_item_effect(bank_attacker, 1) == ITEM_EFFECT_LIGHTCLAY)

@@ -65,6 +65,7 @@ void moveeffect_set_status(u8 bank, u32 flag, u8 stringID); //JeremyZ
 u32 random_value(u32 limit);
 bool is_in_tag_battle(void);
 bool clanging_scales_stat(void);
+void revert_form_change_search(struct pokemon* poke);
 
 void set_unburden(u8 bank)
 {
@@ -77,12 +78,11 @@ void set_unburden(u8 bank)
 void atk7D_set_rain(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.harsh_sun)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.downpour || battle_weather.flags.permament_rain || battle_weather.flags.rain ||
-			(battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	else if (RAIN_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -101,11 +101,11 @@ void atk7D_set_rain(void)
 void atk95_set_sandstorm(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.harsh_sun || battle_weather.flags.heavy_rain)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
+	else if (SANDSTORM_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -124,11 +124,11 @@ void atk95_set_sandstorm(void)
 void atkBB_set_sunny(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.heavy_rain)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
+	else if (SUN_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -147,11 +147,11 @@ void atkBB_set_sunny(void)
 void atkC8_set_hail(void)
 {
 	battlescripts_curr_instruction++;
-	if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)))
+	if (battle_weather.flags.air_current || battle_weather.flags.harsh_sun || battle_weather.flags.heavy_rain)
 	{
 		battlescripts_curr_instruction = (void*) 0x082D9F1C; //but it failed script
 	}
-	else if (battle_weather.flags.hail || battle_weather.flags.permament_hail)
+	else if (HAIL_WEATHER)
 	{
 		move_outcome.missed = 1;
 		battle_communication_struct.multistring_chooser = 2;
@@ -239,7 +239,7 @@ void atk96_weather_damage(void)
 			!(ability_effect && (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_OVERCOAT)) &&
 			is_bank_present(bank_attacker))
 	{
-		if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
+		if (SANDSTORM_WEATHER)
 		{
 			if (!(is_of_type(bank_attacker, TYPE_GROUND) || is_of_type(bank_attacker, TYPE_STEEL) ||
 					is_of_type(bank_attacker, TYPE_ROCK)) && !(ability_effect &&
@@ -251,7 +251,7 @@ void atk96_weather_damage(void)
 				}
 			}
 		}
-		else if (battle_weather.flags.hail || battle_weather.flags.permament_hail)
+		else if (HAIL_WEATHER)
 		{
 			if (!(is_of_type(bank_attacker, TYPE_ICE)) && !(ability_effect && (ability == ABILITY_SNOW_CLOAK)))
 			{
@@ -298,9 +298,33 @@ void atkE2_switchout_abilities(void)
 					bb2_setattributes_in_battle(0, REQUEST_HP_BATTLE, second_arg, 2, current_hp);
 					mark_buffer_bank_for_execution(active_bank);
 				}
-			}
 				break;
-			//三大特殊天气
+			}
+			//Weather Trio
+			case ABILITY_PRIMORDIAL_SEA:
+			{
+				if (battle_weather.flags.heavy_rain && !ability_battle_effects(15, active_bank, ABILITY_PRIMORDIAL_SEA, 0, 0)) {
+					battle_weather.flags.downpour = 0;
+					battle_weather.flags.rain = 0;
+					battle_weather.flags.heavy_rain = 0;
+				}
+				break;
+			}
+			case ABILITY_DESOLATE_LAND:
+			{
+				if (battle_weather.flags.harsh_sun && !ability_battle_effects(15, active_bank, ABILITY_DESOLATE_LAND, 0, 0)) {
+                    battle_weather.flags.sun = 0;
+					battle_weather.flags.harsh_sun = 0;
+				}
+				break;
+			}
+			case ABILITY_DELTA_STREAM:
+			{
+				if (battle_weather.flags.air_current && !ability_battle_effects(15, active_bank, ABILITY_DELTA_STREAM, 0, 0)) {
+					battle_weather.flags.air_current = 0;
+				}
+				break;
+			}
 		}
 	}
 	battlescripts_curr_instruction += 2;
@@ -1489,7 +1513,7 @@ u8 check_if_cannot_attack(void)
 						else if (current_move != MOVE_SLEEP_TALK && current_move != MOVE_SNORE)
 						{
 							effect = 1;
-							hitmarker |= 0x80000;
+							hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 							battlescripts_curr_instruction = (void*) 0x82DB213;
 						}
 					}
@@ -1500,16 +1524,16 @@ u8 check_if_cannot_attack(void)
 				{
 					if (percent_chance(20))
 					{
-						attacker_struct->status.flags.freeze = 0;
 						effect = 2;
+						attacker_struct->status.flags.freeze = 0;
 						battle_communication_struct.multistring_chooser = 0;
 						bs_push_current((void*) 0x82DB277);
 					}
 					else if (!find_move_in_table(current_move, user_thawing_moves))
 					{
 						effect = 1;
+						hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 						battlescripts_curr_instruction = (void*) 0x82DB26A;
-						hitmarker |= HITMARKER_NO_ATTACKSTRING;
 					}
 				}
 				break;
@@ -1610,7 +1634,7 @@ u8 check_if_cannot_attack(void)
 						bank_target = bank_attacker;
 						damage_calc(MOVE_CONFUSION_DMG, TYPE_EGG, bank_attacker, bank_attacker, 0x64);
 						protect_structs[bank_attacker].flag1_confusion_self_damage = 1;
-						hitmarker |= 0x80000;
+						hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 					}
 					effect = 1;
 				}
@@ -1621,7 +1645,7 @@ u8 check_if_cannot_attack(void)
 					effect = 1;
 					protect_structs[bank_attacker].flag0_prlz_immobility = 1;
 					battlescripts_curr_instruction = (void*) 0x82DB28B;
-					hitmarker |= 0x80000;
+					hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 				}
 				break;
 			case 14: //check infatuation
@@ -1763,7 +1787,7 @@ u8 check_if_cannot_attack(void)
 		}
 		else if (effect >= 3)
 		{
-			hitmarker |= 0x80000;
+			hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 			reset_multiple_turn_effects(bank_attacker);
 		}
 		*state_tracker += 1;
@@ -1863,7 +1887,7 @@ void atk00_move_canceller(void)
 	}
 	if (battle_participants[bank_attacker].current_hp == 0 && !(hitmarker & HITMARKER_NO_ATTACKSTRING))
 	{
-		hitmarker |= 0x80000;
+		hitmarker |= HITMARKER_IMMOBILE_DUE_TO_STATUS;
 		battlescripts_curr_instruction = (void*) 0x082D8A4E; //bs_endturn and end
 		return;
 	}
@@ -1876,9 +1900,12 @@ void atk00_move_canceller(void)
 		return;
 	else if (ability_battle_effects(2, bank_target, 0, 0, 0))
 		return;
+	else if (ability_battle_effects(3, bank_target, 0, 0, 0))
+		return;
 	else if (immune_to_powder_moves(bank_target, current_move))
 		return;
 	else if (check_ability(bank_attacker, ABILITY_PRANKSTER) &&
+			bank_attacker != bank_target &&
 			is_of_type(bank_target, TYPE_DARK) &&
 			!DAMAGING_MOVE(current_move)) //Dark type blocks Prankster
 	{
@@ -2919,6 +2946,7 @@ void revert_form_change(bool mega_revert, u8 teamID, u8 side, struct pokemon* po
 
 		}
 	}
+	revert_form_change_search(poke);
 }
 
 void atk56_prepare_fainting_cry(void)
@@ -2962,14 +2990,14 @@ void atk47_set_statchange_values(void)
 	u8* statgfx = &battle_scripting.AnimInfo1;
 
 	//first three bits is colour
-	if (statchanger & STAT_MULTIPLE)
-		*statgfx = 7;
-	else
-	{
-		static const u8 statID_to_colorID[] = {0, 1, 3, 5, 6, 2,
-				4}; //colors: atk = 0, def = 1, acc = 2, spd = 3 , 4 = evs, 5 = spatk, 6 = spdef
+//	if (statchanger & STAT_MULTIPLE)
+//		*statgfx = 7;
+//	else
+//	{
+		static const u8 statID_to_colorID[] = {0, 1, 3, 5, 6, 2, 4};
+		//colors: atk = 0, def = 1, acc = 2, spd = 3, 4 = evs, 5 = spatk, 6 = spdef
 		*statgfx = statID_to_colorID[(statchanger & STAT_STATID) - 1];
-	}
+//	}
 
 	//0x10 and 0x20 and 0x40 is intensity
 	*statgfx |= (statchanger & STAT_STAGES);

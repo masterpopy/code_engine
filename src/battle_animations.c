@@ -82,20 +82,25 @@ void AnimTask_swapbanks(u8 taskID)
 
 void ANIMTASK_prepare_statargs(u8 taskID)
 {
-    if (new_battlestruct->various.dont_play_stat_anim)
-    { move_anim_task_delete(taskID); }
-    else
-    {
-        u16 info = battle_graphics.graphics_data->anims_info->arg;
-        anim_arguments[0] = (info & STAT_NEGATIVE); //bool goes down
-        anim_arguments[1] = (info & STAT_STATID); //colour ID
-        if (anim_arguments[1] == 7)
-            new_battlestruct->various.dont_play_stat_anim = 1; //if the colour is gray, dont play anim later
-        anim_arguments[2] = 0;
-        anim_arguments[3] = 0;
-        anim_arguments[4] = (info & STAT_STAGES); //stages
-        task_statchange_preparestruct(taskID);
-    }
+	if (new_battlestruct->various.dont_play_stat_anim)
+	{ move_anim_task_delete(taskID); }
+	else
+	{
+		u16 info = battle_graphics.graphics_data->anims_info->arg;
+/*		anim_arguments[0] = (info & STAT_NEGATIVE); //bool goes down
+		if ((anim_arguments[1] = (info & STAT_STATID)) == 7) { //colour ID
+			new_battlestruct->various.dont_play_stat_anim = 1; //if the colour is gray, dont play anim later
+		} */
+		if ((anim_arguments[0] = (info & STAT_NEGATIVE))) { //bool goes down
+			anim_arguments[1] = 7; //gray colour, if stat gose down
+		} else {
+			anim_arguments[1] = (info & STAT_STATID); //colour ID
+		}
+		anim_arguments[2] = 0;
+		anim_arguments[3] = 0;
+		anim_arguments[4] = (info & STAT_STAGES); //stages
+		task_statchange_preparestruct(taskID);
+	}
 
 }
 

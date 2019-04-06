@@ -312,7 +312,7 @@ u16 damage_type_effectiveness_update(u16 move, u8 attacking_type, u8 defending_t
     {
         effect = 10;
     }
-    else if ((battle_weather.flags.air_current && check_field_for_ability(ABILITY_DELTA_STREAM, 3, 0)) && defending_type == TYPE_FLYING && effect == 20 && weather_abilities_effect())
+    else if (battle_weather.flags.air_current && defending_type == TYPE_FLYING && effect == 20 && weather_abilities_effect())
     {
         effect = 10;
     }
@@ -462,7 +462,7 @@ u8 cant_poison(u8 atk_bank, u8 def_bank, u8 self_inflicted)
         return 1;
     if (battle_participants[def_bank].status.int_status ||is_class_FOUR(def_bank))
         return 2;
-    if ((is_of_type(def_bank, TYPE_POISON) || is_of_type(def_bank, TYPE_STEEL)) && atk_bank != def_bank && !self_inflicted && !check_ability(atk_bank, ABILITY_CORROSION))
+    if ((is_of_type(def_bank, TYPE_POISON) || is_of_type(def_bank, TYPE_STEEL)) && !check_ability(atk_bank, ABILITY_CORROSION))
         return 3;
 	
     u8 ability = battle_participants[def_bank].ability_id;
@@ -1617,8 +1617,7 @@ bool update_turn_counters(void)
                 {
                     if((*sidebank)<=3)
                     {
-                        if((!battle_weather.flags.downpour && !battle_weather.flags.permament_rain && !(battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) && !battle_weather.flags.rain)
-                           && is_bank_present(*sidebank) && !is_of_type(*sidebank,TYPE_FIRE))
+                        if(!RAIN_WEATHER && is_bank_present(*sidebank) && !is_of_type(*sidebank,TYPE_FIRE))
                         {
                             effect=1;
                             active_bank = bank_attacker = *sidebank;
@@ -1748,11 +1747,11 @@ bool update_turn_counters(void)
                 *statetracker += 1;
             }
         case 24: //rain
-            if (battle_weather.flags.rain || battle_weather.flags.downpour || (battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || battle_weather.flags.permament_rain)
+            if (RAIN_WEATHER)
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
-                if ((battle_weather.flags.heavy_rain && check_field_for_ability(ABILITY_PRIMORDIAL_SEA, 3, 0)) || battle_weather.flags.permament_rain || battle_effects_duration.weather_dur)
+                if (battle_weather.flags.heavy_rain || battle_weather.flags.permament_rain || battle_effects_duration.weather_dur)
                 {
                     if (battle_weather.flags.downpour)
                         *sidebank = 1;
@@ -1774,11 +1773,11 @@ bool update_turn_counters(void)
             *statetracker += 1;
             break;
         case 25: //sun
-            if (battle_weather.flags.sun || battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)))
+            if (SUN_WEATHER)
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
-                if (battle_weather.flags.permament_sun || (battle_weather.flags.harsh_sun && check_field_for_ability(ABILITY_DESOLATE_LAND, 3, 0)) || battle_effects_duration.weather_dur)
+                if (battle_weather.flags.permament_sun || battle_weather.flags.harsh_sun || battle_effects_duration.weather_dur)
                     call_bc_move_exec((void*)0x82DACD2);
                 else
                 {
@@ -1790,7 +1789,7 @@ bool update_turn_counters(void)
             *statetracker += 1;
             break;
         case 26: //sandstorm
-            if (battle_weather.flags.sandstorm || battle_weather.flags.permament_sandstorm)
+            if (SANDSTORM_WEATHER)
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;
@@ -1807,7 +1806,7 @@ bool update_turn_counters(void)
             *statetracker += 1;
             break;
         case 27: //hail
-            if (battle_weather.flags.hail || battle_weather.flags.permament_hail)
+            if (HAIL_WEATHER)
             {
                 effect = 1;
                 battle_effects_duration.weather_dur--;

@@ -2165,7 +2165,8 @@ PARALYZE_TARGET:
 	jumpifsubstituteaffects MOVE_FAILED
 	attackstring
 	ppreduce
-	jumpiftypenotaffected MOVE_FAILED
+	jumpifmove MOVE_THUNDER_WAVE PARALYZE_THUNDER_WAVE
+PARALYZE_TARGET_CONT:	
 	callasm_cmd 34 @similar to jumpifcannotsleep
 	accuracycheck MOVE_MISSED 0x0
 	jumpifhalverset 0x0 0x20 0x82DAD01
@@ -2174,6 +2175,9 @@ PARALYZE_TARGET:
 	seteffect1 MOVEEFFECT_PRLZ
 	seteffectprimary
 	goto_cmd ENDTURN
+PARALYZE_THUNDER_WAVE:
+	jumpiftypenotaffected MOVE_FAILED
+	goto_cmd PARALYZE_TARGET_CONT
 
 BADLY_POISON_TARGET:
 	seteffect1 MOVEEFFECT_TOXIC
