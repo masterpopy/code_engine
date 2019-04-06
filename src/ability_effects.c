@@ -824,20 +824,19 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             break;
         case 9: // switch-in abilities executor
             for (u8 k = 0; k < no_of_all_banks; k++) {
-                if (status3[k].switchinlock) {
-                    status3[k].switchinlock = 0;
-                    if (handle_primal_reversion(k)) {
+                if (status3[turn_order[k]].switchinlock) {
+                    status3[turn_order[k]].switchinlock = 0;
+                    if (handle_primal_reversion(turn_order[k])) {
                         effect = 1;
                         break;
                     }
-                    status3[k].innerswitchinlock = 1;
-                    effect = ability_battle_effects(24, k, 0, 0, 0);
+                    status3[turn_order[k]].innerswitchinlock = 1;
+                    effect = ability_battle_effects(24, turn_order[k], 0, 0, 0);
                     if (effect) {
                         break;
                     }
                 }
             }
-
             break;
         case 10:
             if (has_ability_effect(bank, 0) && MOVE_WORKED
