@@ -3633,18 +3633,17 @@ void atk23_exp_evs_lvlup(void)
 			}
 			struct battle_participant* oppponent = &battle_participants[bank];
 			u16 exp = (*basestat_table)[oppponent->species].exp_yield * oppponent->level / 7;
-			//exp*=10;
-			//if (EXP_DIVIDE == true && via_expshare)
-			//{
-			//exp /= 2;
-			//}
+			//exp *= 10;
+			if (EXP_DIVIDE == true && via_expshare)
+			{
+			    exp /= 2;
+			}
 			if (EXP_DIVIDE == true)
 				*sentin_exp = ATLEAST_ONE(exp / via_sentin);
 			else
 				*sentin_exp = ATLEAST_ONE(exp);
 #if (EXP_DIVIDE == true)
-			expshare_exp = ATLEAST_ONE(exp);
-			//expshare_exp = ATLEAST_ONE(exp / via_expshare);
+			expshare_exp = ATLEAST_ONE(exp / via_expshare);
 #else
 			expshare_exp = ATLEAST_ONE(exp);
 #endif
@@ -3686,8 +3685,8 @@ void atk23_exp_evs_lvlup(void)
 							exp_for_poke = *sentin_exp;
 						else
 							exp_for_poke += expshare_exp;
-						//if (EXP_DIVIDE == false && !(*sentin_pokes & 1))
-						// exp_for_poke /= 2;
+						if (EXP_DIVIDE == false && !(*sentin_pokes & 1))
+						 exp_for_poke /= 2;
 					}
 					if (held_item == ITEM_EFFECT_LUCKYEGG)
 						exp_for_poke = PERCENT_100(exp_for_poke, 200);
@@ -3702,32 +3701,32 @@ void atk23_exp_evs_lvlup(void)
 					battle_stuff_ptr->expgetter_bank = 0;
 					if (battle_flags.double_battle && is_bank_present(2) && battle_team_id_by_side[2] == *exp_getter_id)
 						battle_stuff_ptr->expgetter_bank = 2;
+					if(*exp_getter_id == 0){
+						//buffer poke name
+						battle_text_buff1[0] = 0xFD;
+						battle_text_buff1[1] = 4;
+						battle_text_buff1[2] = battle_stuff_ptr->expgetter_bank;
+						battle_text_buff1[3] = *exp_getter_id;
+						battle_text_buff1[4] = 0xFF;
 
-					//buffer poke name
-					battle_text_buff1[0] = 0xFD;
-					battle_text_buff1[1] = 4;
-					battle_text_buff1[2] = battle_stuff_ptr->expgetter_bank;
-					battle_text_buff1[3] = *exp_getter_id;
-					battle_text_buff1[4] = 0xFF;
+						//buffer 'gained' or 'gained a boosted'
+						battle_text_buff2[0] = 0xFD;
+						battle_text_buff2[1] = 0;
+						battle_text_buff2[2] = bs_id;
+						battle_text_buff2[3] = bs_id >> 8;
+						battle_text_buff2[4] = 0xFF;
 
-					//buffer 'gained' or 'gained a boosted'
-					battle_text_buff2[0] = 0xFD;
-					battle_text_buff2[1] = 0;
-					battle_text_buff2[2] = bs_id;
-					battle_text_buff2[3] = bs_id >> 8;
-					battle_text_buff2[4] = 0xFF;
+						//buffer exp number
+						battle_text_buff3[0] = 0xFD;
+						battle_text_buff3[1] = 1;
+						battle_text_buff3[2] = 2; //halfword
+						battle_text_buff3[3] = 5; //max digits
+						battle_text_buff3[4] = exp_for_poke;
+						battle_text_buff3[5] = exp_for_poke >> 8;
+						battle_text_buff3[6] = 0xFF;
 
-					//buffer exp number
-					battle_text_buff3[0] = 0xFD;
-					battle_text_buff3[1] = 1;
-					battle_text_buff3[2] = 2; //halfword
-					battle_text_buff3[3] = 5; //max digits
-					battle_text_buff3[4] = exp_for_poke;
-					battle_text_buff3[5] = exp_for_poke >> 8;
-					battle_text_buff3[6] = 0xFF;
-
-					prep_string(0xD, battle_stuff_ptr->expgetter_bank);
-
+						prep_string(0xD, battle_stuff_ptr->expgetter_bank);
+					}
 					(*tracker)++;
 				}
 				else
@@ -3810,11 +3809,15 @@ void atk23_exp_evs_lvlup(void)
 				*tracker = 3; //give exp again
 			else
 			{
-				(*exp_getter_id)++;
-				if (*exp_getter_id > 5)
+				if (*exp_getter_id == 5)
 					*tracker = 6; //finish exp giving
-				else
+				else {
+					if(*exp_getter_id == 0 && !GET_CUSTOMFLAG(DISABLED_EXP_FLAG)){
+						prep_string(0x26b, battle_stuff_ptr->expgetter_bank);
+					}
 					*tracker = 2; //looper increment
+				}
+				(*exp_getter_id)++;
 			}
 			break;
 		case 6: //exp giving finished
