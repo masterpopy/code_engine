@@ -75,3 +75,4 @@ get_active_poke_ability 0x804c990 0
 get_active_poke_ability2 0x803ad60 0
 check_z_seted 08057C1E 0
 sub_82E1810 82E1810 1
+check_attack_new 809B3DC 1
