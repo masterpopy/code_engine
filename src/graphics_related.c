@@ -54,29 +54,29 @@
 
 //only for II
 const struct b_background_info battle_bgs[] = {
-		{(void*) 0x8f708d0, (void*) 0x8a6a3d0, (void*) 0x8d7e280, (void*) 0x8f79f60, (void*) 0x8d78318},//grass
-		{(void*) 0x8f71ef0, (void*) 0x8a6a3d0, (void*) 0x8d7e9c4, (void*) 0x8f7a130, (void*) 0x8d78c78},//long grass
-		{(void*) 0x8f73130, (void*) 0x8a6a3d0, (void*) 0x8d7f30c, (void*) 0x8d7f850, (void*) 0x8d79560},//sand
-		{(void*) 0x8f73fc0, (void*) 0x8a6a950, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d79e10},//underwater
-		{(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d80054, (void*) 0x8f7a500, (void*) 0x8d7a6dc},//water
-		{(void*) 0x8f76230, (void*) 0x8a6b490, (void*) 0x8d80804, (void*) 0x8f7a6b0, (void*) 0x8d7af78},//pond
-		{(void*) 0x8f76f60, (void*) 0x8a6b490, (void*) 0x8d80e9c, (void*) 0x8d8147c, (void*) 0x8d7b828},//rock
-		{(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7c10c},//cave
-		{(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7deb4},//indoors1
-		{(void*) 0x8f7cbe0, (void*) 0x8a700c0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7c404},//indoors2
-		{(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7c9ec},//frontier
-		{(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7df30},//groudon
-		{(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d7def4},//kyogre
-		{(void*) 0x8d7d590, (void*) 0x8d7dc04, (void*) 0x8d82608, (void*) 0x8d82c70, (void*) 0x8d7e234},//rayquaza
-		{(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7dfc4},//leader
-		{(void*) 0x8f7c230, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1f8},//champion
-		{(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7df88},//gym
-		{(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e060},//team magma
-		{(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e000},//team aqua
-		{(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e0cc},//elitefour1
-		{(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e11c},//elitefour2
-		{(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e164},//elitefour3
-		{(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1a8}//elitefour4
+        {(void*) 0x8f708d0, (void*) 0x8a6a3d0, (void*) 0x8d7e280, (void*) 0x8f79f60, (void*) 0x8d78318},//grass
+        {(void*) 0x8f71ef0, (void*) 0x8a6a3d0, (void*) 0x8d7e9c4, (void*) 0x8f7a130, (void*) 0x8d78c78},//long grass
+        {(void*) 0x8f73130, (void*) 0x8a6a3d0, (void*) 0x8d7f30c, (void*) 0x8d7f850, (void*) 0x8d79560},//sand
+        {(void*) 0x8f73fc0, (void*) 0x8a6a950, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d79e10},//underwater
+        {(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d80054, (void*) 0x8f7a500, (void*) 0x8d7a6dc},//water
+        {(void*) 0x8f76230, (void*) 0x8a6b490, (void*) 0x8d80804, (void*) 0x8f7a6b0, (void*) 0x8d7af78},//pond
+        {(void*) 0x8f76f60, (void*) 0x8a6b490, (void*) 0x8d80e9c, (void*) 0x8d8147c, (void*) 0x8d7b828},//rock
+        {(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7c10c},//cave
+        {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7deb4},//indoors1
+        {(void*) 0x8f7cbe0, (void*) 0x8a700c0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7c404},//indoors2
+        {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7c9ec},//frontier
+        {(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7df30},//groudon
+        {(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d7def4},//kyogre
+        {(void*) 0x8d7d590, (void*) 0x8d7dc04, (void*) 0x8d82608, (void*) 0x8d82c70, (void*) 0x8d7e234},//rayquaza
+        {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7dfc4},//leader
+        {(void*) 0x8f7c230, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1f8},//champion
+        {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7df88},//gym
+        {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e060},//team magma
+        {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e000},//team aqua
+        {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e0cc},//elitefour1
+        {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e11c},//elitefour2
+        {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e164},//elitefour3
+        {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1a8}//elitefour4
 };
 
 const struct img_size trainerthrow_imgs[] = {
@@ -258,4 +258,33 @@ bool b_load_chosen_bg_element(u8 caseID)
 			break;
 	}
 	return to_ret;
+}
+//这三个的地址可能是错误地需要在BPEE0.ld里修改
+u8 __attribute__((long_call)) is_move_a_HM(u16);
+u32 __attribute__((long_call)) check_TM_compatibility(u32 species, u16 move);
+u32 __attribute__((long_call)) check_if_move_learnt(struct pokemon* species, u16 move);
+
+
+bool check_attack(struct pokemon* poke, u16 sp, u16 move){
+	if (is_move_a_HM(move)){
+		return check_TM_compatibility(sp, move);
+	}
+	return check_if_move_learnt(poke, move);
+}
+
+bool check_attack_new(void* script){
+	u16 move = read_hword(script);
+	u8 i;
+	for (i = 0; i <= 5; i = i + 1 )
+	{
+		u16 sp = get_attributes(party_player + i, ATTR_SPECIES, 0);
+		if (!sp)
+			break;
+		if (!get_attributes(party_player + i, ATTR_IS_EGG, 0) && check_attack(party_player + i, sp, move))
+		{
+            var_8004 = sp;
+		}
+	}
+    var_800D_lastresult = i;
+    return 0;
 }
