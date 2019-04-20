@@ -260,10 +260,10 @@ bool b_load_chosen_bg_element(u8 caseID)
 	return to_ret;
 }
 //这三个的地址可能是错误地需要在BPEE0.ld里修改
-u8 __attribute__((long_call)) is_move_a_HM(u16);
+u8 __attribute__((long_call)) is_move_a_HM(u16 move);
 u32 __attribute__((long_call)) check_TM_compatibility(u32 species, u16 move);
 u32 __attribute__((long_call)) check_if_move_learnt(struct pokemon* species, u16 move);
-
+u16 __attribute__((long_call))script_read_halfword(void* ptr);
 
 bool check_attack(struct pokemon* poke, u16 sp, u16 move){
 	if (is_move_a_HM(move)){
@@ -273,7 +273,7 @@ bool check_attack(struct pokemon* poke, u16 sp, u16 move){
 }
 
 bool check_attack_new(void* script){
-	u16 move = read_hword(script);
+	u16 move = script_read_halfword(script);
 	u8 i;
 	for (i = 0; i <= 5; i = i + 1 )
 	{
