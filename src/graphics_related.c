@@ -2,7 +2,7 @@
 
 
 const struct b_background_info battle_bgs[] =
-#if EM_VERSION == 0
+#if EM_VERSION == EM
 {
     {&bg_grass_tileset, &bg_grass_tilemap, &entry_bg_grass_tileset, &entry_bg_grass_tilemap, &bg_grass_pal}, //0 grass
     {&bg_longgrass_tileset, &bg_longgrass_tilemap, &entry_bg_longgrass_tileset, &entry_bg_longgrass_tilemap, &bg_longgrass_pal}, //1 long grass
@@ -58,58 +58,31 @@ const struct b_background_info battle_bgs[] =
 
 //only for II
 #else
-        {{(void*) 0x8f708d0, (void*) 0x8a6a3d0, (void*) 0x8d7e280, (void*) 0x8f79f60, (void*) 0x8d78318},//grass
-                {
-                        (void*) 0x8f71ef0, (void*) 0x8a6a3d0, (void*) 0x8d7e9c4, (void*) 0x8f7a130,
-                        (void*) 0x8d78c78},//long grass
-                {(void*) 0x8f73130, (void*) 0x8a6a3d0, (void*) 0x8d7f30c, (void*) 0x8d7f850, (void*) 0x8d79560},//sand
-                {
-                        (void*) 0x8f73fc0, (void*) 0x8a6a950, (void*) 0x8d7f9f8, (void*) 0x8f7a370,
-                        (void*) 0x8d79e10},//underwater
-                {(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d80054, (void*) 0x8f7a500, (void*) 0x8d7a6dc},//water
-                {(void*) 0x8f76230, (void*) 0x8a6b490, (void*) 0x8d80804, (void*) 0x8f7a6b0, (void*) 0x8d7af78},//pond
-                {(void*) 0x8f76f60, (void*) 0x8a6b490, (void*) 0x8d80e9c, (void*) 0x8d8147c, (void*) 0x8d7b828},//rock
-                {(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7c10c},//cave
-                {
-                        (void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7deb4},//indoors1
-                {
-                        (void*) 0x8f7cbe0, (void*) 0x8a700c0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7c404},//indoors2
-                {
-                        (void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7c9ec},//frontier
-                {
-                        (void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c,
-                        (void*) 0x8d7df30},//groudon
-                {(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d7def4},//kyogre
-                {
-                        (void*) 0x8d7d590, (void*) 0x8d7dc04, (void*) 0x8d82608, (void*) 0x8d82c70,
-                        (void*) 0x8d7e234},//rayquaza
-                {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7dfc4},//leader
-                {
-                        (void*) 0x8f7c230, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e1f8},//champion
-                {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7df88},//gym
-                {
-                        (void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e060},//team magma
-                {
-                        (void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e000},//team aqua
-                {
-                        (void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e0cc},//elitefour1
-                {
-                        (void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e11c},//elitefour2
-                {
-                        (void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e164},//elitefour3
-                {
-                        (void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4,
-                        (void*) 0x8d7e1a8}//elitefour4
-        };
+{
+    {(void*) 0x8f708d0, (void*) 0x8a6a3d0, (void*) 0x8d7e280, (void*) 0x8f79f60, (void*) 0x8d78318},//grass
+    {(void*) 0x8f71ef0, (void*) 0x8a6a3d0, (void*) 0x8d7e9c4, (void*) 0x8f7a130, (void*) 0x8d78c78},//long grass
+    {(void*) 0x8f73130, (void*) 0x8a6a3d0, (void*) 0x8d7f30c, (void*) 0x8d7f850, (void*) 0x8d79560},//sand
+    {(void*) 0x8f73fc0, (void*) 0x8a6a950, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d79e10},//underwater
+    {(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d80054, (void*) 0x8f7a500, (void*) 0x8d7a6dc},//water
+    {(void*) 0x8f76230, (void*) 0x8a6b490, (void*) 0x8d80804, (void*) 0x8f7a6b0, (void*) 0x8d7af78},//pond
+    {(void*) 0x8f76f60, (void*) 0x8a6b490, (void*) 0x8d80e9c, (void*) 0x8d8147c, (void*) 0x8d7b828},//rock
+    {(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7c10c},//cave
+    {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7deb4},//indoors1
+    {(void*) 0x8f7cbe0, (void*) 0x8a700c0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7c404},//indoors2
+    {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7c9ec},//frontier
+    {(void*) 0x8f78c30, (void*) 0x8a6bfb0, (void*) 0x8d81610, (void*) 0x8d81e2c, (void*) 0x8d7df30},//groudon
+    {(void*) 0x8f75170, (void*) 0x8a6aef0, (void*) 0x8d7f9f8, (void*) 0x8f7a370, (void*) 0x8d7def4},//kyogre
+    {(void*) 0x8d7d590, (void*) 0x8d7dc04, (void*) 0x8d82608, (void*) 0x8d82c70, (void*) 0x8d7e234},//rayquaza
+    {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7dfc4},//leader
+    {(void*) 0x8f7c230, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1f8},//champion
+    {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7df88},//gym
+    {(void*) 0x8f7a800, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e060},//team magma
+    {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e000},//team aqua
+    {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e0cc},//elitefour1
+    {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e11c},//elitefour2
+    {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e164},//elitefour3
+    {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1a8}//elitefour4
+};
 
 #endif
 const struct img_size trainerthrow_imgs[] = {{(void*) 0x8D66480, 0x2000}, // 0 brendan

@@ -60,6 +60,10 @@
 #define DBL_HB_0_Y 75
 #define DBL_HB_2_Y 100
 
-#define EM_VERSION 1
+enum Version{
+    EM=0,UTRAL=1
+};
+
+#define EM_VERSION UTRAL
 
 #endif /* CONFIG_H */
