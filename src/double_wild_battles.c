@@ -41,7 +41,7 @@ bool doubles_tile_check(void)
 bool wild_grass_battle(void* wild_data)
 {
     bool battle = consider_creating_wild_poke(wild_data, 0, 3);
-    if (/*GET_CUSTOMFLAG (DOUBLE_WILD_BATTLES_FLAG) && DOUBLE_WILD_BATTLES &&*/ battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
+    if (battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
         struct pokemon poke = party_opponent[0];
         while (!consider_creating_wild_poke(wild_data, 0, 3));

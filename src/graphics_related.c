@@ -57,7 +57,7 @@ const struct b_background_info battle_bgs[] =
 
 
 //only for II
-#else
+#elif EM_VERSION == UTRAL
 {
     {(void*) 0x8f708d0, (void*) 0x8a6a3d0, (void*) 0x8d7e280, (void*) 0x8f79f60, (void*) 0x8d78318},//grass
     {(void*) 0x8f71ef0, (void*) 0x8a6a3d0, (void*) 0x8d7e9c4, (void*) 0x8f7a130, (void*) 0x8d78c78},//long grass
