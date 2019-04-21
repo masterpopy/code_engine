@@ -1430,12 +1430,14 @@ void atk49_move_end_turn(void)
 
 bool healblock_forbidden_moves(u16 move, u8 with_leechseed)
 {
-	if (move == MOVE_ABSORB || move == MOVE_MEGA_DRAIN || move == MOVE_GIGA_DRAIN || move == MOVE_LEECH_LIFE ||
-			move == MOVE_DRAINING_KISS || move == MOVE_DRAIN_PUNCH || move == MOVE_DREAM_EATER ||
-			move == MOVE_HORN_LEECH || move == MOVE_OBLIVION_WING || move == MOVE_PARABOLIC_CHARGE ||
-			move == MOVE_MILK_DRINK || move == MOVE_HEAL_PULSE || move == MOVE_REST || move == MOVE_RECOVER ||
-			move == MOVE_MOONLIGHT || move == MOVE_MORNING_SUN || move == MOVE_SLACK_OFF || move == MOVE_SYNTHESIS ||
-			move == MOVE_ROOST || move == MOVE_SOFTBOILED)
+    static const u16 healthblock_forbidden_moves[] = {MOVE_ABSORB,MOVE_MEGA_DRAIN,MOVE_GIGA_DRAIN,MOVE_LEECH_LIFE
+			,MOVE_DRAINING_KISS,MOVE_DRAIN_PUNCH,MOVE_DREAM_EATER
+			,MOVE_HORN_LEECH,MOVE_OBLIVION_WING,MOVE_PARABOLIC_CHARGE
+			,MOVE_MILK_DRINK,MOVE_HEAL_PULSE,MOVE_REST,MOVE_RECOVER
+			,MOVE_MOONLIGHT,MOVE_MORNING_SUN,MOVE_SLACK_OFF,MOVE_SYNTHESIS
+			,MOVE_ROOST,MOVE_SOFTBOILED,0xFFFF};
+
+	if (find_move_in_table(move, healthblock_forbidden_moves))
 		return 1;
 	else if (move == MOVE_LEECH_SEED && with_leechseed)
 		return 1;

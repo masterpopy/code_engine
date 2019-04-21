@@ -21,7 +21,7 @@ struct double_grass_tile double_grass_tiles[DOUBLE_WILD_TILES] = {
     {0xD, 70}
 };*/
 
-#define DOUBLE_BATTLE_PERCENT 0
+#define DOUBLE_BATTLE_PERCENT 100
 
 bool doubles_tile_check(void)
 {
@@ -43,9 +43,9 @@ bool wild_grass_battle(void* wild_data)
     bool battle = consider_creating_wild_poke(wild_data, 0, 3);
     if (/*GET_CUSTOMFLAG (DOUBLE_WILD_BATTLES_FLAG) && DOUBLE_WILD_BATTLES &&*/ battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
-		party_opponent[1] = party_opponent[0];
+        struct pokemon poke = party_opponent[0];
         while (!consider_creating_wild_poke(wild_data, 0, 3));
-        //party_opponent[1] = poke;
+        party_opponent[1] = poke;
         battle_flags.double_battle = 1;
     }
     return battle;
@@ -227,7 +227,7 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
     case BALL_BEAST:
         if (is_poke_ultrabeast(catching->species))
             multiplier = 50;
-		else 
+		else
 			multiplier = 1;
         break;
     #endif // EXPANDED_POKEBALLS
@@ -275,13 +275,13 @@ void atkEF_ballthrow(void)
     else
     {
         enum ball_index ball_no = itemID_to_ballID(last_used_item);
-		
+
 		 //calculate ball shakes
         u32 formula = calc_ball_formula(ball_no, &battle_participants[catch_bank]);
         ball_shakes = 0;
         while (rng() < formula && ball_shakes <= 3)
                 ball_shakes++;
-		
+
         if (ball_no == BALL_MASTER )
 		{
 			battle_trace.flags |= 2;
@@ -292,7 +292,7 @@ void atkEF_ballthrow(void)
             if (*attempt < 254)
                 (*attempt)++;
         }
-       
+
         u8* string_chooser = &battle_communication_struct.multistring_chooser;
         if (ball_no == BALL_MASTER || ball_shakes == 4) //catching successful
         {

@@ -1,5 +1,6 @@
 check_if_move_learnt = 0x081B6D44|1;
 check_TM_compatibility = 0x0806E064|1;
+get_TM_move = 0x081B6CFC|1;
 is_move_a_HM = 0x081B6D14|1;
 script_read_halfword = 0x08098E0C|1;
 get_bank_identity0 = 0x080A6A44|1;

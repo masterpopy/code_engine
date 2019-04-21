@@ -241,7 +241,7 @@ enum trainer_class{
 #define BATTLE_FRONTIER_BATTLE (battle_flags.frontier_general || battle_flags.battle_dome || battle_flags.battle_palace || battle_flags.battle_arena || battle_flags.battle_factory || battle_flags.flag_x100000 || battle_flags.battle_pyramid)
 #define ATLEAST_ONE(value)(value != 0 ? value : 1)
 #define PERCENT_100(value, percent)((value * percent) / 100)
-#define GETS_VIA_EXPSHARE(held_item)((GENVI_EXPSHARE == false && held_item == ITEM_EFFECT_EXPSHARE) || (GENVI_EXPSHARE == true && checkitem(ITEM_EXPSHARE, 1) && getflag(EXPSHARE_FLAG)))
+#define GETS_VIA_EXPSHARE(held_item)((GENVI_EXPSHARE == false && held_item == ITEM_EFFECT_EXPSHARE) || (GENVI_EXPSHARE == true && checkitem(ITEM_EXPSHARE, 1) /*&& getflag(EXPSHARE_FLAG)*/))
 #define COIN_FLIP(option1, option2)((rng() & 1) ? option1 : option2)
 #define GET_CUSTOMFLAG(flagID)((flagID == 0 ? 0 : (getflag(flagID))))
 #define get_1_16_of_max_hp(bank)(ATLEAST_ONE(battle_participants[bank].max_hp >> 4))
