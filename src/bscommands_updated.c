@@ -3668,15 +3668,13 @@ void atk23_exp_evs_lvlup(void)
 			{
 			    exp /= (2 + battle_flags.double_battle);
 			}
-			if (EXP_DIVIDE == true)
-				*sentin_exp = ATLEAST_ONE(exp / via_sentin);
-			else
-				*sentin_exp = ATLEAST_ONE(exp);
 #if (EXP_DIVIDE == true)
-			expshare_exp = ATLEAST_ONE(exp / via_expshare);
+				*sentin_exp = ATLEAST_ONE(exp / via_sentin);
+				expshare_exp = ATLEAST_ONE(exp / via_expshare);
 #else
-			expshare_exp = ATLEAST_ONE(exp);
+				expshare_exp =*sentin_exp = ATLEAST_ONE(exp);
 #endif
+
 			*exp_getter_id = 0;
 			battle_stuff_ptr->sentin_pokes = sent_in;
 			(*tracker)++;
