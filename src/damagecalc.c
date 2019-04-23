@@ -1254,11 +1254,6 @@ u16 get_attack_stat(u16 move, u8 move_type, u8 atk_bank, u8 def_bank) {
                     modifier = chain_modifier(modifier, 0x1800);
                 }
                 break;
-            /*case ABILITY_THICK_FAT:
-                if (move_type == TYPE_FIRE || move_type == TYPE_ICE) {
-                    modifier = chain_modifier(modifier, 0x800);
-                }
-                break;*/
             case ABILITY_PLUS:
             case ABILITY_MINUS:
                 if (move_split == MOVE_SPECIAL && (ability_battle_effects(20, atk_bank, ABILITY_PLUS, 0, 0) ||

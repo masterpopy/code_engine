@@ -480,7 +480,7 @@ u8 ability_battle_effects(u8 switch_id, u8 bank, u8 ability_to_check, u8 special
             }
             break;
         case 3: //abilities that affect type except telepathy
-            if (curr_move && has_ability_effect(bank, 1)) {
+            if (curr_move && bank != bank_attacker && has_ability_effect(bank, 1)) {
                 if (protect_structs[bank_attacker].flag2_notfirststrike)
                     adder = 1;
                 u8 stat = 0;
