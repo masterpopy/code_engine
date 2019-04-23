@@ -3628,6 +3628,7 @@ void atk23_exp_evs_lvlup(void)
 	} // wait for the things to get done
 	u8* tracker = &battle_scripting.cmd23_state_tracker;
 	u16* sentin_exp = &battle_stuff_ptr->exp;
+	expshare_exp = 0;
 	u8 bank = get_battle_bank(read_byte(battlescripts_curr_instruction + 1));
 	bank_partner_atk = bank;
 	u8* exp_getter_id = &battle_stuff_ptr->expgetter_id;
@@ -3663,10 +3664,9 @@ void atk23_exp_evs_lvlup(void)
 			}
 			struct battle_participant* oppponent = &battle_participants[bank];
 			u16 exp = (*basestat_table)[oppponent->species].exp_yield * oppponent->level / 7;
-			//exp *= 10;
 			if (EXP_DIVIDE == true && via_expshare)
 			{
-			    exp /= 2;
+			    exp /= (2 + battle_flags.double_battle);
 			}
 			if (EXP_DIVIDE == true)
 				*sentin_exp = ATLEAST_ONE(exp / via_sentin);
@@ -3731,7 +3731,7 @@ void atk23_exp_evs_lvlup(void)
 					battle_stuff_ptr->expgetter_bank = 0;
 					if (battle_flags.double_battle && is_bank_present(2) && battle_team_id_by_side[2] == *exp_getter_id)
 						battle_stuff_ptr->expgetter_bank = 2;
-					if(*exp_getter_id == 0){
+					if(*exp_getter_id == 0 || !expshare_exp){
 						//buffer poke name
 						battle_text_buff1[0] = 0xFD;
 						battle_text_buff1[1] = 4;
@@ -3842,7 +3842,7 @@ void atk23_exp_evs_lvlup(void)
 				if (*exp_getter_id == 5)
 					*tracker = 6; //finish exp giving
 				else {
-					if(*exp_getter_id == 0 && !GET_CUSTOMFLAG(DISABLED_EXP_FLAG)){
+					if(*exp_getter_id == 0 && !GET_CUSTOMFLAG(DISABLED_EXP_FLAG) && expshare_exp){
 						prep_string(0x26b, battle_stuff_ptr->expgetter_bank);
 					}
 					*tracker = 2; //looper increment
