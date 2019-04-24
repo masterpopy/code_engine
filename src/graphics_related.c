@@ -274,7 +274,7 @@ u16 __attribute__((long_call)) script_read_halfword(void* ptr);
 u8 tm_index(u16 move)
 {
     static const u8 tms[] = {0xF, 0x13, 0x39, 0x46, 0x94, 0xF9, 0x7F};
-    const size = sizeof(tms);
+    const u8 size = sizeof(tms);
     if (move == 0x123)
         return size;
     for (u8 i = 0; i < size; i++)
