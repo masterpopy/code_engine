@@ -271,26 +271,26 @@ u32 __attribute__((long_call)) check_TM_compatibility(u32 species, u16 move);
 u32 __attribute__((long_call)) check_if_move_learnt(struct pokemon* species, u16 move);
 u16 __attribute__((long_call)) script_read_halfword(void* ptr);
 
-bool find_tm(u16 move)
+u8 tm_index(u16 move)
 {
-    static const u16 tms[] = {0xF, 0x13, 0x39, 0x46, 0x94, 0xF9, 0x7F};
+    static const u8 tms[] = {0xF, 0x13, 0x39, 0x46, 0x94, 0xF9, 0x7F};
+    const size = sizeof(tms);
     if (move == 0x123)
-        return true;
-    for (u8 i = 0; i < sizeof(tms); i++)
+        return size;
+    for (u8 i = 0; i < size; i++)
     {
         if (tms[i] == move)
-            return true;
+            return i;
     }
-    return false;
+    return 0xff;
 }
 
 
-bool check_attack(struct pokemon* poke, u16 sp, u16 move)
+bool check_attack(struct pokemon* poke, u16 sp, u16 move, u8 tm)
 {
-    u16 m = find_tm(move);
-    if (m)
+    if (tm != 0xFF)
     {
-        return check_TM_compatibility(sp, m + 99);
+        return check_TM_compatibility(sp, tm + 99);
     }
     return check_if_move_learnt(poke, move);
 }
@@ -298,6 +298,7 @@ bool check_attack(struct pokemon* poke, u16 sp, u16 move)
 bool check_attack_new(void* script)
 {
     u16 move = script_read_halfword(script);
+    u8 tm = tm_index(move);
     u8 i;
     for (i = 0; i < 6; i++)
     {
@@ -305,7 +306,7 @@ bool check_attack_new(void* script)
         u16 sp = get_attributes(poke, ATTR_SPECIES, 0);
         if (!sp)
             break;
-        if (!get_attributes(poke, ATTR_IS_EGG, 0) && check_attack(poke, sp, move))
+        if (!get_attributes(poke, ATTR_IS_EGG, 0) && check_attack(poke, sp, move, tm))
         {
             var_8004 = sp;
             break;
