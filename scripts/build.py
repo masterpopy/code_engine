@@ -16,8 +16,8 @@ for candidatePath in Paths:
         break
 if PATH == "":
     print('DevKit does not exist in your Path variable.\nChecking default location.')
-    #PATH = 'E:\\GAME\\GBA\\devkitARM\\bin'
-    PATH = 'D:\\ZXZ\\ZXZ\\entr\\Pokemon\\RSEFL\\Hack\\devkitARM\\bin'
+    PATH = 'E:\\GAME\\GBA\\devkitARM\\bin'
+    #PATH = 'D:\\ZXZ\\ZXZ\\entr\\Pokemon\\RSEFL\\Hack\\devkitARM\\bin'
     if not os.path.isdir(PATH):
         print("...\nDevkit not found.")
         sys.exit(1)
@@ -33,7 +33,7 @@ SRC = './src'
 BUILD = './build'
 ASFLAGS = ['-mthumb', '-I', SRC]
 LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
-CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',
+CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',"-fno-inline",
           '-mno-long-calls', '-march=armv4t', '-Wall','-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
 
 
