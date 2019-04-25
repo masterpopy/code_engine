@@ -403,9 +403,7 @@ bool check_focus(u8 bank) {
 }
 
 //Is Z Move
-inline bool is_z_move(u16 move) {
-    return move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_ASH_GRENINJA;
-}
+#define is_z_move(move) (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_ASH_GRENINJA)
 
 u16 check_z_move(u32 move, u32 bank) {
     const struct move_info* info = &move_table[move];

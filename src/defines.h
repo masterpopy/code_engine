@@ -20,39 +20,41 @@
 #define PR_baneful_bunker 0x9
 
 #define CURRENT_Z_MOVE *((u16*)0x2037610)
-enum move_split{
+enum move_split
+{
     MOVE_PHYSICAL, //0
     MOVE_SPECIAL, //1
     MOVE_STATUS, //2
 };
 
-enum poke_sprite{
-    SPRITE_BACK = 0,
-    SPRITE_FRONT = 1
+enum poke_sprite
+{
+    SPRITE_BACK = 0, SPRITE_FRONT = 1
 };
 
-enum poke_gender{
-    POKE_MALE = 0,
-    POKE_FEMALE = 0xFE,
-    POKE_GENDERLESS = 0xFF
+enum poke_gender
+{
+    POKE_MALE = 0, POKE_FEMALE = 0xFE, POKE_GENDERLESS = 0xFF
 };
 
-enum menu_action{
-    ACTION_MOVE=0, //0x0
+enum menu_action
+{
+    ACTION_MOVE = 0, //0x0
     ACTION_ITEM, //0x1
     ACTION_SWITCH, //0x2
     ACTION_RUN, //0x3
 };
 
-enum item_pocket{
-    POCKET_ITEMS = 1,
-    POCKET_BALLS, //0x2
+enum item_pocket
+{
+    POCKET_ITEMS = 1, POCKET_BALLS, //0x2
     POCKET_TMS, //0x3
     POCKET_BERRIES, //0x4
     POCKET_KEYITEMS, //0x5
 };
 
-enum ball_index{
+enum ball_index
+{
     BALL_POKE, //0x0
     BALL_GREAT, //0x1
     BALL_SAFARI, //0x2
@@ -66,7 +68,7 @@ enum ball_index{
     BALL_LUXURY, //0xA
     BALL_PREMIER, //0xB
     //new balls
-    #if EXPANDED_POKEBALLS == true
+#if EXPANDED_POKEBALLS == true
     BALL_LEVEL, //0xC
     BALL_LURE, //0xD
     BALL_MOON, //0xE
@@ -82,17 +84,16 @@ enum ball_index{
     BALL_PARK, //0x18
     BALL_DREAM, //0x19
     BALL_BEAST, //0x1A
-    #endif // EXPANDED_POKEBALLS
+#endif // EXPANDED_POKEBALLS
 };
 
-enum map_type{
-    MAP_TOWN = 1,
-    MAP_CITY, //0x2
+enum map_type
+{
+    MAP_TOWN = 1, MAP_CITY, //0x2
     MAP_ROUTE, //0x3
     MAP_CAVE, //0x4
     MAP_UNDERWATER, //0x5
-    MAP_INSIDE = 8,
-    MAP_SECRETBASE, //0x9
+    MAP_INSIDE = 8, MAP_SECRETBASE, //0x9
 };
 
 #include "./defines/poke_types.h"
@@ -164,7 +165,8 @@ enum map_type{
 #define BACKGROUND_ELITEFOUR3 21
 #define BACKGROUND_ELITEFOUR4 22
 
-enum trainer_class{
+enum trainer_class
+{
     CLASS_PKMN_TRAINER0, //0
     CLASS_PKMN_TRAINER1, //1
     CLASS_HIKER, //2
@@ -348,59 +350,34 @@ enum trainer_class{
 //Mega icons related
 enum mega_trigger_properties
 {
-    BANK_TO_ATTACH_TRIGGER,
-    ANIM_STATE,
-    PALLET_STATE,
-    RELATIVE_X,
-    BASE_X
+    BANK_TO_ATTACH_TRIGGER, ANIM_STATE, PALLET_STATE, RELATIVE_X, BASE_X
 };
 
 enum mega_trigger_animation_states
 {
-    HIDE,
-    POS_BEHIND_HPBAR,
-    SLIDE_OUT,
-    SLIDE_IN,
-    DISABLE,
-    SLIDED_OUT,
-    HIDDEN,
-    DISABLED
+    HIDE, POS_BEHIND_HPBAR, SLIDE_OUT, SLIDE_IN, DISABLE, SLIDED_OUT, HIDDEN, DISABLED
 };
 
 enum mega_trigger_pallet_states
 {
-    REGULAR,
-    LIGHT_UP_TRIGGER,
-    TRIGGER_ON,
-    REVERT_COLORS
+    REGULAR, LIGHT_UP_TRIGGER, TRIGGER_ON, REVERT_COLORS
 };
 
 
 enum mega_indicator_properties
 {
-    DISABLED_INDICATOR=1,
-    PRIMAL_CHECK_COMPLETE
+    DISABLED_INDICATOR = 1, PRIMAL_CHECK_COMPLETE
 };
 
 enum call_mode
 {
-    BATTLE_TURN,
-    MOVE_TURN
+    BATTLE_TURN, MOVE_TURN
 };
 
 bool can_change_stat(u8 bank, bool self_inflicted, u8 statchanger);
 const struct evolution_sub* GET_EVO_TABLE(u16 species);
 
-inline u8 stat_get_bits_arg(bool self_inflicted, bool print_ability, bool change_stats){
-    u8 bits = 0;
-    if (self_inflicted)
-        bits |= STAT_SELFINFLICTED;
-    if (print_ability)
-        bits |= STAT_PRINTABILITY;
-    if (change_stats)
-        bits |= STAT_CHANGE_VALUES;
-    return bits;
-}
+#define stat_get_bits_arg(self_inflicted, print_ability, change_stats) (0 | (self_inflicted ? STAT_SELFINFLICTED:0)|(print_ability ? STAT_PRINTABILITY:0)|(change_stats ? STAT_CHANGE_VALUES:0))
 u8 change_stats(u8 bank, u8 bits, void* bs_unable);
 
 #endif /* DEFINES_H */

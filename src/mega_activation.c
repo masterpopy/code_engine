@@ -57,10 +57,7 @@ u32 get_battle_item_extra_param(u32 bank)
 	return get_item_extra_param(battle_participants[bank].held_item);
 }
 
-inline bool choosen_z_move(u8 bank)
-{
-    return check_z_move(battle_participants[bank].moves[move_selection_cursor_pbs[bank]], bank);
-}
+#define choosen_z_move(bank)(check_z_move(battle_participants[bank].moves[move_selection_cursor_pbs[bank]], bank))
 
 
 bool can_set_z_trigger(u8 bank)
