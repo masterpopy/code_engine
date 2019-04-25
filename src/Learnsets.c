@@ -49,11 +49,11 @@ bool has_next_and_store_current(struct learnset_iterator* itr)
 typedef bool (* learnset_callback)(struct learnset_iterator* poke_data);
 
 //返回被callback终止的索引,如果遍历完成则返回0xFF
-u32 begin_itr(struct learnset_iterator* itr, void* callback)
+u32 begin_itr(struct learnset_iterator* itr, learnset_callback callback)
 {
     while (has_next_and_store_current(itr))
     {
-        if (!((learnset_callback) callback)(itr))
+        if (!callback(itr))
         {
             return itr->index;
         }
@@ -95,9 +95,9 @@ u16 teach_move_evolving(struct pokemon* poke)
         }
         slot_in_learnset_table = begin_itr(&itr, cb);
     }
-    if (itr.level != LEVEL_EVO)
+    if (itr.poke_moveset[slot_in_learnset_table].level != LEVEL_EVO)
         return 0;
-    move_to_learn = itr.move;
+    move_to_learn = itr.poke_moveset[slot_in_learnset_table].move;
     slot_in_learnset_table++;
     return teach_move_in_available_slot(poke, move_to_learn);
 }
@@ -105,7 +105,7 @@ u16 teach_move_evolving(struct pokemon* poke)
 u16 teach_move_player(struct pokemon* poke, u8 slot)
 {
     struct learnset_iterator itr = learnset_itr(poke);
-    if (slot != 0)
+    if (slot != 0)//slot=0 意味着这个精灵尚未习得技能，需要从头学
     {
         bool cb(struct learnset_iterator* poke_data)
         {
@@ -113,9 +113,9 @@ u16 teach_move_player(struct pokemon* poke, u8 slot)
         }
         slot_in_learnset_table = begin_itr(&itr, cb);
     }
-    if (itr.level != itr.poke_lvl)
+    if (itr.poke_moveset[slot_in_learnset_table].level != itr.poke_lvl)
         return teach_move_evolving(poke);
-    move_to_learn = itr.move;
+    move_to_learn = itr.poke_moveset[slot_in_learnset_table].move;
     slot_in_learnset_table++;
     return teach_move_in_available_slot(poke, move_to_learn);
 }
