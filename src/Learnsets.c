@@ -5,8 +5,6 @@
 
 #define get_learnset_table(poke) (learnset_table[poke->spieces])
 
-#define ITR_END 0xff
-
 struct learnset_iterator
 {
     //基本常用缓存信息
@@ -36,7 +34,7 @@ bool has_next_and_store_current(struct learnset_iterator* itr)
     const struct learnset* poke_moveset = &itr->poke_moveset[itr->index];
     u8 lvl = poke_moveset->level;
     u16 move = poke_moveset->move;
-    if (move != MOVE_BLANK && lvl != 0xFF)
+    if (move != MOVE_BLANK && lvl != END)
     {
         itr->level = lvl;
         itr->move = move;
@@ -59,7 +57,7 @@ u32 begin_itr(struct learnset_iterator* itr, learnset_callback callback)
         }
         itr->index++;
     }
-    return ITR_END;
+    return END;
 }
 
 
@@ -146,11 +144,11 @@ u8 relearnable_moves(struct pokemon* poke, u16 moves_table[])
             if (!find_move_in_table2(known_move, poke->moves, 4) &&
                     !find_move_in_table2(known_move, moves_table, number_of_moves))
             {
-                if (!moves_table)
+                number_of_moves++;
+                if (moves_table)
                 {
-                    return 1;
+                    moves_table[number_of_moves] = known_move;
                 }
-                moves_table[number_of_moves++] = known_move;
             }
         }
         else
@@ -174,11 +172,11 @@ u8 learnsanydamagingmove(u16 poke)
 {
     struct learnset_iterator itr;
     itr.poke_moveset = learnset_table[poke];
-    bool cb(const struct learnset_iterator* poke_moveset)
+    bool cb(struct learnset_iterator* poke_moveset)
     {
         return !move_table[poke_moveset->move].base_power;
     }
-    return begin_itr(&itr, cb) != ITR_END;
+    return begin_itr(&itr, cb) != END;
 }
 
 #endif
