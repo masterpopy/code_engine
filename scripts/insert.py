@@ -18,8 +18,8 @@ for candidatePath in Paths:
 		PATH = candidatePath
 		break
 if PATH == "":
-	#PATH = 'E:\\GAME\\GBA\\devkitARM\\bin'
-	PATH = 'D:\\ZXZ\\ZXZ\\entr\\Pokemon\\RSEFL\\Hack\\devkitARM\\bin'
+	PATH = 'E:\\GAME\\GBA\\devkitARM\\bin'
+	#PATH = 'D:\\ZXZ\\ZXZ\\entr\\Pokemon\\RSEFL\\Hack\\devkitARM\\bin'
 	if not os.path.isdir(PATH):
 		print('Devkit not found.')
 		sys.exit(1)

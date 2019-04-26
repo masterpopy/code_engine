@@ -1,8 +1,6 @@
 #ifndef NEW_STRUCT
 #define NEW_STRUCT
 
-#include "types.h"
-
 //JeremyZ
 #define NIGHT_FIRST_HOUR    18
 #define NIGHT_LAST_HOUR     5

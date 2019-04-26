@@ -13,9 +13,9 @@ typedef signed short s16;
 typedef signed long s32;
 
 #define NULL 0
-#ifndef bool
+
 typedef s32 bool;
-#endif
+
 typedef void (*command)(void);
 
 #endif /* ENGINE_TYPES_H */

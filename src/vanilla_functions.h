@@ -1,8 +1,6 @@
 #ifndef VANILLA_FUNCTIONS
 #define VANILLA_FUNCTIONS
 
-#include "types.h"
-
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -213,7 +211,7 @@ void __attribute__((long_call)) sp29_party_from_save(void);
 void __attribute__((long_call)) obj_delete_and_free_tiles(struct object *parent_object);
 void __attribute__((long_call)) gpu_pal_obj_alloc_tag_and_apply(const struct SpritePalette*);
 void __attribute__((long_call)) gpu_tile_obj_decompress_alloc_tag_and_upload(const struct SpriteTiles*);
-u8 __attribute__((long_call)) template_instanciate_forward_search(struct template *template, u16 x, u8 y, u8 derp);
+u8 __attribute__((long_call)) template_instanciate_forward_search(void* ptr, u16 x, u8 y, u8 derp);
 void __attribute__((long_call)) task_statchange_preparestruct(u8 taskID);
 void __attribute__((long_call)) change_order_in_battle(u8 bank);
 void __attribute__((long_call)) sub_81B8E80(u8 bank, u8 pokeID, u8 sth);
