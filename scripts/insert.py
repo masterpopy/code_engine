@@ -51,9 +51,6 @@ def get_text_section():
 def symbols(subtract=0):
 		out = subprocess.check_output([NM, 'build/linked.o'])
 		lines = out.decode().split('\n')
-		
-		name = ''
-		
 		ret = {}
 		for line in lines:
 				parts = line.strip().split()
@@ -61,7 +58,7 @@ def symbols(subtract=0):
 				if (len(parts) < 3):
 						continue
 						
-				if (parts[1].lower() not in {'t','d'}):
+				if parts[1].lower() not in {'t', 'd', 'w'}:
 						continue
 						
 				offset = int(parts[0], 16)

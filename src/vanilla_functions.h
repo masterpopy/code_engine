@@ -3,17 +3,9 @@
 
 #include "types.h"
 
-/*
-void __attribute__((long_call))  sub_80081A8(void*, u16);
-void __attribute__((long_call))  sub_80A68D4(void*); 
-u8 __attribute__((long_call))  sub_80A6900(void*); 
-void __attribute__((long_call))  sub_8100524(void*, u8); 
-u16 __attribute__((long_call))  sub_8100504(void*);
-u16 __attribute__((long_call)) sub_80a82e4(u8);
-u16 __attribute__((long_call)) sub_80a5c6c(u8, u8);
-s16 __attribute__((long_call)) sub_80a861c(u8, u8);
-u16 __attribute__((long_call)) sub_80a6a30(u8);
-*/
+#ifdef __cplusplus
+extern "C"{
+#endif
 void __attribute__((long_call)) pokemon_slot_purge(const struct pokemon* poke);
 void* __attribute__((long_call)) int_to_str(void* buffer, s32 num, u8 format, u8 max_digits);
 void* __attribute__((long_call)) u_int_to_str(void* buffer, u32 num, u8 format, u8 max_digits);
@@ -261,5 +253,9 @@ u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
 void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
 void set_callback2(void* ptr);
 u32 __umodsi3(u32, u32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* VANILLA_FUNCTIONS */

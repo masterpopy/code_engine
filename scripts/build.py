@@ -27,6 +27,7 @@ if PATH == "":
 PREFIX = '/arm-none-eabi-'
 AS = (PATH + PREFIX + 'as')
 CC = (PATH + PREFIX + 'gcc')
+CPP = (PATH + PREFIX + 'g++')
 LD = (PATH + PREFIX + 'ld')
 OBJCOPY = (PATH + PREFIX + 'objcopy')
 SRC = './src'
@@ -36,6 +37,7 @@ LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
 CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',"-fno-inline",
           '-mno-long-calls', '-march=armv4t', '-Wall','-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
 
+CPPFLAGS = CFLAGS + ['-fno-exceptions','-fno-unwind-tables','-fno-asynchronous-unwind-tables']
 
 def run_command(cmd):
     try:
@@ -69,6 +71,12 @@ def process_c(in_file):
     run_command(cmd)
     return out_file
 
+def process_cpp(in_file):
+    out_file = make_output_file(in_file)
+    print('Compiling cpp:%s' % in_file)
+    cmd = [CPP] + CFLAGS + ['-c', in_file, '-o', out_file]
+    run_command(cmd)
+    return out_file
 
 def link(objects):
     """Link objects into one binary"""
@@ -94,7 +102,7 @@ def run_glob(globstr, fn):
 
 
 def main():
-    globs = [('**/*.s', process_assembly), ('**/*.c', process_c)]
+    globs = [('**/*.s', process_assembly), ('**/*.c', process_c),('**/*.cpp',process_cpp)]
     # Create output directory
     try:
         os.makedirs(BUILD)
