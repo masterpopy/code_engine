@@ -9,6 +9,7 @@ void healthbar_indicator_callback(struct object* self);
 u8 is_in_triggering_state(u8 bank);
 u8 is_multi_battle();
 
+//返回activebank的设置mega类型
 extern bool is_z_seted();
 void revert_triggers(u8 bank);
 
@@ -219,7 +220,8 @@ void position_trigger()
 {
     u8 set_mode = can_set_mega_trigger(active_bank);
     if (!set_mode){
-        if (new_battlestruct->mega_related.user_trigger == 0) hide_trigger_on_pressing_A();
+        if (is_z_seted() == 0)
+            hide_trigger_on_pressing_A();
         return;
     }
 

@@ -23,6 +23,7 @@ static struct learnset_iterator learnset_itr(struct pokemon* poke)
     struct learnset_iterator itr;
     itr.poke_moveset = learnset_table[poke->spieces];
     itr.poke_lvl = poke->level;
+
     itr.poke = poke;
     itr.index = 0;
     return itr;
@@ -64,7 +65,7 @@ static u32 begin_itr(struct learnset_iterator* itr, learnset_callback callback)
 void fill_with_default_moves(struct pokemon* poke)
 {
     struct learnset_iterator itr = learnset_itr(poke);
-
+    itr.poke_lvl = get_lvl_from_exp(poke);
     bool cb(struct learnset_iterator* poke_data)
     {
         if (poke_data->learnset_lvl <= poke_data->poke_lvl)

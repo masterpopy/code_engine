@@ -312,7 +312,7 @@ u8 check_mega_evo(u8 bank) {
             bank_mega_mode = new_battlestruct->mega_related.user_trigger;
             if (bank_mega_mode == 3) //bank_mega_mode > 1
             {
-                if (!/*battle_flags.multibattle*/is_in_tag_battle()) {
+                if (!battle_flags.multibattle) {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x5;
                 } else {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x1;
@@ -323,7 +323,7 @@ u8 check_mega_evo(u8 bank) {
             bank_mega_mode = new_battlestruct->mega_related.ally_trigger;
             if (bank_mega_mode == 3) //bank_mega_mode > 1
             {
-                if (!/*battle_flags.multibattle*/is_in_tag_battle()) {
+                if (!battle_flags.multibattle) {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x5;
                 } else {
                     new_battlestruct->mega_related.evo_happened_pbs |= 0x4;

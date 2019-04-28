@@ -2016,7 +2016,7 @@ void atk00_move_canceller(void)
 					objects[new_battlestruct->mega_related.trigger_id].private[ANIM_STATE]=DISABLE;
 				}
 			*/
-			if (!/*battle_flags.multibattle*/is_in_tag_battle())
+			if (!battle_flags.multibattle)
 			{
 				new_battlestruct->mega_related.z_happened_pbs |= 0x5;
 			}
@@ -2028,7 +2028,7 @@ void atk00_move_canceller(void)
 		}
 		else if (bank_attacker == 2)
 		{
-			if (!/*battle_flags.multibattle*/is_in_tag_battle())
+			if (!battle_flags.multibattle)
 			{
 				new_battlestruct->mega_related.z_happened_pbs |= 0x5;
 			}
@@ -3628,7 +3628,6 @@ void atk23_exp_evs_lvlup(void)
 	} // wait for the things to get done
 	u8* tracker = &battle_scripting.cmd23_state_tracker;
 	u16* sentin_exp = &battle_stuff_ptr->exp;
-	expshare_exp = 0;
 	u8 bank = get_battle_bank(read_byte(battlescripts_curr_instruction + 1));
 	bank_partner_atk = bank;
 	u8* exp_getter_id = &battle_stuff_ptr->expgetter_id;
@@ -3649,6 +3648,7 @@ void atk23_exp_evs_lvlup(void)
 			u8 via_expshare = 0;
 			u8 via_sentin = 0;
 			u8 sent_in = sent_pokes_to_opponent[bank >> 1];
+			expshare_exp = 0;
 			for (u8 i = 0; i < 6; i++)
 			{
 				struct pokemon* poke = &party_player[i];

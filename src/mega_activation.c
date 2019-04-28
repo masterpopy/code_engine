@@ -66,12 +66,12 @@ bool can_set_z_trigger(u8 bank)
 		return false;
 	struct mega_related* mega = &new_battlestruct->mega_related;
 	if (bank == 0 && mega->user_trigger != 1 &&
-		((/*battle_flags.multibattle*/is_in_tag_battle() && !(mega->z_happened_pbs & 0x1)) || !(mega->z_happened_pbs & 0x5)))
+		((battle_flags.multibattle && !(mega->z_happened_pbs & 0x1)) || !(mega->z_happened_pbs & 0x5)))
 	{
 		return true;
 	}
 	else if (bank == 2 && mega->user_trigger != 1 && mega->ally_trigger != 1 &&
-			 ((/*battle_flags.multibattle*/is_in_tag_battle() && !(mega->z_happened_pbs & 0x4)) || !(mega->z_happened_pbs & 0x5)))
+			 ((battle_flags.multibattle && !(mega->z_happened_pbs & 0x4)) || !(mega->z_happened_pbs & 0x5)))
 	{
 		return true;
 	}
@@ -150,12 +150,12 @@ u8 can_set_mega_trigger(u8 bank) //JeremyZ
 	bool res = 0;
 	int mega_mode = 0;
 	if (bank == 0 && mega->user_trigger < 3 &&
-		((/*battle_flags.multibattle*/is_in_tag_battle() && !(mega->evo_happened_pbs & 0x1)) || !(mega->evo_happened_pbs & 0x5)))
+		((battle_flags.multibattle && !(mega->evo_happened_pbs & 0x1)) || !(mega->evo_happened_pbs & 0x5)))
 	{
 		res = true;
 	}
 	else if (bank == 2 && mega->user_trigger < 3 && mega->ally_trigger < 3 &&
-			 ((/*battle_flags.multibattle*/is_in_tag_battle() && !(mega->evo_happened_pbs & 0x4)) || !(mega->evo_happened_pbs & 0x5)))
+			 ((battle_flags.multibattle && !(mega->evo_happened_pbs & 0x4)) || !(mega->evo_happened_pbs & 0x5)))
 	{
 		res = true;
 	}
