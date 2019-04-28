@@ -186,7 +186,7 @@ bool stat_raise_berry(u8 bank, bool checkHP, u8 item_effect, enum call_mode call
             }
             while (doable)
             {
-                u8 rand = /*__umodsi3(rng(), 5)*/random_value(5);
+                u8 rand = random_value(5);
                 if (doable & BIT_GET(rand))
                 {
                     battle_scripting.stat_changer = 0x21 + rand;

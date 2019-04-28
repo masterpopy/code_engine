@@ -110,7 +110,6 @@ enum map_type
 #include "battle_locations.h"
 #include "new_battle_struct.h"
 #include "vanilla_functions.h"
-#define externc extern "C"
 
 #endif
 #endif //ENGINE7_CPPDEFINES_H

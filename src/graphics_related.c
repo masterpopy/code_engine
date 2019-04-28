@@ -85,7 +85,8 @@ const struct b_background_info battle_bgs[] =
 };
 
 #endif
-const struct img_size trainerthrow_imgs[] = {{(void*) 0x8D66480, 0x2000}, // 0 brendan
+const struct img_size trainerthrow_imgs[] = {
+        {(void*) 0x8D66480, 0x2000}, // 0 brendan
         {(void*) 0x8D68480, 0x12000}, // 1 may
         {(void*) 0x8D6A480, 0x22800}, // 2 FR male protag
         {(void*) 0x8D6CC80, 0x32800}, // 3 FR female protag
@@ -105,7 +106,8 @@ u8 steven_pallete[] __attribute__((aligned(2))) = {
         0x55, 0x4a, 0x2d, 0x0, 0xc6, 0x1c, 0x7a, 0x77, 0xf5, 0x6a, 0x4f, 0x52, 0x0, 0x9f, 0x2d, 0x18, 0x21, 0xff, 0x7f,
         0x0, 0x0};
 
-const struct img_size trainerthrow_pals[] = {{(void*) 0x83021E0, 0}, // 0 brendan
+const struct img_size trainerthrow_pals[] = {
+        {(void*) 0x83021E0, 0}, // 0 brendan
         {(void*) 0x83021E0, 1}, // 1 may
         {(void*) 0x8D77480, 2}, // 2 FR male protag
         {(void*) 0x8D774A8, 3}, // 3 FR female protag
@@ -115,7 +117,8 @@ const struct img_size trainerthrow_pals[] = {{(void*) 0x83021E0, 0}, // 0 brenda
         {steven_pallete, 7}, // 7 steven
 };
 
-const struct trainerhrow_position trainerhrow_positions[] = {{8, 4, 0}, // 0 brendan
+const struct trainerhrow_position trainerhrow_positions[] = {
+        {8, 4, 0}, // 0 brendan
         {8, 4, 0}, // 1 may
         {8, 5, 0}, // 2 FR male protag
         {8, 5, 0}, // 3 FR female protag
@@ -127,9 +130,7 @@ const struct trainerhrow_position trainerhrow_positions[] = {{8, 4, 0}, // 0 bre
 
 bool does_partner_animate(void)
 {
-    if (partner_trainer == TRAINER_STEVEN || (partner_trainer & PARTNER_ANIMATES))
-        return 1;
-    return 0;
+    return (partner_trainer == TRAINER_STEVEN || (partner_trainer & PARTNER_ANIMATES));
 }
 
 u8 get_fitting_BG_ID(void)
@@ -144,7 +145,7 @@ u8 get_fitting_BG_ID(void)
         return BACKGROUND_RAYQUAZA;
     else if (battle_flags.trainer)
     {
-        enum trainer_class class = (*trainer_table)[var_8015_trainer_opponent_A].class;
+        u8 class = (*trainer_table)[var_8015_trainer_opponent_A].class;
         if (class == CLASS_LEADER)
             return BACKGROUND_LEADER;
         if (class == CLASS_CHAMPION)

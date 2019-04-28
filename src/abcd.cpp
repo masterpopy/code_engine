@@ -9,8 +9,7 @@ struct exzample{
 } exzample1;
 
 
-
-externc void test_function1(){
+extern "C" void test_function1(){
     exzample1.test_function2();
     exzample1.poke_sggg.current_hp=0;
     exzample1.poke_sggg.level = 0;
