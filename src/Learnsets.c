@@ -1,3 +1,5 @@
+#include "defines.h"
+
 #if BUILD_LEARNSETS == true
 
 #include "Learnsets.h"
@@ -63,8 +65,7 @@ u32 begin_itr(struct learnset_iterator* itr, learnset_callback callback)
 
 void fill_with_default_moves(struct pokemon* poke)
 {
-    struct learnset_iterator liter = learnset_itr(poke);
-    struct learnset_iterator* literator = &liter;
+    struct learnset_iterator itr = learnset_itr(poke);
 
     bool cb(struct learnset_iterator* poke_data)
     {
@@ -78,7 +79,7 @@ void fill_with_default_moves(struct pokemon* poke)
         return false;
     }
 
-    begin_itr(literator, cb);
+    begin_itr(&itr, cb);
 }
 
 u16 teach_move_evolving(struct pokemon* poke)
