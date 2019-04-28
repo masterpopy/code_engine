@@ -8,13 +8,10 @@
 
 struct learnset_iterator
 {
-    //基本常用缓存信息
     struct pokemon* poke;
     u8 poke_lvl;
-    //当前迭代技能数据
     u8 learnset_lvl;
     u16 learnset_move;
-    //迭代索引
     const struct learnset* poke_moveset;
     u8 index;
     u8 itr_result;
@@ -32,7 +29,7 @@ static struct learnset_iterator learnset_itr(struct pokemon* poke)
 }
 
 
-static bool has_next_and_store_current(struct learnset_iterator* itr)
+static bool has_next_and_store_current(struct learnset_iterator *itr)
 {
     const struct learnset* poke_moveset = &itr->poke_moveset[itr->index];
     u8 lvl = poke_moveset->level;
@@ -185,7 +182,7 @@ bool can_learn_move_from_learnset(struct pokemon* poke,u16 move){
     struct learnset_iterator itr = learnset_itr(poke);
     itr.data = move;
     bool cb(struct learnset_iterator* itr){
-        return itr->learnset_lvl < itr->poke_lvl && itr->learnset_move != itr->data;
+        return itr->learnset_lvl <= itr->poke_lvl && itr->learnset_move != itr->data;
     }
     return begin_itr(&itr,cb) != END;
 }
