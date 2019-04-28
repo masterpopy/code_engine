@@ -37,8 +37,7 @@ LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
 CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',"-fno-inline",
           '-mno-long-calls', '-march=armv4t', '-Wall','-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
 
-CPPFLAGS = CFLAGS + ['-fno-exceptions','-fno-unwind-tables','-fno-asynchronous-unwind-tables']
-
+CPPFLAGS = CFLAGS + ['-fno-exceptions','-fno-unwind-tables','-fno-asynchronous-unwind-tables','-std=c++11']
 def run_command(cmd):
     try:
         subprocess.check_output(cmd)
@@ -102,7 +101,7 @@ def run_glob(globstr, fn):
 
 
 def main():
-    globs = [('**/*.s', process_assembly), ('**/*.c', process_c),('**/*.cpp',process_cpp)]
+    globs = [('**/*.s', process_assembly),('**/*.cpp',process_cpp), ('**/*.c', process_c)]
     # Create output directory
     try:
         os.makedirs(BUILD)

@@ -824,10 +824,8 @@ bool find_move_in_table(u16 move, const u16 *table_ptr) {
 }
 
 bool does_move_make_contact(u16 move, u8 atk_bank) {
-    if (move_table[move].move_flags.flags.makes_contact && !check_ability(atk_bank, ABILITY_LONG_REACH) &&
-        get_item_effect(atk_bank, 1) != ITEM_EFFECT_PROTECTIVEPADS)
-        return 1;
-    return 0;
+    return (move_table[move].move_flags.flags.makes_contact && !check_ability(atk_bank, ABILITY_LONG_REACH) &&
+        get_item_effect(atk_bank, 1) != ITEM_EFFECT_PROTECTIVEPADS);
 }
 
 u16 apply_base_power_modifiers(u16 move, u8 move_type, u8 atk_bank, u8 def_bank, u16 base_power) {

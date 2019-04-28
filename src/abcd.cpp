@@ -12,6 +12,4 @@ struct exzample{
 extern "C" void test_function1(){
     exzample1.poke_sggg.current_hp=0;
     exzample1.poke_sggg.level = 0;
-
-    exzample1.poke_sggg.iv_hp=3;
 }

@@ -406,9 +406,9 @@ bool check_focus(u8 bank) {
 #define is_z_move(move) (move >= MOVE_Z_NORMAL_PHYS && move <= MOVE_Z_ASH_GRENINJA)
 
 u16 check_z_move(u32 move, u32 bank) {
-    const struct move_info* info = &move_table[move];
     if (get_item_effect(bank, 0) != ITEM_EFFECT_ZCRYSTAL)
         return 0;
+    const struct move_info* info = &move_table[move];
     u8 type = info->type;
     u16 z_move = 0;
     //决定Z招式文本
@@ -418,10 +418,10 @@ u16 check_z_move(u32 move, u32 bank) {
     else if (z_type > TYPE_EGG)
         z_type--;
     new_battlestruct->various.var2 = 0x24D + z_type; //default: 0x18D
-    u32 param = get_battle_item_extra_param(bank);
+    u32 param;
     if (is_z_move(move))
         z_move = move;
-    else if (param > TYPE_FAIRY) {
+    else if ((param = get_battle_item_extra_param(bank)) > TYPE_FAIRY) {
         const struct evolution_sub* evo = GET_EVO_TABLE(battle_participants[bank].species);
         for (u8 i = 0; i < NUM_OF_EVOS; i++) {
             if (!evo[i].method && evo[i].paramter == battle_participants[bank].held_item &&
@@ -436,7 +436,7 @@ u16 check_z_move(u32 move, u32 bank) {
         if (info->split == 2)
             z_move = move;
         else
-            z_move = MOVE_Z_NORMAL_PHYS + (z_type << 1) + info->split;
+            z_move = MOVE_Z_NORMAL_PHYS + z_type * 2 + info->split;
     }
     return z_move;
 }
