@@ -5,7 +5,6 @@
 #include "Learnsets.h"
 #include "static_references.h"
 
-#define get_learnset_table(poke) (learnset_table[poke->spieces])
 
 struct learnset_iterator
 {
@@ -23,7 +22,7 @@ struct learnset_iterator
 static struct learnset_iterator learnset_itr(struct pokemon* poke)
 {
     struct learnset_iterator itr;
-    itr.poke_moveset = get_learnset_table(poke);
+    itr.poke_moveset = learnset_table[poke->spieces];
     itr.poke_lvl = poke->level;
     itr.poke = poke;
     itr.index = 0;
