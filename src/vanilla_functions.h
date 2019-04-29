@@ -5,7 +5,7 @@
 extern "C"{
 #endif
 #define longcall __attribute__((long_call))
-#define no_inline __attribute__((noinline))
+#define no_inline __attribute__((noinline)) //禁止编译器inline节省空间
 
 void __attribute__((long_call)) pokemon_slot_purge(const struct pokemon* poke);
 void* __attribute__((long_call)) int_to_str(void* buffer, s32 num, u8 format, u8 max_digits);

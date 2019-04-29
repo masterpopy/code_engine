@@ -52,25 +52,25 @@ u32 random_value(u32 limit);
 u8 z_protect_affects(u16 move); //JeremyZ
 void check_weather_trio(void);
 
-bool is_poke_valid(struct pokemon* poke)
+bool no_inline is_poke_valid(struct pokemon* poke)
 {
     u16 species = get_attributes(poke, ATTR_SPECIES, 0);
     return (species != 0 && species != 412 && !get_attributes(poke, ATTR_IS_EGG, 0)); //JeremyZ
 }
 
-struct pokemon* get_party_ptr(u8 bank)
+struct pokemon* no_inline get_party_ptr(u8 bank)
 {
     if (get_bank_side(bank))
         return &party_opponent[0];
     return &party_player[0];
 }
 
-struct pokemon* get_bank_poke_ptr(u8 bank)
+struct pokemon* no_inline get_bank_poke_ptr(u8 bank)
 {
     return &get_party_ptr(bank)[battle_team_id_by_side[bank]];
 }
 
-u8 get_poke_ability_active_bank(){
+u8 no_inline get_poke_ability_active_bank(){
 	return get_poke_ability(get_bank_poke_ptr(active_bank));
 }
 
@@ -86,13 +86,13 @@ u8 count_party_pokemon(u8 bank)
     return usable_pokes;
 }
 
-void ability_switchin_effect(void)
+void no_inline ability_switchin_effect(void)
 {
     status3[new_battlestruct->various.active_bank].innerswitchinlock = 1;
     ability_battle_effects(24, new_battlestruct->various.active_bank, 0, 0, 0);
 }
 
-void change_attacker_item(void)
+void no_inline change_attacker_item(void)
 {
     active_bank = bank_attacker;
     bb2_setattributes_in_battle(0, 2, 0, 4, &battle_participants[bank_attacker].held_item);
