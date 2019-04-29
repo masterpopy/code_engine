@@ -34,7 +34,7 @@ SRC = './src'
 BUILD = './build'
 ASFLAGS = ['-mthumb', '-I', SRC]
 LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
-CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',"-fno-inline",
+CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',
           '-mno-long-calls', '-march=armv4t', '-Wall','-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
 
 CPPFLAGS = CFLAGS + ['-fno-exceptions','-fno-unwind-tables','-fno-asynchronous-unwind-tables','-std=c++11']

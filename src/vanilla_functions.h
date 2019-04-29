@@ -4,6 +4,9 @@
 #ifdef __cplusplus
 extern "C"{
 #endif
+#define longcall __attribute__((long_call))
+#define no_inline __attribute__((noinline))
+
 void __attribute__((long_call)) pokemon_slot_purge(const struct pokemon* poke);
 void* __attribute__((long_call)) int_to_str(void* buffer, s32 num, u8 format, u8 max_digits);
 void* __attribute__((long_call)) u_int_to_str(void* buffer, u32 num, u8 format, u8 max_digits);
