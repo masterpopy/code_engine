@@ -41,9 +41,9 @@ struct learnset_iterator
     typedef bool (* learnset_callback)(learnset_iterator*);
 
     //返回被callback终止的索引,如果遍历完成则返回0xFF
-    u8 no_inline begin_itr(learnset_callback callback)
+    u8 begin_itr(learnset_callback callback)
     {
-        while (this->has_next_and_store_current())
+        while (has_next_and_store_current())
         {
             if (!callback(this))
             {
