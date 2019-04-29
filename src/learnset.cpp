@@ -17,10 +17,10 @@ struct learnset_iterator
 
     no_inline learnset_iterator(struct pokemon* poke)
     {
-        this->poke_moveset = learnset_table[poke->spieces];
-        this->poke_lvl = poke->level;
+        poke_moveset = learnset_table[poke->spieces];
+        poke_lvl = poke->level;
         this->poke = poke;
-        this->index = 0;
+        index = 0;
     }
 
     bool no_inline has_next_and_store_current()
@@ -53,6 +53,12 @@ struct learnset_iterator
         }
         return END;
     }
+
+    u16 no_inline teach_move_in_available_slot0(){
+        move_to_learn = poke_moveset[slot_in_learnset_table].move;
+        slot_in_learnset_table++;
+        return teach_move_in_available_slot(poke, move_to_learn);
+    }
 };
 
 
@@ -60,7 +66,8 @@ extern "C" void fill_with_default_moves(struct pokemon* poke)
 {
     struct learnset_iterator itr = learnset_iterator(poke);
     itr.poke_lvl = get_lvl_from_exp(poke);
-    auto cb=[](learnset_iterator* itr)-> bool{
+    auto cb=[](learnset_iterator* itr)-> bool
+    {
         if (itr->learnset_lvl <= itr->poke_lvl)
         {
             if (teach_move_in_available_slot(itr->poke, itr->learnset_move) ==
@@ -68,9 +75,12 @@ extern "C" void fill_with_default_moves(struct pokemon* poke)
                 new_move_for_the_first(itr->poke, itr->learnset_move);
             return true;
         }
-        return false;};
+        return false;
+    };
     itr.begin_itr(cb);
 }
+
+
 
 u16 teach_move_evolving(struct pokemon* poke)
 {
@@ -84,9 +94,7 @@ u16 teach_move_evolving(struct pokemon* poke)
     }
     if (itr.poke_moveset[slot_in_learnset_table].level != LEVEL_EVO)
         return 0;
-    move_to_learn = itr.poke_moveset[slot_in_learnset_table].move;
-    slot_in_learnset_table++;
-    return teach_move_in_available_slot(poke, move_to_learn);
+    return itr.teach_move_in_available_slot0();
 }
 
 extern "C" u16 teach_move_player(struct pokemon* poke, u8 slot)
@@ -101,9 +109,7 @@ extern "C" u16 teach_move_player(struct pokemon* poke, u8 slot)
     }
     if (itr.poke_moveset[slot_in_learnset_table].level != itr.poke_lvl)
         return teach_move_evolving(poke);
-    move_to_learn = itr.poke_moveset[slot_in_learnset_table].move;
-    slot_in_learnset_table++;
-    return teach_move_in_available_slot(poke, move_to_learn);
+    return itr.teach_move_in_available_slot0();
 }
 
 bool find_move_in_table2(u16 move, u16* table_ptr, u8 table_length)
