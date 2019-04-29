@@ -6,12 +6,6 @@
 #define NUM_OF_EVOS     5       //number of evolutions per pokemon
 #define KEYSTONE        0x78     //mega item that the player has to posses in order to mega evolve
 
-#define BUILD_LEARNSETS true        //set to false if you modified the learnsets and dont want them to get changed
-#define GEN4_LEARNSETS  true //set to true if you want to have learnsets for pokemon up to genIV
-#define GEN5_LEARNSETS  true         //set to true if you want to have learnsets for pokemon up to genV
-#define GEN6_LEARNSETS  true          //set to true if you want to have learnsets for pokemon up to genVI
-#define GEN7_LEARNSETS true
-
 #define EXP_CAPTURE         false    //set to false if you don't want to receive exp from catching pokes
 #define STAT_RECALC         false   //set to true if you want all pokemon having their stats recalculated at the end of the battle
 #define ITEM_STEAL          true   //if true player is able to steal other trainers' items, if false the stolen item will disappear at the end of the battle

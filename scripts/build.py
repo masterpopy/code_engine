@@ -73,7 +73,7 @@ def process_c(in_file):
 def process_cpp(in_file):
     out_file = make_output_file(in_file)
     print('Compiling cpp:%s' % in_file)
-    cmd = [CPP] + CFLAGS + ['-c', in_file, '-o', out_file]
+    cmd = [CPP] + CPPFLAGS + ['-c', in_file, '-o', out_file]
     run_command(cmd)
     return out_file
 
