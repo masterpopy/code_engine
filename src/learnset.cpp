@@ -4,6 +4,7 @@
 
 struct learnset_iterator
 {
+public:
     struct pokemon* poke;
     u8 poke_lvl;
     u8 learnset_lvl;
@@ -25,13 +26,12 @@ struct learnset_iterator
 
     bool no_inline has_next_and_store_current()
     {
-        const struct learnset* poke_moveset = &this->poke_moveset[this->index];
-        u8 lvl = poke_moveset->level;
-        u16 move = poke_moveset->move;
+        u8 lvl = poke_moveset[index].level;
+        u16 move = poke_moveset[index].move;
         if (move != MOVE_BLANK && lvl != END)
         {
-            this->learnset_lvl = lvl;
-            this->learnset_move = move;
+            learnset_lvl = lvl;
+            learnset_move = move;
             return true;
         }
         return false;
@@ -47,9 +47,9 @@ struct learnset_iterator
         {
             if (!callback(this))
             {
-                return this->index;
+                return index;
             }
-            this->index++;
+            index++;
         }
         return END;
     }
@@ -173,7 +173,7 @@ extern "C" u8 learnsanydamagingmove(u16 poke)
 }
 
 extern "C" bool can_learn_move_from_learnset(struct pokemon* poke,u16 move){
-    struct learnset_iterator itr = learnset_iterator(poke);
+    auto itr = learnset_iterator(poke);
     itr.data = move;
     return itr.begin_itr([](struct learnset_iterator* itr)->bool{
         return itr->learnset_lvl <= itr->poke_lvl && itr->learnset_move != itr->data;
