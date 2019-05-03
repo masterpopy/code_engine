@@ -45,6 +45,8 @@ def run_command(cmd):
         print(e.output.decode(), file=sys.stderr)
         sys.exit(1)
 
+def check_time(in_file,out_file):
+    return os.path.getmtime(in_file) > os.path.getmtime(out_file)
 
 def make_output_file(filename):
     """Return hash of filename to use as object filename"""
@@ -56,25 +58,28 @@ def make_output_file(filename):
 def process_assembly(in_file):
     """Assemble"""
     out_file = make_output_file(in_file)
-    print('Assembling %s' % in_file)
-    cmd = [AS] + ASFLAGS + ['-c', in_file, '-o', out_file]
-    run_command(cmd)
+    if check_time(in_file, out_file):
+        print('Assembling %s' % in_file)
+        cmd = [AS] + ASFLAGS + ['-c', in_file, '-o', out_file]
+        run_command(cmd)
     return out_file
 
 
 def process_c(in_file):
     """Compile C"""
     out_file = make_output_file(in_file)
-    print('Compiling %s' % in_file)
-    cmd = [CC] + CFLAGS + ['-c', in_file, '-o', out_file]
-    run_command(cmd)
+    if check_time(in_file, out_file):
+        print('Compiling %s' % in_file)
+        cmd = [CC] + CFLAGS + ['-c', in_file, '-o', out_file]
+        run_command(cmd)
     return out_file
 
 def process_cpp(in_file):
     out_file = make_output_file(in_file)
-    print('Compiling cpp:%s' % in_file)
-    cmd = [CPP] + CPPFLAGS + ['-c', in_file, '-o', out_file]
-    run_command(cmd)
+    if check_time(in_file, out_file):
+        print('Compiling cpp:%s' % in_file)
+        cmd = [CPP] + CPPFLAGS + ['-c', in_file, '-o', out_file]
+        run_command(cmd)
     return out_file
 
 def link(objects):
