@@ -21,7 +21,7 @@ struct double_grass_tile double_grass_tiles[DOUBLE_WILD_TILES] = {
     {0xD, 70}
 };*/
 
-#define DOUBLE_BATTLE_PERCENT 100
+#define DOUBLE_BATTLE_PERCENT 0
 
 bool doubles_tile_check(void)
 {

@@ -1,3 +1,5 @@
+bbp_for_banks = 0x02022D10;
+battle_buffer_reset = 0x080331B8|1;
 check_if_move_learnt = 0x081B6D44|1;
 check_TM_compatibility = 0x0806E064|1;
 get_TM_move = 0x081B6CFC|1;
