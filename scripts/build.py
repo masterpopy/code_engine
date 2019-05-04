@@ -46,7 +46,9 @@ def run_command(cmd):
         sys.exit(1)
 
 def check_time(in_file,out_file):
-    return os.path.exists(out_file) and os.path.getmtime(in_file) > os.path.getmtime(out_file)
+    if os.path.exists(out_file):
+        return os.path.getmtime(in_file) > os.path.getmtime(out_file)
+    return True
 
 def make_output_file(filename):
     """Return hash of filename to use as object filename"""
