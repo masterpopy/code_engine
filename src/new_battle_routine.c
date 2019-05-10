@@ -105,36 +105,47 @@ extern u8 get_ability(u16, u8);
 void prep_string(u16 strID, u8 bank);
 
 extern u8 bbp_for_banks[4];
-
 extern void longcall battle_buffer_reset(u8,void*,u8);
 
+void set_bank_cmd(u8 bank,u8 cmd){
+    battle_bufferA[bank].command_id=cmd;
+    mark_buffer_bank_for_execution(bank);
+}
+
+void bbo_new4(){
+    if(battle_execution_buffer) return;
+    set_bank_cmd(3,0x2f);
+    battle_executed_routine = (void*) 0x803B3CC+1;
+}
+
 void bbo_new3(){
-    no_of_all_banks = 4;
+    if(battle_execution_buffer) return;
     battle_flags.double_battle = 1;
     absent_bank_flags |= BIT_GET(2);
-    bbp_for_banks[3] = 0x2f;
-    mark_buffer_bank_for_execution(3);
-    battle_executed_routine = (void*) 0x803B1DC+1;
+    set_bank_cmd(3,4);
 }
 
 
 void bbo_new2(){
     if(!battle_execution_buffer){
-        bbp_for_banks[3] = 0;
+        tasks_for_banks[3] = (void*) (0x0805F180|1);
+        no_of_all_banks = 4;
+
         banks_by_side[3] = 3;
         battle_team_id_by_side[3] = 1;
-        battle_buffer_reset(0,bbp_for_banks,1);
-        mark_buffer_bank_for_execution(3);
+        party_opponent[1] = party_opponent[0];
+        set_bank_cmd(3,0);
         battle_executed_routine = bbo_new3;
     }
 }
 
-void bbo_new1(){//repoint sub_803B3CC
+void bbo_new1(){
+    //repoint sub_803B3CC
     //First printstring inbattle
     //set pokemon data
     //move pokemon and showpokemon
     if(battle_execution_buffer) return;
     prep_string(0,0);
-    battle_executed_routine = (void*) (0x803B3CC+1);
+    battle_executed_routine = bbo_new2;
 }
 

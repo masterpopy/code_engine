@@ -32,12 +32,13 @@ LD = (PATH + PREFIX + 'ld')
 OBJCOPY = (PATH + PREFIX + 'objcopy')
 SRC = './src'
 BUILD = './build'
-ASFLAGS = ['-mthumb', '-I', SRC]
+ASFLAGS = [AS, '-mthumb', '-I', SRC]
 LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
-CFLAGS = ['-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',
+CFLAGS = [CC,'-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',
           '-mno-long-calls', '-march=armv4t', '-Wall','-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
 
 CPPFLAGS = CFLAGS + ['-fno-exceptions','-fno-unwind-tables','-fno-asynchronous-unwind-tables','-std=c++11']
+CPPFLAGS[0] = CPP
 def run_command(cmd):
     try:
         subprocess.check_output(cmd)
@@ -45,7 +46,7 @@ def run_command(cmd):
         print(e.output.decode(), file=sys.stderr)
         sys.exit(1)
 
-def check_time(in_file,out_file):
+def file_modifiled(in_file,out_file):
     if os.path.exists(out_file):
         return os.path.getmtime(in_file) > os.path.getmtime(out_file)
     return True
@@ -56,33 +57,23 @@ def make_output_file(filename):
     m.update(filename.encode())
     return os.path.join(BUILD, m.hexdigest() + '.o')
 
+def process(in_file,cmd,msg):
+    out_file = make_output_file(in_file)
+    if file_modifiled(in_file, out_file):
+        print(msg % in_file)
+        run_command(cmd+['-c', in_file, '-o', out_file])
+    return out_file
+
 
 def process_assembly(in_file):
-    """Assemble"""
-    out_file = make_output_file(in_file)
-    if check_time(in_file, out_file):
-        print('Assembling %s' % in_file)
-        cmd = [AS] + ASFLAGS + ['-c', in_file, '-o', out_file]
-        run_command(cmd)
-    return out_file
+    return process(in_file,ASFLAGS,'Assembling %s')
 
 
 def process_c(in_file):
-    """Compile C"""
-    out_file = make_output_file(in_file)
-    if check_time(in_file, out_file):
-        print('Compiling %s' % in_file)
-        cmd = [CC] + CFLAGS + ['-c', in_file, '-o', out_file]
-        run_command(cmd)
-    return out_file
+    return process(in_file,CFLAGS,'Compiling %s')
 
 def process_cpp(in_file):
-    out_file = make_output_file(in_file)
-    if check_time(in_file, out_file):
-        print('Compiling cpp:%s' % in_file)
-        cmd = [CPP] + CPPFLAGS + ['-c', in_file, '-o', out_file]
-        run_command(cmd)
-    return out_file
+    return process(in_file,CPPFLAGS,'Compiling %s')
 
 def link(objects):
     """Link objects into one binary"""

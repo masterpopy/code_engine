@@ -1248,7 +1248,7 @@ struct saveblock2
 	u8 seen_flags[52];
 };
 
-extern struct saveblock2* sav2;//0xF2C
+extern struct saveblock2* sav2;//0xF2C 02024A54
 
 struct battle_record_pbs
 {

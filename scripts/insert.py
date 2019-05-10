@@ -9,6 +9,7 @@ import textwrap
 import sys
 
 OFFSET_TO_PUT = 0x1d00000
+FIX_EVO=False
 
 PathVar = os.environ.get('Path')
 Paths = PathVar.split(';')
@@ -153,6 +154,7 @@ with open(ROM_NAME, 'rb+') as rom:
 								continue
 
 						hook(rom, code, offset, int(register))
+		if FIX_EVO:hook(rom,table['lowest_evo'],0x70004,2)
 
 		# Read repoints from a file 
 		with open('repoints', 'r') as repointlist:

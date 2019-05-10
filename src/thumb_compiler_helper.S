@@ -203,5 +203,3 @@ get_bank_side:
 get_bank_identity:
      ldr r3, =get_bank_identity0
      bx r3
-
-
