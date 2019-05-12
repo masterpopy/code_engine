@@ -211,7 +211,7 @@ with open(ROM_NAME, 'rb+') as rom:
 						funcwrap(rom, code, offset, int(nparam), int(isreturning))
 
 		# Insert byte changes
-		with open('bytereplacement', 'r') as replacelist:
+		with open('bytereplacement', 'r',encoding='utf-8') as replacelist:
 				for line in replacelist:
 						if line.strip().startswith('#'): continue
 						offset = int(line[:8],16) - 0x08000000
