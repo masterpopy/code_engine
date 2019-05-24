@@ -1,3 +1,12 @@
+new_sav3 = 0x201749C;
+sav_sections = 0x03006220;
+sav_counterplus1 = 0x030061F0;
+sav_buff_ptr =  0x03006204;
+sav_index = 0x03006200;
+copy_flash_section = 0x0815314C|1;
+over_world_script = 0x3000e40;
+sav_get_checksum = 0x08153164|1;
+sub_8152908 = 0x08152908|1;
 bbp_for_banks = 0x02022D10;
 battle_buffer_reset = 0x080331B8|1;
 check_if_move_learnt = 0x081B6D44|1;

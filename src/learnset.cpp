@@ -4,7 +4,6 @@
 
 struct learnset_iterator
 {
-public:
     struct pokemon* poke;
     u8 poke_lvl;
     u8 learnset_lvl;
@@ -80,8 +79,6 @@ extern "C" void fill_with_default_moves(struct pokemon* poke)
     itr.begin_itr(cb);
 }
 
-
-
 u16 teach_move_evolving(struct pokemon* poke)
 {
     struct learnset_iterator itr = learnset_iterator(poke);
@@ -112,7 +109,7 @@ extern "C" u16 teach_move_player(struct pokemon* poke, u8 slot)
     return itr.teach_move_in_available_slot0();
 }
 
-bool find_move_in_table2(u16 move, u16* table_ptr, u8 table_length)
+extern "C" bool find_move_in_table2(u16 move, u16* table_ptr, u8 table_length)
 {
     for (u8 i = 0; i < table_length; i++)
     {

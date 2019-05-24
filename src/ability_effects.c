@@ -166,28 +166,28 @@ static bool HP_half_drop(u8 bank) {
 
 enum CastformForm castform_change(u8 bank) {
     if (battle_participants[bank].species == POKE_CASTFORM) {
-        enum CastformForm form = castform_form[bank];
+        u8 type = battle_participants[bank].type1;
         bool weather = weather_abilities_effect();
         bool forecast = check_ability(bank, ABILITY_FORECAST);
         //becomes normal if weather has no effect, doesnt have forecast or the weather doesnt make it possible to change
-        if (form != CastformNormal && (!weather || !forecast || (!RAIN_WEATHER && !SUN_WEATHER && !HAIL_WEATHER))) {
+        if (type != CastformNormal && (!weather || !forecast || (!RAIN_WEATHER && !SUN_WEATHER && !HAIL_WEATHER))) {
             set_type(bank, TYPE_NORMAL);
             return CastformNormal;
         }
         //to become other types it has to have forecast and the weather has to be in effect
         if (forecast && weather) {
             //check fire
-            if (form != CastformFire && SUN_WEATHER) {
+            if (type != TYPE_FIRE && SUN_WEATHER) {
                 set_type(bank, TYPE_FIRE);
                 return CastformFire;
             }
             //check water
-            if (form != CastformWater && RAIN_WEATHER) {
+            if (type != TYPE_WATER && RAIN_WEATHER) {
                 set_type(bank, TYPE_WATER);
                 return CastformWater;
             }
             //check hail
-            if (form != CastformIce && HAIL_WEATHER) {
+            if (type != TYPE_ICE && HAIL_WEATHER) {
                 set_type(bank, TYPE_ICE);
                 return CastformIce;
             }

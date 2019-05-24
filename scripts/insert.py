@@ -10,6 +10,7 @@ import sys
 
 OFFSET_TO_PUT = 0x1d00000
 FIX_EVO=False
+BUILD_PC=True
 
 PathVar = os.environ.get('Path')
 Paths = PathVar.split(';')
@@ -154,8 +155,16 @@ with open(ROM_NAME, 'rb+') as rom:
 								continue
 
 						hook(rom, code, offset, int(register))
-		if FIX_EVO:hook(rom,table['lowest_evo'],0x70004,2)
-
+		if FIX_EVO:
+			hook(rom,table['lowest_evo'],0x70004,2)
+		if BUILD_PC:
+			hook(rom,table['sav_to_flash_section'],0x081527A0,3)
+			hook(rom,table['flash_to_sav'],0x08152E10,3)
+			hook(rom,table['sav_to_flash_copy'],0x08152B00,3)
+			hook(rom,table['get_box_name'],0x080D20D0,3)
+			hook(rom,table['get_box_bg'],0x080D20F8,3)
+			hook(rom,table['set_box_bg'],0x080D2120,3)
+			hook(rom,table['ov_showcontest'],0x809B794,3)
 		# Read repoints from a file 
 		with open('repoints', 'r') as repointlist:
 				for line in repointlist:
@@ -224,7 +233,9 @@ with open(ROM_NAME, 'rb+') as rom:
 					fstr = ('{:' + str(width) + '} {:08X}')
 					offset_file.write(fstr.format(key + ':', table[key] + 0x08000000) + '\n')
 		offset_file.close()
-						
+if BUILD_PC:
+	out = subprocess.check_output(['armips','pc.ips'])
+	print(out.decode())
 
 
 

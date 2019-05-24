@@ -16,52 +16,53 @@ void bs_execute(void* now);
 bool load_weather_from_overworld(void)
 {
     bool is_weather_loaded = false;
-    if(true)
+    if (true)
     {
         u8 ow_weather = get_overworld_weather();
-        switch(ow_weather)
+        switch (ow_weather)
         {
-        case 3:
-        case 5:
-        case 13:
-            if(!battle_weather.flags.downpour && !battle_weather.flags.rain && !battle_weather.flags.permament_rain)
-            {
-                battle_weather.int_bw = (weather_permament_rain | weather_rain);
-                battle_scripting.AnimInfo1 = 0xA;
-                is_weather_loaded = true;
-            }
-            break;
-		//case 4:
-		case 7:
-			if(!battle_weather.flags.hail && !battle_weather.flags.permament_hail)
-			{
-				battle_weather.int_bw = (weather_hail | weather_permament_hail);
-                battle_scripting.AnimInfo1 = 0xD;
-                is_weather_loaded = true;
-			}
-			break;
-        case 8:
-            if(!battle_weather.flags.permament_sandstorm && !battle_weather.flags.sandstorm)
-            {
-                battle_weather.int_bw = (weather_permament_sandstorm | weather_sandstorm);
-                battle_scripting.AnimInfo1 = 0xC;
-                is_weather_loaded = true;
-            }
-            break;
-        case 12:
-            if(!battle_weather.flags.permament_sun && !battle_weather.flags.sun)
-            {
-                battle_weather.int_bw = (weather_permament_sun | weather_sun);
-                battle_scripting.AnimInfo1 = 0xB;
-                is_weather_loaded = true;
-            }
-            break;
+            case 3:
+            case 5:
+            case 13:
+                if (!battle_weather.flags.downpour && !battle_weather.flags.rain &&
+                        !battle_weather.flags.permament_rain)
+                {
+                    battle_weather.int_bw = (weather_permament_rain | weather_rain);
+                    battle_scripting.AnimInfo1 = 0xA;
+                    is_weather_loaded = true;
+                }
+                break;
+                //case 4:
+            case 7:
+                if (!battle_weather.flags.hail && !battle_weather.flags.permament_hail)
+                {
+                    battle_weather.int_bw = (weather_hail | weather_permament_hail);
+                    battle_scripting.AnimInfo1 = 0xD;
+                    is_weather_loaded = true;
+                }
+                break;
+            case 8:
+                if (!battle_weather.flags.permament_sandstorm && !battle_weather.flags.sandstorm)
+                {
+                    battle_weather.int_bw = (weather_permament_sandstorm | weather_sandstorm);
+                    battle_scripting.AnimInfo1 = 0xC;
+                    is_weather_loaded = true;
+                }
+                break;
+            case 12:
+                if (!battle_weather.flags.permament_sun && !battle_weather.flags.sun)
+                {
+                    battle_weather.int_bw = (weather_permament_sun | weather_sun);
+                    battle_scripting.AnimInfo1 = 0xB;
+                    is_weather_loaded = true;
+                }
+                break;
         }
-        if(is_weather_loaded)
+        if (is_weather_loaded)
         {
             battle_scripting.active_bank = 0;
             battle_communication_struct.multistring_chooser = ow_weather;
-            bs_execute((void *)0x82DACE7);
+            bs_execute((void*) 0x82DACE7);
         }
     }
     return is_weather_loaded;
@@ -69,7 +70,8 @@ bool load_weather_from_overworld(void)
 
 struct pokemon* get_poke_to_illusion_into(struct pokemon* poke, u8 bank)
 {
-    if (!new_battlestruct->bank_affecting[bank].illusion_on && !new_battlestruct->bank_affecting[bank].illusion_hit && get_poke_ability(poke) == ABILITY_ILLUSION)
+    if (!new_battlestruct->bank_affecting[bank].illusion_on && !new_battlestruct->bank_affecting[bank].illusion_hit &&
+            get_poke_ability(poke) == ABILITY_ILLUSION)
     {
         u8 usable_pokemon = count_party_pokemon(bank);
         u8 min_to_have = 2;
@@ -83,7 +85,7 @@ struct pokemon* get_poke_to_illusion_into(struct pokemon* poke, u8 bank)
         if (usable_pokemon >= min_to_have)
         {
             struct pokemon* partner = 0;
-            u8 ally_bank = bank ^ 2;
+            u8 ally_bank = bank ^2;
             if (is_bank_present(ally_bank))
             {
                 partner = get_bank_poke_ptr(ally_bank);
@@ -91,7 +93,8 @@ struct pokemon* get_poke_to_illusion_into(struct pokemon* poke, u8 bank)
             for (s8 i = 5; i >= 0; i--)
             {
                 struct pokemon* masquerade_as = &get_party_ptr(bank)[i];
-                if (poke != masquerade_as && !get_attributes(masquerade_as, ATTR_IS_EGG, 0) && poke != partner && is_poke_valid(masquerade_as) && get_attributes(masquerade_as, ATTR_CURRENT_HP, 0))
+                if (poke != masquerade_as && !get_attributes(masquerade_as, ATTR_IS_EGG, 0) && poke != partner &&
+                        is_poke_valid(masquerade_as) && get_attributes(masquerade_as, ATTR_CURRENT_HP, 0))
                 {
                     return masquerade_as;
                 }
@@ -108,7 +111,8 @@ bool try_illusion_change(struct pokemon* poke, u8 bank)
     {
         new_battlestruct->bank_affecting[bank].illusion_on = 1;
         (*battle_graphics.graphics_data->species_info)[bank].pal_change = 0;
-        (*battle_graphics.graphics_data->species_info)[bank].transformed_species = get_attributes(masquerade_as, ATTR_SPECIES, 0);
+        (*battle_graphics.graphics_data->species_info)[bank].transformed_species = get_attributes(masquerade_as,
+                ATTR_SPECIES, 0);
         PiD_pbs[bank] = get_attributes(masquerade_as, ATTR_PID, 0);
         new_battlestruct->bank_affecting[bank].transform_tid = get_attributes(masquerade_as, ATTR_TID, 0);
         get_attributes(masquerade_as, ATTR_NAME, &new_battlestruct->bank_affecting[bank].illusion_nick);
@@ -146,17 +150,18 @@ void update_pokenick_in_healthbox(u8 objectID, struct pokemon* poke)
         gender = poke_get_gender(poke);
     }
     //append gender sign unless it's already there
-    if ((species == POKE_NIDORANMALE || species == POKE_NIDORANFEMALE) && compare_two_strings(string_loc, (*poke_name_table)[species]) == 0)
+    if ((species == POKE_NIDORANMALE || species == POKE_NIDORANFEMALE) &&
+            compare_two_strings(string_loc, (*poke_name_table)[species]) == 0)
     {
         gender = POKE_GENDERLESS;
     }
     const u8* gender_sign = NULL;
-    if(gender == POKE_MALE)
-		gender_sign = nick_male_sign;
-    else if(gender == POKE_FEMALE)
-    	gender_sign = nick_female_sign;
+    if (gender == POKE_MALE)
+        gender_sign = nick_male_sign;
+    else if (gender == POKE_FEMALE)
+        gender_sign = nick_female_sign;
     else// if(gender == POKE_GENDERLESS)
-		gender_sign = nick_genderless_sign;
+        gender_sign = nick_genderless_sign;
     str_append(string_loc, gender_sign);
 }
 
@@ -169,9 +174,9 @@ u16 b_get_ball_to_throw(u8 bank)
         pokeball = get_attributes(get_bank_poke_ptr(bank), ATTR_POKEBALL, 0);
 
 #if !EXPANDED_POKEBALLS
-		return itemID_to_ballID(pokeball);
+    return itemID_to_ballID(pokeball);
 #else
-		return pokeball;
+    return pokeball;
 #endif
 }
 
@@ -185,7 +190,18 @@ void update_transform_sprite_pal(u8 bank, u16 pal_arg1)
     }
 }
 
-void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (*sprites)[ALL_POKES])
+u8 castform_type(u8 bank)
+{
+    u8 type = battle_participants[bank].type1;
+    static u8 castform_type_array[] = {TYPE_NORMAL,TYPE_FIRE, TYPE_WATER, TYPE_ICE};
+    u8 i = 0;
+    for (; i < 4; i++)
+        if (castform_type_array[i] == type)
+            break;
+    return i;
+}
+
+void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (* sprites)[], enum poke_sprite sprite)
 {
     //load actual sprite
     if (!new_battlestruct->bank_affecting[bank].caught)
@@ -193,9 +209,9 @@ void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (*spr
         u16 species;
         u32 PiD, TiD;
         u16 transform_species = get_transform_species(bank);
-        void (*sprite_load) (void* sprite_ptr, void* dst, u16 species_no, u32 PiD, enum poke_sprite);
+        void ( * sprite_load)(void* sprite_ptr, void* dst, u16 species_no, u32 PiD, enum poke_sprite sprite);
         if (transform_species)
-        {	
+        {
             species = transform_species;
             PiD = PiD_pbs[bank];
             sprite_load = &load_poke_sprite_deoxys_form;
@@ -204,32 +220,32 @@ void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (*spr
         else
         {
             species = get_attributes(poke, ATTR_SPECIES, 0);
+            TiD = get_attributes(poke, ATTR_TID, 0);
             PiD = get_attributes(poke, ATTR_PID, 0);
             if (b_link_related(1, bank))
                 sprite_load = &load_poke_sprite_deoxys_form;
             else
                 sprite_load = &load_poke_sprite;
-            TiD = get_attributes(poke, ATTR_TID, 0);	
         }
-		if (species==POKE_MINIOR_CORE)
-			species=0x3ee;
-        enum poke_sprite sprite = SPRITE_BACK;
-        if (sprites == front_sprites)
-            sprite = SPRITE_FRONT;
-        sprite_load((void*) &(*sprites)[species].sprite, battle_graphics.graphics_loc->decompressed_sprite[get_bank_identity(bank)], species, PiD, sprite);
-        void* poke_pal = poke_get_pal(species, TiD, PiD);
-        LZ77UnCompWram(poke_pal, decompression_buffer);
+        if (species == POKE_MINIOR_CORE)
+            species = 0x3ee;
+        LZ77UnCompWram(poke_get_pal(species, TiD, PiD), decompression_buffer);
         u16 pal_adder = 256 + bank * 16;
-        gpu_pal_apply((struct palette*)(decompression_buffer), pal_adder, 0x20);
-        gpu_pal_apply((struct palette*)(decompression_buffer), 0x80 + bank * 16, 0x20);
+        gpu_pal_apply((struct palette*) (decompression_buffer), pal_adder, 0x20);
+        gpu_pal_apply((struct palette*) (decompression_buffer), 0x80 + bank * 16, 0x20);
+        void* graphics_loc = battle_graphics.graphics_loc->decompressed_sprite[get_bank_identity(bank)];
         if (species == POKE_CASTFORM)
         {
-            LZ77UnCompWram(poke_pal, &battle_stuff_ptr->castform_pal);
-            gpu_pal_apply(&battle_stuff_ptr->castform_pal[castform_form[bank]], pal_adder, 0x20);
+            CpuSet(decompression_buffer, &battle_stuff_ptr->castform_pal, 0x40);
+            gpu_pal_apply(&battle_stuff_ptr->castform_pal[castform_type(bank)], pal_adder, 0x20);
+            LZ77UnCompWram((*sprites)[species].sprite, decompression_buffer);
+            CpuSet(decompression_buffer + 0x800 * castform_type(bank), graphics_loc, 0x400);
+            return;
         }
+        sprite_load((void*) &(*sprites)[species].sprite, graphics_loc, species, PiD, sprite);
         if (transform_species)
         {
-            update_transform_sprite_pal(bank,  pal_adder);
+            update_transform_sprite_pal(bank, pal_adder);
         }
     }
     else
@@ -241,13 +257,13 @@ void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (*spr
 
 void b_load_sprite_player(struct pokemon* poke, u8 bank)
 {
-    b_load_sprite(poke, bank, back_sprites);
+    b_load_sprite(poke, bank, back_sprites, SPRITE_BACK);
     new_battlestruct->various.sent_in_player |= (bits_table[battle_team_id_by_side[bank]]);
 }
 
 void b_load_sprite_opponent(struct pokemon* poke, u8 bank)
 {
-    b_load_sprite(poke, bank, front_sprites);
+    b_load_sprite(poke, bank, front_sprites, SPRITE_FRONT);
 }
 
 void bbp05_send_out_poke_new()

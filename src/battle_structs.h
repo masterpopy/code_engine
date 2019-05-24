@@ -1005,8 +1005,8 @@ struct sprite_poke
 	u16 species;
 };
 
-extern const struct sprite_poke (* front_sprites)[ALL_POKES];
-extern const struct sprite_poke (* back_sprites)[ALL_POKES];
+extern const struct sprite_poke (* front_sprites)[];
+extern const struct sprite_poke (* back_sprites)[];
 
 extern const u8 (* poke_name_table)[ALL_POKES][11];
 
