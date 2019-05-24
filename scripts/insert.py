@@ -10,7 +10,7 @@ import sys
 
 OFFSET_TO_PUT = 0x1d00000
 FIX_EVO=False
-BUILD_PC=True
+BUILD_PC=False
 
 PathVar = os.environ.get('Path')
 Paths = PathVar.split(';')
