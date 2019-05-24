@@ -1,3 +1,5 @@
+
+
 #include "pc.h"
 
 
@@ -81,7 +83,6 @@ void copy_sav_to_buffer(struct sav_buff* sav_buff_ptr, void* sav, u16 size)
     savBuffInfo->checksum = sav_get_checksum(sav_buff_ptr, MAX_SAVE_BLOCK);
 }
 
-
 u8 sav_to_flash_section(u8 sectionID, struct sav_section* sav_sections)
 {
     struct sav_buff_info* savBuffInfo = &sav_buff_ptr->savBuffInfo;
@@ -129,7 +130,6 @@ u8 flash_to_sav()
 {
     return flash_to_sav0(0);
 }
-
 
 void new3_to_flash()
 {

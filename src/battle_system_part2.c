@@ -194,7 +194,6 @@ void update_transform_sprite_pal(u8 bank, u16 pal_arg1)
 #define BUILD_PC false
 
 #if BUILD_PC==true
-
 u8 castform_type(u8 bank)
 {
     u8 type = battle_participants[bank].type1;
@@ -310,6 +309,7 @@ void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (*spr
     }
 }
 #endif
+
 void b_load_sprite_player(struct pokemon* poke, u8 bank)
 {
     b_load_sprite(poke, bank, back_sprites, SPRITE_BACK);
