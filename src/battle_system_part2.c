@@ -190,6 +190,11 @@ void update_transform_sprite_pal(u8 bank, u16 pal_arg1)
     }
 }
 
+
+#define BUILD_PC false
+
+#if BUILD_PC==true
+
 u8 castform_type(u8 bank)
 {
     u8 type = battle_participants[bank].type1;
@@ -250,11 +255,61 @@ void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (* sp
     }
     else
     {
+        (*battle_graphics.graphics_data->species_info)[bank].invisible = 1;
+    }
+}
+#else
+void b_load_sprite(struct pokemon* poke, u8 bank, const struct sprite_poke (*sprites)[],enum poke_sprite sprite)
+{
+    //load actual sprite
+    if (!new_battlestruct->bank_affecting[bank].caught)
+    {
+        u16 species;
+        u32 PiD, TiD;
+        u16 transform_species = get_transform_species(bank);
+        void (*sprite_load) (void* sprite_ptr, void* dst, u16 species_no, u32 PiD, enum poke_sprite);
+        if (transform_species)
+        {
+            species = transform_species;
+            PiD = PiD_pbs[bank];
+            sprite_load = &load_poke_sprite_deoxys_form;
+            TiD = new_battlestruct->bank_affecting[bank].transform_tid;
+        }
+        else
+        {
+            species = get_attributes(poke, ATTR_SPECIES, 0);
+            PiD = get_attributes(poke, ATTR_PID, 0);
+            if (b_link_related(1, bank))
+                sprite_load = &load_poke_sprite_deoxys_form;
+            else
+                sprite_load = &load_poke_sprite;
+            TiD = get_attributes(poke, ATTR_TID, 0);
+        }
+        if (species==POKE_MINIOR_CORE)
+            species=0x3ee;
+        sprite_load((void*) &(*sprites)[species].sprite, battle_graphics.graphics_loc->decompressed_sprite[get_bank_identity(bank)], species, PiD, sprite);
+        void* poke_pal = poke_get_pal(species, TiD, PiD);
+        LZ77UnCompWram(poke_pal, decompression_buffer);
+        u16 pal_adder = 256 + bank * 16;
+        gpu_pal_apply((struct palette*)(decompression_buffer), pal_adder, 0x20);
+        gpu_pal_apply((struct palette*)(decompression_buffer), 0x80 + bank * 16, 0x20);
+        if (species == POKE_CASTFORM)
+        {
+            LZ77UnCompWram(poke_pal, &battle_stuff_ptr->castform_pal);
+            gpu_pal_apply(&battle_stuff_ptr->castform_pal[castform_form[bank]], pal_adder, 0x20);
+        }
+        if (transform_species)
+        {
+            update_transform_sprite_pal(bank,  pal_adder);
+        }
+    }
+    else
+    {
         //pokemon is caught, set invisibility bit
         (*battle_graphics.graphics_data->species_info)[bank].invisible = 1;
     }
 }
-
+#endif
 void b_load_sprite_player(struct pokemon* poke, u8 bank)
 {
     b_load_sprite(poke, bank, back_sprites, SPRITE_BACK);
