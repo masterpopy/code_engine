@@ -392,10 +392,10 @@ bool check_focus(u8 bank) {
 		is_bank_focusing = true;
         bs_execute((void*) 0x82DB1FF);//Needs Revision
     }
-    else if (new_battlestruct->bank_affecting[bank].beak_blast_charge == (char)1) {//JeremyZ
+    else if (new_battlestruct->bank_affecting[bank].beak_blast_charge == 1) {//JeremyZ
         new_battlestruct->bank_affecting[bank].beak_blast_charge = 2;
 		goto Is_bank_focusing_true;
-    } else if (new_battlestruct->bank_affecting[bank].shell_trap_charge == (char)1) {
+    } else if (new_battlestruct->bank_affecting[bank].shell_trap_charge == 1) {
         new_battlestruct->bank_affecting[bank].shell_trap_charge = 2;
 		goto Is_bank_focusing_true;
     }//
