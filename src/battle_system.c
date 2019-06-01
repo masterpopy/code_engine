@@ -583,7 +583,7 @@ u8 cant_become_freezed(u8 bank, u8 self_inflicted)
         return 4;
     if (side_affecting_halfword[get_bank_side(bank)].safeguard_on && !self_inflicted)
         return 5;
-    if (weather_abilities_effect() && battle_weather.int_bw & (weather_harsh_sun || weather_permament_sun || weather_sun))
+    if (weather_abilities_effect() && SUN_WEATHER)
         return 7;
     if (new_battlestruct->field_affecting.misty_terrain && GROUNDED(bank) /*&& !self_inflicted*/)
         return 8;

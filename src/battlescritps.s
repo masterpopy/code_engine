@@ -1669,6 +1669,12 @@ CANT_CONFUSE_DUETOABILITY_PRINT_END2:
 	call CANT_CONFUSE_DUETOABILITY_PRINT
 	end2
 	
+.global BS_BEAKBLAST
+BS_BEAKBLAST:
+	waitstate
+	seteffectsecondary
+	return_cmd	
+	
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Cant select a move from menu
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

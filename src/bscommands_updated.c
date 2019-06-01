@@ -1377,7 +1377,9 @@ void atk49_move_end_turn(void)
 						(special_statuses[bank_target].moveturn_losthp) &&
 						battle_participants[bank_attacker].current_hp && !cant_become_burned(bank_attacker, 0))
 				{
-					moveeffect_set_status(bank_attacker, STATUS_BURN, 2);
+					new_battlestruct->move_effect.effect1 = MOVEEFFECT_BRN | MOVEEFFECT_AFFECTSUSER;
+					bs_push_current(BS_BEAKBLAST);
+					hitmarker |= HITMAKRER_IGNORE_SAFEGUARD;
 					effect = 1;
 				}
 				INC_END_EVENTS

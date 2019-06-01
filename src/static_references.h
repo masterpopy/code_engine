@@ -224,6 +224,7 @@ extern u8 BS_INCINERATEBERRY[];
 extern u8 BS_MAGICIAN[];
 extern u8 BS_MAGICBOUNCE[];
 extern u8 BS_SYNCHRONIZE[];
+extern u8 BS_BEAKBLAST[];
 
 extern u8 BS_CANTSELECT_GRAVITY[];
 extern u8 BS_CANTSELECT_HEALBLOCK[];
