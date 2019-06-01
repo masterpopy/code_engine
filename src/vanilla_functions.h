@@ -95,7 +95,6 @@ void __attribute__((long_call)) sub_8075198(void* ptr, void* pixles, u8 arg3);
 void __attribute__((long_call)) rboxid_08003574(u8 rboxID);
 void __attribute__((long_call)) pal_fade_1(u16 arg1, u16 arg2, u8 arg3, u16 arg4);
 void __attribute__((long_call)) battle_callback1();
-void __attribute__((long_call)) CpuSet(void* src, void* dst, u32 mode);
 void __attribute__((long_call)) poke_update_altitude(u8 bank, u16 species);
 u8 __attribute__((long_call)) b_get_sprite_y(u8 bank);
 void __attribute__((long_call)) pal_fade_control_reset_maybe();
@@ -248,8 +247,16 @@ void __attribute__((long_call)) bb34_battle_animation(u8 buffID, u8 animID, u16 
 //functions rewritten in ASM to get rid of long calls
 u32 read_word(const void*);
 u16 rng(void);
-void LZ77UnCompVram(const void* src, void* dst);
-void LZ77UnCompWram(const void* src, void* dst);
+
+inline void LZ77UnCompVram(const void* src, void* dst){
+    __asm("swi 0x12"::"r"(src), "r"(dst):);
+}
+inline void LZ77UnCompWram(const void* src, void* dst){
+    __asm("swi 0x11"::"r"(src), "r"(dst):);
+}
+inline void CpuSet(void* src, void* dst, u32 mode){
+    __asm("swi 0xB"::"r"(src), "r"(dst), "r"(mode):);
+}
 u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
 void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
 void set_callback2(void* ptr);

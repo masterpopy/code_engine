@@ -156,7 +156,7 @@ __umodsi3:
     ldr r3, = (__umodsi3__)
     bx r3
 
-    .global LZ77UnCompWram
+/*    .global LZ77UnCompWram
 LZ77UnCompWram:
     swi 0x11
     bx lr
@@ -166,6 +166,11 @@ LZ77UnCompVram:
     swi 0x12
     bx lr
 
+    .global CpuSet
+CpuSet:
+    swi 0xB
+    bx lr
+*/
     .global get_attributes
 get_attributes:
     ldr r3, =(__get_attributes)

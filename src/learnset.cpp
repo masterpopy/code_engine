@@ -27,13 +27,13 @@ struct learnset_iterator
     {
         u8 lvl = poke_moveset[index].level;
         u16 move = poke_moveset[index].move;
-        if (move != MOVE_BLANK && lvl != END)
+        bool result = move != MOVE_BLANK && lvl != END;
+        if (result)
         {
             learnset_lvl = lvl;
             learnset_move = move;
-            return true;
         }
-        return false;
+        return result;
     }
 
     //返回true继续遍历，返回false终止遍历
