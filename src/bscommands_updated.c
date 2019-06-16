@@ -253,7 +253,7 @@ void atk96_weather_damage(void)
 		}
 		else if (HAIL_WEATHER)
 		{
-			if (!(is_of_type(bank_attacker, TYPE_ICE)) && !(ability_effect && (ability == ABILITY_SNOW_CLOAK)))
+		if (!(is_of_type(bank_attacker, TYPE_ICE)) && !(ability_effect && (ability == ABILITY_ICE_BODY || ability == ABILITY_SNOW_CLOAK)))
 			{
 				if (!(status3[bank_attacker].underground || status3[bank_attacker].underwater))
 				{
