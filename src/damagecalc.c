@@ -767,7 +767,7 @@ u16 get_base_power(u16 move, u8 atk_bank, u8 def_bank) {
                 base_power = 200;
             break;
         case MOVE_PAYBACK:
-            if (get_bank_turn_order(def_bank) < turn_order[atk_bank]) {
+            if (turn_order[def_bank] < turn_order[atk_bank] && menu_choice_pbs[def_bank] != ACTION_SWITCH) {
                 base_power *= 2;
             }
             break;
