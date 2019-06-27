@@ -2047,6 +2047,16 @@ void atk00_move_canceller(void)
 		}
 		//battlescripts_curr_instruction = BS_START_Z;
 		bs_push_current(BS_START_Z);
+		
+		//If user is of ability Illusion, then it turns off illusion when using Z-move.
+		if (check_ability(bank_attacker, ABILITY_ILLUSION) &&
+				new_battlestruct->bank_affecting[bank_attacker].illusion_on)
+		{
+			new_battlestruct->bank_affecting[bank_attacker].illusion_on = 0;
+			new_battlestruct->bank_affecting[bank_attacker].illusion_hit = 1;
+			bs_push_current(BS_ILLUSION_OFF2);
+			battle_participants[bank_attacker].status2.transformed = 0;
+		}		
 	}
 }
 

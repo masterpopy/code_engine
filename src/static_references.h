@@ -133,6 +133,7 @@ extern u8 BS_SYMBIOSIS[];
 extern u8 BS_TRACE[];
 extern u8 BS_IMPOSTER[];
 extern u8 BS_ILLUSION_OFF[];
+extern u8 BS_ILLUSION_OFF2[];
 extern u8 BS_SLOWSTART_MSG1[];
 extern u8 BS_IMMUNESTATRAISE_ABILITY[];
 extern u8 BS_IMMUNE_ABILITY[];
