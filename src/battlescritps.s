@@ -949,6 +949,13 @@ BS_ILLUSION_OFF:
 	waitmessage 0x40
 	return_cmd
 	
+.global BS_ILLUSION_OFF2
+BS_ILLUSION_OFF2:
+	playanimation bank_attacker 0x21 0x0
+	waitanimation
+	waitmessage 0x40
+	return_cmd		
+	
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ BS Slow Start
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

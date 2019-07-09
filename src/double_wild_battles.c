@@ -8,7 +8,8 @@ bool is_poke_valid(const struct pokemon* poke);
 void revert_form_change(bool mega_revert, u8 teamID, u8 side, const struct pokemon* poke);
 u8 get_bank_side(u8 bank);
 void setflag(u16 flag);
-bool time_check(u8 from, u8 to); //JeremyZ
+bool time_check(u8 from, u8 to);
+bool is_of_type(u8 bank, u8 type);
 
 /*#pragma pack(push,1)
 struct double_grass_tile{
@@ -105,13 +106,16 @@ bool is_poke_caught(u16 species)
 
 bool is_poke_ultrabeast(u16 species)
 {
-	return ((species > 0x34D && species < 0x355) || (species > 0x42E && species < 0x433)); //JeremyZ
+	return ((species > 0x34D && species < 0x355) || (species > 0x42E && species < 0x433));
 }
 
 u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catching)
 {
     u8 multiplier = 10;
     u8 catchrate = (*basestat_table)[catching->species].catch_rate;
+    if (is_poke_ultrabeast(catching->species) && ball_no != BALL_MASTER && ball_no != BALL_BEAST)
+        multiplier = 1;
+	else {
     switch (ball_no)
     {
     //case BALL_PREMIER: case BALL_LUXURY: case BALL_POKE: case BALL_MASTER:
@@ -130,9 +134,13 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         multiplier = 20;
         break;
     case BALL_NET:
-        if (catching->type1 == TYPE_BUG || catching->type1 == TYPE_WATER || catching->type2 == TYPE_BUG || catching->type2 == TYPE_WATER)
+    {
+        u8 catch_bank = bank_attacker ^ (u8)1;
+        if (!is_bank_present(catch_bank)) {catch_bank ^= 2;}
+        if (is_of_type(catch_bank, TYPE_WATER) || is_of_type(catch_bank, TYPE_BUG))
             multiplier = 35;
         break;
+    }
     case BALL_DIVE:
         if (sav1_get_map_type() == MAP_UNDERWATER)
             multiplier = 35;
@@ -140,7 +148,7 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
     case BALL_NEST:
         {
             u8 level = catching->level;
-            if (level < 30) //JeremyZ
+            if (level < 30)
                 multiplier = 41 - level;
         }
         break;
@@ -149,7 +157,7 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
             multiplier = 35;
         break;
     case BALL_TIMER:
-        multiplier = battle_trace.battle_turn_counter * 3 + 10; //JeremyZ
+        multiplier = battle_trace.battle_turn_counter * 3 + 10;
         if (multiplier > 40)
             multiplier = 40;
         break;
@@ -158,11 +166,11 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         {
             u8 opp_level = catching->level;
             u8 pl_level = battle_participants[bank_attacker].level;
-            if (opp_level >= pl_level)
+            if (pl_level <= opp_level)
                 multiplier = 10;
-            else if (pl_level < opp_level * 2)
+            else if (pl_level <= opp_level * 2)
                 multiplier = 20;
-            else if (pl_level < opp_level * 3)
+            else if (pl_level <= opp_level * 4)
                 multiplier = 40;
             else
                 multiplier = 80;
@@ -187,28 +195,27 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         break;
     case BALL_QUICK:
         if (battle_trace.battle_turn_counter == 0)
-            multiplier = 50; //JeremyZ
+            multiplier = 50;
         break;
     case BALL_HEAVY:
         {
             u16 weight = get_height_or_weight(species_to_national_dex(catching->species), 1);
             s16 changed_rate = catchrate;
-            if (weight < 1024) {changed_rate -= 20;}
-            else if (weight < 2048) {}
-            else if (weight < 3072) {changed_rate += 20;}
-            else if (weight < 4096) {changed_rate += 30;}
-            else {changed_rate += 40;}
-			if (changed_rate < 1) //JeremyZ
-				changed_rate = 1;
-            if (changed_rate >= 0 && changed_rate <= 255) {catchrate = changed_rate;}
+            if (weight < 1000) {changed_rate -= 20;}
+            else if (weight < 2000) {}
+            else if (weight < 3000) {changed_rate += 20;}
+            else {changed_rate += 30;}
+            if (changed_rate < 1)
+                changed_rate = 1;
+            catchrate = changed_rate;
         }
         break;
     case BALL_LURE:
         if (new_battlestruct->various.fishing_battle)
-            multiplier = 30;
+            multiplier = 50;
         break;
     case BALL_DUSK:
-        if (curr_mapheader.type == MAP_CAVE || time_check(NIGHT_FIRST_HOUR, NIGHT_LAST_HOUR)) //JeremyZ
+        if (curr_mapheader.type == MAP_CAVE || time_check(NIGHT_FIRST_HOUR, NIGHT_LAST_HOUR))
             multiplier = 30;
         break;
     case BALL_MOON:
@@ -232,8 +239,7 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         break;
     #endif // EXPANDED_POKEBALLS
     }
-	if (is_poke_ultrabeast(catching->species) && ball_no != BALL_MASTER && ball_no != BALL_BEAST)
-		multiplier = 1;
+	}
     u16 hp_max = catching->max_hp * 3;
     u32 formula = (catchrate * multiplier / 10) * (hp_max - catching->current_hp * 2) / hp_max;
     if (catching->status.flags.sleep || catching->status.flags.freeze)

@@ -219,7 +219,12 @@ u8 calculate_move_type(u8 bank, u16 move, u8 set_bonus) {
             }
             case MOVE_MULTI_ATTACK:
             case MOVE_REVELATION_DANCE: {
-                move_type = battle_participants[bank].type1;
+				if (battle_participants[bank].type1 != TYPE_EGG)
+					move_type = battle_participants[bank].type1;
+				else if (battle_participants[bank].type2 != TYPE_EGG)
+					move_type = battle_participants[bank].type2;
+				else
+					move_type = new_battlestruct->bank_affecting[bank].type3;
                 break;
             }
 

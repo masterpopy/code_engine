@@ -802,7 +802,9 @@ bool battle_turn_move_effects(void)
                     if (attacker_struct->status.flags.burn && current_hp && not_magicguard(active_bank))
                     {
                         effect = 1;
-                        damage_loc = get_1_16_of_max_hp(active_bank); //JeremyZ
+                        damage_loc = get_1_16_of_max_hp(active_bank);
+						if (check_ability(active_bank, ABILITY_HEATPROOF))
+							damage_loc /= 2;
                         call_bc_move_exec((void*)0x082DB25F);
                     }
                     break;
