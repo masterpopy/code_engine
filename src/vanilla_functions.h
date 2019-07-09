@@ -251,7 +251,7 @@ u16 rng(void);
  void LZ77UnCompVram(const void* src, void* dst);
  void LZ77UnCompWram(const void* src, void* dst);
  void CpuSet(void* src, void* dst, u32 mode);
- 
+
 u16 get_attributes(const struct pokemon* poke_address, u8 request, void* dst);
 void set_attributes(const struct pokemon* poke_address, u8 request, void* new_value);
 void set_callback2(void* ptr);
