@@ -47,8 +47,8 @@ def run_command(cmd):
         sys.exit(1)
 
 def file_modifiled(in_file,out_file):
-    if os.path.exists(out_file):
-        return os.path.getmtime(in_file) > os.path.getmtime(out_file)
+    #if os.path.exists(out_file):
+    #    return os.path.getmtime(in_file) > os.path.getmtime(out_file)
     return True
 
 def make_output_file(filename):

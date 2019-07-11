@@ -218,8 +218,7 @@ with open(ROM_NAME, 'rb+') as rom:
 						bytereplace(rom, offset, line[9:])
 						
 		width = max(map(len, table.keys())) + 1
-		offset_file = open("offsets.ini", 'r+')
-		offset_file.truncate()
+		offset_file = open("offsets.ini", 'w')
 		for key in sorted(table.keys()):
 					fstr = ('{:' + str(width) + '} {:08X}')
 					offset_file.write(fstr.format(key + ':', table[key] + 0x08000000) + '\n')
