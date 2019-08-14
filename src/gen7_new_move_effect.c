@@ -274,18 +274,6 @@ bool clanging_scales_stat(void)
 	return 0;
 }
 
-bool is_bank_using_z_move(u8 bank) {
-    u8 bank_z_mode = 0;
-    if (bank == 0)
-        bank_z_mode = new_battlestruct->mega_related.user_trigger;
-    else if (bank == 2)
-        bank_z_mode = new_battlestruct->mega_related.ally_trigger;
-    else if (!(new_battlestruct->mega_related.z_happened_pbs & (BIT_GET(bank) | BIT_GET(bank ^ 2))))
-        bank_z_mode = 1;
-    if (battle_flags.link && !new_battlestruct->mega_related.link_indicator[bank])
-        bank_z_mode = 0;
-    return (bank_z_mode == 1);
-}
 
 bool check_ability_with_mold(u8 bank, u8 ability) {
 	return (has_ability_effect(bank, 1) && battle_participants[bank].ability_id == ability);
