@@ -6,7 +6,6 @@ u8 percent_chance(u8 percent);
 u8 hp_condition(u8 bank, u8 percent);
 u8 get_item_effect(u8 bank, u8 check_negating_effects);
 u8 has_ability_effect(u8 bank, u8 mold_breaker);
-bool is_bank_using_z_move(u8 bank);
 
 bool check_ability(u8 bank, u8 ability)
 {
@@ -18,8 +17,6 @@ bool check_ability(u8 bank, u8 ability)
 s8 get_priority(u16 move, u8 bank)
 {
     s8 priority = move_table[move].priority;
-	if (is_bank_using_z_move(bank))
-		priority = 0;
     if (check_ability(bank, ABILITY_GALE_WINGS) && move_table[move].type == TYPE_FLYING && FULL_HP(bank))
         priority++;
     else if (check_ability(bank, ABILITY_PRANKSTER) && move_table[move].split == 2)

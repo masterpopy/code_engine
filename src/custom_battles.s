@@ -76,8 +76,26 @@ bbpp07_correct_sprite: @hook at 0x081BD384, via r0
 	bx r0
 bbpp07_correct_sprite_animate:
 	ldr r4, =(partner_sprite)
-	ldrb r4, [r4]
-	mov r4, #7 @@@@ changed
+	ldrh r4, [r4]
+	cmp r4, #0
+	beq bbpp07_steven_sprite_animate
+	mov r4, r4
+	mov r0, #0x5A
+	mov r9, r0
+	ldr r1, =(trainerhrow_positions)
+	lsl r0, r4, #2
+	add r1, r1, r0
+	ldrb r1, [r1]
+	mov r0, #8
+	sub r0, r0, r1
+	lsl r0, r0, #0x12
+	ldr r1, =(0x500000)
+	add r0, r0, r1
+	lsr r7, r0, #0x10
+	ldr r0, =(0x081BD3D6 | 1)
+	bx r0
+bbpp07_steven_sprite_animate:
+    mov r4, #7
 	mov r0, #0x5A
 	mov r9, r0
 	ldr r1, =(trainerhrow_positions)
@@ -126,8 +144,10 @@ bbpp2F_trainer_throw: @hook at 0x081BE1B0, via r1
 	beq bbpp2F_trainer_throw_sprite
 	ldr r0, =(trainerthrow_pals)
 	ldr r1, =(partner_sprite)
-	ldrb r1, [r1]
-	mov r1, #7 @@@@ changed
+	ldrh r1, [r1]
+	cmp r1, #0
+	beq bbpp2F_steven_throw_sprite
+	mov r1, r1
 	lsl r1, r1, #3
 	ldr r0, [r0, r1]
 	ldr r2, =(0x081BE1C2 | 1)
@@ -137,7 +157,12 @@ bbpp2F_trainer_throw_sprite:
 	ldrh r0, [r2]
 	ldr r1, =(0x081BE1FC | 1)
 	bx r1
-	
+bbpp2F_steven_throw_sprite:
+    mov r1, #7
+	lsl r1, r1, #3
+	ldr r0, [r0, r1]
+	ldr r2, =(0x081BE1C2 | 1)
+	bx r2
 bbp2F_trainer_throw: @hook at 0805CB28, via r0
 	bl get_player_backsprite_pal
 	ldr r1, =(0x0805CB36 | 1)

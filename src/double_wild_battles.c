@@ -10,7 +10,7 @@ u8 get_bank_side(u8 bank);
 void setflag(u16 flag);
 bool time_check(u8 from, u8 to);
 bool is_of_type(u8 bank, u8 type);
-
+u8 get_trainer_opponent_A_class();
 /*#pragma pack(push,1)
 struct double_grass_tile{
     u16 tile_id;
@@ -65,6 +65,12 @@ void pokeball_chosen(u8 taskID)
         }
     else if (is_team_and_pc_full()) //full box
         fail_msg = text_BOX_IS_FULL;
+    else if (battle_flags.trainer && get_trainer_opponent_A_class() >= CLASS_ELITE_FOUR){
+        static const u8 text_lead_no_item[] = {
+                y_,Space,c_,a_,n_,Space,y_,Space,u_,p_,Space,n_,o_,Space,c_,a_,n_,Space,Space,n_,o_,Space,b_,b_,Termin
+        };
+        fail_msg = text_lead_no_item;
+    }
     bool pyramid = is_in_battle_pyramid();
     if (fail_msg)
     {
