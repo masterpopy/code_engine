@@ -778,6 +778,8 @@ struct sprite
 	u16 x_and_flag2;
 	u16 attr2;//4~7位是调色板
 	u16 rotscaleinfo;
+
+
 };
 
 struct coords16
@@ -825,7 +827,9 @@ struct object//68
 	struct coords8 pos_neg_center;//40
 	u8 anim_number;//42
 	u8 anim_frame;//43
-	u8 anim_delay_countdown;//44
+	u8 anim_delay_countdown : 6;//44
+    u8 animPaused:1;
+    u8 affineAnimPaused:1;
 	u8 anim_unkown_counter;//45
 	u16 private[8];//46
 	u8 in_use : 1;//62

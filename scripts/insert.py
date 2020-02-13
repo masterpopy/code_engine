@@ -160,7 +160,7 @@ with open(ROM_NAME, 'rb+') as rom:
 		with open('repoints', 'r') as repointlist:
 				for line in repointlist:
 						if line.strip().startswith('#'): continue
-						if len(line.split()) is 2:
+						if len(line.split()) == 2:
 								symbol, address = line.split()
 								offset = int(address, 16) - 0x08000000
 								try:
@@ -170,7 +170,7 @@ with open(ROM_NAME, 'rb+') as rom:
 										continue
 
 								repoint(rom, code, offset)
-						if len(line.split()) is 3:
+						if len(line.split()) == 3:
 								symbol, address, slide = line.split()
 								offset = int(address, 16) - 0x08000000
 								try:
