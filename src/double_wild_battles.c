@@ -26,7 +26,8 @@ struct double_grass_tile double_grass_tiles[DOUBLE_WILD_TILES] = {
 
 bool doubles_tile_check(void)
 {
-    return cur_map_get_blockid_at(sav1->x_coords + 7, sav1->y_coords + 7) == 0xD && percent_chance(DOUBLE_BATTLE_PERCENT);
+    return cur_map_get_blockid_at(sav1->x_coords + 7, sav1->y_coords + 7) == 0xD
+    && percent_chance(DOUBLE_BATTLE_PERCENT);
     /*for (u32 i = 0; i < DOUBLE_WILD_TILES; i++)
     {
         if (double_grass_tiles[i].tile_id == tile)
@@ -65,12 +66,6 @@ void pokeball_chosen(u8 taskID)
         }
     else if (is_team_and_pc_full()) //full box
         fail_msg = text_BOX_IS_FULL;
-    else if (battle_flags.trainer && get_trainer_opponent_A_class() >= CLASS_ELITE_FOUR){
-        static const u8 text_lead_no_item[] = {
-                y_,Space,c_,a_,n_,Space,y_,Space,u_,p_,Space,n_,o_,Space,c_,a_,n_,Space,Space,n_,o_,Space,b_,b_,Termin
-        };
-        fail_msg = text_lead_no_item;
-    }
     bool pyramid = is_in_battle_pyramid();
     if (fail_msg)
     {
