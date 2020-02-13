@@ -28,7 +28,38 @@ const struct b_background_info battle_bgs[] =
     {&bg_boss_tileset, &bg_boss_tilemap, &entry_bg_indoors_tileset, &entry_bg_indoors_tilemap, &bg_elitefour3_pal}, //21 elitefour3
     {&bg_boss_tileset, &bg_boss_tilemap, &entry_bg_indoors_tileset, &entry_bg_indoors_tilemap, &bg_elitefour4_pal}, //22 elitefour4
 };
+const struct img_size trainerthrow_imgs[] = {
+    {(void*) 0x8D66480, 0x2000}, // 0 brendan
+    {(void*) 0x8D68480, 0x12000}, // 1 may
+    {(void*) 0x8D6A480, 0x22800}, // 2 FR male protag
+    {(void*) 0x8D6CC80, 0x32800}, // 3 FR female protag
+    {(void*) 0x8D6F480, 0x42000}, // 4 RS brendan
+    {(void*) 0x8D71480, 0x52000}, // 5 RS may
+    {(void*) 0x8D73480, 0x62000}, // 6 wally
+    {(void*) 0x8D75480, 0x72000}, // 7 steven
+};
 
+const struct img_size trainerthrow_pals[] = {
+    {(void*) 0x8D61A30, 0}, // 0 brendan
+    {(void*) 0x8D61D58, 1}, // 1 may
+    {(void*) 0x8D77480, 2}, // 2 FR male protag
+    {(void*) 0x8D774A8, 3}, // 3 FR female protag
+    {(void*) 0x8D66130, 4}, // 4 RS brendan
+    {(void*) 0x8D66458, 5}, // 5 RS may
+    {(void*) 0x8D616E4, 6}, // 6 wally
+    {(void*) 0x8D63E88, 7}, // 7 steven
+};
+
+const struct trainerhrow_position trainerhrow_positions[] = {
+    {8, 4, 0}, // 0 brendan
+    {8, 4, 0}, // 1 may
+    {8, 5, 0}, // 2 FR male protag
+    {8, 5, 0}, // 3 FR female protag
+    {8, 4, 0}, // 4 RS brendan
+    {8, 4, 0}, // 5 RS may
+    {8, 4, 0}, // 6 wally
+    {8, 4, 0}, // 7 steven
+};
 // const struct b_background_info battle_bgs[] = {
 // {(void*)0x8f708d0,(void*)0x8f70350,(void*)0x8d7e280,(void*)0x8f79f60,(void*)0x8d78318},//grass
 // {(void*)0x8f71ef0,(void*)0x8f70350,(void*)0x8d7e9c4,(void*)0x8f7a130,(void*)0x8d78c78},//long grass
@@ -83,8 +114,6 @@ const struct b_background_info battle_bgs[] =
     {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e164},//elitefour3
     {(void*) 0x8f7b950, (void*) 0x8a6a3d0, (void*) 0x8d820d4, (void*) 0x8d824e4, (void*) 0x8d7e1a8}//elitefour4
 };
-
-#endif
 const struct img_size trainerthrow_imgs[] = {
         {(void*) 0x8D66480, 0x2000}, // 0 brendan
         {(void*) 0x8D68480, 0x12000}, // 1 may
@@ -116,6 +145,8 @@ const struct img_size trainerthrow_pals[] = {
         {wally_pallete, 6}, // 6 wally
         {steven_pallete, 7}, // 7 steven
 };
+#endif
+
 
 const struct trainerhrow_position trainerhrow_positions[] = {
         {8, 4, 0}, // 0 brendan

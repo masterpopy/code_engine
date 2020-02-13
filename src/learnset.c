@@ -956,8 +956,8 @@ const struct learnset* learnset_table[ALL_POKES] = {
         [0x498 ... ALL_POKES - 1] = EMPTYSLOT_MOVESET
 };
 
-const struct learnset* get_learset_table(struct pokemon* poke){
-	return learnset_table[poke->spieces];
+const struct learnset* no_inline get_learset_table(struct pokemon* poke){
+	return learnset_table[get_attributes(poke,ATTR_SPECIES,0)];
 }
 
 
