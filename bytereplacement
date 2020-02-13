@@ -98,5 +98,5 @@
 085EE5B5 09 C7 03 6D
 ##恢复check_attack
 0809B3DC F0 B5 FD F7 15 FD 00 04
-##取消复制三个save 改成mov r4,#0
+##取消复制三个save 改成mov r4,#0 这个不能串档
 08076BEE 00 24

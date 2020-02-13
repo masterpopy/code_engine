@@ -50,16 +50,6 @@ const struct img_size trainerthrow_pals[] = {
     {(void*) 0x8D63E88, 7}, // 7 steven
 };
 
-const struct trainerhrow_position trainerhrow_positions[] = {
-    {8, 4, 0}, // 0 brendan
-    {8, 4, 0}, // 1 may
-    {8, 5, 0}, // 2 FR male protag
-    {8, 5, 0}, // 3 FR female protag
-    {8, 4, 0}, // 4 RS brendan
-    {8, 4, 0}, // 5 RS may
-    {8, 4, 0}, // 6 wally
-    {8, 4, 0}, // 7 steven
-};
 // const struct b_background_info battle_bgs[] = {
 // {(void*)0x8f708d0,(void*)0x8f70350,(void*)0x8d7e280,(void*)0x8f79f60,(void*)0x8d78318},//grass
 // {(void*)0x8f71ef0,(void*)0x8f70350,(void*)0x8d7e9c4,(void*)0x8f7a130,(void*)0x8d78c78},//long grass
