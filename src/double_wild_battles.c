@@ -119,9 +119,6 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
 {
     u8 multiplier = 10;
     u8 catchrate = (*basestat_table)[catching->species].catch_rate;
-    if (is_poke_ultrabeast(catching->species) && ball_no != BALL_MASTER && ball_no != BALL_BEAST)
-        multiplier = 1;
-	else {
     switch (ball_no)
     {
     //case BALL_PREMIER: case BALL_LUXURY: case BALL_POKE: case BALL_MASTER:
@@ -245,7 +242,6 @@ u32 calc_ball_formula(enum ball_index ball_no, struct battle_participant* catchi
         break;
     #endif // EXPANDED_POKEBALLS
     }
-	}
     u16 hp_max = catching->max_hp * 3;
     u32 formula = (catchrate * multiplier / 10) * (hp_max - catching->current_hp * 2) / hp_max;
     if (catching->status.flags.sleep || catching->status.flags.freeze)
