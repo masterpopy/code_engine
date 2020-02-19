@@ -183,7 +183,7 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 		u16 mega_current_species = poke_address->spieces;
 		const struct evolution_sub* evos = GET_EVO_TABLE(mega_current_species);
 		if (mega_current_species == POKE_ULTRA_NECROZMA)
-			species_to_revert = ((u16*) sav1->balls_pocket)[opponent_side];
+			species_to_revert = new_battlestruct->mega_related.light_up_species[opponent_side];
 		for (u8 j = 0; j < NUM_OF_EVOS; j++)
 		{
 			if (evos[j].method == 0xFF)
@@ -198,7 +198,6 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 			calculate_stats_pokekmon(poke_address);
 		}
 	}
-	return;
 }
 
 //Start Z

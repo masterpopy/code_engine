@@ -368,7 +368,7 @@ u8 check_mega_evo(u8 bank) {
         }
         else if (bank_mega_mode == 2) //bank_mega_mode == 1
         {
-            ((u16*) sav1->balls_pocket)[banks_side] = attacker_struct->species;
+            new_battlestruct->mega_related.light_up_species[banks_side] = attacker_struct->species;
             bs_execute(BS_LIGHT_UP);
         } else {
             //buffer for mega ring

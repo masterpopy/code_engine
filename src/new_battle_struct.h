@@ -178,6 +178,7 @@ struct mega_related
     u16 z_happened_pbs: 4;
     u16 party_z_check: 6;
     u16 ai_party_z_check: 6;
+    u16 light_up_species[2];
 };
 
 struct tai_related{

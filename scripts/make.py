@@ -88,9 +88,9 @@ with open(ROM_NAME, 'rb+') as rom:
 		offset = find_offset_to_put(rom, 0x50000, align_x100(offset))
 	edit_linker(offset)
 	edit_insert(offset)
-	build_code()
-	insert_code()
-	rom.close()
+
+build_code()
+insert_code()
 	
 with open("test.gba", 'rb+') as new_rom:
 	if CLEAR_OLD_MOVETABLE == True or CLEAR_ALL_OLDTABLES == True:
