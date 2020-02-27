@@ -33,6 +33,8 @@ OBJCOPY = (PATH + PREFIX + 'objcopy')
 SRC = './src'
 BUILD = './build'
 ASFLAGS = [AS, '-mthumb', '-I', SRC]
+#'--defsym=var_800D_lastresult=0x020375F0',
+SYMBOLS = {}
 LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
 CFLAGS = [CC,'-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',
           '-mno-long-calls', '-march=armv4t', '-Wall','-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
@@ -74,6 +76,16 @@ def process_c(in_file):
 
 def process_cpp(in_file):
     return process(in_file,CPPFLAGS,'Compiling %s')
+
+def read_symbols():
+    table = []
+    if len(SYMBOLS) != 0:
+        with open('BPEE0.gba', 'rb+') as rom:
+            for entry in SYMBOLS:
+                rom.seek(SYMBOLS[entry])
+                table.append('--defsym='+entry+'='+int.from_bytes(rom.read(4), 'little'))
+    return table
+
 
 def link(objects):
     """Link objects into one binary"""

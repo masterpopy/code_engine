@@ -11,6 +11,7 @@ void setflag(u16 flag);
 bool time_check(u8 from, u8 to);
 bool is_of_type(u8 bank, u8 type);
 u8 get_trainer_opponent_A_class();
+bool is_poke_caught(u16 species);
 /*#pragma pack(push,1)
 struct double_grass_tile{
     u16 tile_id;
@@ -40,13 +41,18 @@ bool doubles_tile_check(void)
     return 0;*/
 }
 
+bool consider_creating_wild_poke_delegate(void* poke_data){
+    return consider_creating_wild_poke(poke_data, 0, 3) &&
+    !(basestat_table[party_opponent[0].spieces]->sp && is_poke_caught(party_opponent[0].spieces));
+}
+
 bool wild_grass_battle(void* wild_data)
 {
-    bool battle = consider_creating_wild_poke(wild_data, 0, 3);
+    bool battle = consider_creating_wild_poke_delegate(wild_data);
     if (battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
         struct pokemon poke = party_opponent[0];
-        while (!consider_creating_wild_poke(wild_data, 0, 3));
+        while (!consider_creating_wild_poke_delegate(wild_data));
         party_opponent[1] = poke;
         battle_flags.double_battle = 1;
     }

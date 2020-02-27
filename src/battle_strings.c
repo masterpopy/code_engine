@@ -499,7 +499,7 @@ const u8 text_GO_xfd5[] = {0xFC, 2, 0xf, 0x07, 0x7D, 0x07, 0xA6, 0x03, 0x4D, 0x0
 		0x00, 0xFD, 0x05, 0xAB, 0xFF};
 const u8 text_go_fdx0[] = {0x07, 0x7D, 0x07, 0xA6, 0x03, 0x4D, 0x0C, 0x0C, 0x09, 0xD9, 0x08, 0x9E, 0xAB, 0x00, 0xfd,
 		0x00, 0xab, 0xFF};
-const u8* const new_strings_table[] = {firespintrap_text, magmastormtrap_text, extreme_sun_activation_text,
+const u8* new_strings_table[] = {firespintrap_text, magmastormtrap_text, extreme_sun_activation_text,
 		heavyrain_activation_text, mysticalaircurrent_activation_text, forewarn_text, slowstart_text, anticipation_text,
 		infestationtrap_text, airlock_text, harvest_text, healer_text, empty_text5, moldbreaker_text, turboblaze_text,
 		terravolt_text, empty_text9, use_zmove_text, empty_text12, absorbabilityimmune_text, userteam_text,
@@ -725,7 +725,7 @@ static void b_fdecode_case(const u8* const src, u8* dst)
 				dst = get_chosen_poke_nick(read_byte(&src[srcID]), read_byte(&src[srcID + 1]), dst);
 				srcID += 2;
 				break;
-			case 8: //todo
+			case 8:
 				String = negative_flavour_table[read_byte(&src[srcID])];
 				srcID++;
 				break;
