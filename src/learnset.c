@@ -1052,7 +1052,7 @@ static const struct learnset* get_learnset_table(struct pokemon* poke){
 void fill_with_default_moves(struct pokemon* poke)
 {
     u8 level = get_lvl_from_exp(poke);
-    static const struct learnset* const poke_moveset = get_learnset_table(poke);
+    const struct learnset* const poke_moveset = get_learnset_table(poke);
     for (u8 i = 0; poke_moveset[i].move != MOVE_BLANK && poke_moveset[i].level != 0xFF; i++)
     {
         if (poke_moveset[i].level <= level)
@@ -1065,7 +1065,7 @@ void fill_with_default_moves(struct pokemon* poke)
 
 u16 teach_move_evolving(struct pokemon* poke)
 {
-	static const struct learnset* const poke_moveset = get_learnset_table(poke);
+    const struct learnset* const poke_moveset = get_learnset_table(poke);
 	if (poke->padding_maybe >> 7 & 1) {
 		poke->padding_maybe ^= 128;
 		for (slot_in_learnset_table = 0; ; slot_in_learnset_table++)
@@ -1085,7 +1085,7 @@ u16 teach_move_evolving(struct pokemon* poke)
 
 u16 teach_move_player(struct pokemon* poke, u8 slot)
 {
-	static const struct learnset* const poke_moveset = get_learnset_table(poke);
+    const struct learnset* const poke_moveset = get_learnset_table(poke);
 	u8 level = get_attributes(poke, ATTR_LEVEL, 0);
 	if (slot != 0)
     {
@@ -1124,7 +1124,7 @@ u8 relearnable_moves(struct pokemon* poke, u16 moves_table[])
         known_moves[j] = get_attributes(poke, ATTR_ATTACK_1 + j, 0);
     }
 	//u16* known_moves = poke->moves;
-	static const struct learnset* const poke_moveset = get_learnset_table(poke);
+	const struct learnset* const poke_moveset = get_learnset_table(poke);
 	u8 level = get_attributes(poke, ATTR_LEVEL, 0);
 	for (u8 i = 0; poke_moveset[i].move != MOVE_BLANK && poke_moveset[i].level != 0xFF; i++)
     {
@@ -1159,7 +1159,7 @@ u8 get_number_of_relearnable_moves(struct pokemon* poke)
 
 u8 learnsanydamagingmove(u16 poke)
 {
-    static const struct learnset* const poke_moveset = learnset_table[poke];
+    const struct learnset* const poke_moveset = learnset_table[poke];
     for (u8 i = 0; poke_moveset[i].move != MOVE_BLANK && poke_moveset[i].level != 0xFF; i++)
     {
         if (move_table[poke_moveset[i].move].base_power)
