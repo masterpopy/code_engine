@@ -42,8 +42,9 @@ bool doubles_tile_check(void)
 }
 
 bool consider_creating_wild_poke_delegate(void* poke_data){
+    u16 spieces;
     return consider_creating_wild_poke(poke_data, 0, 3) &&
-    !(basestat_table[party_opponent[0].spieces]->sp && is_poke_caught(party_opponent[0].spieces));
+    !(basestat_table[(spieces = get_attributes(party_opponent,ATTR_SPECIES,0))]->sp && is_poke_caught(spieces));
 }
 
 bool wild_grass_battle(void* wild_data)

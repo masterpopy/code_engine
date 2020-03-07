@@ -24,7 +24,7 @@ struct trainer_slide_info sliding_trainers[NO_OF_SLIDING_MSG_TRAINERS] = {
 
 u8 get_trainer_opponent_A_class()
 {
-	return (*trainer_table)[var_8015_trainer_opponent_A].class;
+	return trainer_table[var_8015_trainer_opponent_A].class;
 }
 /*
 u8 get_trainer_class_by_bank(u8 bank){

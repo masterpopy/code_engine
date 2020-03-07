@@ -639,7 +639,7 @@ const u8* get_partner_name(void)
 	if (battle_flags.player_ingame_partner)
 	{
 		if (partner_trainer & PARTNER_CUSTOM)
-			string_ptr = (*trainer_table)[BIC(partner_trainer, PARTNER_ANIMATES | PARTNER_CUSTOM)].name;
+			string_ptr = trainer_table[BIC(partner_trainer, PARTNER_ANIMATES | PARTNER_CUSTOM)].name;
 		else
 		{
 			get_frontier_trainer_name(script_text_buffer1, partner_trainer);
@@ -1056,7 +1056,7 @@ u32 b_strcpy_decode(const u8* const src, u8* const dst)
 					else if (battle_flags.flag_x4000000)
 						class_id = get_x4000000_trainerclass(trainer_opponent_B);
 					else
-						class_id = (*trainer_table)[trainer_opponent_B].class;
+						class_id = trainer_table[trainer_opponent_B].class;
 					string = get_trainerclass_ptr(class_id);
 				}
 					break;
@@ -1072,7 +1072,7 @@ u32 b_strcpy_decode(const u8* const src, u8* const dst)
 						string = text;
 					}
 					else
-						string = (*trainer_table)[trainer_opponent_B].name;
+						string = trainer_table[trainer_opponent_B].name;
 					break;
 				case 48: //trainer B lose text
 					if (BATTLE_FRONTIER_BATTLE)
@@ -1098,7 +1098,7 @@ u32 b_strcpy_decode(const u8* const src, u8* const dst)
 				case 50: //partner trainer class
 					if (partner_trainer & PARTNER_CUSTOM)
 						string = get_trainerclass_ptr(
-								(*trainer_table)[BIC(partner_trainer, PARTNER_ANIMATES | PARTNER_CUSTOM)].class);
+								trainer_table[BIC(partner_trainer, PARTNER_ANIMATES | PARTNER_CUSTOM)].class);
 					else
 						string = get_trainerclass_ptr(get_frontier_opponent_class(partner_trainer));
 					break;

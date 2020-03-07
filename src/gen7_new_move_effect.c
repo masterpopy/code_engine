@@ -180,7 +180,7 @@ void revert_mega_to_normalform_new(u8 opponent_side)
 		if (poke_address->current_hp && !battle_outcome)
 			continue;
 		u16 species_to_revert = 0;
-		u16 mega_current_species = poke_address->spieces;
+		u16 mega_current_species = get_attributes(poke_address,ATTR_SPECIES, 0);
 		const struct evolution_sub* evos = GET_EVO_TABLE(mega_current_species);
 		if (mega_current_species == POKE_ULTRA_NECROZMA)
 			species_to_revert = new_battlestruct->mega_related.light_up_species[opponent_side];

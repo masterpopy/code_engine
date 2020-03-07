@@ -36,7 +36,8 @@ SRC = './src'
 BUILD = './build'
 ASFLAGS = [AS, '-mthumb', '-I', SRC]
 # '--defsym=var_800D_lastresult=0x020375F0',
-SYMBOLS = {}
+SYMBOLS = {"trainer_table" : 0x080619C8}
+
 LDFLAGS = ['BPEE.ld', '-T', 'linker.ld']
 CFLAGS = [CC, '-mthumb', '-mno-thumb-interwork', '-mcpu=arm7tdmi', '-mtune=arm7tdmi',
           '-mno-long-calls', '-march=armv4t', '-Wall', '-Wextra', '-Os', '-fira-loop-pressure', '-fipa-pta']
@@ -91,8 +92,10 @@ def read_symbols():
     if len(SYMBOLS) != 0:
         with open('BPEE0.gba', 'rb+') as rom:
             for entry in SYMBOLS:
-                rom.seek(SYMBOLS[entry])
-                table.append('--defsym=' + entry + '=' + int.from_bytes(rom.read(4), 'little'))
+                rom.seek(SYMBOLS[entry] - 0x8000000)
+                symbol = entry + '=' + hex(int.from_bytes(rom.read(4), 'little'))
+                print("build symbol:"+symbol)
+                table.append('--defsym=' + symbol)
     return table
 
 
@@ -100,7 +103,7 @@ def link(objects):
     """Link objects into one binary"""
     linked = 'build/linked.o'
 
-    cmd = [LD] + LDFLAGS + ['-o', linked] + list(objects)
+    cmd = [LD] + LDFLAGS + read_symbols() + ['-o', linked] + list(objects)
     run_command(cmd)
     return linked
 

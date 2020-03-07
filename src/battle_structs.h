@@ -666,70 +666,26 @@ struct battleflags
 
 extern struct battleflags battle_flags;
 
-struct pokemon
-{
-	u32 PID;
-	u32 OTID;
-	char name[10];
-	char language;
-	char badegg;
-	char OT_name[7];
-	char markings;            // only the lowest 4 bits are used
-	u16 checksum;
-	u16 padding_maybe;        //get_attr 6a674
-	u16 spieces;
-	u16 item;
-	u32 exp;
-	char pointup;
-	//char	PointUp1 : 2;	// @0x42,
-	//char	PointUp2 : 2;	// @0x44,
-	//char	PointUp3 : 2;	// @0x46,
-	char bIntimate : 8;
-	u16 unk0;
-	u16 moves[4];        // ID of the Skill
-	char movePP[4];        // Skill Points
-	char evs_hp;
-	char evs_atk;
-	char evs_def;
-	char evs_spd;
-	char evs_spatk;
-	char evs_spdef;
-	char beauty[0x06];        // 帅气 美丽 可爱 聪明 强壮 光滑
-	u32 virus : 4;        // @0x00, if any bit is set, ポケルスがかかる
-	u32 blackpoint : 4;        // @0x04, if any bit is set, 黑点
-	u32 catchplace : 8;
-	u32 catchlevel : 7;
-	u32 gameversion : 4;    // @0x17, game version (sapphire=1, ruby=2, emerald=3, fire=4, leaf=5)
-	u32 ball : 4;        // @0x1B, Poke-Ball type (Write twice, why?)
-	u32 unk1 : 1;            // @0x1F, 0
-	u32 iv_hp : 5;
-	u32 iv_atk : 5;
-	u32 iv_def : 5;
-	u32 iv_spd : 5;
-	u32 iv_spatk : 5;
-	u32 iv_spdef : 5;
-	u32 isEgg : 1;
-	u32 ability : 1;
-	u32 ribbon0 : 3;
-	u32 ribbon1 : 3;
-	u32 ribbon2 : 3;
-	u32 ribbon3 : 3;
-	u32 ribbon4 : 3;
-	u32 ribbon5 : 12;
-	u32 unk2 : 4;
-	u32 obedience : 1;
-	// only for active (in group) pokemons
-	char status;        // bit0-2:异常状态,
-	char unkonw[3];
-	char level;
-	char pokerus;        // this is always 'FF'
-	u16 current_hp;
-	u16 total_hp;
-	u16 attack;
-	u16 defense;
-	u16 speed;
-	u16 sp_attack;
-	u16 sp_defense;
+struct pokemon{
+    u32 PID;
+    u32 OTID;
+    char name[10];
+    u16 language;
+    u8 OT_name[7];
+    u8 markings;
+    u16 checksum;
+    u16 padding_maybe;
+    u8 data[48];//加密数据，不能直接使用
+    u32 ailment;
+    u8 level;
+    u8 pokerus;
+    u16 current_hp;
+    u16 total_hp;
+    u16 attack;
+    u16 defense;
+    u16 speed;
+    u16 sp_attack;
+    u16 sp_defense;
 };
 
 extern struct pokemon party_opponent[6];
@@ -1297,7 +1253,7 @@ struct trainer_data
 	struct poke_trainer_data* poke_data;
 };
 
-extern const struct trainer_data (* trainer_table)[864];
+extern const struct trainer_data trainer_table[864];
 
 struct fadescreen_exec
 {

@@ -189,7 +189,7 @@ void custom_stevenliketag_battle(void) //var 8005 = opponentB ID, var 8006 partn
 
 u8 get_partner_spriteID(u16 trainerID)
 {
-    return (*trainer_table)[BIC(trainerID, PARTNER_ANIMATES | PARTNER_CUSTOM)].sprite;
+    return trainer_table[BIC(trainerID, PARTNER_ANIMATES | PARTNER_CUSTOM)].sprite;
 }
 
 u8 get_player_backspriteID(void)

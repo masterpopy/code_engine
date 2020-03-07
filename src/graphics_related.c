@@ -166,7 +166,7 @@ u8 get_fitting_BG_ID(void)
         return BACKGROUND_RAYQUAZA;
     else if (battle_flags.trainer)
     {
-        u8 class = (*trainer_table)[var_8015_trainer_opponent_A].class;
+        u8 class = trainer_table[var_8015_trainer_opponent_A].class;
         if (class == CLASS_LEADER)
             return BACKGROUND_LEADER;
         if (class == CLASS_CHAMPION)
