@@ -65,7 +65,7 @@ def edit_linker(offset):
 	file_change_line("linker.ld", 4, "\t\trom     : ORIGIN = (0x08000000 + " + hex(offset) + "), LENGTH = 32M\n")
 	
 def edit_insert(offset):
-	file_change_line("./scripts/insert.py", 11, "OFFSET_TO_PUT = " + hex(offset) + '\n')
+	file_change_line("./scripts/insert.py", 8, "OFFSET_TO_PUT = " + hex(offset) + '\n')
 		
 def build_code():
 	os.system("python scripts/build.py")

@@ -8,10 +8,9 @@ import sys
 OFFSET_TO_PUT = 0x1d00000
 FIX_EVO = False
 
-Paths = os.environ.get('Path').split(';')
 PATH = os.environ.get('DEVKITARM')
 if PATH is None:
-    for candidatePath in Paths:
+    for candidatePath in os.environ.get("Path").split(";"):
         if "devkitARM" in candidatePath:
             PATH = candidatePath
             break
