@@ -49,6 +49,7 @@ bool consider_creating_wild_poke_delegate(void* poke_data){
 bool wild_grass_battle(void* wild_data)
 {
     bool battle = consider_creating_wild_poke_delegate(wild_data);
+#if DOUBLE_BATTLE_PERCENT > 0
     if (battle && doubles_tile_check() && !not_enough_for_doubles()) //consider double wild battles
     {
         struct pokemon poke = party_opponent[0];
@@ -56,6 +57,7 @@ bool wild_grass_battle(void* wild_data)
         party_opponent[1] = poke;
         battle_flags.double_battle = 1;
     }
+#endif
     return battle;
 }
 
